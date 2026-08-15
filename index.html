@@ -444,6 +444,16 @@
     .tcard--red:hover{border-color:var(--red);box-shadow:0 18px 40px rgba(212,0,27,.3)}
     .tcard-stars{display:flex;gap:.38rem;margin-top:.35rem}
     .tcard-stars i{width:.5rem;height:.5rem}
+    .tcard-photo-wrap{
+      position:relative;width:100%;aspect-ratio:4/3;border-radius:12px;overflow:hidden;
+      border:1px solid var(--line);
+      background:repeating-linear-gradient(135deg,var(--paper) 0 44px,#ECE9E2 44px 88px);
+    }
+    .tcard-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+    .tcard-photo.is-missing{display:none}
+    .tcard-photo.is-missing + .tcard-fallback{display:block}
+    .tcard-fallback{position:absolute;inset:0;width:100%;height:100%;display:none;padding:20px}
+    .tcard--red .tcard-photo-wrap{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.08)}
 
     .cult-grid{display:grid;grid-template-columns:1fr;gap:2.6rem}
     @media(min-width:820px){.cult-grid{grid-template-columns:1fr 1fr;gap:4rem}}
@@ -628,6 +638,7 @@
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
     <path id="jersey" d="M25 18 C32 10 40 9 47 14 L55 23 H65 L73 14 C80 9 88 10 95 18 L102 40 L92 60 L86 53 L86 112 H34 L34 53 L28 60 L18 40 Z"/>
+    <path id="trophy" d="M28 12 h64 v4 c0 20 -14 32 -32 32 s-32 -12 -32 -32 z M19 15 c-9 5 -11 16 -3 23 l9 -8 c-3 -4 -2 -9 1 -12 z M101 15 c9 5 11 16 3 23 l-9 -8 c3 -4 2 -9 -1 -12 z M54 47 h12 v9 l-3 14 h-6 l-3 -14 z M43 70 h34 v8 h-34 z M39 78 h42 v7 h-42 z"/>
   </defs></svg>
 
   <a class="skip" href="#main">Pular para o conteúdo</a>
@@ -993,6 +1004,10 @@
 
         <ul class="titles-grid">
           <li class="tcard tcard--red reveal">
+            <figure class="tcard-photo-wrap">
+              <img class="tcard-photo" src="img/trofeus/mundial.png" alt="Taça do Mundial de Clubes do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
+            </figure>
             <span class="trule" aria-hidden="true"></span>
             <p class="tcard-count">3×</p>
             <span class="stars tcard-stars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
@@ -1000,48 +1015,80 @@
             <p class="tcard-years">1992 · 1993 · 2005 — o recordista brasileiro</p>
           </li>
           <li class="tcard reveal" style="--d:.05s">
+            <figure class="tcard-photo-wrap">
+              <img class="tcard-photo" src="img/trofeus/libertadores.png" alt="Taça da Copa Libertadores do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
+            </figure>
             <span class="trule" aria-hidden="true"></span>
             <p class="tcard-count">3×</p>
             <p class="tcard-name">Copa Libertadores</p>
             <p class="tcard-years">1992 · 1993 · 2005</p>
           </li>
           <li class="tcard reveal" style="--d:.1s">
+            <figure class="tcard-photo-wrap">
+              <img class="tcard-photo" src="img/trofeus/brasileirao.png" alt="Taça do Campeonato Brasileiro do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
+            </figure>
             <span class="trule" aria-hidden="true"></span>
             <p class="tcard-count">6×</p>
             <p class="tcard-name">Campeonato Brasileiro</p>
             <p class="tcard-years">1977 · 1986 · 1991 · 2006 · 2007 · 2008</p>
           </li>
           <li class="tcard reveal" style="--d:.15s">
+            <figure class="tcard-photo-wrap">
+              <img class="tcard-photo" src="img/trofeus/copa-do-brasil.png" alt="Taça da Copa do Brasil do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
+            </figure>
             <span class="trule" aria-hidden="true"></span>
             <p class="tcard-count">3×</p>
             <p class="tcard-name">Copa do Brasil</p>
             <p class="tcard-years">1998 · 2002 · 2023</p>
           </li>
           <li class="tcard reveal" style="--d:.2s">
+            <figure class="tcard-photo-wrap">
+              <img class="tcard-photo" src="img/trofeus/supercopa-brasil.png" alt="Taça da Supercopa do Brasil do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
+            </figure>
             <span class="trule" aria-hidden="true"></span>
             <p class="tcard-count">1×</p>
             <p class="tcard-name">Supercopa do Brasil</p>
             <p class="tcard-years">2024</p>
           </li>
           <li class="tcard reveal" style="--d:.25s">
+            <figure class="tcard-photo-wrap">
+              <img class="tcard-photo" src="img/trofeus/recopa-sul-americana.png" alt="Taça da Recopa Sul-Americana do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
+            </figure>
             <span class="trule" aria-hidden="true"></span>
             <p class="tcard-count">2×</p>
             <p class="tcard-name">Recopa Sul-Americana</p>
             <p class="tcard-years">1993 · 1994</p>
           </li>
           <li class="tcard reveal" style="--d:.3s">
+            <figure class="tcard-photo-wrap">
+              <img class="tcard-photo" src="img/trofeus/sul-americana.png" alt="Taça da Copa Sul-Americana do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
+            </figure>
             <span class="trule" aria-hidden="true"></span>
             <p class="tcard-count">1×</p>
             <p class="tcard-name">Copa Sul-Americana</p>
             <p class="tcard-years">2012</p>
           </li>
           <li class="tcard reveal" style="--d:.35s">
+            <figure class="tcard-photo-wrap">
+              <img class="tcard-photo" src="img/trofeus/supercopa-libertadores.png" alt="Taça da Supercopa Libertadores do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
+            </figure>
             <span class="trule" aria-hidden="true"></span>
             <p class="tcard-count">1×</p>
             <p class="tcard-name">Supercopa Libertadores</p>
             <p class="tcard-years">1993</p>
           </li>
           <li class="tcard reveal" style="--d:.4s">
+            <figure class="tcard-photo-wrap">
+              <img class="tcard-photo" src="img/trofeus/paulista.png" alt="Taça do Campeonato Paulista do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
+            </figure>
             <span class="trule" aria-hidden="true"></span>
             <p class="tcard-count">22×</p>
             <p class="tcard-name">Campeonato Paulista</p>
