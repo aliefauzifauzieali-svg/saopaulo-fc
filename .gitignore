@@ -10,3 +10,6 @@ Desktop.ini
 
 # Logs
 *.log
+
+# Raw logo source pack (cleaned spfc-logo.svg is the one in use)
+img/Sao-Paulo-Futebol-Clube-Logo-Vector/
