@@ -339,15 +339,15 @@
     }
     .hino-credit{margin-top:2rem;color:rgba(255,255,255,.7);font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase}
 
-    .escudo-stage{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,3.5rem);align-items:center}
-    @media(min-width:900px){.escudo-stage{grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:clamp(2.5rem,6vw,4.5rem)}}
+    .escudo-stage{display:grid;grid-template-columns:1fr;gap:clamp(1.75rem,4vw,3rem);align-items:center}
+    @media(min-width:900px){.escudo-stage{grid-template-columns:minmax(0,330px) minmax(0,1fr);gap:clamp(2.5rem,5vw,4rem)}}
     .emblem{width:auto;height:auto;margin-inline:auto}
 
     .escudo-plate{
-      position:relative;text-align:center;
+      position:relative;text-align:center;width:100%;max-width:330px;margin-inline:auto;
       background:var(--paper);
       border:1px solid var(--line);border-radius:var(--radius);
-      padding:clamp(2.2rem,5vw,3.4rem) 1.5rem clamp(1.9rem,4vw,2.4rem);
+      padding:clamp(1.9rem,4vw,2.6rem) 1.25rem clamp(1.5rem,3vw,1.9rem);
       overflow:hidden;
     }
     .escudo-plate::before{
@@ -355,36 +355,36 @@
       background:repeating-linear-gradient(90deg,var(--red) 0 40px,var(--white) 40px 80px,var(--black) 80px 120px);
     }
     .plate-badge{
-      position:relative;width:clamp(150px,22vw,196px);margin-inline:auto;
+      position:relative;display:block;width:clamp(140px,21vw,180px);margin-inline:auto;
       aspect-ratio:304/403;
     }
-    .plate-badge .emblem{position:relative;z-index:1;width:100%;height:auto;margin:0;filter:drop-shadow(0 18px 32px rgba(22,22,26,.2))}
+    .plate-badge .emblem{position:relative;z-index:1;width:100%;height:auto;margin:0;filter:drop-shadow(0 14px 28px rgba(22,22,26,.18))}
     .plate-frame{
-      position:absolute;z-index:0;inset:-16px -20px;
+      position:absolute;z-index:0;inset:-14px -18px;
       border:1px dashed var(--line);border-radius:6px;pointer-events:none;
     }
     .escudo-plate figcaption{
-      position:relative;margin-top:2rem;
-      font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+      position:relative;margin-top:1.6rem;
+      font-family:var(--mono);font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);
     }
-    .escudo-plate figcaption::before{content:"";display:block;width:2.4rem;height:3px;background:var(--red);margin:0 auto .8rem}
+    .escudo-plate figcaption::before{content:"";display:block;width:2.2rem;height:3px;background:var(--red);margin:0 auto .7rem}
 
-    .escudo-copy{display:flex;flex-direction:column;gap:2.1rem}
-    .escudo-story{color:var(--ink);font-size:1.07rem;line-height:1.7;max-width:44rem}
+    .escudo-copy{display:flex;flex-direction:column;gap:1.8rem;min-width:0}
+    .escudo-story{color:var(--ink);font-size:1.06rem;line-height:1.7;max-width:44rem}
     .escudo-story strong{font-weight:700}
 
     .escudo-spec{margin:0;border-top:1px solid var(--line)}
-    .spec-row{border-bottom:1px solid var(--line);padding:1.15rem 0}
-    .spec-row:last-child{border-bottom:0;padding-bottom:.2rem}
-    .spec-row dt{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:.4rem}
-    .spec-row dd{margin:0;color:var(--muted);font-size:.98rem;line-height:1.65;max-width:42rem}
+    .spec-row{border-bottom:1px solid var(--line);padding:1.05rem 0}
+    .spec-row:last-child{border-bottom:0;padding-bottom:.15rem}
+    .spec-row dt{font-family:var(--mono);font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:.38rem}
+    .spec-row dd{margin:0;color:var(--muted);font-size:.97rem;line-height:1.65;max-width:42rem}
 
     .escudo-origin{
-      display:flex;align-items:center;gap:1.1rem;
+      display:flex;align-items:center;gap:1rem;
       background:var(--paper);border:1px solid var(--line);border-radius:12px;
-      padding:1rem 1.2rem;
+      padding:.9rem 1.1rem;
     }
-    .escudo-origin .emblem{width:52px;height:auto;flex:none;margin:0}
+    .escudo-origin .emblem{width:50px;height:auto;flex:none;margin:0}
     .escudo-origin p{margin:0;color:var(--muted);font-size:.92rem;line-height:1.55}
 
     .camisas-grid{display:grid;grid-template-columns:1fr;gap:1.15rem}
@@ -754,8 +754,8 @@
 
         <div class="escudo-stage">
           <figure class="escudo-plate reveal">
-            <span class="plate-frame" aria-hidden="true"></span>
             <span class="plate-badge">
+              <span class="plate-frame" aria-hidden="true"></span>
               <img class="emblem" src="img/spfc-logo.png" alt="Escudo oficial do São Paulo FC com as cinco estrelas" width="304" height="403" decoding="async">
             </span>
             <figcaption>Escudo atual · coração de cinco pontas</figcaption>
