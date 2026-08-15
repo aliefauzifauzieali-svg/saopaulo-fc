@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>São Paulo FC — Tricolor Paulista · História, Títulos e Ídolos</title>
-  <meta name="description" content="O Tricolor Paulista em uma página: história desde 1930, os 3 Mundiais, as 3 Libertadores, os 6 Brasileiros, ídolos como Rogério Ceni e o estádio MorumBIS. Feito por torcedores.">
+  <meta name="description" content="O Tricolor Paulista em uma página: história desde 1930, o escudo coração de cinco pontas, as camisas históricas, o hino, 3 Mundiais, 3 Libertadores, 6 Brasileiros e ídolos como Rogério Ceni. Feito por torcedores.">
   <meta name="author" content="Torcida Tricolor">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="color-scheme" content="light">
@@ -12,13 +12,13 @@
 
   <link rel="canonical" href="https://example.com/saopaulo-fc/">
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120'%3E%3Cpath d='M15 4h70l11 13v80L50 120 4 97V17Z' fill='%23fff' stroke='%230B0B0D' stroke-width='5'/%3E%3Cpath d='M15 4h70l11 13v7H4v-7Z' fill='%23D4001B'/%3E%3Ctext x='50' y='84' text-anchor='middle' font-size='34' font-weight='900' letter-spacing='1' fill='%230B0B0D' font-family='Arial,sans-serif'%3ESPFC%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpath d='M8 2h104v32L60 114 8 34Z' fill='%23fff' stroke='%230B0B0D' stroke-width='3'/%3E%3Cpath d='M10 5h100v26H10z' fill='%230B0B0D'/%3E%3Ctext x='60' y='25' text-anchor='middle' font-family='Courier New,monospace' font-weight='bold' font-size='16' fill='%23fff'%3ESPFC%3C/text%3E%3Cpath d='M10 31h35L60 111Z' fill='%23D4001B'/%3E%3Cpath d='M45 31h30L60 111Z' fill='%23fff'/%3E%3Cpath d='M75 31h35L60 111Z' fill='%230B0B0D'/%3E%3C/svg%3E">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="Tricolor Paulista">
   <meta property="og:title" content="São Paulo FC — Tricolor Paulista · História, Títulos e Ídolos">
-  <meta property="og:description" content="Os 3 Mundiais, as 3 Libertadores, os 6 Brasileiros e os ídolos que eternizaram a camisa tricolor. Uma página feita por torcedores.">
+  <meta property="og:description" content="Escudo coração de cinco pontas, camisas históricas, hino, os 3 Mundiais e os ídolos que eternizaram o Tricolor. Uma página feita por torcedores.">
   <meta property="og:url" content="https://example.com/saopaulo-fc/">
   <meta property="og:image" content="https://example.com/saopaulo-fc/og.png">
   <meta property="og:image:width" content="1200">
@@ -28,7 +28,7 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="São Paulo FC — Tricolor Paulista">
-  <meta name="twitter:description" content="História, títulos e ídolos do Tricolor: 3x Mundial, 3x Libertadores, 6x Brasileiro.">
+  <meta name="twitter:description" content="História, escudo, camisas, títulos e ídolos do Tricolor: 3x Mundial, 3x Libertadores, 6x Brasileiro.">
   <meta name="twitter:image" content="https://example.com/saopaulo-fc/og.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,7 +58,14 @@
       "name": "Estádio Cícero Pompeu de Toledo (MorumBIS)",
       "capacity": 66795
     },
-    "memberOf": { "@type": "SportsOrganization", "name": "Campeonato Brasileiro Série A" }
+    "memberOf": { "@type": "SportsOrganization", "name": "Campeonato Brasileiro Série A" },
+    "athlete": [
+      { "@type": "Person", "name": "Rogério Ceni", "jobTitle": "Goleiro" },
+      { "@type": "Person", "name": "Raí" },
+      { "@type": "Person", "name": "Leônidas da Silva" },
+      { "@type": "Person", "name": "Kaká" }
+    ],
+    "coach": [{ "@type": "Person", "name": "Telê Santana" }]
   }
   </script>
 
@@ -69,7 +76,7 @@
     "name": "Tricolor Paulista — São Paulo FC",
     "url": "https://example.com/saopaulo-fc/",
     "inLanguage": "pt-BR",
-    "description": "Site de torcedores sobre o São Paulo Futebol Clube: história, títulos e ídolos."
+    "description": "Site de torcedores sobre o São Paulo Futebol Clube: história, escudo, camisas, títulos e ídolos."
   }
   </script>
 
@@ -168,13 +175,15 @@
       max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.25rem,4vw,2rem);
       display:flex;align-items:center;justify-content:space-between;gap:1rem;height:76px;
     }
-    .brand{display:flex;align-items:center;gap:.7rem;text-decoration:none}
-    .brand svg{width:34px;height:40px;color:#fff}
+    .brand{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+    .brand-mark{position:relative;width:34px;height:40px;flex:none}
+    .brand-logo,.brand-logo-fallback{position:absolute;inset:0;width:100%;height:100%}
+    .brand-logo.is-missing{display:none}
     .brand-word{font-weight:900;font-size:1.25rem;letter-spacing:.06em}
     .brand-sub{font-family:var(--mono);font-size:.62rem;letter-spacing:.22em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:2px}
     .brand-txt{display:flex;flex-direction:column;line-height:1.1}
 
-    .site-nav{display:flex;align-items:center;gap:2rem}
+    .site-nav{display:flex;align-items:center;gap:1.6rem}
     .site-nav a{
       font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
       text-decoration:none;color:rgba(255,255,255,.82);
@@ -188,7 +197,7 @@
     .site-nav a:hover::after{width:100%}
     .site-nav .nav-cta{
       font-family:var(--font);font-weight:700;
-      background:var(--red);color:#fff;border-radius:999px;padding:.65rem 1.3rem;
+      background:var(--red);color:#fff;border-radius:999px;padding:.65rem 1.3rem;flex:none;
     }
     .site-nav .nav-cta::after{display:none}
     .site-nav .nav-cta:hover{background:var(--red-deep)}
@@ -280,7 +289,8 @@
     .section{padding-block:clamp(4.5rem,10vw,8rem)}
     .section-light{background:var(--paper)}
     .section-dark{background:var(--black);color:#fff}
-    .section-red{background:var(--red);color:#fff}
+    .section-red{background:var(--red);color:#fff;position:relative;overflow:hidden}
+    .section-dark + .section-dark{border-top:1px solid rgba(255,255,255,.09)}
 
     .sec-head{max-width:44rem;margin-bottom:clamp(2.5rem,5vw,3.5rem)}
     .trule{
@@ -311,6 +321,52 @@
     .tl-body h3{font-size:1.08rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin:.55rem 0 .45rem;color:var(--ink)}
     .tl-body p{color:var(--muted);max-width:56ch;font-size:1rem}
 
+    .hino{background:var(--red);color:#fff;padding-block:clamp(4.5rem,10vw,7rem);position:relative;overflow:hidden}
+    .hino::before{
+      content:"";position:absolute;top:-3rem;right:-2rem;width:min(38vw,420px);height:min(38vw,420px);
+      background:rgba(255,255,255,.07);transform:rotate(45deg);
+    }
+    .hino-inner{max-width:60rem;position:relative}
+    .hino-verse{
+      font-size:clamp(1.5rem,4vw,2.6rem);font-weight:800;line-height:1.22;letter-spacing:-.01em;
+      max-width:22em;
+    }
+    .hino-coro{
+      margin-top:1.4rem;font-size:clamp(1.05rem,2.2vw,1.35rem);font-weight:600;
+      font-style:italic;color:rgba(255,255,255,.92);
+    }
+    .hino-credit{margin-top:2rem;color:rgba(255,255,255,.7);font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase}
+
+    .escudo-grid{display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:center}
+    @media(min-width:860px){.escudo-grid{grid-template-columns:.9fr 1.1fr;gap:4rem}}
+    .emblem{width:clamp(170px,30vw,260px);height:auto;margin-inline:auto}
+    .emblem-badge{display:flex;flex-direction:column;align-items:center}
+    .emblem-badge figcaption{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:1.2rem;text-align:center}
+    .escudo-facts{list-style:none;display:flex;flex-direction:column;gap:1.1rem;margin-top:2.2rem;max-width:44rem}
+    .escudo-facts li{
+      display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;
+      border-left:3px solid var(--line);padding-left:1.1rem;
+    }
+    .escudo-facts strong{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);padding-top:.15rem}
+    .escudo-facts p{color:var(--muted);font-size:.98rem}
+    .escudo-evo{display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:2.4rem;padding-top:2rem;border-top:1px solid var(--line)}
+    .escudo-evo .emblem{width:74px}
+    .escudo-evo figcaption{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.5rem;text-align:center}
+
+    .camisas-grid{display:grid;grid-template-columns:1fr;gap:1.15rem}
+    @media(min-width:560px){.camisas-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:980px){.camisas-grid{grid-template-columns:repeat(4,1fr)}}
+    .jcard{
+      border:1px solid var(--line);border-radius:var(--radius);background:var(--white);
+      padding:1.8rem 1.2rem 1.5rem;display:flex;flex-direction:column;align-items:center;gap:.8rem;text-align:center;
+      transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
+    }
+    .jcard:hover{transform:translateY(-5px);border-color:var(--red);box-shadow:0 18px 40px rgba(22,22,26,.12)}
+    .jcard svg{width:150px;height:150px}
+    .jcard-year{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+    .jcard-name{font-weight:800;text-transform:uppercase;font-size:1.02rem;letter-spacing:.02em}
+    .jcard-line{color:var(--muted);font-size:.9rem;line-height:1.5;max-width:26ch}
+
     .titles-grid{display:grid;grid-template-columns:1fr;gap:1.15rem}
     @media(min-width:640px){.titles-grid{grid-template-columns:repeat(2,1fr)}}
     @media(min-width:980px){.titles-grid{grid-template-columns:repeat(3,1fr)}}
@@ -329,29 +385,63 @@
     .tcard--red .trule{background:repeating-linear-gradient(90deg,#fff 0 18px,var(--black) 18px 36px,#fff 36px 54px)}
     .tcard--red:hover{border-color:var(--red);box-shadow:0 18px 40px rgba(212,0,27,.3)}
 
+    .cult-grid{display:grid;grid-template-columns:1fr;gap:2.6rem}
+    @media(min-width:820px){.cult-grid{grid-template-columns:1fr 1fr;gap:4rem}}
+    .cult-title{font-weight:800;font-size:1.35rem;text-transform:uppercase;letter-spacing:.02em;margin-bottom:.7rem}
+    .cult-text{color:rgba(255,255,255,.72);max-width:46ch}
+    .grito{
+      margin-top:1.8rem;border:1px solid rgba(255,255,255,.16);border-radius:var(--radius);
+      padding:1.4rem 1.5rem;background:rgba(255,255,255,.03);
+      font-family:var(--mono);font-size:.85rem;line-height:1.9;letter-spacing:.06em;
+    }
+    .grito-label{font-size:.64rem;letter-spacing:.2em;color:var(--red-soft);margin-bottom:.6rem}
+    .grito strong{color:#fff;font-weight:700}
+    .cotia-chips{list-style:none;display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1.4rem;max-width:46ch}
+    .cotia-chips li{
+      border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:.42rem .95rem;
+      font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.9);
+    }
+    .cult-note{margin-top:1.8rem;font-size:.68rem;letter-spacing:.14em;color:var(--red-soft)}
+
     .idols-grid{display:grid;grid-template-columns:1fr;gap:1.15rem}
     @media(min-width:560px){.idols-grid{grid-template-columns:repeat(2,1fr)}}
     @media(min-width:960px){.idols-grid{grid-template-columns:repeat(3,1fr)}}
     .icard{
       border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);
-      background:rgba(255,255,255,.03);padding:1.7rem 1.6rem 1.6rem;
-      display:flex;flex-direction:column;gap:.7rem;min-height:230px;
+      background:rgba(255,255,255,.03);padding:1.6rem;overflow:hidden;
+      display:flex;flex-direction:column;gap:1.1rem;
       transition:transform .3s var(--ease),background .3s var(--ease);
     }
     .icard:hover{transform:translateY(-5px);background:rgba(255,255,255,.06)}
-    .icard-num{
-      font-size:clamp(2.6rem,5.5vw,3.6rem);font-weight:900;line-height:1;
-      color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.5);
-      letter-spacing:-.01em;
+    .icard-photo-wrap{
+      position:relative;aspect-ratio:1/1;border-radius:12px;overflow:hidden;
+      background:repeating-linear-gradient(135deg,var(--red) 0 44px,var(--black) 44px 88px);
     }
+    .icard-photo{
+      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+      filter:grayscale(1) contrast(1.06);
+      transition:filter .45s var(--ease);
+    }
+    .icard:hover .icard-photo{filter:grayscale(0) contrast(1)}
+    .icard-photo.is-missing{display:none}
+    .icard-num{
+      position:absolute;inset:0;z-index:1;pointer-events:none;
+      display:flex;align-items:center;justify-content:center;
+      font-size:clamp(3.2rem,6vw,4.2rem);font-weight:900;line-height:1;letter-spacing:-.01em;
+      color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.85);
+    }
+    .icard-body{display:flex;flex-direction:column;gap:.55rem;min-height:150px}
     .icard-name{font-weight:800;font-size:1.25rem;text-transform:uppercase;letter-spacing:.02em}
     .icard-role{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red-soft)}
     .icard-line{color:rgba(255,255,255,.7);font-size:.96rem;line-height:1.55}
     .icard--red{background:var(--red);border-color:var(--red)}
     .icard--red:hover{background:var(--red-deep)}
-    .icard--red .icard-num{color:#fff;-webkit-text-stroke:1.5px rgba(255,255,255,.85)}
     .icard--red .icard-role{color:rgba(255,255,255,.85)}
     .icard--red .icard-line{color:rgba(255,255,255,.92)}
+
+    .stadium-bg{position:absolute;inset:0;z-index:0}
+    .stadium-bg img{width:100%;height:100%;object-fit:cover;opacity:.16;filter:grayscale(1) contrast(1.15)}
+    .section-red .wrap{position:relative;z-index:1}
 
     .estadio-facts{
       list-style:none;display:grid;grid-template-columns:1fr;gap:0;margin:2.4rem 0 2.8rem;max-width:680px;
@@ -389,8 +479,8 @@
     .site-foot::before{content:"";display:block;height:5px;margin-bottom:3rem;background:repeating-linear-gradient(90deg,var(--red) 0 42px,var(--white) 42px 84px,var(--black) 84px 126px)}
     .foot-grid{display:grid;grid-template-columns:1fr;gap:2.2rem}
     @media(min-width:820px){.foot-grid{grid-template-columns:1.4fr 1fr 1fr}}
-    .foot-brand{display:flex;align-items:center;gap:.8rem;margin-bottom:.9rem}
-    .foot-brand svg{width:30px;height:36px;color:var(--red)}
+    .foot-brand{display:flex;align-items:center;gap:.8rem;margin-bottom:.9rem;color:var(--red)}
+    .foot-brand .brand-mark{width:30px;height:36px}
     .foot-brand strong{font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:#fff}
     .foot-blurb{max-width:34ch;line-height:1.6}
     .foot-col h3{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#fff;margin-bottom:1rem}
@@ -406,7 +496,7 @@
     .js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease) var(--d,0s),transform .7s var(--ease) var(--d,0s)}
     .js .reveal.in{opacity:1;transform:none}
 
-    @media(max-width:900px){
+    @media(max-width:1024px){
       .nav-toggle{display:block}
       .site-nav{
         position:fixed;top:76px;left:0;right:0;
@@ -436,16 +526,27 @@
 </head>
 <body>
 
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <path id="sstar" d="M0 -6 L1.8 -1.9 L6 -1.9 L2.6 1.1 L3.8 5.5 L0 3 L-3.8 5.5 L-2.6 1.1 L-6 -1.9 L-1.8 -1.9 Z"/>
+    <path id="jersey" d="M25 18 C32 10 40 9 47 14 L55 23 H65 L73 14 C80 9 88 10 95 18 L102 40 L92 60 L86 53 L86 112 H34 L34 53 L28 60 L18 40 Z"/>
+  </defs></svg>
+
   <a class="skip" href="#main">Pular para o conteúdo</a>
 
   <header class="site-head" id="top">
     <div class="head-inner">
       <a class="brand" href="#top" aria-label="São Paulo FC — voltar ao início">
-        <svg viewBox="0 0 100 120" aria-hidden="true">
-          <path d="M15 4h70l11 13v80L50 120 4 97V17Z" fill="#fff" stroke="currentColor" stroke-width="5"/>
-          <path d="M15 4h70l11 13v7H4v-7Z" fill="#D4001B"/>
-          <text x="50" y="84" text-anchor="middle" font-size="34" font-weight="900" letter-spacing="1" fill="currentColor" font-family="Arial,sans-serif">SPFC</text>
-        </svg>
+        <span class="brand-mark">
+          <img class="brand-logo" src="img/spfc-logo.svg" alt="Escudo oficial do São Paulo Futebol Clube" width="34" height="40" decoding="async" onerror="this.classList.add('is-missing')">
+          <svg class="brand-logo-fallback" viewBox="0 0 120 120" aria-hidden="true">
+            <path d="M8 2h104v32L60 114 8 34Z" fill="#fff" stroke="#0B0B0D" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M10 5h100v26H10z" fill="#0B0B0D"/>
+            <text x="60" y="25" text-anchor="middle" font-family="Courier New,monospace" font-weight="bold" font-size="16" fill="#fff">SPFC</text>
+            <path d="M10 31h35L60 111Z" fill="#D4001B"/>
+            <path d="M45 31h30L60 111Z" fill="#fff"/>
+            <path d="M75 31h35L60 111Z" fill="#0B0B0D"/>
+          </svg>
+        </span>
         <span class="brand-txt">
           <span class="brand-word">SPFC</span>
           <span class="brand-sub">Tricolor · 1930</span>
@@ -454,6 +555,7 @@
 
       <nav class="site-nav" id="siteNav" aria-label="Navegação principal">
         <a href="#historia">História</a>
+        <a href="#camisas">Camisas</a>
         <a href="#titulos">Títulos</a>
         <a href="#idolos">Ídolos</a>
         <a href="#estadio">Estádio</a>
@@ -471,7 +573,7 @@
     <section class="hero" id="inicio" aria-label="Apresentação do São Paulo FC">
       <div class="hero-stripes" aria-hidden="true"></div>
       <div class="hero-inner">
-        <p class="hero-eyebrow hero-fx fx-1">São Paulo Futebol Clube · São Paulo · Brasil</p>
+        <p class="hero-eyebrow hero-fx fx-1">São Paulo Futebol Clube · São Paulo · Brasil · Desde 1930</p>
         <h1 class="hero-title hero-fx fx-2">TRICOLOR</h1>
         <p class="hero-tag hero-fx fx-3">
           O mais querido do Brasil. Tricampeão mundial, tricampeão da América,
@@ -516,8 +618,22 @@
           <li class="tl-item reveal">
             <p class="tl-year">1930</p>
             <div class="tl-body">
-              <h3>A fundação</h3>
-              <p>Em 25 de janeiro de 1930 nasce o São Paulo Futebol Clube, da união entre o Club Athletico Paulistano e a Associação Atlética das Palmeiras. Começa a história do Tricolor.</p>
+              <h3>A fundação e o primeiro escudo</h3>
+              <p>Em 25 de janeiro de 1930 nasce o São Paulo Futebol Clube, da união entre o Club Athletico Paulistano e a Associação Atlética das Palmeiras. Poucos dias depois, o coração de cinco pontas é desenhado por Walter Ostrich para o concurso interno do clube.</p>
+            </div>
+          </li>
+          <li class="tl-item reveal">
+            <p class="tl-year">1932</p>
+            <div class="tl-body">
+              <h3>Nasce a camisa listrada</h3>
+              <p>Em 29 de maio, contra o Santos, o Tricolor estreia o uniforme nº 2: as listras verticais em vermelho, branco e preto que se tornariam parte da alma do clube. Vitória por 4 a 0.</p>
+            </div>
+          </li>
+          <li class="tl-item reveal">
+            <p class="tl-year">1935</p>
+            <div class="tl-body">
+              <h3>O reinício</h3>
+              <p>Em meio a dificuldades financeiras, o clube se reorganiza e renasce. É nesse período que o tenente José Porphyrio da Paz compõe o hino — "Salve o Tricolor Paulista" — oficializado em 1942.</p>
             </div>
           </li>
           <li class="tl-item reveal">
@@ -577,6 +693,178 @@
             </div>
           </li>
         </ol>
+      </div>
+    </section>
+
+    <section class="hino" aria-label="Hino oficial do São Paulo FC">
+      <div class="wrap hino-inner reveal">
+        <blockquote>
+          <p class="hino-verse">“Salve o Tricolor Paulista, amado clube brasileiro. Tu és forte, tu és grande — dentre os grandes, és o primeiro.”</p>
+          <p class="hino-coro">Ó Tricolor, clube bem amado: as tuas glórias vêm do passado.</p>
+        </blockquote>
+        <p class="hino-credit">Hino oficial · Tenente José Porphyrio da Paz · composto em 1936 · oficializado em 1942</p>
+      </div>
+    </section>
+
+    <section class="section" id="escudo">
+      <div class="wrap">
+        <header class="sec-head reveal">
+          <span class="trule" aria-hidden="true"></span>
+          <p class="kicker">O símbolo</p>
+          <h2 class="sec-title">O coração de cinco pontas</h2>
+        </header>
+        <div class="escudo-grid">
+          <figure class="emblem-badge reveal">
+            <svg class="emblem" viewBox="0 0 120 172" role="img" aria-label="Escudo oficial do São Paulo FC com as estrelas">
+              <g fill="#FFC72C">
+                <use href="#sstar" transform="translate(32,14)"/>
+                <use href="#sstar" transform="translate(51,14)"/>
+              </g>
+              <g fill="#D4001B">
+                <use href="#sstar" transform="translate(70,14)"/>
+                <use href="#sstar" transform="translate(89,14)"/>
+              </g>
+              <path d="M8 32h104v32L60 144 8 64Z" fill="#fff" stroke="#0B0B0D" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M10 35h100v26H10z" fill="#0B0B0D"/>
+              <text x="60" y="55" text-anchor="middle" font-family="Courier New,monospace" font-weight="bold" font-size="16" fill="#fff">SPFC</text>
+              <path d="M10 61h35L60 141Z" fill="#D4001B"/>
+              <path d="M45 61h30L60 141Z" fill="#fff"/>
+              <path d="M75 61h35L60 141Z" fill="#0B0B0D"/>
+            </svg>
+            <figcaption>Duas estrelas douradas · três vermelhas — sobrepostas ao escudo, não parte dele</figcaption>
+          </figure>
+          <div>
+            <p class="sec-lead reveal" style="margin-top:0">O emblema são-paulino nasceu dias após a fundação, em 1930, desenhado pelo estilista alemão Walter Ostrich, o "Oliver", com a colaboração de Firmiano de Morais Pinto Filho. Apresentado pela primeira vez em 9 de março de 1930, na vitória por 3 a 0 sobre o Ypiranga, sua forma única — um coração de cinco pontas — foi eleita a mais bonita do mundo pela imprensa britânica.</p>
+            <ul class="escudo-facts reveal">
+              <li>
+                <strong>O formato</strong>
+                <p>Um triângulo isósceles com o lado maior para cima, encimado por um retângulo preto com as letras SPFC em branco. No interior, a faixa branca central ladeada pelo triângulo vermelho e pelo preto.</p>
+              </li>
+              <li>
+                <strong>As cores</strong>
+                <p>Vermelho dos sócios do Paulistano, preto dos associados da AA das Palmeiras e o branco comum a ambos — as mesmas cores da bandeira paulista.</p>
+              </li>
+              <li>
+                <strong>As estrelas</strong>
+                <p>Duas douradas, em homenagem aos recordes mundiais do triplo salto de Adhemar Ferreira da Silva (1952 e 1955), e três vermelhas, pelos títulos mundiais de 1992, 1993 e 2005.</p>
+              </li>
+            </ul>
+            <div class="escudo-evo reveal">
+              <figure class="emblem-badge">
+                <svg class="emblem" viewBox="0 0 120 140" role="img" aria-label="Escudo com a sigla pontuada S.P.F.C.">
+                  <path d="M8 32h104v32L60 134 8 64Z" fill="#fff" stroke="#0B0B0D" stroke-width="3" stroke-linejoin="round"/>
+                  <path d="M10 35h100v26H10z" fill="#0B0B0D"/>
+                  <text x="60" y="55" text-anchor="middle" font-family="Courier New,monospace" font-weight="bold" font-size="15" fill="#fff">S.P.F.C.</text>
+                  <path d="M10 61h35L60 131Z" fill="#D4001B"/>
+                  <path d="M45 61h30L60 131Z" fill="#fff"/>
+                  <path d="M75 61h35L60 131Z" fill="#0B0B0D"/>
+                </svg>
+                <figcaption>1930 · S.P.F.C.</figcaption>
+              </figure>
+              <figure class="emblem-badge">
+                <svg class="emblem" viewBox="0 0 120 172" role="img" aria-label="Escudo atual do São Paulo FC com estrelas">
+                  <g fill="#FFC72C">
+                    <use href="#sstar" transform="translate(32,14)"/>
+                    <use href="#sstar" transform="translate(51,14)"/>
+                  </g>
+                  <g fill="#D4001B">
+                    <use href="#sstar" transform="translate(70,14)"/>
+                    <use href="#sstar" transform="translate(89,14)"/>
+                  </g>
+                  <path d="M8 32h104v32L60 144 8 64Z" fill="#fff" stroke="#0B0B0D" stroke-width="3" stroke-linejoin="round"/>
+                  <path d="M10 35h100v26H10z" fill="#0B0B0D"/>
+                  <text x="60" y="55" text-anchor="middle" font-family="Courier New,monospace" font-weight="bold" font-size="16" fill="#fff">SPFC</text>
+                  <path d="M10 61h35L60 141Z" fill="#D4001B"/>
+                  <path d="M45 61h30L60 141Z" fill="#fff"/>
+                  <path d="M75 61h35L60 141Z" fill="#0B0B0D"/>
+                </svg>
+                <figcaption>Hoje · SPFC com as estrelas</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light" id="camisas">
+      <div class="wrap">
+        <header class="sec-head reveal">
+          <span class="trule" aria-hidden="true"></span>
+          <p class="kicker">Os mantos</p>
+          <h2 class="sec-title">Camisas que entraram para a história</h2>
+          <p class="sec-lead">Do manto da fundação à camisa de Tóquio: cada tecido branco carrega uma história tricolor.</p>
+        </header>
+
+        <ul class="camisas-grid">
+          <li class="jcard reveal">
+            <svg viewBox="0 0 120 120" role="img" aria-label="Camisa de 1930, branca com faixas vermelha e preta no peito">
+              <defs>
+                <clipPath id="clip1930"><use href="#jersey"/></clipPath>
+              </defs>
+              <use href="#jersey" fill="#fff" stroke="#0B0B0D" stroke-width="2"/>
+              <g clip-path="url(#clip1930)">
+                <rect x="0" y="38" width="120" height="14" fill="#D4001B"/>
+                <rect x="0" y="52" width="120" height="14" fill="#0B0B0D"/>
+              </g>
+              <path d="M52 21 Q60 27 68 21 L65 17 Q60 22 55 17 Z" fill="#D4001B"/>
+            </svg>
+            <p class="jcard-year">1930 · Uniforme nº 1</p>
+            <p class="jcard-name">O manto da fundação</p>
+            <p class="jcard-line">Do cinturão vermelho do Paulistano e da faixa preta da AA Palmeiras nasce a combinação das três cores.</p>
+          </li>
+          <li class="jcard reveal" style="--d:.06s">
+            <svg viewBox="0 0 120 120" role="img" aria-label="Camisa listrada de 1932, com listras verticais vermelho, branco e preto">
+              <defs>
+                <clipPath id="clip1932"><use href="#jersey"/></clipPath>
+                <pattern id="list1932" width="14" height="14" patternUnits="userSpaceOnUse">
+                  <rect width="14" height="14" fill="#fff"/>
+                  <rect width="4.7" height="14" fill="#D4001B"/>
+                  <rect x="9.3" width="4.7" height="14" fill="#0B0B0D"/>
+                </pattern>
+              </defs>
+              <g clip-path="url(#clip1932)">
+                <rect x="0" y="0" width="120" height="120" fill="url(#list1932)"/>
+              </g>
+              <use href="#jersey" fill="none" stroke="#0B0B0D" stroke-width="2"/>
+              <path d="M52 21 Q60 27 68 21 L65 17 Q60 22 55 17 Z" fill="#D4001B"/>
+            </svg>
+            <p class="jcard-year">1932 · Uniforme nº 2</p>
+            <p class="jcard-name">A camisa listrada</p>
+            <p class="jcard-line">Listras verticais vermelho, branco e preto desde o 4 a 0 sobre o Santos, em maio de 1932.</p>
+          </li>
+          <li class="jcard reveal" style="--d:.12s">
+            <svg viewBox="0 0 120 120" role="img" aria-label="Camisa de 2005, branca com faixa tricolor no peito">
+              <defs>
+                <clipPath id="clip2005"><use href="#jersey"/></clipPath>
+              </defs>
+              <use href="#jersey" fill="#fff" stroke="#0B0B0D" stroke-width="2"/>
+              <g clip-path="url(#clip2005)">
+                <rect x="0" y="42" width="120" height="12" fill="#D4001B"/>
+                <rect x="0" y="54" width="120" height="12" fill="#0B0B0D"/>
+              </g>
+              <path d="M52 21 Q60 27 68 21 L65 17 Q60 22 55 17 Z" fill="#0B0B0D"/>
+            </svg>
+            <p class="jcard-year">2005</p>
+            <p class="jcard-name">A camisa de Tóquio</p>
+            <p class="jcard-line">O branco do tricampeonato mundial, imortalizado com Rogério Ceni no Japão, sobre o Liverpool.</p>
+          </li>
+          <li class="jcard reveal" style="--d:.18s">
+            <svg viewBox="0 0 120 120" role="img" aria-label="Camisa atual do São Paulo FC, branca com mangas pretas">
+              <defs>
+                <clipPath id="clipHoje"><use href="#jersey"/></clipPath>
+              </defs>
+              <use href="#jersey" fill="#fff" stroke="#0B0B0D" stroke-width="2"/>
+              <g clip-path="url(#clipHoje)">
+                <path d="M-5 0 L44 0 L44 70 L-5 70 Z" fill="#0B0B0D"/>
+                <path d="M76 0 L125 0 L125 70 L76 70 Z" fill="#0B0B0D"/>
+              </g>
+              <path d="M52 21 Q60 27 68 21 L65 17 Q60 22 55 17 Z" fill="#D4001B"/>
+            </svg>
+            <p class="jcard-year">Hoje</p>
+            <p class="jcard-name">O manto tricolor</p>
+            <p class="jcard-line">O branco que a nova geração veste sob as cinco estrelas — 96 anos e contando.</p>
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -648,6 +936,42 @@
       </div>
     </section>
 
+    <section class="section section-dark" id="torcida">
+      <div class="wrap">
+        <header class="sec-head reveal">
+          <span class="trule" aria-hidden="true"></span>
+          <p class="kicker">Time da fé</p>
+          <h2 class="sec-title">A torcida e a base</h2>
+          <p class="sec-lead">O velhinho de barbas brancas, o grito que faz o estádio tremer e o celeiro de craques que alimenta o Tricolor.</p>
+        </header>
+
+        <div class="cult-grid">
+          <div class="reveal">
+            <h3 class="cult-title">Santo Paulo, o vovô tricolor</h3>
+            <p class="cult-text">O mascote eternizou-se nos cartuns do jornal A Gazeta, nos anos 1940. Chamado de "Santo Paulo" para não se confundir com o nome do clube, o simpático velhinho de barbas brancas representa o "time da fé" — o apóstolo Paulo, o padroeiro da cidade, dá nome ao clube desde a fundação em 25 de janeiro.</p>
+            <div class="grito" aria-label="Grito de torcida do São Paulo FC">
+              <p class="grito-label">O grito que ecoa no MorumBIS</p>
+              <p>Arakan–Balan–Bakan<br>Arakan–Balan–Bakan<br>Tumerê–Tumerá · Macambê, bê-cam-bê-cá<br>Rico-réco, Rico-rá<br><strong>Rá-rá-rá! São Paulo! São Paulo! São Paulo!</strong></p>
+            </div>
+          </div>
+          <div class="reveal" style="--d:.08s">
+            <h3 class="cult-title">Made in Cotia</h3>
+            <p class="cult-text">O centro de treinamento da base é uma das fábricas de talento mais respeitadas do Brasil. De lá saíram craques que conquistaram o mundo — e que continuam enchendo o estádio de esperança.</p>
+            <ul class="cotia-chips">
+              <li>Kaká</li>
+              <li>Lucas Moura</li>
+              <li>Casemiro</li>
+              <li>Hernanes</li>
+              <li>Éder Militão</li>
+              <li>Antony</li>
+              <li>David Neres</li>
+            </ul>
+            <p class="cult-note mono">Recorde de público do MorumBIS: 146.082 torcedores em 1977</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section section-dark" id="idolos">
       <div class="wrap">
         <header class="sec-head reveal">
@@ -659,46 +983,79 @@
 
         <ul class="idols-grid">
           <li class="icard icard--red reveal">
-            <p class="icard-num">01</p>
-            <p class="icard-name">Rogério Ceni</p>
-            <p class="icard-role">Goleiro · Nº 1</p>
-            <p class="icard-line">1.257 jogos e 131 gols. O maior goleiro-artilheiro da história e capitão de praticamente todas as conquistas.</p>
+            <figure class="icard-photo-wrap">
+              <img class="icard-photo" src="img/idolos/rogerio-ceni.jpg" alt="Rogério Ceni com a camisa do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <span class="icard-num" aria-hidden="true">01</span>
+            </figure>
+            <div class="icard-body">
+              <p class="icard-name">Rogério Ceni</p>
+              <p class="icard-role">Goleiro · Nº 1</p>
+              <p class="icard-line">1.257 jogos e 131 gols. O maior goleiro-artilheiro da história e capitão de praticamente todas as conquistas.</p>
+            </div>
           </li>
           <li class="icard reveal" style="--d:.05s">
-            <p class="icard-num">10</p>
-            <p class="icard-name">Raí</p>
-            <p class="icard-role">Meia · Terror do Morumbi</p>
-            <p class="icard-line">Herói do Mundial de 1992, com dois gols na final contra o Barcelona. Gênio do período mais vitorioso.</p>
+            <figure class="icard-photo-wrap">
+              <img class="icard-photo" src="img/idolos/rai.jpg" alt="Raí com a camisa do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <span class="icard-num" aria-hidden="true">10</span>
+            </figure>
+            <div class="icard-body">
+              <p class="icard-name">Raí</p>
+              <p class="icard-role">Meia · Terror do Morumbi</p>
+              <p class="icard-line">Herói do Mundial de 1992, com dois gols na final contra o Barcelona. Gênio do período mais vitorioso.</p>
+            </div>
           </li>
           <li class="icard reveal" style="--d:.1s">
-            <p class="icard-num">MS</p>
-            <p class="icard-name">Telê Santana</p>
-            <p class="icard-role">Técnico · O Mestre</p>
-            <p class="icard-line">Arquiteto da era de ouro: Libertadores e Mundiais de 1992 e 1993, com um futebol que encantou o mundo.</p>
+            <figure class="icard-photo-wrap">
+              <img class="icard-photo" src="img/idolos/tele-santana.jpg" alt="Telê Santana, técnico do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <span class="icard-num" aria-hidden="true">MS</span>
+            </figure>
+            <div class="icard-body">
+              <p class="icard-name">Telê Santana</p>
+              <p class="icard-role">Técnico · O Mestre</p>
+              <p class="icard-line">Arquiteto da era de ouro: Libertadores e Mundiais de 1992 e 1993, com um futebol que encantou o mundo.</p>
+            </div>
           </li>
           <li class="icard reveal" style="--d:.15s">
-            <p class="icard-num">MR</p>
-            <p class="icard-name">Muricy Ramalho</p>
-            <p class="icard-role">Técnico</p>
-            <p class="icard-line">O único a vencer três Campeonatos Brasileiros seguidos no formato de pontos corridos, de 2006 a 2008.</p>
+            <figure class="icard-photo-wrap">
+              <img class="icard-photo" src="img/idolos/muricy-ramalho.jpg" alt="Muricy Ramalho, técnico do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <span class="icard-num" aria-hidden="true">MR</span>
+            </figure>
+            <div class="icard-body">
+              <p class="icard-name">Muricy Ramalho</p>
+              <p class="icard-role">Técnico</p>
+              <p class="icard-line">O único a vencer três Campeonatos Brasileiros seguidos no formato de pontos corridos, de 2006 a 2008.</p>
+            </div>
           </li>
           <li class="icard reveal" style="--d:.2s">
-            <p class="icard-num">09</p>
-            <p class="icard-name">Leônidas da Silva</p>
-            <p class="icard-role">Atacante · Diamante Negro</p>
-            <p class="icard-line">O inventor da bicicleta. Ídolo absoluto da era de ouro dos anos 1940 e símbolo da camisa tricolor.</p>
+            <figure class="icard-photo-wrap">
+              <img class="icard-photo" src="img/idolos/leonidas-da-silva.jpg" alt="Leônidas da Silva, atacante do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <span class="icard-num" aria-hidden="true">09</span>
+            </figure>
+            <div class="icard-body">
+              <p class="icard-name">Leônidas da Silva</p>
+              <p class="icard-role">Atacante · Diamante Negro</p>
+              <p class="icard-line">O inventor da bicicleta. Ídolo absoluto da era de ouro dos anos 1940 e símbolo da camisa tricolor.</p>
+            </div>
           </li>
           <li class="icard reveal" style="--d:.25s">
-            <p class="icard-num">08</p>
-            <p class="icard-name">Kaká</p>
-            <p class="icard-role">Meia · Nº 8</p>
-            <p class="icard-line">Revelado em Cotia pelo Tricolor, foi eleito o melhor jogador do mundo em 2007, levando o nome de São Paulo ao planeta.</p>
+            <figure class="icard-photo-wrap">
+              <img class="icard-photo" src="img/idolos/kaka.jpg" alt="Kaká, meia revelado pelo São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <span class="icard-num" aria-hidden="true">08</span>
+            </figure>
+            <div class="icard-body">
+              <p class="icard-name">Kaká</p>
+              <p class="icard-role">Meia · Nº 8</p>
+              <p class="icard-line">Revelado em Cotia pelo Tricolor, foi eleito o melhor jogador do mundo em 2007, levando o nome de São Paulo ao planeta.</p>
+            </div>
           </li>
         </ul>
       </div>
     </section>
 
     <section class="section section-red" id="estadio">
+      <div class="stadium-bg" aria-hidden="true">
+        <img src="img/morumbis.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()">
+      </div>
       <div class="wrap">
         <header class="sec-head reveal">
           <span class="trule" aria-hidden="true" style="background:repeating-linear-gradient(90deg,#fff 0 18px,var(--black) 18px 36px,#fff 36px 54px)"></span>
@@ -764,11 +1121,17 @@
       <div class="foot-grid">
         <div>
           <p class="foot-brand">
-            <svg viewBox="0 0 100 120" aria-hidden="true">
-              <path d="M15 4h70l11 13v80L50 120 4 97V17Z" fill="none" stroke="currentColor" stroke-width="5"/>
-              <path d="M15 4h70l11 13v7H4v-7Z" fill="#D4001B"/>
-              <text x="50" y="84" text-anchor="middle" font-size="34" font-weight="900" letter-spacing="1" fill="currentColor" font-family="Arial,sans-serif">SPFC</text>
-            </svg>
+            <span class="brand-mark">
+              <img class="brand-logo" src="img/spfc-logo.svg" alt="Escudo oficial do São Paulo Futebol Clube" width="30" height="36" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <svg class="brand-logo-fallback" viewBox="0 0 120 120" aria-hidden="true">
+                <path d="M8 2h104v32L60 114 8 34Z" fill="#fff" stroke="#0B0B0D" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M10 5h100v26H10z" fill="#0B0B0D"/>
+                <text x="60" y="25" text-anchor="middle" font-family="Courier New,monospace" font-weight="bold" font-size="16" fill="#fff">SPFC</text>
+                <path d="M10 31h35L60 111Z" fill="#D4001B"/>
+                <path d="M45 31h30L60 111Z" fill="#fff"/>
+                <path d="M75 31h35L60 111Z" fill="#0B0B0D"/>
+              </svg>
+            </span>
             <strong>Tricolor Paulista</strong>
           </p>
           <p class="foot-blurb">Feito por torcedores, para torcedores. São Paulo Futebol Clube — o mais querido, tricolor de coração.</p>
@@ -777,6 +1140,8 @@
           <h3>Explore</h3>
           <ul>
             <li><a href="#historia">História</a></li>
+            <li><a href="#escudo">Escudo</a></li>
+            <li><a href="#camisas">Camisas</a></li>
             <li><a href="#titulos">Títulos</a></li>
             <li><a href="#idolos">Ídolos</a></li>
             <li><a href="#estadio">Estádio</a></li>
