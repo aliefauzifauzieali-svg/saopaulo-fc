@@ -484,15 +484,19 @@
     @media(min-width:640px){.titles-grid{grid-template-columns:repeat(2,1fr)}}
     @media(min-width:1080px){.titles-grid{grid-template-columns:repeat(4,1fr)}}
     .tcard{
-      display:flex;flex-direction:column;gap:.5rem;
-      border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);
-      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));
-      padding:1.1rem 1.2rem 1.3rem;
+      position:relative;display:flex;flex-direction:column;gap:.5rem;
+      border:1px solid rgba(232,181,45,.35);border-radius:var(--radius);
+      background:linear-gradient(160deg,rgba(212,0,27,.15),rgba(212,0,27,.04) 34%,rgba(255,255,255,.03) 72%,rgba(232,181,45,.09));
+      padding:1.1rem 1.2rem 1.3rem;overflow:hidden;
       transition:transform .35s var(--ease),border-color .35s var(--ease),box-shadow .35s var(--ease);
     }
+    .tcard::before{
+      content:"";position:absolute;inset:8px;pointer-events:none;
+      border:1px solid rgba(232,181,45,.2);border-radius:calc(var(--radius) - 4px);
+    }
     .tcard:hover{
-      transform:translateY(-6px);border-color:rgba(232,181,45,.55);
-      box-shadow:0 20px 44px rgba(0,0,0,.45);
+      transform:translateY(-6px);border-color:rgba(232,181,45,.6);
+      box-shadow:0 20px 44px rgba(0,0,0,.5),0 0 40px rgba(232,181,45,.12);
     }
     .tcard-count{font-size:clamp(2.1rem,4.5vw,2.8rem);font-weight:900;line-height:1;letter-spacing:-.02em;color:var(--gold-soft)}
     .tcard-name{font-weight:800;text-transform:uppercase;font-size:.98rem;letter-spacing:.02em;color:#fff}
