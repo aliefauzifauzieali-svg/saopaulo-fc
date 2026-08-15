@@ -455,12 +455,6 @@
       position:relative;width:100%;aspect-ratio:16/10;border-radius:14px;overflow:hidden;background:transparent;
     }
     .tcard-feature .tcard-photo{object-fit:contain}
-    .tcard-feature .tcard-photo-wrap::after{
-      content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-      background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.34) 50%,transparent 58%);
-      transform:translateX(-130%);animation:shimmer 6s ease-in-out infinite;
-    }
-    @keyframes shimmer{0%,52%{transform:translateX(-130%)}88%,100%{transform:translateX(130%)}}
     .tcard-feature-body{position:relative;display:flex;flex-direction:column;gap:.65rem;padding:.4rem .2rem}
     .tcard-feature .tcard-count{
       display:flex;align-items:baseline;gap:.4rem;
