@@ -341,19 +341,18 @@
 
     .escudo-grid{display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:center}
     @media(min-width:860px){.escudo-grid{grid-template-columns:.9fr 1.1fr;gap:4rem}}
-    .emblem{width:clamp(170px,30vw,260px);height:auto;margin-inline:auto}
+    .emblem{width:clamp(150px,24vw,210px);height:auto;margin-inline:auto}
+    .escudo-grid>.emblem-badge .emblem{filter:drop-shadow(0 16px 32px rgba(22,22,26,.18))}
     .emblem-badge{display:flex;flex-direction:column;align-items:center}
     .emblem-badge figcaption{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:1.2rem;text-align:center}
-    .escudo-facts{list-style:none;display:flex;flex-direction:column;gap:1.1rem;margin-top:2.2rem;max-width:44rem}
-    .escudo-facts li{
-      display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;
-      border-left:3px solid var(--line);padding-left:1.1rem;
-    }
-    .escudo-facts strong{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);padding-top:.15rem}
-    .escudo-facts p{color:var(--muted);font-size:.98rem}
-    .escudo-evo{display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:2.4rem;padding-top:2rem;border-top:1px solid var(--line)}
-    .escudo-evo .emblem{height:74px;width:auto}
+    .escudo-facts{list-style:none;display:flex;flex-direction:column;gap:1.5rem;margin-top:2.2rem;max-width:44rem}
+    .escudo-facts li{border-left:3px solid var(--red);padding-left:1.15rem}
+    .escudo-facts strong{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+    .escudo-facts p{color:var(--muted);font-size:.98rem;line-height:1.65;margin-top:.45rem}
+    .escudo-evo{display:flex;flex-wrap:wrap;align-items:center;gap:1.8rem;margin-top:2.4rem;padding-top:2rem;border-top:1px solid var(--line)}
+    .escudo-evo .emblem{height:80px;width:auto}
     .escudo-evo figcaption{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.5rem;text-align:center}
+    .evo-note{max-width:26rem;color:var(--muted);font-size:.98rem;line-height:1.65}
 
     .camisas-grid{display:grid;grid-template-columns:1fr;gap:1.15rem}
     @media(min-width:560px){.camisas-grid{grid-template-columns:repeat(2,1fr)}}
@@ -742,12 +741,9 @@
             <div class="escudo-evo reveal">
               <figure class="emblem-badge">
                 <img class="emblem" src="img/escudo-1930.png" alt="Escudo do São Paulo FC de 1930 a 1935, com a sigla pontuada S.P.F.C." width="298" height="300" decoding="async">
-                <figcaption>1930 · S.P.F.C.</figcaption>
+                <figcaption>1930 · O escudo original</figcaption>
               </figure>
-              <figure class="emblem-badge">
-                <img class="emblem" src="img/spfc-logo.png" alt="Escudo atual do São Paulo FC com as estrelas" width="304" height="403" decoding="async">
-                <figcaption>Hoje · SPFC com as estrelas</figcaption>
-              </figure>
+              <p class="evo-note">O coração de cinco pontas desenhado em 1930 é o mesmo que o Tricolor veste até hoje — sob a insígnia das cinco estrelas sobre o escudo.</p>
             </div>
           </div>
         </div>
