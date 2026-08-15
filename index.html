@@ -12,7 +12,7 @@
 
   <link rel="canonical" href="https://example.com/saopaulo-fc/">
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpath d='M8 2h104v32L60 114 8 34Z' fill='%23fff' stroke='%230B0B0D' stroke-width='3'/%3E%3Cpath d='M10 5h100v26H10z' fill='%230B0B0D'/%3E%3Ctext x='60' y='25' text-anchor='middle' font-family='Courier New,monospace' font-weight='bold' font-size='16' fill='%23fff'%3ESPFC%3C/text%3E%3Cpath d='M10 31h35L60 111Z' fill='%23D4001B'/%3E%3Cpath d='M45 31h30L60 111Z' fill='%23fff'/%3E%3Cpath d='M75 31h35L60 111Z' fill='%230B0B0D'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="img/spfc-logo.svg">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
@@ -178,7 +178,9 @@
     .brand{display:flex;align-items:center;gap:.75rem;text-decoration:none}
     .brand-mark{position:relative;width:34px;height:40px;flex:none}
     .brand-logo,.brand-logo-fallback{position:absolute;inset:0;width:100%;height:100%}
+    .brand-logo-fallback{display:none}
     .brand-logo.is-missing{display:none}
+    .brand-logo.is-missing + .brand-logo-fallback{display:block}
     .brand-word{font-weight:900;font-size:1.25rem;letter-spacing:.06em}
     .brand-sub{font-family:var(--mono);font-size:.62rem;letter-spacing:.22em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:2px}
     .brand-txt{display:flex;flex-direction:column;line-height:1.1}
@@ -1002,7 +1004,7 @@
           </li>
           <li class="icard reveal" style="--d:.15s">
             <figure class="icard-photo-wrap">
-              <img class="icard-photo" src="img/idolos/muricy-ramalho.webp" alt="Muricy Ramalho, técnico do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" style="object-position:70% center" onerror="this.classList.add('is-missing')">
+              <img class="icard-photo" src="img/idolos/muricy-ramalho.webp" alt="Muricy Ramalho, técnico do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" style="object-position:80% center" onerror="this.classList.add('is-missing')">
               <span class="icard-num" aria-hidden="true">MR</span>
             </figure>
             <div class="icard-body">
