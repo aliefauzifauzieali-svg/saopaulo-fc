@@ -360,6 +360,13 @@
     .tl-year{font-size:clamp(1.7rem,4.4vw,2.7rem);font-weight:900;line-height:1;color:var(--red);letter-spacing:-.01em}
     .tl-body h3{font-size:1.08rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin:.55rem 0 .45rem;color:var(--ink)}
     .tl-body p{color:var(--muted);max-width:56ch;font-size:1rem}
+    .tl-photo{
+      position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;
+      margin-top:1rem;border:1px solid var(--line);background:var(--paper);
+    }
+    .tl-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+    .tl-item:hover .tl-photo img{transform:scale(1.04)}
+    .tl-photo.is-missing{display:none}
 
     .hino{background:var(--red);color:#fff;padding-block:clamp(4.5rem,10vw,7rem);position:relative;overflow:hidden}
     .hino::before{
@@ -527,6 +534,19 @@
 
     .cult-grid{display:grid;grid-template-columns:1fr;gap:2.6rem}
     @media(min-width:820px){.cult-grid{grid-template-columns:1fr 1fr;gap:4rem}}
+    .cult-card{
+      border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);
+      background:rgba(255,255,255,.03);overflow:hidden;
+      transition:transform .35s var(--ease),border-color .35s var(--ease);
+    }
+    .cult-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.2)}
+    .cult-card-photo{
+      position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:rgba(255,255,255,.05);
+    }
+    .cult-card-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+    .cult-card:hover .cult-card-photo img{transform:scale(1.05)}
+    .cult-card-photo.is-missing{display:none}
+    .cult-card-body{padding:1.4rem 1.5rem 1.6rem}
     .cult-title{font-weight:800;font-size:1.35rem;text-transform:uppercase;letter-spacing:.02em;margin-bottom:.7rem}
     .cult-text{color:rgba(255,255,255,.72);max-width:46ch}
     .grito{
@@ -619,6 +639,12 @@
         repeating-linear-gradient(90deg,var(--red) 0 130px,var(--black) 130px 260px);
       color:#fff;padding-block:clamp(5rem,11vw,9rem);text-align:center;position:relative;overflow:hidden;
     }
+    .cta::before{
+      content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+      width:min(80vw,600px);height:400px;pointer-events:none;
+      background:radial-gradient(closest-side,rgba(212,0,27,.2),transparent 70%);
+    }
+    .cta .wrap{position:relative;z-index:1}
     .cta .sec-head{margin-inline:auto;margin-bottom:0;max-width:44rem}
     .cta .sec-title{font-size:clamp(2.4rem,7vw,5rem)}
     .cta p.sec-lead{margin-inline:auto;color:rgba(255,255,255,.78)}
@@ -814,6 +840,7 @@
             <div class="tl-body">
               <h3>A fundação e o primeiro escudo</h3>
               <p>Em 25 de janeiro de 1930 nasce o São Paulo Futebol Clube, da união entre o Club Athletico Paulistano e a Associação Atlética das Palmeiras. Poucos dias depois, o coração de cinco pontas é desenhado por Walter Ostrich para o concurso interno do clube.</p>
+              <figure class="tl-photo"><img src="img/historia/fundacao-1930.jpg" alt="Sócios fundadores do São Paulo FC em 1930" width="800" height="450" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')"></figure>
             </div>
           </li>
           <li class="tl-item reveal">
@@ -849,6 +876,7 @@
             <div class="tl-body">
               <h3>O Tricolor de Aço</h3>
               <p>Com um futebol que valeu o apelido de "Tricolor de Aço", o São Paulo conquista o Campeonato Paulista fazendo do Morumbi uma fortaleza — a década termina com dois títulos estaduais e uma nova geração em campo.</p>
+              <figure class="tl-photo"><img src="img/historia/tricolor-de-aco-1970.jpg" alt="Time do Tricolor de Aço nos anos 1970" width="800" height="450" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')"></figure>
             </div>
           </li>
           <li class="tl-item reveal">
@@ -870,6 +898,7 @@
             <div class="tl-body">
               <h3>O mundo fica tricolor</h3>
               <p>Sob Telê Santana, o São Paulo é campeão da Libertadores e depois do mundo, vencendo o Barcelona no Japão com dois gols de Raí.</p>
+              <figure class="tl-photo"><img src="img/historia/mundial-1992.jpg" alt="São Paulo campeão mundial em 1992" width="800" height="450" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')"></figure>
             </div>
           </li>
           <li class="tl-item reveal">
@@ -884,6 +913,7 @@
             <div class="tl-body">
               <h3>O tri em Tóquio</h3>
               <p>Tricampeão da América e campeão mundial ao vencer o Liverpool por 1 a 0, com atuação histórica de Rogério Ceni e gol de Mineiro.</p>
+              <figure class="tl-photo"><img src="img/historia/tri-toquio-2005.jpg" alt="São Paulo tricampeão mundial em Tóquio, 2005" width="800" height="450" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')"></figure>
             </div>
           </li>
           <li class="tl-item reveal">
@@ -1178,27 +1208,37 @@
         </header>
 
         <div class="cult-grid">
-          <div class="reveal">
-            <h3 class="cult-title">Santo Paulo, o vovô tricolor</h3>
-            <p class="cult-text">O mascote eternizou-se nos cartuns do jornal A Gazeta, nos anos 1940. Chamado de "Santo Paulo" para não se confundir com o nome do clube, o simpático velhinho de barbas brancas representa o "time da fé" — o apóstolo Paulo, o padroeiro da cidade, dá nome ao clube desde a fundação em 25 de janeiro.</p>
-            <div class="grito" aria-label="Grito de torcida do São Paulo FC">
-              <p class="grito-label">O grito que ecoa no MorumBIS</p>
-              <p>Arakan–Balan–Bakan<br>Arakan–Balan–Bakan<br>Tumerê–Tumerá · Macambê, bê-cam-bê-cá<br>Rico-réco, Rico-rá<br><strong>Rá-rá-rá! São Paulo! São Paulo! São Paulo!</strong></p>
+          <div class="cult-card reveal">
+            <figure class="cult-card-photo">
+              <img src="img/torcida/santo-paulo-mascote.png" alt="Santo Paulo, mascote do São Paulo FC" width="600" height="450" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+            </figure>
+            <div class="cult-card-body">
+              <h3 class="cult-title">Santo Paulo, o vovô tricolor</h3>
+              <p class="cult-text">O mascote eternizou-se nos cartuns do jornal A Gazeta, nos anos 1940. Chamado de "Santo Paulo" para não se confundir com o nome do clube, o simpático velhinho de barbas brancas representa o "time da fé" — o apóstolo Paulo, o padroeiro da cidade, dá nome ao clube desde a fundação em 25 de janeiro.</p>
+              <div class="grito" aria-label="Grito de torcida do São Paulo FC">
+                <p class="grito-label">O grito que ecoa no MorumBIS</p>
+                <p>Arakan–Balan–Bakan<br>Arakan–Balan–Bakan<br>Tumerê–Tumerá · Macambê, bê-cam-bê-cá<br>Rico-réco, Rico-rá<br><strong>Rá-rá-rá! São Paulo! São Paulo! São Paulo!</strong></p>
+              </div>
             </div>
           </div>
-          <div class="reveal" style="--d:.08s">
-            <h3 class="cult-title">Made in Cotia</h3>
-            <p class="cult-text">O centro de treinamento da base é uma das fábricas de talento mais respeitadas do Brasil. De lá saíram craques que conquistaram o mundo — e que continuam enchendo o estádio de esperança.</p>
-            <ul class="cotia-chips">
-              <li>Kaká</li>
-              <li>Lucas Moura</li>
-              <li>Casemiro</li>
-              <li>Hernanes</li>
-              <li>Éder Militão</li>
-              <li>Antony</li>
-              <li>David Neres</li>
-            </ul>
-            <p class="cult-note mono">Recorde de público do MorumBIS: 146.082 torcedores em 1977</p>
+          <div class="cult-card reveal" style="--d:.08s">
+            <figure class="cult-card-photo">
+              <img src="img/torcida/cotia-base.jpg" alt="Centro de treinamento da base do São Paulo FC" width="600" height="450" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+            </figure>
+            <div class="cult-card-body">
+              <h3 class="cult-title">Made in Cotia</h3>
+              <p class="cult-text">O centro de treinamento da base é uma das fábricas de talento mais respeitadas do Brasil. De lá saíram craques que conquistaram o mundo — e que continuam enchendo o estádio de esperança.</p>
+              <ul class="cotia-chips">
+                <li>Kaká</li>
+                <li>Lucas Moura</li>
+                <li>Casemiro</li>
+                <li>Hernanes</li>
+                <li>Éder Militão</li>
+                <li>Antony</li>
+                <li>David Neres</li>
+              </ul>
+              <p class="cult-note mono">Recorde de público do MorumBIS: 146.082 torcedores em 1977</p>
+            </div>
           </div>
         </div>
 
