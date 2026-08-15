@@ -103,10 +103,10 @@
     }
 
     *,*::before,*::after{box-sizing:border-box}
-    html{scroll-behavior:smooth;overflow-x:clip}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
-      overflow-x:clip;
+      overflow-x:hidden;
       font-family:var(--font);
       font-size:16px;
       line-height:1.6;
@@ -176,10 +176,6 @@
       background:rgba(11,11,13,.9);
       -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
       color:#fff;transition:box-shadow .3s var(--ease);
-    }
-    .site-head::before{
-      content:"";position:absolute;top:0;left:0;right:0;height:5px;
-      background:repeating-linear-gradient(90deg,var(--red) 0 42px,var(--white) 42px 84px,var(--black) 84px 126px);
     }
     .site-head.is-scrolled{box-shadow:0 8px 30px rgba(0,0,0,.25)}
     .head-inner{
@@ -502,12 +498,7 @@
     }
     .icard:hover .icard-photo{filter:grayscale(0) contrast(1);transform:scale(1.07)}
     .icard-photo.is-missing{display:none}
-    .icard-num{
-      position:absolute;inset:0;z-index:1;pointer-events:none;
-      display:flex;align-items:center;justify-content:center;
-      font-size:clamp(3.2rem,6vw,4.2rem);font-weight:900;line-height:1;letter-spacing:-.01em;
-      color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.85);
-    }
+    .icard-photo--right{object-position:72% 25%}
     .icard-body{display:flex;flex-direction:column;gap:.55rem;min-height:150px}
     .icard-name{font-weight:800;font-size:1.25rem;text-transform:uppercase;letter-spacing:.02em}
     .icard-role{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red-soft)}
@@ -582,7 +573,7 @@
     .js .jcard.reveal.in:hover,.js .tcard.reveal.in:hover,.js .icard.reveal.in:hover{transform:translateY(-5px);transition-delay:0s}
 
     #scrollProgress{
-      position:fixed;top:5px;left:0;right:0;height:4px;z-index:70;
+      position:fixed;top:0;left:0;right:0;height:4px;z-index:70;
       transform:scaleX(0);transform-origin:0 50%;pointer-events:none;
       background:repeating-linear-gradient(90deg,var(--red) 0 42px,var(--white) 42px 84px,var(--black) 84px 126px);
     }
@@ -1129,7 +1120,6 @@
           <li class="icard icard--red reveal">
             <figure class="icard-photo-wrap">
               <img class="icard-photo" src="img/idolos/rogerio-ceni.webp" alt="Rogério Ceni com a camisa do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-              <span class="icard-num" aria-hidden="true">01</span>
             </figure>
             <div class="icard-body">
               <p class="icard-name">Rogério Ceni</p>
@@ -1140,7 +1130,6 @@
           <li class="icard reveal" style="--d:.05s">
             <figure class="icard-photo-wrap">
               <img class="icard-photo" src="img/idolos/rai.webp" alt="Raí com a camisa do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-              <span class="icard-num" aria-hidden="true">10</span>
             </figure>
             <div class="icard-body">
               <p class="icard-name">Raí</p>
@@ -1151,7 +1140,6 @@
           <li class="icard reveal" style="--d:.1s">
             <figure class="icard-photo-wrap">
               <img class="icard-photo" src="img/idolos/tele-santana.jpg" alt="Telê Santana, técnico do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-              <span class="icard-num" aria-hidden="true">MS</span>
             </figure>
             <div class="icard-body">
               <p class="icard-name">Telê Santana</p>
@@ -1162,7 +1150,6 @@
           <li class="icard reveal" style="--d:.15s">
             <figure class="icard-photo-wrap">
               <img class="icard-photo" src="img/idolos/muricy-ramalho.jpg" alt="Muricy Ramalho, técnico do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-              <span class="icard-num" aria-hidden="true">MR</span>
             </figure>
             <div class="icard-body">
               <p class="icard-name">Muricy Ramalho</p>
@@ -1173,7 +1160,6 @@
           <li class="icard reveal" style="--d:.2s">
             <figure class="icard-photo-wrap">
               <img class="icard-photo" src="img/idolos/leonidas-da-silva.png" alt="Leônidas da Silva, atacante do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-              <span class="icard-num" aria-hidden="true">09</span>
             </figure>
             <div class="icard-body">
               <p class="icard-name">Leônidas da Silva</p>
@@ -1183,8 +1169,7 @@
           </li>
           <li class="icard reveal" style="--d:.25s">
             <figure class="icard-photo-wrap">
-              <img class="icard-photo" src="img/idolos/kaka.webp" alt="Kaká, meia revelado pelo São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-              <span class="icard-num" aria-hidden="true">08</span>
+              <img class="icard-photo icard-photo--right" src="img/idolos/kaka.webp" alt="Kaká, meia revelado pelo São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
             </figure>
             <div class="icard-body">
               <p class="icard-name">Kaká</p>
@@ -1195,7 +1180,6 @@
           <li class="icard reveal" style="--d:.3s">
             <figure class="icard-photo-wrap">
               <img class="icard-photo" src="img/idolos/cafu.webp" alt="Cafu com a camisa do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-              <span class="icard-num" aria-hidden="true">02</span>
             </figure>
             <div class="icard-body">
               <p class="icard-name">Cafu</p>
@@ -1206,7 +1190,6 @@
           <li class="icard reveal" style="--d:.35s">
             <figure class="icard-photo-wrap">
               <img class="icard-photo" src="img/idolos/mineiro.webp" alt="Mineiro com a camisa do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-              <span class="icard-num" aria-hidden="true">08</span>
             </figure>
             <div class="icard-body">
               <p class="icard-name">Mineiro</p>
