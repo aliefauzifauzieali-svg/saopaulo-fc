@@ -104,6 +104,7 @@
 
     *,*::before,*::after{box-sizing:border-box}
     html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
       overflow-x:hidden;
@@ -127,6 +128,18 @@
     :focus-visible{outline:3px solid var(--red);outline-offset:3px;border-radius:2px}
 
     .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.25rem,4vw,2rem)}
+
+    .site-head{opacity:0;animation:fadeIn .8s var(--ease) .1s forwards}
+    @keyframes fadeIn{to{opacity:1}}
+
+    a{color:inherit;position:relative}
+    .site-nav a:not(.nav-cta)::after{
+      content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;
+      background:var(--red);transition:width .3s var(--ease);border-radius:1px;
+    }
+    .site-nav a:not(.nav-cta):hover::after{width:100%}
+
+    .sec-lead{margin-top:1.1rem;color:var(--muted);font-size:1.06rem;max-width:46ch;transition:opacity .6s var(--ease),transform .6s var(--ease)}
 
     .skip{
       position:absolute;left:1rem;top:-4rem;z-index:100;
@@ -626,13 +639,16 @@
     .foot-stars{display:flex;justify-content:center;margin-top:2.2rem}
     .foot-stars .stars i{width:.5rem;height:.5rem;background:var(--gold-soft);opacity:.7}
 
-    .js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease) var(--d,0s),transform .7s var(--ease) var(--d,0s)}
+    .js .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease) var(--d,0s),transform .9s var(--ease) var(--d,0s)}
     .js .reveal.in{opacity:1;transform:none}
-    .js #historia .tl-item.reveal{transform:translateX(-36px)}
+    .js #historia .tl-item.reveal{transform:translateX(-40px);transition:opacity .9s var(--ease) var(--d,0s),transform .9s var(--ease) var(--d,0s)}
     .js #historia .tl-item.reveal.in{transform:none}
-    .js .tcard.reveal,.js .tcard-feature.reveal,.js .icard.reveal{transform:scale(.95) translateY(10px)}
-    .js .tcard.reveal.in,.js .icard.reveal.in{transform:none}
-    .js .jcard.reveal.in:hover,.js .tcard.reveal.in:hover,.js .icard.reveal.in:hover{transform:translateY(-5px);transition-delay:0s}
+    .js .tcard.reveal,.js .tcard-feature.reveal,.js .icard.reveal{transform:scale(.96) translateY(16px)}
+    .js .tcard.reveal.in,.js .tcard-feature.reveal.in,.js .icard.reveal.in{transform:none}
+    .js .jcard.reveal.in:hover,.js .tcard.reveal.in:hover,.js .icard.reveal.in:hover{transform:translateY(-6px);transition-delay:0s}
+
+    img[loading="lazy"]{opacity:0;transition:opacity .5s var(--ease)}
+    img[loading="lazy"].loaded, img[loading="lazy"]:not([src=""]){opacity:1}
 
     #scrollProgress{
       position:fixed;top:0;left:0;right:0;height:5px;z-index:70;
@@ -675,11 +691,13 @@
     @media(prefers-reduced-motion:reduce){
       html{scroll-behavior:auto}
       *,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important}
+      .site-head{animation:none;opacity:1}
       .ticker-track{animation:none}
       .js .hero-stripes{animation:none}
       .js .hero-fx,.js .reveal{opacity:1;transform:none}
       .js .hero-title .ch{animation:none;opacity:1;transform:none}
-      .js #historia .tl-item.reveal,.js .tcard.reveal,.js .icard.reveal{transform:none}
+      .js #historia .tl-item.reveal,.js .tcard.reveal,.js .tcard-feature.reveal,.js .icard.reveal{transform:none}
+      img[loading="lazy"]{opacity:1;transition:none}
     }
   </style>
 </head>
@@ -1527,6 +1545,11 @@
 
       var yearEl = document.getElementById('year');
       if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
+        if(img.complete){img.classList.add('loaded')}
+        else{img.addEventListener('load',function(){img.classList.add('loaded')},{once:true})}
+      });
     })();
   </script>
 </body>
