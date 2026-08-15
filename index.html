@@ -351,10 +351,9 @@
     }
     .escudo-facts strong{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);padding-top:.15rem}
     .escudo-facts p{color:var(--muted);font-size:.98rem}
-    .escudo-evo{display:flex;flex-wrap:wrap;gap:2rem;margin-top:2.4rem;padding-top:2rem;border-top:1px solid var(--line)}
-    .escudo-evo .emblem-badge{width:104px}
+    .escudo-evo{display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:2.4rem;padding-top:2rem;border-top:1px solid var(--line)}
     .escudo-evo .emblem{height:84px;width:auto}
-    .escudo-evo figcaption{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.5rem;text-align:center;width:100%;line-height:1.5}
+    .escudo-evo figcaption{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.5rem;text-align:center}
 
     .camisas-grid{display:grid;grid-template-columns:1fr;gap:1.15rem}
     @media(min-width:560px){.camisas-grid{grid-template-columns:repeat(2,1fr)}}
@@ -365,7 +364,11 @@
       transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
     }
     .jcard:hover{transform:translateY(-5px);border-color:var(--red);box-shadow:0 18px 40px rgba(22,22,26,.12)}
-    .jcard svg{width:150px;height:150px}
+    .jcard-photo-wrap{position:relative;width:150px;height:150px;flex:none;border-radius:10px;overflow:hidden;background:var(--white)}
+    .jcard-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .jcard-fallback{position:absolute;inset:0;width:100%;height:100%;display:none}
+    .jcard-photo.is-missing{display:none}
+    .jcard-photo.is-missing + .jcard-fallback{display:block}
     .jcard-year{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
     .jcard-name{font-weight:800;text-transform:uppercase;font-size:1.02rem;letter-spacing:.02em}
     .jcard-line{color:var(--muted);font-size:.9rem;line-height:1.5;max-width:26ch}
@@ -762,69 +765,81 @@
 
         <ul class="camisas-grid">
           <li class="jcard reveal">
-            <svg viewBox="0 0 120 120" role="img" aria-label="Camisa de 1930, branca com faixas vermelha e preta no peito">
-              <defs>
-                <clipPath id="clip1930"><use href="#jersey"/></clipPath>
-              </defs>
-              <use href="#jersey" fill="#fff" stroke="#0B0B0D" stroke-width="2"/>
-              <g clip-path="url(#clip1930)">
-                <rect x="0" y="38" width="120" height="14" fill="#D4001B"/>
-                <rect x="0" y="52" width="120" height="14" fill="#0B0B0D"/>
-              </g>
-              <path d="M52 21 Q60 27 68 21 L65 17 Q60 22 55 17 Z" fill="#D4001B"/>
-            </svg>
+            <figure class="jcard-photo-wrap">
+              <img class="jcard-photo" src="img/camisas/1930.jpg" alt="Camisa de 1930 do São Paulo FC, branca com faixas vermelha e preta no peito" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <svg class="jcard-fallback" viewBox="0 0 120 120" aria-hidden="true">
+                <defs>
+                  <clipPath id="clip1930"><use href="#jersey"/></clipPath>
+                </defs>
+                <use href="#jersey" fill="#fff" stroke="#0B0B0D" stroke-width="2"/>
+                <g clip-path="url(#clip1930)">
+                  <rect x="0" y="38" width="120" height="14" fill="#D4001B"/>
+                  <rect x="0" y="52" width="120" height="14" fill="#0B0B0D"/>
+                </g>
+                <path d="M52 21 Q60 27 68 21 L65 17 Q60 22 55 17 Z" fill="#D4001B"/>
+              </svg>
+            </figure>
             <p class="jcard-year">1930 · Uniforme nº 1</p>
             <p class="jcard-name">O manto da fundação</p>
             <p class="jcard-line">Do cinturão vermelho do Paulistano e da faixa preta da AA Palmeiras nasce a combinação das três cores.</p>
           </li>
           <li class="jcard reveal" style="--d:.06s">
-            <svg viewBox="0 0 120 120" role="img" aria-label="Camisa listrada de 1932, com listras verticais vermelho, branco e preto">
-              <defs>
-                <clipPath id="clip1932"><use href="#jersey"/></clipPath>
-                <pattern id="list1932" width="14" height="14" patternUnits="userSpaceOnUse">
-                  <rect width="14" height="14" fill="#fff"/>
-                  <rect width="4.7" height="14" fill="#D4001B"/>
-                  <rect x="9.3" width="4.7" height="14" fill="#0B0B0D"/>
-                </pattern>
-              </defs>
-              <g clip-path="url(#clip1932)">
-                <rect x="0" y="0" width="120" height="120" fill="url(#list1932)"/>
-              </g>
-              <use href="#jersey" fill="none" stroke="#0B0B0D" stroke-width="2"/>
-              <path d="M52 21 Q60 27 68 21 L65 17 Q60 22 55 17 Z" fill="#D4001B"/>
-            </svg>
+            <figure class="jcard-photo-wrap">
+              <img class="jcard-photo" src="img/camisas/1932.jpg" alt="Camisa listrada de 1932 do São Paulo FC, com listras verticais vermelho, branco e preto" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <svg class="jcard-fallback" viewBox="0 0 120 120" aria-hidden="true">
+                <defs>
+                  <clipPath id="clip1932"><use href="#jersey"/></clipPath>
+                  <pattern id="list1932" width="14" height="14" patternUnits="userSpaceOnUse">
+                    <rect width="14" height="14" fill="#fff"/>
+                    <rect width="4.7" height="14" fill="#D4001B"/>
+                    <rect x="9.3" width="4.7" height="14" fill="#0B0B0D"/>
+                  </pattern>
+                </defs>
+                <g clip-path="url(#clip1932)">
+                  <rect x="0" y="0" width="120" height="120" fill="url(#list1932)"/>
+                </g>
+                <use href="#jersey" fill="none" stroke="#0B0B0D" stroke-width="2"/>
+                <path d="M52 21 Q60 27 68 21 L65 17 Q60 22 55 17 Z" fill="#D4001B"/>
+              </svg>
+            </figure>
             <p class="jcard-year">1932 · Uniforme nº 2</p>
             <p class="jcard-name">A camisa listrada</p>
             <p class="jcard-line">Listras verticais vermelho, branco e preto desde o 4 a 0 sobre o Santos, em maio de 1932.</p>
           </li>
           <li class="jcard reveal" style="--d:.12s">
-            <svg viewBox="0 0 120 120" role="img" aria-label="Camisa de 2005, branca com faixa tricolor no peito">
-              <defs>
-                <clipPath id="clip2005"><use href="#jersey"/></clipPath>
-              </defs>
-              <use href="#jersey" fill="#fff" stroke="#0B0B0D" stroke-width="2"/>
-              <g clip-path="url(#clip2005)">
-                <rect x="0" y="42" width="120" height="12" fill="#D4001B"/>
-                <rect x="0" y="54" width="120" height="12" fill="#0B0B0D"/>
-              </g>
-              <path d="M52 21 Q60 27 68 21 L65 17 Q60 22 55 17 Z" fill="#0B0B0D"/>
-            </svg>
+            <figure class="jcard-photo-wrap">
+              <img class="jcard-photo" src="img/camisas/2005.jpg" alt="Camisa de 2005 do São Paulo FC, branca com faixa tricolor no peito" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <svg class="jcard-fallback" viewBox="0 0 120 120" aria-hidden="true">
+                <defs>
+                  <clipPath id="clip2005"><use href="#jersey"/></clipPath>
+                </defs>
+                <use href="#jersey" fill="#fff" stroke="#0B0B0D" stroke-width="2"/>
+                <g clip-path="url(#clip2005)">
+                  <rect x="0" y="42" width="120" height="12" fill="#D4001B"/>
+                  <rect x="0" y="54" width="120" height="12" fill="#0B0B0D"/>
+                </g>
+                <path d="M52 21 Q60 27 68 21 L65 17 Q60 22 55 17 Z" fill="#0B0B0D"/>
+              </svg>
+            </figure>
             <p class="jcard-year">2005</p>
             <p class="jcard-name">A camisa de Tóquio</p>
             <p class="jcard-line">O branco do tricampeonato mundial, imortalizado com Rogério Ceni no Japão, sobre o Liverpool.</p>
           </li>
           <li class="jcard reveal" style="--d:.18s">
-            <svg viewBox="0 0 120 120" role="img" aria-label="Camisa atual do São Paulo FC, branca com mangas pretas">
-              <defs>
-                <clipPath id="clipHoje"><use href="#jersey"/></clipPath>
-              </defs>
-              <use href="#jersey" fill="#fff" stroke="#0B0B0D" stroke-width="2"/>
-              <g clip-path="url(#clipHoje)">
-                <path d="M-5 0 L44 0 L44 70 L-5 70 Z" fill="#0B0B0D"/>
-                <path d="M76 0 L125 0 L125 70 L76 70 Z" fill="#0B0B0D"/>
-              </g>
-              <path d="M52 21 Q60 27 68 21 L65 17 Q60 22 55 17 Z" fill="#D4001B"/>
-            </svg>
+            <figure class="jcard-photo-wrap">
+              <img class="jcard-photo" src="img/camisas/hoje.jpg" alt="Camisa atual do São Paulo FC, branca com mangas pretas" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <svg class="jcard-fallback" viewBox="0 0 120 120" aria-hidden="true">
+                <defs>
+                  <clipPath id="clipHoje"><use href="#jersey"/></clipPath>
+                </defs>
+                <use href="#jersey" fill="#fff" stroke="#0B0B0D" stroke-width="2"/>
+                <g clip-path="url(#clipHoje)">
+                  <path d="M-5 0 L44 0 L44 70 L-5 70 Z" fill="#0B0B0D"/>
+                  <path d="M76 0 L125 0 L125 70 L76 70 Z" fill="#0B0B0D"/>
+                </g>
+                <path d="M52 21 Q60 27 68 21 L65 17 Q60 22 55 17 Z" fill="#D4001B"/>
+              </svg>
+            </figure>
             <p class="jcard-year">Hoje</p>
             <p class="jcard-name">O manto tricolor</p>
             <p class="jcard-line">O branco que a nova geração veste sob as cinco estrelas — 96 anos e contando.</p>
