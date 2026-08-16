@@ -644,10 +644,10 @@
     .idols-accordion{
       position:relative;
       display:flex;align-items:stretch;
-      gap:clamp(8px,1vw,12px);
-      height:clamp(460px,72vh,640px);
-      max-width:var(--maxw);margin-inline:auto;
-      padding:2rem 1rem 3rem;
+      gap:clamp(8px,1vw,14px);
+      height:clamp(520px,78vh,720px);
+      max-width:min(1440px,100% - 2rem);margin-inline:auto;
+      padding:2rem clamp(1rem,3vw,2.5rem) 3rem;
     }
 
     .icard{
@@ -668,12 +668,13 @@
 
     .icard-img{
       position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+      transform-origin:50% 28%;
       filter:brightness(.55) saturate(.72);
-      transition:filter .6s var(--ease),transform .9s var(--ease);
+      transition:filter .6s var(--ease),transform 1s var(--ease);
     }
-    .icard-img[loading="lazy"]{transition:opacity .5s var(--ease),filter .6s var(--ease),transform .9s var(--ease)}
+    .icard-img[loading="lazy"]{transition:opacity .5s var(--ease),filter .6s var(--ease),transform 1s var(--ease)}
     .icard:hover .icard-img,.icard.is-open .icard-img{
-      filter:brightness(.8) saturate(.95);transform:scale(1.1);
+      filter:brightness(.85) saturate(1.02);transform:scale(1.18);
     }
     .icard-img.is-missing{display:none}
     .icard-photo--right{object-position:72% 25%}
@@ -707,7 +708,7 @@
 
     .icard-meta{
       position:absolute;left:0;right:0;bottom:0;z-index:3;
-      padding:1.5rem 1.6rem 1.7rem;
+      padding:clamp(1.3rem,2.6vw,2.2rem) clamp(1.4rem,2.8vw,2.4rem) clamp(1.5rem,3vw,2.4rem);
       transform:translateY(14px);
       transition:transform .5s var(--ease);
     }
@@ -718,33 +719,37 @@
     .icard:hover .icard-meta > *:nth-child(2),.icard.is-open .icard-meta > *:nth-child(2){transition-delay:.18s}
     .icard:hover .icard-meta > *:nth-child(3),.icard.is-open .icard-meta > *:nth-child(3){transition-delay:.24s}
     .icard:hover .icard-meta > *:nth-child(4),.icard.is-open .icard-meta > *:nth-child(4){transition-delay:.3s}
-    .icard-meta h3{font-weight:900;font-size:clamp(1.3rem,2vw,1.65rem);text-transform:uppercase;letter-spacing:.01em;color:#fff;line-height:1.15}
-    .icard-meta .icard-role{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red-soft);margin-top:.4rem;display:block}
-    .icard-meta .icard-line{color:rgba(255,255,255,.75);font-size:.92rem;line-height:1.6;margin-top:.6rem;max-width:32ch}
+    .icard-meta h3{font-weight:900;font-size:clamp(1.35rem,2.2vw,1.9rem);text-transform:uppercase;letter-spacing:.01em;color:#fff;line-height:1.12}
+    .icard-meta .icard-role{font-family:var(--mono);font-size:clamp(.62rem,1vw,.72rem);letter-spacing:.14em;text-transform:uppercase;color:var(--red-soft);margin-top:.45rem;display:block}
+    .icard-meta .icard-line{color:rgba(255,255,255,.78);font-size:clamp(.85rem,1.3vw,.98rem);line-height:1.6;margin-top:.65rem;max-width:34ch}
     .icard-meta .icard-trule{width:26px;height:3px;margin-top:.75rem;background:linear-gradient(90deg,var(--red) 0 33.4%,var(--white) 33.4% 66.7%,var(--black) 66.7% 100%)}
 
     .icard-glow{
       position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
       width:150%;height:120%;
-      background:radial-gradient(ellipse,rgba(212,0,27,.14),transparent 60%);
-      opacity:0;transition:opacity .5s;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse,rgba(212,0,27,.18),transparent 60%);
+      opacity:0;transition:opacity .6s;pointer-events:none;z-index:0;
     }
     .icard:hover .icard-glow,.icard.is-open .icard-glow{opacity:1}
 
-    @media(max-width:720px){
+    @media(max-width:1280px){
+      .idols-accordion{height:clamp(480px,70vh,620px)}
+    }
+    @media(max-width:860px){
       .idols-accordion{
         overflow-x:auto;overflow-y:hidden;
         scroll-snap-type:x proximity;
-        height:auto;padding:2rem .5rem 3rem;
+        height:auto;padding:2rem clamp(1rem,4vw,2rem) 3rem;
         scrollbar-width:none;-webkit-overflow-scrolling:touch;
       }
       .idols-accordion::-webkit-scrollbar{display:none}
-      .icard{flex:0 0 72%;aspect-ratio:3/4;height:auto;min-height:340px;scroll-snap-align:center}
-      .icard:hover,.icard.is-open{flex:0 0 72%}
+      .icard{flex:0 0 clamp(240px,74%,380px);aspect-ratio:3/4;height:auto;min-height:320px;scroll-snap-align:center}
+      .icard:hover,.icard.is-open{flex:0 0 clamp(240px,74%,380px)}
       .icard-name{display:none}
-      .icard-meta{transform:none;padding:1.1rem 1.2rem 1.3rem}
+      .icard-meta{transform:none;padding:1.2rem 1.4rem 1.4rem}
       .icard-meta > *{opacity:1;transform:none;transition:none}
-      .icard-meta .icard-line{font-size:.82rem}
+      .icard-meta .icard-line{font-size:clamp(.82rem,2.6vw,.92rem);max-width:30ch}
+      .icard-glow{width:120%;height:110%}
     }
 
     .estadio-layout{
