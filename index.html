@@ -644,8 +644,8 @@
 
     .idols-accordion{
       position:relative;
-      display:flex;justify-content:center;align-items:flex-end;
-      gap:clamp(6px,1vw,10px);
+      display:flex;justify-content:center;align-items:stretch;
+      gap:clamp(4px,.6vw,8px);
       padding:2rem 1rem 2.5rem;
       max-width:var(--maxw);margin-inline:auto;
     }
@@ -656,78 +656,90 @@
       height:clamp(340px,54vh,480px);
       border-radius:var(--radius);overflow:visible;
       cursor:pointer;flex-shrink:0;
-      border:1px solid rgba(255,255,255,.06);
-      background:rgba(255,255,255,.04);
-      transition:box-shadow .5s,border-color .4s;
+      border:none;
+      background:transparent;
+      transition:z-index 0s;
       z-index:1;
     }
-    .icard:hover,.icard.is-open{z-index:10;border-color:rgba(255,255,255,.12)}
+    .icard:hover,.icard.is-open{z-index:10}
 
-    .icard-strip{position:absolute;inset:0;border-radius:var(--radius);overflow:hidden}
+    .icard-strip{
+      position:absolute;inset:0;border-radius:var(--radius);overflow:hidden;
+      border:1px solid rgba(255,255,255,.06);
+      transition:border-color .4s,box-shadow .4s;
+    }
+    .icard:hover .icard-strip,.icard.is-open .icard-strip{
+      border-color:rgba(255,255,255,.15);
+      box-shadow:0 0 40px rgba(212,0,27,.1),0 12px 30px rgba(0,0,0,.4);
+    }
     .icard-strip-img{
       position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-      filter:brightness(.55) saturate(.7);transition:filter .4s;
+      filter:brightness(.5) saturate(.6);transition:filter .4s,transform .5s;
     }
-    .icard:hover .icard-strip-img,.icard.is-open .icard-strip-img{filter:brightness(.7) saturate(.9)}
+    .icard:hover .icard-strip-img,.icard.is-open .icard-strip-img{filter:brightness(.65) saturate(.8);transform:scale(1.04)}
     .icard-strip-img.is-missing{display:none}
     .icard-photo--right{object-position:72% 25%}
     .icard-photo--shift{object-position:62% 25%}
-    .icard-strip::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.7) 100%)}
-    .icard-accent{
-      position:absolute;top:0;left:0;right:0;height:4px;z-index:3;
-      border-radius:var(--radius) var(--radius) 0 0;
-      background:linear-gradient(90deg,var(--red) 0 33.4%,var(--white) 33.4% 66.7%,var(--black) 66.7% 100%);
+    .icard-strip::after{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,transparent 20%,transparent 60%,rgba(0,0,0,.65) 100%);
     }
     .icard-strip-name{
       position:absolute;bottom:0;left:0;right:0;z-index:3;
-      padding:1rem .5rem;text-align:center;
-      font-weight:800;font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;color:#fff;
+      padding:1rem .4rem;text-align:center;
+      font-weight:800;font-size:.55rem;text-transform:uppercase;letter-spacing:.1em;color:#fff;
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
     }
 
     .icard-panel{
       position:absolute;z-index:20;
-      bottom:0;left:50%;transform:translateX(-50%) translateY(8px);
-      width:clamp(280px,26vw,360px);
-      border-radius:var(--radius);overflow:hidden;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(12,12,16,.96);
-      -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
-      box-shadow:0 24px 64px rgba(0,0,0,.6),0 0 80px rgba(212,0,27,.08);
+      top:50%;left:50%;
+      transform:translate(-50%,-50%) scale(.92);
+      width:clamp(300px,28vw,380px);
+      border-radius:calc(var(--radius) + 4px);overflow:hidden;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(8,8,12,.97);
+      box-shadow:0 32px 80px rgba(0,0,0,.7),0 0 100px rgba(212,0,27,.08);
       opacity:0;pointer-events:none;
       transition:opacity .4s cubic-bezier(.4,0,.15,1),transform .4s cubic-bezier(.4,0,.15,1);
     }
     .icard:hover .icard-panel,.icard.is-open .icard-panel{
-      opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);
+      opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1);
     }
 
     .icard-panel-img{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:var(--ink)}
     .icard-panel-img img{
       position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-      transition:transform .6s var(--ease),filter .4s;filter:brightness(.8);
+      transition:transform .6s var(--ease);filter:brightness(.85);
     }
-    .icard:hover .icard-panel-img img,.icard.is-open .icard-panel-img img{transform:scale(1.05);filter:brightness(.9)}
-    .icard-panel-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(12,12,16,.9) 100%)}
+    .icard:hover .icard-panel-img img,.icard.is-open .icard-panel-img img{transform:scale(1.04)}
+    .icard-panel-img::after{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(180deg,transparent 50%,rgba(8,8,12,.95) 100%);
+    }
 
-    .icard-panel-body{padding:1.1rem 1.4rem 1.3rem}
+    .icard-panel-body{padding:1rem 1.4rem 1.3rem}
     .icard-panel-body h3{font-weight:900;font-size:1.2rem;text-transform:uppercase;letter-spacing:.01em;color:#fff;line-height:1.15}
     .icard-panel-body .icard-role{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red-soft);margin-top:.3rem;display:block}
-    .icard-panel-body .icard-line{color:rgba(255,255,255,.7);font-size:.88rem;line-height:1.55;margin-top:.55rem}
-    .icard-panel-body .icard-trule{width:28px;height:3px;margin-top:.7rem;background:linear-gradient(90deg,var(--red) 0 33.4%,var(--white) 33.4% 66.7%,var(--black) 66.7% 100%)}
+    .icard-panel-body .icard-line{color:rgba(255,255,255,.65);font-size:.88rem;line-height:1.55;margin-top:.55rem}
+    .icard-panel-body .icard-trule{
+      width:28px;height:3px;margin-top:.7rem;
+      background:linear-gradient(90deg,var(--red) 0 33.4%,var(--white) 33.4% 66.7%,var(--black) 66.7% 100%);
+    }
 
     .icard-glow{
-      position:absolute;bottom:-40%;left:50%;transform:translateX(-50%);
-      width:200%;height:80%;
-      background:radial-gradient(ellipse,rgba(212,0,27,.2),transparent 65%);
+      position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+      width:180%;height:120%;
+      background:radial-gradient(ellipse,rgba(212,0,27,.15),transparent 60%);
       opacity:0;transition:opacity .5s;pointer-events:none;z-index:0;
     }
     .icard:hover .icard-glow,.icard.is-open .icard-glow{opacity:1}
 
     @media(max-width:700px){
-      .idols-accordion{gap:5px;padding:1.5rem .5rem 2rem}
+      .idols-accordion{gap:4px;padding:1.5rem .5rem 2rem}
       .icard{width:42px;height:260px}
-      .icard-panel{width:clamp(220px,65vw,280px)}
-      .icard-strip-name{font-size:.5rem;padding:.7rem .3rem}
+      .icard-panel{width:clamp(240px,70vw,300px)}
+      .icard-strip-name{font-size:.48rem;padding:.6rem .3rem}
     }
 
     .estadio-layout{
@@ -1470,7 +1482,6 @@
           <div class="icard-glow" aria-hidden="true"></div>
           <div class="icard-strip">
             <img class="icard-strip-img" src="img/idolos/rogerio-ceni.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            <div class="icard-accent" aria-hidden="true"></div>
             <span class="icard-strip-name">Rogério Ceni</span>
           </div>
           <div class="icard-panel">
@@ -1489,7 +1500,6 @@
           <div class="icard-glow" aria-hidden="true"></div>
           <div class="icard-strip">
             <img class="icard-strip-img" src="img/idolos/rai.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            <div class="icard-accent" aria-hidden="true"></div>
             <span class="icard-strip-name">Raí</span>
           </div>
           <div class="icard-panel">
@@ -1508,7 +1518,6 @@
           <div class="icard-glow" aria-hidden="true"></div>
           <div class="icard-strip">
             <img class="icard-strip-img" src="img/idolos/tele-santana.jpg" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            <div class="icard-accent" aria-hidden="true"></div>
             <span class="icard-strip-name">Telê</span>
           </div>
           <div class="icard-panel">
@@ -1527,7 +1536,6 @@
           <div class="icard-glow" aria-hidden="true"></div>
           <div class="icard-strip">
             <img class="icard-strip-img" src="img/idolos/muricy-ramalho.jpg" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            <div class="icard-accent" aria-hidden="true"></div>
             <span class="icard-strip-name">Muricy</span>
           </div>
           <div class="icard-panel">
@@ -1546,7 +1554,6 @@
           <div class="icard-glow" aria-hidden="true"></div>
           <div class="icard-strip">
             <img class="icard-strip-img" src="img/idolos/leonidas-da-silva.png" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            <div class="icard-accent" aria-hidden="true"></div>
             <span class="icard-strip-name">Leônidas</span>
           </div>
           <div class="icard-panel">
@@ -1565,7 +1572,6 @@
           <div class="icard-glow" aria-hidden="true"></div>
           <div class="icard-strip">
             <img class="icard-strip-img icard-photo--right" src="img/idolos/kaka.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            <div class="icard-accent" aria-hidden="true"></div>
             <span class="icard-strip-name">Kaká</span>
           </div>
           <div class="icard-panel">
@@ -1584,7 +1590,6 @@
           <div class="icard-glow" aria-hidden="true"></div>
           <div class="icard-strip">
             <img class="icard-strip-img" src="img/idolos/cafu.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            <div class="icard-accent" aria-hidden="true"></div>
             <span class="icard-strip-name">Cafu</span>
           </div>
           <div class="icard-panel">
@@ -1603,7 +1608,6 @@
           <div class="icard-glow" aria-hidden="true"></div>
           <div class="icard-strip">
             <img class="icard-strip-img icard-photo--shift" src="img/idolos/mineiro.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            <div class="icard-accent" aria-hidden="true"></div>
             <span class="icard-strip-name">Mineiro</span>
           </div>
           <div class="icard-panel">
