@@ -638,108 +638,98 @@
     .classicos-vs{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red-soft);margin-top:.4rem}
     .classicos-line{color:rgba(255,255,255,.7);font-size:.93rem;line-height:1.55;margin-top:.65rem}
 
-    #idolos{overflow:visible}
-    #idolos .sec-head{text-align:center;max-width:100%;margin-inline:auto;margin-bottom:clamp(1.5rem,3vw,2.5rem)}
+    #idolos .sec-head{text-align:center;max-width:100%;margin-inline:auto;margin-bottom:clamp(2rem,4vw,3rem)}
     #idolos .sec-lead{margin-inline:auto}
 
     .idols-accordion{
       position:relative;
-      display:flex;justify-content:center;align-items:stretch;
-      gap:clamp(4px,.6vw,8px);
-      padding:2rem 1rem 2.5rem;
+      display:flex;align-items:stretch;
+      gap:clamp(6px,1vw,10px);
+      height:clamp(340px,56vh,480px);
       max-width:var(--maxw);margin-inline:auto;
+      padding:2rem 1rem 3rem;
     }
 
     .icard{
-      position:relative;
-      width:clamp(56px,7.5vw,88px);
-      height:clamp(340px,54vh,480px);
-      border-radius:var(--radius);overflow:visible;
-      cursor:pointer;flex-shrink:0;
-      border:none;
-      background:transparent;
-      transition:z-index 0s;
+      position:relative;flex:1 1 0;min-width:0;
+      border-radius:var(--radius);overflow:hidden;
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,.07);
+      transition:flex .55s cubic-bezier(.45,0,.15,1),border-color .4s,box-shadow .5s;
       z-index:1;
     }
-    .icard:hover,.icard.is-open{z-index:10}
+    .icard:hover,.icard.is-open{
+      flex:5 5 0;
+      border-color:rgba(255,255,255,.16);
+      box-shadow:0 0 70px rgba(212,0,27,.14),0 18px 50px rgba(0,0,0,.55);
+      z-index:2;
+    }
 
-    .icard-strip{
-      position:absolute;inset:0;border-radius:var(--radius);overflow:hidden;
-      border:1px solid rgba(255,255,255,.06);
-      transition:border-color .4s,box-shadow .4s;
-    }
-    .icard:hover .icard-strip,.icard.is-open .icard-strip{
-      border-color:rgba(255,255,255,.15);
-      box-shadow:0 0 40px rgba(212,0,27,.1),0 12px 30px rgba(0,0,0,.4);
-    }
-    .icard-strip-img{
+    .icard-img{
       position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-      filter:brightness(.5) saturate(.6);transition:filter .4s,transform .5s;
+      filter:brightness(.55) saturate(.72);
+      transition:filter .5s,transform .6s var(--ease);
     }
-    .icard:hover .icard-strip-img,.icard.is-open .icard-strip-img{filter:brightness(.65) saturate(.8);transform:scale(1.04)}
-    .icard-strip-img.is-missing{display:none}
+    .icard:hover .icard-img,.icard.is-open .icard-img{
+      filter:brightness(.75) saturate(.92);transform:scale(1.05);
+    }
+    .icard-img.is-missing{display:none}
     .icard-photo--right{object-position:72% 25%}
     .icard-photo--shift{object-position:62% 25%}
-    .icard-strip::after{
-      content:"";position:absolute;inset:0;
-      background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,transparent 20%,transparent 60%,rgba(0,0,0,.65) 100%);
+
+    .icard::after{
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(180deg,transparent 42%,rgba(0,0,0,.72) 100%);
+      transition:background .5s;
     }
-    .icard-strip-name{
-      position:absolute;bottom:0;left:0;right:0;z-index:3;
-      padding:1rem .4rem;text-align:center;
-      font-weight:800;font-size:.55rem;text-transform:uppercase;letter-spacing:.1em;color:#fff;
+    .icard:hover::after,.icard.is-open::after{
+      background:linear-gradient(180deg,rgba(0,0,0,.06) 0%,transparent 32%,rgba(0,0,0,.85) 100%);
+    }
+
+    .icard-name{
+      position:absolute;left:0;right:0;bottom:0;z-index:3;
+      padding:1.15rem .4rem;text-align:center;
+      font-weight:800;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:#fff;
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+      transition:opacity .3s;
     }
+    .icard:hover .icard-name,.icard.is-open .icard-name{opacity:0}
 
-    .icard-panel{
-      position:absolute;z-index:20;
-      top:50%;left:50%;
-      transform:translate(-50%,-50%) scale(.92);
-      width:clamp(300px,28vw,380px);
-      border-radius:calc(var(--radius) + 4px);overflow:hidden;
-      border:1px solid rgba(255,255,255,.1);
-      background:rgba(8,8,12,.97);
-      box-shadow:0 32px 80px rgba(0,0,0,.7),0 0 100px rgba(212,0,27,.08);
-      opacity:0;pointer-events:none;
-      transition:opacity .4s cubic-bezier(.4,0,.15,1),transform .4s cubic-bezier(.4,0,.15,1);
+    .icard-meta{
+      position:absolute;left:0;right:0;bottom:0;z-index:3;
+      padding:1.3rem 1.3rem 1.4rem;
+      opacity:0;transform:translateY(14px);
+      transition:opacity .45s var(--ease),transform .45s var(--ease);
     }
-    .icard:hover .icard-panel,.icard.is-open .icard-panel{
-      opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1);
+    .icard:hover .icard-meta,.icard.is-open .icard-meta{
+      opacity:1;transform:none;transition-delay:.08s;
     }
-
-    .icard-panel-img{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:var(--ink)}
-    .icard-panel-img img{
-      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-      transition:transform .6s var(--ease);filter:brightness(.85);
-    }
-    .icard:hover .icard-panel-img img,.icard.is-open .icard-panel-img img{transform:scale(1.04)}
-    .icard-panel-img::after{
-      content:"";position:absolute;inset:0;
-      background:linear-gradient(180deg,transparent 50%,rgba(8,8,12,.95) 100%);
-    }
-
-    .icard-panel-body{padding:1rem 1.4rem 1.3rem}
-    .icard-panel-body h3{font-weight:900;font-size:1.2rem;text-transform:uppercase;letter-spacing:.01em;color:#fff;line-height:1.15}
-    .icard-panel-body .icard-role{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red-soft);margin-top:.3rem;display:block}
-    .icard-panel-body .icard-line{color:rgba(255,255,255,.65);font-size:.88rem;line-height:1.55;margin-top:.55rem}
-    .icard-panel-body .icard-trule{
-      width:28px;height:3px;margin-top:.7rem;
-      background:linear-gradient(90deg,var(--red) 0 33.4%,var(--white) 33.4% 66.7%,var(--black) 66.7% 100%);
-    }
+    .icard-meta h3{font-weight:900;font-size:1.25rem;text-transform:uppercase;letter-spacing:.01em;color:#fff;line-height:1.15}
+    .icard-meta .icard-role{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red-soft);margin-top:.35rem;display:block}
+    .icard-meta .icard-line{color:rgba(255,255,255,.7);font-size:.86rem;line-height:1.55;margin-top:.55rem;max-width:30ch}
+    .icard-meta .icard-trule{width:26px;height:3px;margin-top:.75rem;background:linear-gradient(90deg,var(--red) 0 33.4%,var(--white) 33.4% 66.7%,var(--black) 66.7% 100%)}
 
     .icard-glow{
       position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-      width:180%;height:120%;
-      background:radial-gradient(ellipse,rgba(212,0,27,.15),transparent 60%);
+      width:150%;height:120%;
+      background:radial-gradient(ellipse,rgba(212,0,27,.14),transparent 60%);
       opacity:0;transition:opacity .5s;pointer-events:none;z-index:0;
     }
     .icard:hover .icard-glow,.icard.is-open .icard-glow{opacity:1}
 
-    @media(max-width:700px){
-      .idols-accordion{gap:4px;padding:1.5rem .5rem 2rem}
-      .icard{width:42px;height:260px}
-      .icard-panel{width:clamp(240px,70vw,300px)}
-      .icard-strip-name{font-size:.48rem;padding:.6rem .3rem}
+    @media(max-width:720px){
+      .idols-accordion{
+        overflow-x:auto;overflow-y:hidden;
+        scroll-snap-type:x proximity;
+        height:auto;padding:2rem .5rem 3rem;
+        scrollbar-width:none;-webkit-overflow-scrolling:touch;
+      }
+      .idols-accordion::-webkit-scrollbar{display:none}
+      .icard{flex:0 0 72%;aspect-ratio:3/4;height:auto;min-height:340px;scroll-snap-align:center}
+      .icard:hover,.icard.is-open{flex:0 0 72%}
+      .icard-name{display:none}
+      .icard-meta{opacity:1;transform:none;padding:1.1rem 1.2rem 1.3rem}
+      .icard-meta .icard-line{font-size:.82rem}
     }
 
     .estadio-layout{
@@ -1467,7 +1457,7 @@
       </div>
     </section>
 
-    <section class="section section-dark" id="idolos">
+        <section class="section section-dark" id="idolos">
       <div class="wrap">
         <header class="sec-head reveal">
           <span class="trule" aria-hidden="true" style="margin-inline:auto"></span>
@@ -1480,146 +1470,90 @@
       <div class="idols-accordion" role="list">
         <article class="icard reveal" role="listitem">
           <div class="icard-glow" aria-hidden="true"></div>
-          <div class="icard-strip">
-            <img class="icard-strip-img" src="img/idolos/rogerio-ceni.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            <span class="icard-strip-name">Rogério Ceni</span>
-          </div>
-          <div class="icard-panel">
-            <div class="icard-panel-img">
-              <img src="img/idolos/rogerio-ceni.webp" alt="Rogério Ceni" width="400" height="250" loading="lazy" decoding="async" onerror="this.parentElement.remove()">
-            </div>
-            <div class="icard-panel-body">
-              <h3>Rogério Ceni</h3>
-              <span class="icard-role">Goleiro · Nº 1</span>
-              <p class="icard-line">1.257 jogos e 131 gols. O maior goleiro-artilheiro da história e capitão de praticamente todas as conquistas.</p>
-              <div class="icard-trule" aria-hidden="true"></div>
-            </div>
+          <img class="icard-img" src="img/idolos/rogerio-ceni.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          <span class="icard-name">Rogério Ceni</span>
+          <div class="icard-meta">
+            <h3>Rogério Ceni</h3>
+            <span class="icard-role">Goleiro · Nº 1</span>
+            <p class="icard-line">1.257 jogos e 131 gols. O maior goleiro-artilheiro da história e capitão de praticamente todas as conquistas.</p>
+            <div class="icard-trule" aria-hidden="true"></div>
           </div>
         </article>
         <article class="icard reveal" role="listitem">
           <div class="icard-glow" aria-hidden="true"></div>
-          <div class="icard-strip">
-            <img class="icard-strip-img" src="img/idolos/rai.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            <span class="icard-strip-name">Raí</span>
-          </div>
-          <div class="icard-panel">
-            <div class="icard-panel-img">
-              <img src="img/idolos/rai.webp" alt="Raí" width="400" height="250" loading="lazy" decoding="async" onerror="this.parentElement.remove()">
-            </div>
-            <div class="icard-panel-body">
-              <h3>Raí</h3>
-              <span class="icard-role">Meia · Terror do Morumbi</span>
-              <p class="icard-line">Herói do Mundial de 1992, com dois gols na final contra o Barcelona. Gênio do período mais vitorioso.</p>
-              <div class="icard-trule" aria-hidden="true"></div>
-            </div>
+          <img class="icard-img" src="img/idolos/rai.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          <span class="icard-name">Raí</span>
+          <div class="icard-meta">
+            <h3>Raí</h3>
+            <span class="icard-role">Meia · Terror do Morumbi</span>
+            <p class="icard-line">Herói do Mundial de 1992, com dois gols na final contra o Barcelona. Gênio do período mais vitorioso.</p>
+            <div class="icard-trule" aria-hidden="true"></div>
           </div>
         </article>
         <article class="icard reveal" role="listitem">
           <div class="icard-glow" aria-hidden="true"></div>
-          <div class="icard-strip">
-            <img class="icard-strip-img" src="img/idolos/tele-santana.jpg" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            <span class="icard-strip-name">Telê</span>
-          </div>
-          <div class="icard-panel">
-            <div class="icard-panel-img">
-              <img src="img/idolos/tele-santana.jpg" alt="Telê Santana" width="400" height="250" loading="lazy" decoding="async" onerror="this.parentElement.remove()">
-            </div>
-            <div class="icard-panel-body">
-              <h3>Telê Santana</h3>
-              <span class="icard-role">Técnico · O Mestre</span>
-              <p class="icard-line">Arquiteto da era de ouro: Libertadores e Mundiais de 1992 e 1993, com um futebol que encantou o mundo.</p>
-              <div class="icard-trule" aria-hidden="true"></div>
-            </div>
+          <img class="icard-img" src="img/idolos/tele-santana.jpg" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          <span class="icard-name">Telê</span>
+          <div class="icard-meta">
+            <h3>Telê Santana</h3>
+            <span class="icard-role">Técnico · O Mestre</span>
+            <p class="icard-line">Arquiteto da era de ouro: Libertadores e Mundiais de 1992 e 1993, com um futebol que encantou o mundo.</p>
+            <div class="icard-trule" aria-hidden="true"></div>
           </div>
         </article>
         <article class="icard reveal" role="listitem">
           <div class="icard-glow" aria-hidden="true"></div>
-          <div class="icard-strip">
-            <img class="icard-strip-img" src="img/idolos/muricy-ramalho.jpg" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            <span class="icard-strip-name">Muricy</span>
-          </div>
-          <div class="icard-panel">
-            <div class="icard-panel-img">
-              <img src="img/idolos/muricy-ramalho.jpg" alt="Muricy Ramalho" width="400" height="250" loading="lazy" decoding="async" onerror="this.parentElement.remove()">
-            </div>
-            <div class="icard-panel-body">
-              <h3>Muricy Ramalho</h3>
-              <span class="icard-role">Técnico</span>
-              <p class="icard-line">O único a vencer três Campeonatos Brasileiros seguidos no formato de pontos corridos, de 2006 a 2008.</p>
-              <div class="icard-trule" aria-hidden="true"></div>
-            </div>
+          <img class="icard-img" src="img/idolos/muricy-ramalho.jpg" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          <span class="icard-name">Muricy</span>
+          <div class="icard-meta">
+            <h3>Muricy Ramalho</h3>
+            <span class="icard-role">Técnico</span>
+            <p class="icard-line">O único a vencer três Campeonatos Brasileiros seguidos no formato de pontos corridos, de 2006 a 2008.</p>
+            <div class="icard-trule" aria-hidden="true"></div>
           </div>
         </article>
         <article class="icard reveal" role="listitem">
           <div class="icard-glow" aria-hidden="true"></div>
-          <div class="icard-strip">
-            <img class="icard-strip-img" src="img/idolos/leonidas-da-silva.png" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            <span class="icard-strip-name">Leônidas</span>
-          </div>
-          <div class="icard-panel">
-            <div class="icard-panel-img">
-              <img src="img/idolos/leonidas-da-silva.png" alt="Leônidas da Silva" width="400" height="250" loading="lazy" decoding="async" onerror="this.parentElement.remove()">
-            </div>
-            <div class="icard-panel-body">
-              <h3>Leônidas da Silva</h3>
-              <span class="icard-role">Atacante · Diamante Negro</span>
-              <p class="icard-line">O inventor da bicicleta. Ídolo absoluto da era de ouro dos anos 1940 e símbolo da camisa tricolor.</p>
-              <div class="icard-trule" aria-hidden="true"></div>
-            </div>
+          <img class="icard-img" src="img/idolos/leonidas-da-silva.png" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          <span class="icard-name">Leônidas</span>
+          <div class="icard-meta">
+            <h3>Leônidas da Silva</h3>
+            <span class="icard-role">Atacante · Diamante Negro</span>
+            <p class="icard-line">O inventor da bicicleta. Ídolo absoluto da era de ouro dos anos 1940 e símbolo da camisa tricolor.</p>
+            <div class="icard-trule" aria-hidden="true"></div>
           </div>
         </article>
         <article class="icard reveal" role="listitem">
           <div class="icard-glow" aria-hidden="true"></div>
-          <div class="icard-strip">
-            <img class="icard-strip-img icard-photo--right" src="img/idolos/kaka.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            <span class="icard-strip-name">Kaká</span>
-          </div>
-          <div class="icard-panel">
-            <div class="icard-panel-img">
-              <img src="img/idolos/kaka.webp" alt="Kaká" width="400" height="250" loading="lazy" decoding="async" onerror="this.parentElement.remove()">
-            </div>
-            <div class="icard-panel-body">
-              <h3>Kaká</h3>
-              <span class="icard-role">Meia · Nº 8</span>
-              <p class="icard-line">Revelado em Cotia pelo Tricolor, foi eleito o melhor jogador do mundo em 2007, levando o nome de São Paulo ao planeta.</p>
-              <div class="icard-trule" aria-hidden="true"></div>
-            </div>
+          <img class="icard-img icard-photo--right" src="img/idolos/kaka.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          <span class="icard-name">Kaká</span>
+          <div class="icard-meta">
+            <h3>Kaká</h3>
+            <span class="icard-role">Meia · Nº 8</span>
+            <p class="icard-line">Revelado em Cotia pelo Tricolor, foi eleito o melhor jogador do mundo em 2007, levando o nome de São Paulo ao planeta.</p>
+            <div class="icard-trule" aria-hidden="true"></div>
           </div>
         </article>
         <article class="icard reveal" role="listitem">
           <div class="icard-glow" aria-hidden="true"></div>
-          <div class="icard-strip">
-            <img class="icard-strip-img" src="img/idolos/cafu.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            <span class="icard-strip-name">Cafu</span>
-          </div>
-          <div class="icard-panel">
-            <div class="icard-panel-img">
-              <img src="img/idolos/cafu.webp" alt="Cafu" width="400" height="250" loading="lazy" decoding="async" onerror="this.parentElement.remove()">
-            </div>
-            <div class="icard-panel-body">
-              <h3>Cafu</h3>
-              <span class="icard-role">Lateral-direito · Capitão</span>
-              <p class="icard-line">Campeão da Libertadores e do mundo em 1992 e 1993, foi o único a disputar três finais seguidas de Copa do Mundo.</p>
-              <div class="icard-trule" aria-hidden="true"></div>
-            </div>
+          <img class="icard-img" src="img/idolos/cafu.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          <span class="icard-name">Cafu</span>
+          <div class="icard-meta">
+            <h3>Cafu</h3>
+            <span class="icard-role">Lateral-direito · Capitão</span>
+            <p class="icard-line">Campeão da Libertadores e do mundo em 1992 e 1993, foi o único a disputar três finais seguidas de Copa do Mundo.</p>
+            <div class="icard-trule" aria-hidden="true"></div>
           </div>
         </article>
         <article class="icard reveal" role="listitem">
           <div class="icard-glow" aria-hidden="true"></div>
-          <div class="icard-strip">
-            <img class="icard-strip-img icard-photo--shift" src="img/idolos/mineiro.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            <span class="icard-strip-name">Mineiro</span>
-          </div>
-          <div class="icard-panel">
-            <div class="icard-panel-img">
-              <img src="img/idolos/mineiro.webp" alt="Mineiro" width="400" height="250" loading="lazy" decoding="async" onerror="this.parentElement.remove()">
-            </div>
-            <div class="icard-panel-body">
-              <h3>Mineiro</h3>
-              <span class="icard-role">Volante</span>
-              <p class="icard-line">Autor do gol que deu o tricampeonato mundial ao Tricolor, contra o Liverpool, em Tóquio — símbolo da volta por cima dos anos 2000.</p>
-              <div class="icard-trule" aria-hidden="true"></div>
-            </div>
+          <img class="icard-img icard-photo--shift" src="img/idolos/mineiro.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          <span class="icard-name">Mineiro</span>
+          <div class="icard-meta">
+            <h3>Mineiro</h3>
+            <span class="icard-role">Volante</span>
+            <p class="icard-line">Autor do gol que deu o tricampeonato mundial ao Tricolor, contra o Liverpool, em Tóquio — símbolo da volta por cima dos anos 2000.</p>
+            <div class="icard-trule" aria-hidden="true"></div>
           </div>
         </article>
       </div>
