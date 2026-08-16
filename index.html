@@ -757,7 +757,7 @@
 
     #estadio{background:#000;padding-block:0;overflow:hidden}
     .estadio-hero{
-      position:relative;width:100%;aspect-ratio:16/11;min-height:min(82svh,640px);
+      position:relative;z-index:1;width:100%;aspect-ratio:16/11;min-height:min(82svh,640px);
       display:flex;align-items:center;justify-content:center;
       overflow:hidden;background:#000;
       padding:clamp(5rem,11vh,7.5rem) clamp(1.25rem,4vw,3rem);
@@ -857,6 +857,15 @@
     .js #estadio .estadio-band{opacity:0;transform:translateY(46px);transition:opacity .9s var(--ease) var(--d,0s),transform .9s var(--ease) var(--d,0s)}
     .js #estadio .estadio-band.reveal.in{opacity:1;transform:none}
 
+    .estadio-scene{
+      position:absolute;left:0;right:0;bottom:0;height:58%;z-index:0;pointer-events:none;
+      background:url('img/morumbis.webp') center/cover no-repeat;
+      filter:blur(22px) brightness(.55) saturate(.85);
+      transform:scale(1.12);
+      -webkit-mask-image:linear-gradient(180deg,transparent,#000 26%);
+      mask-image:linear-gradient(180deg,transparent,#000 26%);
+    }
+
     .estadio-info{
       display:grid;grid-template-columns:1fr;gap:1.5rem;
       margin-top:clamp(3rem,6vw,4.5rem);padding-bottom:clamp(3rem,7vw,5rem);
@@ -870,10 +879,6 @@
       border:1px solid rgba(255,255,255,.12);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
       padding:1.6rem 1.6rem 1.4rem;position:relative;overflow:hidden;
-    }
-    .estadio-about::before{
-      content:"";position:absolute;top:0;left:0;right:0;height:3px;
-      background:repeating-linear-gradient(90deg,var(--red) 0 26px,var(--white) 26px 52px,var(--black) 52px 78px);
     }
     .estadio-about-label{
       font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
@@ -892,10 +897,6 @@
       border:1px solid rgba(255,255,255,.12);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
       padding:1.6rem 1.6rem 1.4rem;position:relative;overflow:hidden;
-    }
-    .estadio-side::before{
-      content:"";position:absolute;top:0;left:0;right:0;height:3px;
-      background:repeating-linear-gradient(90deg,var(--red) 0 26px,var(--white) 26px 52px,var(--black) 52px 78px);
     }
     .estadio-side-title{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.1rem}
     .estadio-side dl{display:grid;gap:.8rem;margin-bottom:1.3rem}
@@ -1707,6 +1708,7 @@
         </div>
         <span class="estadio-scroll-hint" aria-hidden="true"></span>
       </div>
+      <div class="estadio-scene" aria-hidden="true"></div>
       <div class="wrap">
         <div class="estadio-band reveal">
           <ul class="estadio-glass">
