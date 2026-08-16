@@ -765,54 +765,123 @@
       width:100%;height:100%;object-fit:cover;
       will-change:transform;transform:scale(1.12);
     }
+    .estadio-hero::before{
+      content:"";position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.05;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
     .estadio-hero::after{
       content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-      background:radial-gradient(120% 90% at 50% 10%,rgba(0,0,0,.28) 0%,transparent 55%),
-                 linear-gradient(180deg,rgba(0,0,0,.55) 0%,transparent 40%,rgba(0,0,0,.68) 100%);
+      background:
+        radial-gradient(120% 90% at 50% 10%,rgba(0,0,0,.28) 0%,transparent 55%),
+        linear-gradient(180deg,rgba(0,0,0,.55) 0%,transparent 42%,rgba(0,0,0,.72) 100%),
+        radial-gradient(140% 120% at 50% 50%,transparent 55%,rgba(0,0,0,.55) 100%);
     }
     .estadio-hero-inner{
-      position:absolute;inset:0;z-index:2;
+      position:absolute;inset:0;z-index:3;
       display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
       padding:clamp(5rem,10vh,8rem) clamp(1.25rem,4vw,2.5rem);
     }
     .estadio-label{
       font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
-      color:var(--red-soft);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem;
+      color:var(--red-soft);margin-bottom:1.1rem;display:flex;align-items:center;gap:.6rem;
     }
     .estadio-label::before{content:"";width:8px;height:8px;background:var(--red);transform:rotate(45deg);flex:none}
     .estadio-title{
       font-size:clamp(3rem,11vw,7rem);font-weight:900;text-transform:uppercase;
       line-height:.92;letter-spacing:-.02em;color:#fff;margin-bottom:1.2rem;
     }
+    .estadio-rule{
+      width:clamp(70px,12vw,130px);height:4px;margin:0 auto 1.3rem;
+      background:repeating-linear-gradient(90deg,var(--red) 0 18px,var(--white) 18px 36px);
+      transform-origin:left;transform:scaleX(0);
+    }
+    .js .estadio-rule{transition:transform .9s var(--ease) .35s}
+    .js .estadio-hero.reveal.in .estadio-rule{transform:scaleX(1)}
     .estadio-text{
       color:rgba(255,255,255,.82);font-size:clamp(1rem,2.2vw,1.2rem);line-height:1.7;
-      max-width:48ch;margin-bottom:clamp(1.8rem,4vw,2.6rem);text-shadow:0 2px 18px rgba(0,0,0,.4);
+      max-width:48ch;margin-bottom:clamp(1.8rem,4vw,2.6rem);text-shadow:0 2px 18px rgba(0,0,0,.45);
     }
 
-    .estadio-facts{
+    .estadio-glass{
+      position:relative;z-index:4;
+      margin-top:clamp(-3rem,-5vw,-1.8rem);
       list-style:none;display:grid;grid-template-columns:repeat(2,1fr);
-      border-top:1px solid rgba(255,255,255,.1);
-      margin-top:clamp(2.5rem,6vw,4rem);
+      border-radius:calc(var(--radius) + 6px);
+      background:rgba(18,18,22,.55);
+      -webkit-backdrop-filter:blur(22px) saturate(140%);backdrop-filter:blur(22px) saturate(140%);
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:0 30px 60px -20px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.08);
+      overflow:hidden;
     }
-    @media(min-width:700px){.estadio-facts{grid-template-columns:repeat(3,1fr)}}
-    @media(min-width:1024px){.estadio-facts{grid-template-columns:repeat(6,1fr)}}
-    .estadio-facts li{
-      padding:1.5rem 1rem;text-align:center;display:flex;flex-direction:column;gap:.35rem;
+    @media(min-width:700px){.estadio-glass{grid-template-columns:repeat(3,1fr)}}
+    @media(min-width:1024px){.estadio-glass{grid-template-columns:repeat(6,1fr)}}
+    .estadio-glass li{
+      padding:1.4rem 1rem;text-align:center;display:flex;flex-direction:column;gap:.35rem;
       border-bottom:1px solid rgba(255,255,255,.1);
       transition:background .35s var(--ease);
     }
-    .estadio-facts li:nth-child(2n+1){border-right:1px solid rgba(255,255,255,.1)}
+    .estadio-glass li:nth-child(2n+1){border-right:1px solid rgba(255,255,255,.1)}
     @media(min-width:700px){
-      .estadio-facts li{border-right:1px solid rgba(255,255,255,.1)}
-      .estadio-facts li:nth-child(3n){border-right:0}
+      .estadio-glass li{border-right:1px solid rgba(255,255,255,.1)}
+      .estadio-glass li:nth-child(3n){border-right:0}
     }
     @media(min-width:1024px){
-      .estadio-facts li:nth-child(3n){border-right:1px solid rgba(255,255,255,.1)}
-      .estadio-facts li:nth-child(6n){border-right:0}
+      .estadio-glass li:nth-child(3n){border-right:1px solid rgba(255,255,255,.1)}
+      .estadio-glass li:nth-child(6n){border-right:0}
+      .estadio-glass li{border-bottom:0}
     }
-    .estadio-facts li:hover{background:rgba(255,255,255,.03)}
-    .estadio-fact-num{font-weight:900;font-size:clamp(1.5rem,3vw,2.2rem);color:#fff;line-height:1;letter-spacing:-.01em}
-    .estadio-fact-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+    .estadio-glass li:hover{background:rgba(255,255,255,.05)}
+    .estadio-fact-num{
+      font-weight:900;font-size:clamp(1.5rem,3vw,2.2rem);line-height:1;letter-spacing:-.01em;
+      color:#fff;font-variant-numeric:tabular-nums;
+      transition:color .35s var(--ease),text-shadow .35s var(--ease);
+    }
+    .estadio-glass li:hover .estadio-fact-num{color:var(--red-soft);text-shadow:0 0 24px rgba(255,90,107,.4)}
+    .estadio-fact-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+
+    .js #estadio .estadio-glass{opacity:0;transform:translateY(46px);transition:opacity .9s var(--ease) var(--d,0s),transform .9s var(--ease) var(--d,0s)}
+    .js #estadio .estadio-glass.reveal.in{opacity:1;transform:none}
+
+    .estadio-info{
+      display:grid;grid-template-columns:1fr;gap:1.5rem;
+      padding-top:clamp(2.5rem,6vw,4rem);align-items:start;
+    }
+    @media(min-width:900px){.estadio-info{grid-template-columns:1.5fr 1fr;gap:clamp(2rem,5vw,4rem)}}
+    .estadio-about{max-width:52ch}
+    .estadio-about-label{
+      font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--red-soft);display:flex;align-items:center;gap:.6rem;margin-bottom:.9rem;
+    }
+    .estadio-about-label::before{content:"";width:8px;height:8px;background:var(--red);transform:rotate(45deg);flex:none}
+    .estadio-about h3{font-size:clamp(1.6rem,3.6vw,2.3rem);font-weight:900;text-transform:uppercase;line-height:1.05;margin-bottom:1rem}
+    .estadio-about p{color:rgba(255,255,255,.7);line-height:1.75;font-size:.99rem;margin-bottom:1.4rem}
+    .estadio-points{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+    .estadio-points li{display:flex;align-items:baseline;gap:.7rem;color:rgba(255,255,255,.82);font-size:.96rem;line-height:1.5}
+    .estadio-points li::before{content:"";width:7px;height:7px;background:var(--red);transform:rotate(45deg);flex:none;translate:0 -1px}
+    .estadio-side{
+      border-radius:calc(var(--radius) + 4px);
+      background:rgba(255,255,255,.04);
+      -webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+      padding:1.6rem 1.6rem 1.4rem;position:relative;overflow:hidden;
+    }
+    .estadio-side::before{
+      content:"";position:absolute;top:0;left:0;right:0;height:3px;
+      background:repeating-linear-gradient(90deg,var(--red) 0 26px,var(--white) 26px 52px,var(--black) 52px 78px);
+    }
+    .estadio-side-title{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.1rem}
+    .estadio-side dl{display:grid;gap:.8rem;margin-bottom:1.3rem}
+    .estadio-side dl div{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-bottom:.7rem;border-bottom:1px dashed rgba(255,255,255,.1)}
+    .estadio-side dt{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+    .estadio-side dd{margin:0;font-weight:700;color:#fff;font-size:.94rem;text-align:right}
+    .estadio-map{
+      display:flex;align-items:center;justify-content:center;gap:.5rem;
+      width:100%;padding:.8rem 1.2rem;border-radius:999px;
+      border:1px solid rgba(255,255,255,.22);color:#fff;font-weight:700;font-size:.88rem;
+      transition:background .3s var(--ease),border-color .3s var(--ease);
+    }
+    .estadio-map:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.4)}
 
     .section-red .wrap{position:relative;z-index:2}
 
@@ -948,6 +1017,8 @@
       .js .hero-title .ch{animation:none;opacity:1;transform:none}
       .js #historia .tl-item.reveal,.js .tcard.reveal,.js .tcard-feature.reveal{transform:none}
       .js .icard.reveal{opacity:1;transform:none;transition:none}
+      .js #estadio .estadio-glass{opacity:1;transform:none;transition:none}
+      .js .estadio-rule{transform:scaleX(1)}
       img[loading="lazy"]{opacity:1;transition:none}
     }
   </style>
@@ -1599,8 +1670,9 @@
       <div class="estadio-hero reveal">
         <img src="img/morumbis.webp" alt="Estádio MorumBIS — visão panorâmica da arquibancada e campo" width="1200" height="675" loading="lazy" decoding="async" onerror="this.parentElement.remove()">
         <div class="estadio-hero-inner">
-          <p class="estadio-label">A casa</p>
+          <p class="estadio-label">A casa · Estádio Cícero Pompeu de Toledo</p>
           <h2 class="estadio-title">MorumBIS</h2>
+          <span class="estadio-rule" aria-hidden="true"></span>
           <p class="estadio-text">O maior estádio particular do Brasil e um dos templos mais imponentes do futebol mundial — onde o Tricolor joga há mais de seis décadas.</p>
           <div class="estadio-cta">
             <a class="btn btn-solid reveal" href="https://www.saopaulofc.net/estrutura/morumbis" target="_blank" rel="noopener">Conheça o estádio</a>
@@ -1608,14 +1680,37 @@
         </div>
       </div>
       <div class="wrap">
-        <ul class="estadio-facts">
-          <li class="reveal" style="--d:.05s"><span class="estadio-fact-num">66.795</span><span class="estadio-fact-label">lugares</span></li>
-          <li class="reveal" style="--d:.1s"><span class="estadio-fact-num">1960</span><span class="estadio-fact-label">inauguração</span></li>
-          <li class="reveal" style="--d:.15s"><span class="estadio-fact-num">1970</span><span class="estadio-fact-label">conclusão</span></li>
-          <li class="reveal" style="--d:.2s"><span class="estadio-fact-num">3º</span><span class="estadio-fact-label">maior do Brasil</span></li>
-          <li class="reveal" style="--d:.25s"><span class="estadio-fact-num">1º</span><span class="estadio-fact-label">particular do país</span></li>
-          <li class="reveal" style="--d:.3s"><span class="estadio-fact-num">2018</span><span class="estadio-fact-label">tombado · Conpresp</span></li>
+        <ul class="estadio-glass reveal">
+          <li><span class="estadio-fact-num" data-count="66795">0</span><span class="estadio-fact-label">lugares</span></li>
+          <li><span class="estadio-fact-num" data-count="1960">0</span><span class="estadio-fact-label">inauguração</span></li>
+          <li><span class="estadio-fact-num" data-count="1970">0</span><span class="estadio-fact-label">conclusão</span></li>
+          <li><span class="estadio-fact-num" data-count="3" data-suffix="º">0</span><span class="estadio-fact-label">maior do Brasil</span></li>
+          <li><span class="estadio-fact-num" data-count="1" data-suffix="º">0</span><span class="estadio-fact-label">particular do país</span></li>
+          <li><span class="estadio-fact-num" data-count="2018">0</span><span class="estadio-fact-label">tombado · Conpresp</span></li>
         </ul>
+
+        <div class="estadio-info">
+          <div class="estadio-about reveal">
+            <p class="estadio-about-label">O templo</p>
+            <h3>Uma casa para a história</h3>
+            <p>Inaugurado em 1960, o MorumBIS é a sede do São Paulo FC e o maior estádio particular do Brasil — palco dos três Mundiais tricolores e de algumas das noites mais memoráveis do futebol mundial.</p>
+            <ul class="estadio-points">
+              <li>Maior estádio particular do Brasil</li>
+              <li>Palco do tri Mundial de Clubes — 92, 93 e 2005</li>
+              <li>Mais de seis décadas como casa do Tricolor</li>
+            </ul>
+          </div>
+          <aside class="estadio-side reveal" style="--d:.12s">
+            <p class="estadio-side-title">Identidade</p>
+            <dl>
+              <div><dt>Nome oficial</dt><dd>Cícero Pompeu de Toledo</dd></div>
+              <div><dt>Inauguração</dt><dd>02/10/1960</dd></div>
+              <div><dt>Proprietário</dt><dd>São Paulo FC</dd></div>
+              <div><dt>Capacidade</dt><dd>66.795</dd></div>
+            </dl>
+            <a class="estadio-map" href="https://maps.google.com/?q=Est%C3%A1dio+C%C3%ADcero+Pompeu+de+Toledo" target="_blank" rel="noopener">Ver no mapa</a>
+          </aside>
+        </div>
       </div>
     </section>
 
@@ -1731,6 +1826,30 @@
         var shift = (r.top + r.height / 2 - window.innerHeight / 2) * -0.1;
         shift = Math.max(-28, Math.min(28, shift));
         stadiumImg.style.transform = 'scale(1.12) translateY(' + shift.toFixed(1) + 'px)';
+      }
+
+      var countNums = document.querySelectorAll('.estadio-fact-num[data-count]');
+      if (countNums.length && !reduce && 'IntersectionObserver' in window) {
+        var countObs = new IntersectionObserver(function (entries, obs) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var el = entry.target;
+            obs.unobserve(el);
+            var target = parseInt(el.getAttribute('data-count'), 10);
+            var suffix = el.getAttribute('data-suffix') || '';
+            var start = null;
+            var dur = 1400;
+            function tick(ts) {
+              if (!start) start = ts;
+              var p = Math.min(1, (ts - start) / dur);
+              var eased = 1 - Math.pow(1 - p, 4);
+              el.textContent = Math.round(target * eased).toLocaleString('pt-BR') + suffix;
+              if (p < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+          });
+        }, { threshold: 0.5 });
+        countNums.forEach(function (n) { countObs.observe(n); });
       }
 
       function onScroll() {
