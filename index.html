@@ -878,6 +878,12 @@
 
     img[loading="lazy"]{opacity:0;transition:opacity .5s var(--ease)}
     img[loading="lazy"].loaded, img[loading="lazy"]:not([src=""]){opacity:1}
+    .tl-photo img[loading="lazy"],
+    .jcard-photo[loading="lazy"],
+    .tcard-photo[loading="lazy"],
+    .cult-card-photo img[loading="lazy"]{
+      transition:opacity .5s var(--ease),transform .6s var(--ease);
+    }
 
     #scrollProgress{
       position:fixed;top:0;left:0;right:0;height:5px;z-index:70;
