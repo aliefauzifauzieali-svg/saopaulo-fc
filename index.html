@@ -655,33 +655,42 @@
       border-radius:var(--radius);overflow:hidden;
       cursor:pointer;
       border:1px solid rgba(255,255,255,.07);
-      transition:flex-grow .6s cubic-bezier(.45,0,.15,1),flex-shrink .6s cubic-bezier(.45,0,.15,1),border-color .4s,box-shadow .5s;
+      transition:flex-grow .7s cubic-bezier(.22,1,.36,1),flex-shrink .7s cubic-bezier(.22,1,.36,1),border-color .5s,box-shadow .6s;
+      will-change:flex-grow,flex-shrink;
       z-index:1;
     }
     .icard:hover,.icard.is-open{
       flex:5 5 0;
-      border-color:rgba(255,255,255,.16);
-      box-shadow:0 0 70px rgba(212,0,27,.14),0 18px 50px rgba(0,0,0,.55);
+      border-color:rgba(255,255,255,.2);
+      box-shadow:0 0 90px rgba(212,0,27,.18),0 24px 60px rgba(0,0,0,.6);
       z-index:2;
     }
 
     .icard-img{
       position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
       filter:brightness(.55) saturate(.72);
-      transition:filter .5s var(--ease),transform .6s var(--ease);
+      transition:filter .6s var(--ease),transform .9s var(--ease);
     }
-    .icard-img[loading="lazy"]{transition:opacity .5s var(--ease),filter .5s var(--ease),transform .6s var(--ease)}
+    .icard-img[loading="lazy"]{transition:opacity .5s var(--ease),filter .6s var(--ease),transform .9s var(--ease)}
     .icard:hover .icard-img,.icard.is-open .icard-img{
-      filter:brightness(.75) saturate(.92);transform:scale(1.05);
+      filter:brightness(.8) saturate(.95);transform:scale(1.1);
     }
     .icard-img.is-missing{display:none}
     .icard-photo--right{object-position:72% 25%}
     .icard-photo--shift{object-position:62% 25%}
 
+    .icard::before{
+      content:"";position:absolute;top:-20%;bottom:-20%;left:-20%;width:40%;z-index:2;pointer-events:none;
+      background:linear-gradient(115deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.16) 50%,rgba(255,255,255,0) 100%);
+      transform:translateX(-180%) skewX(-18deg);
+      transition:transform .9s cubic-bezier(.22,1,.36,1);
+    }
+    .icard:hover::before,.icard.is-open::before{transform:translateX(460%) skewX(-18deg)}
+
     .icard::after{
       content:"";position:absolute;inset:0;pointer-events:none;
       background:linear-gradient(180deg,transparent 42%,rgba(0,0,0,.72) 100%);
-      transition:background .5s;
+      transition:background .6s var(--ease);
     }
     .icard:hover::after,.icard.is-open::after{
       background:linear-gradient(180deg,rgba(0,0,0,.06) 0%,transparent 32%,rgba(0,0,0,.85) 100%);
@@ -692,19 +701,23 @@
       padding:1.35rem .4rem;text-align:center;
       font-weight:800;font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:#fff;
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-      transition:opacity .3s;
+      transition:opacity .3s,transform .4s var(--ease);
     }
-    .icard:hover .icard-name,.icard.is-open .icard-name{opacity:0}
+    .icard:hover .icard-name,.icard.is-open .icard-name{opacity:0;transform:translateY(8px)}
 
     .icard-meta{
       position:absolute;left:0;right:0;bottom:0;z-index:3;
       padding:1.5rem 1.6rem 1.7rem;
-      opacity:0;transform:translateY(14px);
-      transition:opacity .45s var(--ease),transform .45s var(--ease);
+      transform:translateY(14px);
+      transition:transform .5s var(--ease);
     }
-    .icard:hover .icard-meta,.icard.is-open .icard-meta{
-      opacity:1;transform:none;transition-delay:.08s;
-    }
+    .icard:hover .icard-meta,.icard.is-open .icard-meta{transform:none;transition-delay:.1s}
+    .icard-meta > *{opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+    .icard:hover .icard-meta > *,.icard.is-open .icard-meta > *{opacity:1;transform:none}
+    .icard:hover .icard-meta > *:nth-child(1),.icard.is-open .icard-meta > *:nth-child(1){transition-delay:.12s}
+    .icard:hover .icard-meta > *:nth-child(2),.icard.is-open .icard-meta > *:nth-child(2){transition-delay:.18s}
+    .icard:hover .icard-meta > *:nth-child(3),.icard.is-open .icard-meta > *:nth-child(3){transition-delay:.24s}
+    .icard:hover .icard-meta > *:nth-child(4),.icard.is-open .icard-meta > *:nth-child(4){transition-delay:.3s}
     .icard-meta h3{font-weight:900;font-size:clamp(1.3rem,2vw,1.65rem);text-transform:uppercase;letter-spacing:.01em;color:#fff;line-height:1.15}
     .icard-meta .icard-role{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red-soft);margin-top:.4rem;display:block}
     .icard-meta .icard-line{color:rgba(255,255,255,.75);font-size:.92rem;line-height:1.6;margin-top:.6rem;max-width:32ch}
@@ -729,7 +742,8 @@
       .icard{flex:0 0 72%;aspect-ratio:3/4;height:auto;min-height:340px;scroll-snap-align:center}
       .icard:hover,.icard.is-open{flex:0 0 72%}
       .icard-name{display:none}
-      .icard-meta{opacity:1;transform:none;padding:1.1rem 1.2rem 1.3rem}
+      .icard-meta{transform:none;padding:1.1rem 1.2rem 1.3rem}
+      .icard-meta > *{opacity:1;transform:none;transition:none}
       .icard-meta .icard-line{font-size:.82rem}
     }
 
@@ -852,7 +866,7 @@
     .js .tcard.reveal,.js .tcard-feature.reveal{transform:scale(.96) translateY(16px)}
     .js .tcard.reveal.in,.js .tcard-feature.reveal.in{transform:none}
     .js .icard.reveal{opacity:0;transform:translateY(24px)}
-    .js .icard.reveal.in{opacity:1;transform:none;transition:opacity .6s var(--ease) var(--d,0s),transform .6s var(--ease) var(--d,0s),flex-grow .6s cubic-bezier(.45,0,.15,1),flex-shrink .6s cubic-bezier(.45,0,.15,1),border-color .4s,box-shadow .5s}
+    .js .icard.reveal.in{opacity:1;transform:none;transition:opacity .6s var(--ease) var(--d,0s),transform .6s var(--ease) var(--d,0s),flex-grow .7s cubic-bezier(.22,1,.36,1),flex-shrink .7s cubic-bezier(.22,1,.36,1),border-color .5s,box-shadow .6s}
     .js .jcard.reveal.in:hover,.js .tcard.reveal.in:hover{transform:translateY(-6px);transition-delay:0s}
 
     img[loading="lazy"]{opacity:0;transition:opacity .5s var(--ease)}
