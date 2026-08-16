@@ -641,98 +641,96 @@
     #idolos .sec-head{text-align:center;max-width:100%;margin-inline:auto;margin-bottom:clamp(2rem,4vw,3rem)}
     #idolos .sec-lead{margin-inline:auto}
 
-    .idols-scroll{
+    .idols-track{
       position:relative;
-      display:flex;gap:1rem;
-      overflow-x:auto;overflow-y:hidden;
-      scroll-snap-type:x mandatory;
-      -webkit-overflow-scrolling:touch;
-      padding:2rem clamp(.5rem,2vw,1rem) 2.5rem;
-      scrollbar-width:none;
+      display:flex;align-items:center;justify-content:center;
+      gap:clamp(.6rem,1.2vw,1rem);
+      overflow:hidden;
+      padding:2.5rem clamp(1rem,4vw,3rem);
     }
-    .idols-scroll::-webkit-scrollbar{display:none}
-    .idols-scroll::before,.idols-scroll::after{content:"";flex:none;width:clamp(.5rem,2vw,1rem)}
 
     .icard{
-      flex:0 0 clamp(90px,14vw,140px);
-      height:clamp(340px,52vh,460px);
       position:relative;overflow:hidden;
-      border:1px solid rgba(255,255,255,.08);
+      flex:0 0 clamp(70px,10vw,110px);
+      height:clamp(340px,55vh,480px);
       border-radius:var(--radius);
-      background:linear-gradient(180deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.02) 40%,rgba(0,0,0,.3) 100%);
-      -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg,rgba(255,255,255,.07) 0%,rgba(255,255,255,.02) 35%,rgba(0,0,0,.4) 100%);
+      -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
       cursor:pointer;
-      scroll-snap-align:center;
-      transition:flex .45s var(--ease),box-shadow .45s var(--ease),border-color .4s var(--ease);
+      transition:flex .5s cubic-bezier(.4,0,.15,1),box-shadow .5s var(--ease),border-color .4s var(--ease);
+      will-change:flex;
     }
     .icard:hover,.icard:focus-within{
-      flex:0 0 clamp(280px,34vw,400px);
-      border-color:rgba(255,255,255,.18);
-      box-shadow:0 0 60px rgba(212,0,27,.15),0 20px 50px rgba(0,0,0,.5);
-      z-index:2;
+      flex:0 0 clamp(300px,28vw,420px);
+      border-color:rgba(255,255,255,.2);
+      box-shadow:0 0 80px rgba(212,0,27,.12),0 30px 60px rgba(0,0,0,.55);
+      z-index:3;
     }
 
     .icard-glow{
-      position:absolute;bottom:-30%;left:50%;transform:translateX(-50%);
-      width:160%;height:70%;
-      background:radial-gradient(ellipse,rgba(212,0,27,.18) 0%,transparent 70%);
-      opacity:0;transition:opacity .4s var(--ease);pointer-events:none;z-index:0;
+      position:absolute;bottom:-40%;left:50%;transform:translateX(-50%);
+      width:200%;height:80%;
+      background:radial-gradient(ellipse,rgba(212,0,27,.2) 0%,transparent 65%);
+      opacity:0;transition:opacity .5s var(--ease);pointer-events:none;z-index:0;
     }
     .icard:hover .icard-glow{opacity:1}
 
     .icard-photo-wrap{
-      position:absolute;inset:0;z-index:1;
-      overflow:hidden;
+      position:absolute;inset:0;z-index:1;overflow:hidden;
     }
     .icard-photo{
       position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
       transition:transform .6s var(--ease),filter .4s var(--ease);
+      filter:brightness(.75);
     }
-    .icard:hover .icard-photo{transform:scale(1.05)}
+    .icard:hover .icard-photo{transform:scale(1.06);filter:brightness(.85)}
     .icard-photo.is-missing{display:none}
     .icard-photo--right{object-position:72% 25%}
     .icard-photo--shift{object-position:62% 25%}
 
     .icard-photo-wrap::after{
       content:"";position:absolute;inset:0;z-index:2;
-      background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.55) 50%,rgba(0,0,0,.85) 100%);
-      transition:opacity .4s var(--ease);
+      background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.45) 50%,rgba(0,0,0,.88) 100%);
+      transition:background .5s var(--ease);
     }
     .icard:hover .icard-photo-wrap::after{
-      background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.25) 35%,rgba(0,0,0,.82) 100%);
+      background:linear-gradient(180deg,rgba(0,0,0,.02) 0%,rgba(0,0,0,.15) 30%,rgba(0,0,0,.85) 100%);
     }
 
     .icard-label{
       position:absolute;z-index:5;
-      left:50%;bottom:1.2rem;
+      left:50%;bottom:1.4rem;
       transform:translateX(-50%);
-      font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;
-      color:rgba(255,255,255,.7);
-      white-space:nowrap;transition:opacity .3s var(--ease);
+      font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+      color:rgba(255,255,255,.75);
+      white-space:nowrap;
+      transition:opacity .3s var(--ease);
     }
     .icard:hover .icard-label{opacity:0}
 
     .icard-body{
-      position:absolute;z-index:5;inset:0;
-      display:flex;flex-direction:column;justify-content:flex-end;
-      padding:1.4rem 1.3rem 1.5rem;
-      opacity:0;transform:translateY(12px);
-      transition:opacity .35s var(--ease) .05s,transform .35s var(--ease) .05s;
+      position:absolute;z-index:5;bottom:0;left:0;right:0;
+      display:flex;flex-direction:column;
+      padding:1.6rem 1.4rem 1.6rem;
+      opacity:0;transform:translateY(16px);
+      transition:opacity .4s var(--ease) .1s,transform .4s var(--ease) .1s;
     }
     .icard:hover .icard-body{opacity:1;transform:none}
 
-    .icard-name{font-weight:800;font-size:1.15rem;text-transform:uppercase;letter-spacing:.02em;color:#fff;line-height:1.15}
-    .icard-role{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red-soft);margin-top:.35rem}
-    .icard-line{color:rgba(255,255,255,.72);font-size:.88rem;line-height:1.55;margin-top:.6rem;max-width:32ch}
+    .icard-name{font-weight:800;font-size:1.25rem;text-transform:uppercase;letter-spacing:.02em;color:#fff;line-height:1.15}
+    .icard-role{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red-soft);margin-top:.4rem}
+    .icard-line{color:rgba(255,255,255,.72);font-size:.9rem;line-height:1.55;margin-top:.65rem;max-width:34ch}
     .icard-trule{
-      width:28px;height:3px;margin-top:.8rem;
+      width:32px;height:3px;margin-top:.8rem;
       background:linear-gradient(90deg,var(--red) 0 33.4%,var(--white) 33.4% 66.7%,var(--black) 66.7% 100%);
     }
 
     @media(max-width:640px){
-      .icard{flex:0 0 72px;height:300px}
-      .icard:hover,.icard:focus-within{flex:0 0 240px}
-      .icard-body{padding:1rem}
+      .idols-track{gap:.5rem;padding:2rem .5rem}
+      .icard{flex:0 0 60px;height:280px}
+      .icard:hover,.icard:focus-within{flex:0 0 220px}
+      .icard-body{padding:1.1rem}
       .icard-name{font-size:1rem}
     }
 
@@ -1471,7 +1469,7 @@
         </header>
       </div>
 
-      <ul class="idols-scroll">
+      <ul class="idols-track">
         <li class="icard reveal" tabindex="0">
           <div class="icard-glow" aria-hidden="true"></div>
           <figure class="icard-photo-wrap">
