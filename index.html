@@ -737,19 +737,24 @@
     }
     @media(max-width:860px){
       .idols-accordion{
-        overflow-x:auto;overflow-y:hidden;
-        scroll-snap-type:x proximity;
-        height:auto;padding:2rem clamp(1rem,4vw,2rem) 3rem;
-        scrollbar-width:none;-webkit-overflow-scrolling:touch;
+        flex-direction:column;
+        height:auto;overflow:visible;
+        gap:clamp(14px,3.5vw,22px);
+        padding:2rem clamp(1.25rem,4.5vw,2.25rem) 3rem;
       }
-      .idols-accordion::-webkit-scrollbar{display:none}
-      .icard{flex:0 0 clamp(240px,74%,380px);aspect-ratio:3/4;height:auto;min-height:320px;scroll-snap-align:center}
-      .icard:hover,.icard.is-open{flex:0 0 clamp(240px,74%,380px)}
+      .icard{flex:0 0 auto;width:100%;aspect-ratio:3/4;height:auto;min-height:400px}
+      .icard:hover,.icard.is-open{flex:0 0 auto}
       .icard-name{display:none}
-      .icard-meta{transform:none;padding:1.2rem 1.4rem 1.4rem}
+      .icard-meta{transform:none}
       .icard-meta > *{opacity:1;transform:none;transition:none}
-      .icard-meta .icard-line{font-size:clamp(.82rem,2.6vw,.92rem);max-width:30ch}
+      .icard-meta .icard-line{font-size:clamp(.85rem,3vw,.95rem);max-width:40ch}
+      .icard-img{filter:brightness(.66) saturate(.82)}
+      .icard:hover .icard-img,.icard.is-open .icard-img{transform:none;filter:brightness(.66) saturate(.82)}
+      .icard:hover::before,.icard.is-open::before{transform:translateX(-180%) skewX(-18deg)}
       .icard-glow{width:120%;height:110%}
+    }
+    @media(min-width:600px) and (max-width:860px){
+      .idols-accordion{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,3vw,22px)}
     }
 
     .estadio-layout{
