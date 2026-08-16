@@ -643,33 +643,34 @@
     #idolos .sec-lead{margin-inline:auto}
 
     .idols-accordion{
-      display:flex;justify-content:center;align-items:stretch;
-      gap:10px;
-      padding:1.5rem 0 2rem;
+      display:flex;justify-content:center;align-items:flex-end;
+      gap:0;
+      padding:2rem 1rem 2.5rem;
     }
 
     .icard{
       position:relative;
-      width:clamp(64px,8vw,96px);
-      height:clamp(360px,56vh,500px);
+      width:clamp(56px,7.5vw,88px);
+      height:clamp(340px,54vh,480px);
       border-radius:var(--radius);
-      overflow:hidden;
+      overflow:visible;
       cursor:pointer;
       flex-shrink:0;
       border:1px solid rgba(255,255,255,.06);
       background:rgba(255,255,255,.04);
-      transition:width .55s cubic-bezier(.4,.0,.2,1),border-color .4s,border-radius .4s,box-shadow .5s;
+      transition:transform .5s cubic-bezier(.4,0,.15,1),box-shadow .5s,border-color .4s,z-index 0s;
+      transform-origin:bottom center;
+      z-index:1;
     }
     .icard:hover,.icard.is-open{
-      width:clamp(280px,30vw,400px);
+      transform:scaleX(3.6) scaleY(1.02);
       border-color:rgba(255,255,255,.15);
-      box-shadow:0 0 80px rgba(212,0,27,.1),0 20px 60px rgba(0,0,0,.5);
-      z-index:2;
+      box-shadow:0 0 80px rgba(212,0,27,.12),0 20px 60px rgba(0,0,0,.5);
+      z-index:10;
     }
 
-    .icard-bg{
-      position:absolute;inset:0;z-index:0;
-      background:linear-gradient(180deg,rgba(255,255,255,.05) 0%,rgba(255,255,255,.01) 30%,rgba(0,0,0,.5) 100%);
+    .icard-inner{
+      position:absolute;inset:0;border-radius:var(--radius);overflow:hidden;
     }
 
     .icard-glow{
@@ -683,78 +684,77 @@
       position:absolute;inset:0;z-index:2;
       width:100%;height:100%;object-fit:cover;
       transition:transform .6s var(--ease),filter .4s;
-      filter:brightness(.65) saturate(.8);
+      filter:brightness(.6) saturate(.75);
     }
     .icard:hover .icard-img,.icard.is-open .icard-img{
-      transform:scale(1.05);filter:brightness(.75) saturate(.9);
+      transform:scale(1.08);filter:brightness(.8) saturate(1);
     }
     .icard-img.is-missing{display:none}
     .icard-photo--right{object-position:72% 25%}
     .icard-photo--shift{object-position:62% 25%}
 
-    .icard-img::after,.icard::after{
-      content:"";position:absolute;inset:0;
+    .icard-inner::after{
+      content:"";position:absolute;inset:0;z-index:3;
+      background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,.75) 100%);
+      transition:background .5s;
     }
-    .icard::after{
-      z-index:3;
-      background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.7) 100%);
-      transition:opacity .4s;
-    }
-    .icard:hover::after,.icard.is-open::after{
-      background:linear-gradient(180deg,rgba(0,0,0,.1) 20%,rgba(0,0,0,.85) 100%);
+    .icard:hover .icard-inner::after,.icard.is-open .icard-inner::after{
+      background:linear-gradient(180deg,rgba(0,0,0,0) 10%,rgba(0,0,0,.88) 100%);
     }
 
-    .icard-name-collapsed{
+    .icard-label{
       position:absolute;z-index:6;bottom:0;left:0;right:0;
-      padding:1.2rem .8rem;
-      text-align:center;
-      font-weight:800;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:#fff;
+      padding:1rem .6rem;text-align:center;
+      transform:scaleX(calc(1/3.6));
+      font-weight:800;font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:#fff;
       white-space:nowrap;
-      opacity:1;
-      transition:opacity .3s var(--ease);
+      opacity:1;transition:opacity .3s;
     }
-    .icard:hover .icard-name-collapsed,.icard.is-open .icard-name-collapsed{opacity:0;transition-delay:0s}
+    .icard:hover .icard-label,.icard.is-open .icard-label{opacity:0;transition-delay:0s}
 
     .icard-content{
       position:absolute;z-index:6;bottom:0;left:0;right:0;
-      padding:1.5rem 1.4rem 1.6rem;
-      opacity:0;
-      transform:translateY(20px);
-      transition:opacity .4s var(--ease) .08s,transform .4s var(--ease) .08s;
+      padding:1.4rem 1.2rem 1.5rem;
+      transform:scaleX(calc(1/3.6));
+      opacity:0;transform:translateY(16px) scaleX(calc(1/3.6));
+      transition:opacity .4s var(--ease),transform .4s var(--ease);
     }
     .icard:hover .icard-content,.icard.is-open .icard-content{
-      opacity:1;transform:translateY(0);transition-delay:.12s;
+      opacity:1;transform:translateY(0) scaleX(calc(1/3.6));transition-delay:.1s;
     }
 
     .icard-content h3{
-      font-weight:900;font-size:1.3rem;text-transform:uppercase;letter-spacing:.01em;color:#fff;line-height:1.15;
+      font-weight:900;font-size:1.2rem;text-transform:uppercase;letter-spacing:.01em;color:#fff;line-height:1.15;
     }
     .icard-content .icard-role{
-      font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
-      color:var(--red-soft);margin-top:.4rem;display:block;
+      font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--red-soft);margin-top:.35rem;display:block;
     }
     .icard-content .icard-line{
-      color:rgba(255,255,255,.7);font-size:.88rem;line-height:1.55;margin-top:.65rem;max-width:34ch;
+      color:rgba(255,255,255,.7);font-size:.82rem;line-height:1.5;margin-top:.55rem;max-width:30ch;
     }
     .icard-content .icard-trule{
-      width:28px;height:3px;margin-top:.85rem;
+      width:24px;height:3px;margin-top:.7rem;
       background:linear-gradient(90deg,var(--red) 0 33.4%,var(--white) 33.4% 66.7%,var(--black) 66.7% 100%);
     }
 
     .icard-accent{
       position:absolute;top:0;left:0;right:0;height:4px;z-index:7;
       background:linear-gradient(90deg,var(--red) 0 33.4%,var(--white) 33.4% 66.7%,var(--black) 66.7% 100%);
+      border-radius:var(--radius) var(--radius) 0 0;
       transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);
     }
     .icard:hover .icard-accent,.icard.is-open .icard-accent{transform:scaleX(1)}
 
     @media(max-width:700px){
-      .idols-accordion{gap:6px;padding:1rem 0 1.5rem}
-      .icard{width:52px;height:260px}
-      .icard:hover,.icard.is-open{width:200px}
-      .icard-content{padding:1rem .9rem 1.2rem}
-      .icard-content h3{font-size:1.05rem}
-      .icard-name-collapsed{font-size:.55rem;padding:.8rem .5rem}
+      .idols-accordion{padding:1.5rem .5rem 2rem}
+      .icard{width:44px;height:260px}
+      .icard:hover,.icard.is-open{transform:scaleX(3.2) scaleY(1.02)}
+      .icard-label{transform:scaleX(calc(1/3.2))}
+      .icard-content{transform:translateY(16px) scaleX(calc(1/3.2))}
+      .icard:hover .icard-content,.icard.is-open .icard-content{transform:translateY(0) scaleX(calc(1/3.2))}
+      .icard-content{padding:1rem .8rem 1.1rem}
+      .icard-content h3{font-size:1rem}
     }
 
     .estadio-layout{
@@ -1497,8 +1497,10 @@
         <article class="icard reveal" role="listitem">
           <div class="icard-accent" aria-hidden="true"></div>
           <div class="icard-glow" aria-hidden="true"></div>
-          <img class="icard-img" src="img/idolos/rogerio-ceni.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-          <span class="icard-name-collapsed">Rogério Ceni</span>
+          <div class="icard-inner">
+            <img class="icard-img" src="img/idolos/rogerio-ceni.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </div>
+          <span class="icard-label">Rogério Ceni</span>
           <div class="icard-content">
             <h3>Rogério Ceni</h3>
             <span class="icard-role">Goleiro · Nº 1</span>
@@ -1510,8 +1512,10 @@
         <article class="icard reveal" role="listitem">
           <div class="icard-accent" aria-hidden="true"></div>
           <div class="icard-glow" aria-hidden="true"></div>
-          <img class="icard-img" src="img/idolos/rai.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-          <span class="icard-name-collapsed">Raí</span>
+          <div class="icard-inner">
+            <img class="icard-img" src="img/idolos/rai.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </div>
+          <span class="icard-label">Raí</span>
           <div class="icard-content">
             <h3>Raí</h3>
             <span class="icard-role">Meia · Terror do Morumbi</span>
@@ -1523,8 +1527,10 @@
         <article class="icard reveal" role="listitem">
           <div class="icard-accent" aria-hidden="true"></div>
           <div class="icard-glow" aria-hidden="true"></div>
-          <img class="icard-img" src="img/idolos/tele-santana.jpg" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-          <span class="icard-name-collapsed">Telê Santana</span>
+          <div class="icard-inner">
+            <img class="icard-img" src="img/idolos/tele-santana.jpg" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </div>
+          <span class="icard-label">Telê Santana</span>
           <div class="icard-content">
             <h3>Telê Santana</h3>
             <span class="icard-role">Técnico · O Mestre</span>
@@ -1536,8 +1542,10 @@
         <article class="icard reveal" role="listitem">
           <div class="icard-accent" aria-hidden="true"></div>
           <div class="icard-glow" aria-hidden="true"></div>
-          <img class="icard-img" src="img/idolos/muricy-ramalho.jpg" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-          <span class="icard-name-collapsed">Muricy Ramalho</span>
+          <div class="icard-inner">
+            <img class="icard-img" src="img/idolos/muricy-ramalho.jpg" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </div>
+          <span class="icard-label">Muricy Ramalho</span>
           <div class="icard-content">
             <h3>Muricy Ramalho</h3>
             <span class="icard-role">Técnico</span>
@@ -1549,8 +1557,10 @@
         <article class="icard reveal" role="listitem">
           <div class="icard-accent" aria-hidden="true"></div>
           <div class="icard-glow" aria-hidden="true"></div>
-          <img class="icard-img" src="img/idolos/leonidas-da-silva.png" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-          <span class="icard-name-collapsed">Leônidas</span>
+          <div class="icard-inner">
+            <img class="icard-img" src="img/idolos/leonidas-da-silva.png" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </div>
+          <span class="icard-label">Leônidas</span>
           <div class="icard-content">
             <h3>Leônidas da Silva</h3>
             <span class="icard-role">Atacante · Diamante Negro</span>
@@ -1562,8 +1572,10 @@
         <article class="icard reveal" role="listitem">
           <div class="icard-accent" aria-hidden="true"></div>
           <div class="icard-glow" aria-hidden="true"></div>
-          <img class="icard-img icard-photo--right" src="img/idolos/kaka.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-          <span class="icard-name-collapsed">Kaká</span>
+          <div class="icard-inner">
+            <img class="icard-img icard-photo--right" src="img/idolos/kaka.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </div>
+          <span class="icard-label">Kaká</span>
           <div class="icard-content">
             <h3>Kaká</h3>
             <span class="icard-role">Meia · Nº 8</span>
@@ -1575,8 +1587,10 @@
         <article class="icard reveal" role="listitem">
           <div class="icard-accent" aria-hidden="true"></div>
           <div class="icard-glow" aria-hidden="true"></div>
-          <img class="icard-img" src="img/idolos/cafu.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-          <span class="icard-name-collapsed">Cafu</span>
+          <div class="icard-inner">
+            <img class="icard-img" src="img/idolos/cafu.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </div>
+          <span class="icard-label">Cafu</span>
           <div class="icard-content">
             <h3>Cafu</h3>
             <span class="icard-role">Lateral-direito · Capitão</span>
@@ -1588,8 +1602,10 @@
         <article class="icard reveal" role="listitem">
           <div class="icard-accent" aria-hidden="true"></div>
           <div class="icard-glow" aria-hidden="true"></div>
-          <img class="icard-img icard-photo--shift" src="img/idolos/mineiro.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-          <span class="icard-name-collapsed">Mineiro</span>
+          <div class="icard-inner">
+            <img class="icard-img icard-photo--shift" src="img/idolos/mineiro.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </div>
+          <span class="icard-label">Mineiro</span>
           <div class="icard-content">
             <h3>Mineiro</h3>
             <span class="icard-role">Volante</span>
