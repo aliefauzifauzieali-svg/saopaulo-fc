@@ -861,12 +861,9 @@
       position:absolute;left:0;right:0;bottom:0;height:56%;z-index:0;pointer-events:none;
       background:url('img/morumbis-upside.webp') center/cover no-repeat;
       background-position:center 40%;
+      filter:brightness(.78);
       -webkit-mask-image:linear-gradient(180deg,transparent,#000 14%);
       mask-image:linear-gradient(180deg,transparent,#000 14%);
-    }
-    .estadio-scene-shade{
-      position:absolute;left:0;right:0;bottom:0;height:56%;z-index:1;pointer-events:none;
-      background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.2) 35%,rgba(0,0,0,.6) 100%);
     }
 
     .estadio-info{
@@ -1712,7 +1709,6 @@
         <span class="estadio-scroll-hint" aria-hidden="true"></span>
       </div>
       <div class="estadio-scene" aria-hidden="true"></div>
-      <div class="estadio-scene-shade" aria-hidden="true"></div>
       <div class="wrap">
         <div class="estadio-band reveal">
           <ul class="estadio-glass">
