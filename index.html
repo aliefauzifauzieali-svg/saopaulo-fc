@@ -767,21 +767,36 @@
       border-radius:var(--radius);background:var(--ink);
     }
     @media(min-width:860px){
-      .estadio-visual{aspect-ratio:auto;height:100%;min-height:380px;border-radius:var(--radius) 0 0 var(--radius)}
-    }
-    .estadio-visual::after{
-      content:"";position:absolute;inset:0;z-index:1;
-      background:linear-gradient(90deg,transparent 55%,var(--black-2) 100%);
-    }
-    @media(max-width:859px){
-      .estadio-visual::after{
-        background:linear-gradient(180deg,transparent 60%,var(--black-2) 100%);
-      }
+      .estadio-visual{aspect-ratio:auto;height:100%;min-height:420px;border-radius:var(--radius) 0 0 var(--radius)}
     }
     .estadio-visual img{
       width:100%;height:100%;object-fit:cover;
       will-change:transform;transform:scale(1.1);
     }
+    .estadio-visual::after{
+      content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+      background:linear-gradient(90deg,rgba(11,11,13,.3) 0%,transparent 46%,rgba(11,11,13,.55) 100%);
+    }
+    @media(max-width:859px){
+      .estadio-visual::after{
+        background:linear-gradient(180deg,rgba(11,11,13,.25) 0%,transparent 42%,rgba(11,11,13,.68) 100%);
+      }
+    }
+    .estadio-strip{
+      position:absolute;left:0;right:0;bottom:0;height:6px;z-index:2;pointer-events:none;
+      background:linear-gradient(90deg,var(--red) 0 33.4%,var(--white) 33.4% 66.7%,var(--black) 66.7% 100%);
+    }
+    .estadio-badge{
+      position:absolute;left:clamp(1rem,3vw,2rem);top:clamp(1rem,3vw,2rem);z-index:2;
+      display:flex;flex-direction:column;gap:.25rem;
+      background:rgba(11,11,13,.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,.16);border-radius:14px;
+      padding:1rem 1.3rem 1.1rem;box-shadow:0 18px 40px rgba(0,0,0,.35);
+    }
+    .estadio-badge-num{font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:900;line-height:1;color:#fff;letter-spacing:-.01em}
+    .estadio-badge-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red-soft)}
+    .estadio-badge-tag{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:.35rem;border-top:1px solid rgba(255,255,255,.12);padding-top:.4rem}
+
     .estadio-content{
       display:flex;flex-direction:column;justify-content:center;
       padding:clamp(1.5rem,4vw,2.5rem);
@@ -800,23 +815,30 @@
     }
     .estadio-label::before{content:"";width:8px;height:8px;background:var(--red);transform:rotate(45deg);flex:none}
     .estadio-title{
-      font-size:clamp(2.2rem,5vw,3.5rem);font-weight:900;text-transform:uppercase;
-      line-height:1;letter-spacing:-.01em;margin-bottom:1rem;
+      font-size:clamp(2.4rem,5.5vw,4rem);font-weight:900;text-transform:uppercase;
+      line-height:.95;letter-spacing:-.01em;margin-bottom:1.1rem;
     }
     .estadio-text{
-      color:rgba(255,255,255,.7);font-size:1rem;line-height:1.7;max-width:40ch;margin-bottom:2rem;
+      color:rgba(255,255,255,.7);font-size:1rem;line-height:1.7;max-width:42ch;margin-bottom:2rem;
     }
     .estadio-facts{
       list-style:none;display:grid;grid-template-columns:1fr;gap:0;
-      border-top:1px solid rgba(255,255,255,.12);margin-bottom:2rem;
+      border-top:1px solid rgba(255,255,255,.12);margin-bottom:2.2rem;
     }
-    @media(min-width:560px){.estadio-facts{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:560px){.estadio-facts{grid-template-columns:1fr 1fr}}
     .estadio-facts li{
       border-bottom:1px solid rgba(255,255,255,.12);
-      padding:.9rem 0;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
-      color:rgba(255,255,255,.85);display:flex;align-items:center;gap:.7rem;
+      padding:1.05rem 1rem;display:flex;flex-direction:column;gap:.3rem;
+      transition:background .35s var(--ease);
     }
-    .estadio-facts li::before{content:"";width:6px;height:6px;flex:none;background:var(--red);transform:rotate(45deg)}
+    @media(min-width:560px){
+      .estadio-facts li:nth-child(odd){padding-left:0}
+      .estadio-facts li:nth-child(even){padding-right:0;border-left:1px solid rgba(255,255,255,.12)}
+    }
+    .estadio-facts li:hover{background:rgba(212,0,27,.08)}
+    .estadio-fact-num{font-weight:900;font-size:clamp(1.2rem,2vw,1.5rem);color:#fff;line-height:1;letter-spacing:-.01em}
+    .estadio-fact-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+
     .section-red .wrap{position:relative;z-index:2}
 
     .stats-band{padding-block:clamp(3.5rem,8vw,6rem)}
@@ -1603,20 +1625,26 @@
         <div class="estadio-layout">
           <figure class="estadio-visual reveal">
             <img src="img/morumbis.webp" alt="Estádio MorumBIS — visão panorâmica da arquibancada e campo" width="1200" height="675" loading="lazy" decoding="async" onerror="this.parentElement.remove()">
+            <span class="estadio-strip" aria-hidden="true"></span>
+            <div class="estadio-badge" aria-hidden="true">
+              <span class="estadio-badge-num">66.795</span>
+              <span class="estadio-badge-label">lugares</span>
+              <span class="estadio-badge-tag">Desde 1960</span>
+            </div>
           </figure>
           <div class="estadio-content reveal">
             <p class="estadio-label">A casa</p>
             <h2 class="estadio-title">MorumBIS</h2>
             <p class="estadio-text">Estádio Cícero Pompeu de Toledo: o maior estádio particular do Brasil e um dos templos mais imponentes do futebol mundial — onde o Tricolor joga há mais de seis décadas.</p>
             <ul class="estadio-facts">
-              <li>66.795 lugares</li>
-              <li>3º maior estádio do Brasil</li>
-              <li>Maior estádio particular do país</li>
-              <li>Inaugurado em 1960 · concluído em 1970</li>
-              <li>Arquitetura de Vilanova Artigas</li>
-              <li>Tombado pelo Conpresp · 2018</li>
+              <li class="reveal" style="--d:.05s"><span class="estadio-fact-num">66.795</span><span class="estadio-fact-label">lugares</span></li>
+              <li class="reveal" style="--d:.1s"><span class="estadio-fact-num">1960</span><span class="estadio-fact-label">inauguração</span></li>
+              <li class="reveal" style="--d:.15s"><span class="estadio-fact-num">3º</span><span class="estadio-fact-label">maior estádio do Brasil</span></li>
+              <li class="reveal" style="--d:.2s"><span class="estadio-fact-num">1º</span><span class="estadio-fact-label">maior particular do país</span></li>
+              <li class="reveal" style="--d:.25s"><span class="estadio-fact-num">1970</span><span class="estadio-fact-label">conclusão do anel superior</span></li>
+              <li class="reveal" style="--d:.3s"><span class="estadio-fact-num">2018</span><span class="estadio-fact-label">tombado pelo Conpresp</span></li>
             </ul>
-            <div>
+            <div class="estadio-cta">
               <a class="btn btn-solid reveal" href="https://www.saopaulofc.net/estrutura/morumbis" target="_blank" rel="noopener">Conheça o estádio</a>
             </div>
           </div>
