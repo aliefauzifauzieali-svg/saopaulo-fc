@@ -757,12 +757,16 @@
 
     #estadio{background:#000;padding-block:0;overflow:hidden}
     .estadio-hero{
-      position:relative;width:100%;aspect-ratio:16/11;max-height:90vh;overflow:hidden;
-      background:#000;
+      position:relative;width:100%;aspect-ratio:16/11;min-height:min(82svh,640px);
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;background:#000;
+      padding:clamp(5rem,11vh,7.5rem) clamp(1.25rem,4vw,3rem);
     }
-    @media(min-width:900px){.estadio-hero{aspect-ratio:21/9}}
+    @media(min-width:900px){
+      .estadio-hero{aspect-ratio:21/9;min-height:0;max-height:92vh;padding:clamp(3.5rem,9vh,7rem) clamp(1.25rem,4vw,3rem)}
+    }
     .estadio-hero img{
-      width:100%;height:100%;object-fit:cover;
+      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
       will-change:transform;transform:scale(1.12);
     }
     .estadio-hero::before{
@@ -772,15 +776,21 @@
     .estadio-hero::after{
       content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
       background:
-        radial-gradient(120% 90% at 50% 10%,rgba(0,0,0,.28) 0%,transparent 55%),
-        linear-gradient(180deg,rgba(0,0,0,.55) 0%,transparent 42%,rgba(0,0,0,.72) 100%),
-        radial-gradient(140% 120% at 50% 50%,transparent 55%,rgba(0,0,0,.55) 100%);
+        linear-gradient(180deg,rgba(0,0,0,.55) 0%,transparent 38%,transparent 72%,rgba(0,0,0,.85) 100%),
+        radial-gradient(130% 110% at 50% 46%,transparent 55%,rgba(0,0,0,.6) 100%);
     }
     .estadio-hero-inner{
-      position:absolute;inset:0;z-index:3;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
-      padding:clamp(5rem,10vh,8rem) clamp(1.25rem,4vw,2.5rem);
+      position:relative;z-index:3;max-width:66rem;
+      display:flex;flex-direction:column;align-items:center;text-align:center;
     }
+    .estadio-hero-inner::before{
+      content:"";position:absolute;z-index:-1;left:50%;top:50%;translate:-50% -50%;
+      width:min(82vw,840px);height:min(66vw,620px);border-radius:50%;
+      background:radial-gradient(circle,rgba(212,0,27,.26),transparent 65%);
+      filter:blur(44px);
+      animation:estadioGlow 7s ease-in-out infinite;
+    }
+    @keyframes estadioGlow{0%,100%{opacity:.6}50%{opacity:1}}
     .estadio-label{
       font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
       color:var(--red-soft);margin-bottom:1.1rem;display:flex;align-items:center;gap:.6rem;
@@ -801,17 +811,35 @@
       color:rgba(255,255,255,.82);font-size:clamp(1rem,2.2vw,1.2rem);line-height:1.7;
       max-width:48ch;margin-bottom:clamp(1.8rem,4vw,2.6rem);text-shadow:0 2px 18px rgba(0,0,0,.45);
     }
+    .estadio-scroll-hint{
+      position:absolute;left:50%;bottom:1.4rem;translate:-50% 0;z-index:3;
+      width:26px;height:40px;border:1.5px solid rgba(255,255,255,.4);border-radius:999px;
+    }
+    .estadio-scroll-hint::after{
+      content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;border-radius:2px;
+      background:var(--red-soft);animation:scrollHint 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollHint{
+      0%{opacity:0;transform:translate(-50%,0)}
+      35%{opacity:1}
+      70%{opacity:0;transform:translate(-50%,12px)}
+      100%{opacity:0;transform:translate(-50%,12px)}
+    }
 
+    .estadio-band{position:relative;margin-top:clamp(2.5rem,5vw,4rem)}
+    .estadio-band::before{
+      content:"";position:absolute;inset:0 -12% -30%;z-index:0;pointer-events:none;
+      background:radial-gradient(55% 80% at 50% 0%,rgba(212,0,27,.16),transparent 70%);
+      filter:blur(24px);
+    }
     .estadio-glass{
-      position:relative;z-index:4;
-      margin-top:clamp(-3rem,-5vw,-1.8rem);
+      position:relative;z-index:1;
       list-style:none;display:grid;grid-template-columns:repeat(2,1fr);
-      border-radius:calc(var(--radius) + 6px);
-      background:rgba(18,18,22,.55);
-      -webkit-backdrop-filter:blur(22px) saturate(140%);backdrop-filter:blur(22px) saturate(140%);
-      border:1px solid rgba(255,255,255,.14);
-      box-shadow:0 30px 60px -20px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.08);
-      overflow:hidden;
+      border-radius:calc(var(--radius) + 6px);overflow:hidden;
+      background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02) 45%,rgba(212,0,27,.06));
+      -webkit-backdrop-filter:blur(20px) saturate(140%);backdrop-filter:blur(20px) saturate(140%);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 26px 60px -22px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.1);
     }
     @media(min-width:700px){.estadio-glass{grid-template-columns:repeat(3,1fr)}}
     @media(min-width:1024px){.estadio-glass{grid-template-columns:repeat(6,1fr)}}
@@ -839,12 +867,13 @@
     .estadio-glass li:hover .estadio-fact-num{color:var(--red-soft);text-shadow:0 0 24px rgba(255,90,107,.4)}
     .estadio-fact-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.55)}
 
-    .js #estadio .estadio-glass{opacity:0;transform:translateY(46px);transition:opacity .9s var(--ease) var(--d,0s),transform .9s var(--ease) var(--d,0s)}
-    .js #estadio .estadio-glass.reveal.in{opacity:1;transform:none}
+    .js #estadio .estadio-band{opacity:0;transform:translateY(46px);transition:opacity .9s var(--ease) var(--d,0s),transform .9s var(--ease) var(--d,0s)}
+    .js #estadio .estadio-band.reveal.in{opacity:1;transform:none}
 
     .estadio-info{
       display:grid;grid-template-columns:1fr;gap:1.5rem;
-      padding-top:clamp(2.5rem,6vw,4rem);align-items:start;
+      margin-top:clamp(3rem,6vw,4.5rem);padding-bottom:clamp(3rem,7vw,5rem);
+      align-items:start;
     }
     @media(min-width:900px){.estadio-info{grid-template-columns:1.5fr 1fr;gap:clamp(2rem,5vw,4rem)}}
     .estadio-about{max-width:52ch}
@@ -860,7 +889,7 @@
     .estadio-points li::before{content:"";width:7px;height:7px;background:var(--red);transform:rotate(45deg);flex:none;translate:0 -1px}
     .estadio-side{
       border-radius:calc(var(--radius) + 4px);
-      background:rgba(255,255,255,.04);
+      background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02) 50%,rgba(212,0,27,.05));
       -webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);
       border:1px solid rgba(255,255,255,.12);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
@@ -1017,7 +1046,7 @@
       .js .hero-title .ch{animation:none;opacity:1;transform:none}
       .js #historia .tl-item.reveal,.js .tcard.reveal,.js .tcard-feature.reveal{transform:none}
       .js .icard.reveal{opacity:1;transform:none;transition:none}
-      .js #estadio .estadio-glass{opacity:1;transform:none;transition:none}
+      .js #estadio .estadio-band{opacity:1;transform:none;transition:none}
       .js .estadio-rule{transform:scaleX(1)}
       img[loading="lazy"]{opacity:1;transition:none}
     }
@@ -1678,16 +1707,19 @@
             <a class="btn btn-solid reveal" href="https://www.saopaulofc.net/estrutura/morumbis" target="_blank" rel="noopener">Conheça o estádio</a>
           </div>
         </div>
+        <span class="estadio-scroll-hint" aria-hidden="true"></span>
       </div>
       <div class="wrap">
-        <ul class="estadio-glass reveal">
-          <li><span class="estadio-fact-num" data-count="66795">0</span><span class="estadio-fact-label">lugares</span></li>
-          <li><span class="estadio-fact-num" data-count="1960">0</span><span class="estadio-fact-label">inauguração</span></li>
-          <li><span class="estadio-fact-num" data-count="1970">0</span><span class="estadio-fact-label">conclusão</span></li>
-          <li><span class="estadio-fact-num" data-count="3" data-suffix="º">0</span><span class="estadio-fact-label">maior do Brasil</span></li>
-          <li><span class="estadio-fact-num" data-count="1" data-suffix="º">0</span><span class="estadio-fact-label">particular do país</span></li>
-          <li><span class="estadio-fact-num" data-count="2018">0</span><span class="estadio-fact-label">tombado · Conpresp</span></li>
-        </ul>
+        <div class="estadio-band reveal">
+          <ul class="estadio-glass">
+            <li><span class="estadio-fact-num" data-count="66795">0</span><span class="estadio-fact-label">lugares</span></li>
+            <li><span class="estadio-fact-num" data-count="1960">0</span><span class="estadio-fact-label">inauguração</span></li>
+            <li><span class="estadio-fact-num" data-count="1970">0</span><span class="estadio-fact-label">conclusão</span></li>
+            <li><span class="estadio-fact-num" data-count="3" data-suffix="º">0</span><span class="estadio-fact-label">maior do Brasil</span></li>
+            <li><span class="estadio-fact-num" data-count="1" data-suffix="º">0</span><span class="estadio-fact-label">particular do país</span></li>
+            <li><span class="estadio-fact-num" data-count="2018">0</span><span class="estadio-fact-label">tombado · Conpresp</span></li>
+          </ul>
+        </div>
 
         <div class="estadio-info">
           <div class="estadio-about reveal">
