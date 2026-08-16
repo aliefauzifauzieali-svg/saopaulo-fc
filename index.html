@@ -638,37 +638,103 @@
     .classicos-vs{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red-soft);margin-top:.4rem}
     .classicos-line{color:rgba(255,255,255,.7);font-size:.93rem;line-height:1.55;margin-top:.65rem}
 
-    .idols-grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
-    @media(min-width:560px){.idols-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(min-width:960px){.idols-grid{grid-template-columns:repeat(3,1fr)}}
+    #idolos .sec-head{text-align:center;max-width:100%;margin-inline:auto;margin-bottom:clamp(2rem,4vw,3rem)}
+    #idolos .sec-lead{margin-inline:auto}
+
+    .idols-scroll{
+      position:relative;
+      display:flex;gap:1rem;
+      overflow-x:auto;overflow-y:hidden;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      padding:2rem clamp(.5rem,2vw,1rem) 2.5rem;
+      scrollbar-width:none;
+    }
+    .idols-scroll::-webkit-scrollbar{display:none}
+    .idols-scroll::before,.idols-scroll::after{content:"";flex:none;width:clamp(.5rem,2vw,1rem)}
+
     .icard{
+      flex:0 0 clamp(90px,14vw,140px);
+      height:clamp(340px,52vh,460px);
       position:relative;overflow:hidden;
-      border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);
-      background:rgba(255,255,255,.04);
-      display:flex;flex-direction:column;
-      transition:transform .3s var(--ease),border-color .3s var(--ease),box-shadow .3s var(--ease);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.02) 40%,rgba(0,0,0,.3) 100%);
+      -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+      cursor:pointer;
+      scroll-snap-align:center;
+      transition:flex .45s var(--ease),box-shadow .45s var(--ease),border-color .4s var(--ease);
     }
-    .icard::before{
-      content:"";position:absolute;top:0;left:0;right:0;height:6px;z-index:2;
-      background:linear-gradient(90deg,var(--red) 0 33.4%,var(--white) 33.4% 66.7%,var(--black) 66.7% 100%);
+    .icard:hover,.icard:focus-within{
+      flex:0 0 clamp(280px,34vw,400px);
+      border-color:rgba(255,255,255,.18);
+      box-shadow:0 0 60px rgba(212,0,27,.15),0 20px 50px rgba(0,0,0,.5);
+      z-index:2;
     }
-    .icard:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.2);box-shadow:0 20px 50px rgba(0,0,0,.45),0 0 40px rgba(212,0,27,.1)}
+
+    .icard-glow{
+      position:absolute;bottom:-30%;left:50%;transform:translateX(-50%);
+      width:160%;height:70%;
+      background:radial-gradient(ellipse,rgba(212,0,27,.18) 0%,transparent 70%);
+      opacity:0;transition:opacity .4s var(--ease);pointer-events:none;z-index:0;
+    }
+    .icard:hover .icard-glow{opacity:1}
+
     .icard-photo-wrap{
-      position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;
-      background:var(--ink);
+      position:absolute;inset:0;z-index:1;
+      overflow:hidden;
     }
     .icard-photo{
       position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-      transition:transform .6s var(--ease);
+      transition:transform .6s var(--ease),filter .4s var(--ease);
     }
-    .icard:hover .icard-photo{transform:scale(1.06)}
+    .icard:hover .icard-photo{transform:scale(1.05)}
     .icard-photo.is-missing{display:none}
     .icard-photo--right{object-position:72% 25%}
     .icard-photo--shift{object-position:62% 25%}
-    .icard-body{display:flex;flex-direction:column;gap:.5rem;padding:1.3rem 1.4rem 1.5rem}
-    .icard-name{font-weight:800;font-size:1.2rem;text-transform:uppercase;letter-spacing:.02em;color:#fff}
-    .icard-role{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red-soft)}
-    .icard-line{color:rgba(255,255,255,.68);font-size:.94rem;line-height:1.6}
+
+    .icard-photo-wrap::after{
+      content:"";position:absolute;inset:0;z-index:2;
+      background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.55) 50%,rgba(0,0,0,.85) 100%);
+      transition:opacity .4s var(--ease);
+    }
+    .icard:hover .icard-photo-wrap::after{
+      background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.25) 35%,rgba(0,0,0,.82) 100%);
+    }
+
+    .icard-label{
+      position:absolute;z-index:5;
+      left:50%;bottom:1.2rem;
+      transform:translateX(-50%);
+      font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;
+      color:rgba(255,255,255,.7);
+      white-space:nowrap;transition:opacity .3s var(--ease);
+    }
+    .icard:hover .icard-label{opacity:0}
+
+    .icard-body{
+      position:absolute;z-index:5;inset:0;
+      display:flex;flex-direction:column;justify-content:flex-end;
+      padding:1.4rem 1.3rem 1.5rem;
+      opacity:0;transform:translateY(12px);
+      transition:opacity .35s var(--ease) .05s,transform .35s var(--ease) .05s;
+    }
+    .icard:hover .icard-body{opacity:1;transform:none}
+
+    .icard-name{font-weight:800;font-size:1.15rem;text-transform:uppercase;letter-spacing:.02em;color:#fff;line-height:1.15}
+    .icard-role{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red-soft);margin-top:.35rem}
+    .icard-line{color:rgba(255,255,255,.72);font-size:.88rem;line-height:1.55;margin-top:.6rem;max-width:32ch}
+    .icard-trule{
+      width:28px;height:3px;margin-top:.8rem;
+      background:linear-gradient(90deg,var(--red) 0 33.4%,var(--white) 33.4% 66.7%,var(--black) 66.7% 100%);
+    }
+
+    @media(max-width:640px){
+      .icard{flex:0 0 72px;height:300px}
+      .icard:hover,.icard:focus-within{flex:0 0 240px}
+      .icard-body{padding:1rem}
+      .icard-name{font-size:1rem}
+    }
 
     .estadio-layout{
       display:grid;grid-template-columns:1fr;gap:0;align-items:stretch;
@@ -786,9 +852,11 @@
     .js .reveal.in{opacity:1;transform:none}
     .js #historia .tl-item.reveal{transform:translateX(-40px);transition:opacity .9s var(--ease) var(--d,0s),transform .9s var(--ease) var(--d,0s)}
     .js #historia .tl-item.reveal.in{transform:none}
-    .js .tcard.reveal,.js .tcard-feature.reveal,.js .icard.reveal{transform:scale(.96) translateY(16px)}
-    .js .tcard.reveal.in,.js .tcard-feature.reveal.in,.js .icard.reveal.in{transform:none}
-    .js .jcard.reveal.in:hover,.js .tcard.reveal.in:hover,.js .icard.reveal.in:hover{transform:translateY(-6px);transition-delay:0s}
+    .js .tcard.reveal,.js .tcard-feature.reveal{transform:scale(.96) translateY(16px)}
+    .js .tcard.reveal.in,.js .tcard-feature.reveal.in{transform:none}
+    .js .icard.reveal{opacity:0;transform:translateY(20px)}
+    .js .icard.reveal.in{opacity:1;transform:none}
+    .js .jcard.reveal.in:hover,.js .tcard.reveal.in:hover{transform:translateY(-6px);transition-delay:0s}
 
     img[loading="lazy"]{opacity:0;transition:opacity .5s var(--ease)}
     img[loading="lazy"].loaded, img[loading="lazy"]:not([src=""]){opacity:1}
@@ -846,7 +914,8 @@
       .js .hero-stripes{animation:none}
       .js .hero-fx,.js .reveal{opacity:1;transform:none}
       .js .hero-title .ch{animation:none;opacity:1;transform:none}
-      .js #historia .tl-item.reveal,.js .tcard.reveal,.js .tcard-feature.reveal,.js .icard.reveal{transform:none}
+      .js #historia .tl-item.reveal,.js .tcard.reveal,.js .tcard-feature.reveal{transform:none}
+      .js .icard.reveal{opacity:1;transform:none}
       img[loading="lazy"]{opacity:1;transition:none}
     }
   </style>
@@ -1395,95 +1464,119 @@
     <section class="section section-dark" id="idolos">
       <div class="wrap">
         <header class="sec-head reveal">
-          <span class="trule" aria-hidden="true"></span>
-          <p class="kicker">As lendas do Morumbi</p>
+          <span class="trule" aria-hidden="true" style="margin-inline:auto"></span>
+          <p class="kicker" style="justify-content:center">As lendas do Morumbi</p>
           <h2 class="sec-title">Ídolos que vestem a história</h2>
           <p class="sec-lead">Goleiros artilheiros, mestres táticos e craques que fizeram o mundo aplaudir o Tricolor.</p>
         </header>
-
-        <ul class="idols-grid">
-          <li class="icard reveal">
-            <figure class="icard-photo-wrap">
-              <img class="icard-photo" src="img/idolos/rogerio-ceni.webp" alt="Rogério Ceni com a camisa do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            </figure>
-            <div class="icard-body">
-              <p class="icard-name">Rogério Ceni</p>
-              <p class="icard-role">Goleiro · Nº 1</p>
-              <p class="icard-line">1.257 jogos e 131 gols. O maior goleiro-artilheiro da história e capitão de praticamente todas as conquistas.</p>
-            </div>
-          </li>
-          <li class="icard reveal" style="--d:.05s">
-            <figure class="icard-photo-wrap">
-              <img class="icard-photo" src="img/idolos/rai.webp" alt="Raí com a camisa do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            </figure>
-            <div class="icard-body">
-              <p class="icard-name">Raí</p>
-              <p class="icard-role">Meia · Terror do Morumbi</p>
-              <p class="icard-line">Herói do Mundial de 1992, com dois gols na final contra o Barcelona. Gênio do período mais vitorioso.</p>
-            </div>
-          </li>
-          <li class="icard reveal" style="--d:.1s">
-            <figure class="icard-photo-wrap">
-              <img class="icard-photo" src="img/idolos/tele-santana.jpg" alt="Telê Santana, técnico do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            </figure>
-            <div class="icard-body">
-              <p class="icard-name">Telê Santana</p>
-              <p class="icard-role">Técnico · O Mestre</p>
-              <p class="icard-line">Arquiteto da era de ouro: Libertadores e Mundiais de 1992 e 1993, com um futebol que encantou o mundo.</p>
-            </div>
-          </li>
-          <li class="icard reveal" style="--d:.15s">
-            <figure class="icard-photo-wrap">
-              <img class="icard-photo" src="img/idolos/muricy-ramalho.jpg" alt="Muricy Ramalho, técnico do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            </figure>
-            <div class="icard-body">
-              <p class="icard-name">Muricy Ramalho</p>
-              <p class="icard-role">Técnico</p>
-              <p class="icard-line">O único a vencer três Campeonatos Brasileiros seguidos no formato de pontos corridos, de 2006 a 2008.</p>
-            </div>
-          </li>
-          <li class="icard reveal" style="--d:.2s">
-            <figure class="icard-photo-wrap">
-              <img class="icard-photo" src="img/idolos/leonidas-da-silva.png" alt="Leônidas da Silva, atacante do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            </figure>
-            <div class="icard-body">
-              <p class="icard-name">Leônidas da Silva</p>
-              <p class="icard-role">Atacante · Diamante Negro</p>
-              <p class="icard-line">O inventor da bicicleta. Ídolo absoluto da era de ouro dos anos 1940 e símbolo da camisa tricolor.</p>
-            </div>
-          </li>
-          <li class="icard reveal" style="--d:.25s">
-            <figure class="icard-photo-wrap">
-              <img class="icard-photo icard-photo--right" src="img/idolos/kaka.webp" alt="Kaká, meia revelado pelo São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            </figure>
-            <div class="icard-body">
-              <p class="icard-name">Kaká</p>
-              <p class="icard-role">Meia · Nº 8</p>
-              <p class="icard-line">Revelado em Cotia pelo Tricolor, foi eleito o melhor jogador do mundo em 2007, levando o nome de São Paulo ao planeta.</p>
-            </div>
-          </li>
-          <li class="icard reveal" style="--d:.3s">
-            <figure class="icard-photo-wrap">
-              <img class="icard-photo" src="img/idolos/cafu.webp" alt="Cafu com a camisa do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            </figure>
-            <div class="icard-body">
-              <p class="icard-name">Cafu</p>
-              <p class="icard-role">Lateral-direito · Capitão</p>
-              <p class="icard-line">Campeão da Libertadores e do mundo em 1992 e 1993, foi o único a disputar três finais seguidas de Copa do Mundo.</p>
-            </div>
-          </li>
-          <li class="icard reveal" style="--d:.35s">
-            <figure class="icard-photo-wrap">
-              <img class="icard-photo icard-photo--shift" src="img/idolos/mineiro.webp" alt="Mineiro com a camisa do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            </figure>
-            <div class="icard-body">
-              <p class="icard-name">Mineiro</p>
-              <p class="icard-role">Volante</p>
-              <p class="icard-line">Autor do gol que deu o tricampeonato mundial ao Tricolor, contra o Liverpool, em Tóquio — símbolo da volta por cima dos anos 2000.</p>
-            </div>
-          </li>
-        </ul>
       </div>
+
+      <ul class="idols-scroll">
+        <li class="icard reveal" tabindex="0">
+          <div class="icard-glow" aria-hidden="true"></div>
+          <figure class="icard-photo-wrap">
+            <img class="icard-photo" src="img/idolos/rogerio-ceni.webp" alt="Rogério Ceni com a camisa do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </figure>
+          <span class="icard-label" aria-hidden="true">Rogério Ceni</span>
+          <div class="icard-body">
+            <p class="icard-name">Rogério Ceni</p>
+            <p class="icard-role">Goleiro · Nº 1</p>
+            <p class="icard-line">1.257 jogos e 131 gols. O maior goleiro-artilheiro da história e capitão de praticamente todas as conquistas.</p>
+            <div class="icard-trule" aria-hidden="true"></div>
+          </div>
+        </li>
+        <li class="icard reveal" style="--d:.05s" tabindex="0">
+          <div class="icard-glow" aria-hidden="true"></div>
+          <figure class="icard-photo-wrap">
+            <img class="icard-photo" src="img/idolos/rai.webp" alt="Raí com a camisa do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </figure>
+          <span class="icard-label" aria-hidden="true">Raí</span>
+          <div class="icard-body">
+            <p class="icard-name">Raí</p>
+            <p class="icard-role">Meia · Terror do Morumbi</p>
+            <p class="icard-line">Herói do Mundial de 1992, com dois gols na final contra o Barcelona. Gênio do período mais vitorioso.</p>
+            <div class="icard-trule" aria-hidden="true"></div>
+          </div>
+        </li>
+        <li class="icard reveal" style="--d:.1s" tabindex="0">
+          <div class="icard-glow" aria-hidden="true"></div>
+          <figure class="icard-photo-wrap">
+            <img class="icard-photo" src="img/idolos/tele-santana.jpg" alt="Telê Santana, técnico do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </figure>
+          <span class="icard-label" aria-hidden="true">Telê Santana</span>
+          <div class="icard-body">
+            <p class="icard-name">Telê Santana</p>
+            <p class="icard-role">Técnico · O Mestre</p>
+            <p class="icard-line">Arquiteto da era de ouro: Libertadores e Mundiais de 1992 e 1993, com um futebol que encantou o mundo.</p>
+            <div class="icard-trule" aria-hidden="true"></div>
+          </div>
+        </li>
+        <li class="icard reveal" style="--d:.15s" tabindex="0">
+          <div class="icard-glow" aria-hidden="true"></div>
+          <figure class="icard-photo-wrap">
+            <img class="icard-photo" src="img/idolos/muricy-ramalho.jpg" alt="Muricy Ramalho, técnico do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </figure>
+          <span class="icard-label" aria-hidden="true">Muricy Ramalho</span>
+          <div class="icard-body">
+            <p class="icard-name">Muricy Ramalho</p>
+            <p class="icard-role">Técnico</p>
+            <p class="icard-line">O único a vencer três Campeonatos Brasileiros seguidos no formato de pontos corridos, de 2006 a 2008.</p>
+            <div class="icard-trule" aria-hidden="true"></div>
+          </div>
+        </li>
+        <li class="icard reveal" style="--d:.2s" tabindex="0">
+          <div class="icard-glow" aria-hidden="true"></div>
+          <figure class="icard-photo-wrap">
+            <img class="icard-photo" src="img/idolos/leonidas-da-silva.png" alt="Leônidas da Silva, atacante do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </figure>
+          <span class="icard-label" aria-hidden="true">Leônidas da Silva</span>
+          <div class="icard-body">
+            <p class="icard-name">Leônidas da Silva</p>
+            <p class="icard-role">Atacante · Diamante Negro</p>
+            <p class="icard-line">O inventor da bicicleta. Ídolo absoluto da era de ouro dos anos 1940 e símbolo da camisa tricolor.</p>
+            <div class="icard-trule" aria-hidden="true"></div>
+          </div>
+        </li>
+        <li class="icard reveal" style="--d:.25s" tabindex="0">
+          <div class="icard-glow" aria-hidden="true"></div>
+          <figure class="icard-photo-wrap">
+            <img class="icard-photo icard-photo--right" src="img/idolos/kaka.webp" alt="Kaká, meia revelado pelo São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </figure>
+          <span class="icard-label" aria-hidden="true">Kaká</span>
+          <div class="icard-body">
+            <p class="icard-name">Kaká</p>
+            <p class="icard-role">Meia · Nº 8</p>
+            <p class="icard-line">Revelado em Cotia pelo Tricolor, foi eleito o melhor jogador do mundo em 2007, levando o nome de São Paulo ao planeta.</p>
+            <div class="icard-trule" aria-hidden="true"></div>
+          </div>
+        </li>
+        <li class="icard reveal" style="--d:.3s" tabindex="0">
+          <div class="icard-glow" aria-hidden="true"></div>
+          <figure class="icard-photo-wrap">
+            <img class="icard-photo" src="img/idolos/cafu.webp" alt="Cafu com a camisa do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </figure>
+          <span class="icard-label" aria-hidden="true">Cafu</span>
+          <div class="icard-body">
+            <p class="icard-name">Cafu</p>
+            <p class="icard-role">Lateral-direito · Capitão</p>
+            <p class="icard-line">Campeão da Libertadores e do mundo em 1992 e 1993, foi o único a disputar três finais seguidas de Copa do Mundo.</p>
+            <div class="icard-trule" aria-hidden="true"></div>
+          </div>
+        </li>
+        <li class="icard reveal" style="--d:.35s" tabindex="0">
+          <div class="icard-glow" aria-hidden="true"></div>
+          <figure class="icard-photo-wrap">
+            <img class="icard-photo icard-photo--shift" src="img/idolos/mineiro.webp" alt="Mineiro com a camisa do São Paulo FC" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </figure>
+          <span class="icard-label" aria-hidden="true">Mineiro</span>
+          <div class="icard-body">
+            <p class="icard-name">Mineiro</p>
+            <p class="icard-role">Volante</p>
+            <p class="icard-line">Autor do gol que deu o tricampeonato mundial ao Tricolor, contra o Liverpool, em Tóquio — símbolo da volta por cima dos anos 2000.</p>
+            <div class="icard-trule" aria-hidden="true"></div>
+          </div>
+        </li>
+      </ul>
     </section>
 
     <section class="section section-red" id="estadio">
