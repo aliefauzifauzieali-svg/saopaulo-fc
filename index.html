@@ -349,11 +349,11 @@
 
     .ticker{overflow:hidden;background:var(--black);color:#fff;border-top:1px solid rgba(255,255,255,.08)}
     .ticker-track{
-      display:flex;align-items:center;gap:3rem;width:max-content;
+      display:flex;align-items:center;width:max-content;
       padding-block:1.05rem;animation:tick 38s linear infinite;
     }
     .ticker-track span{
-      display:flex;align-items:center;gap:3rem;white-space:nowrap;
+      display:flex;align-items:center;gap:3rem;margin-right:3rem;white-space:nowrap;
       font-weight:800;text-transform:uppercase;
       font-size:clamp(1rem,2.2vw,1.6rem);letter-spacing:.03em;
     }
@@ -656,7 +656,6 @@
       cursor:pointer;
       border:1px solid rgba(255,255,255,.07);
       transition:flex-grow .7s cubic-bezier(.22,1,.36,1),flex-shrink .7s cubic-bezier(.22,1,.36,1),border-color .5s,box-shadow .6s;
-      will-change:flex-grow,flex-shrink;
       z-index:1;
     }
     .icard:hover,.icard.is-open{
@@ -665,6 +664,7 @@
       box-shadow:0 0 90px rgba(212,0,27,.18),0 24px 60px rgba(0,0,0,.6);
       z-index:2;
     }
+    .icard:focus-visible{outline:2px solid var(--red-soft);outline-offset:2px}
 
     .icard-img{
       position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
@@ -735,7 +735,11 @@
     @media(max-width:1280px){
       .idols-accordion{height:clamp(480px,70vh,620px)}
     }
-    @media(max-width:860px){
+    @media(min-width:861px) and (max-width:1100px){
+      .idols-accordion{height:clamp(400px,52vh,500px)}
+      .icard:hover,.icard.is-open{flex:4 4 0}
+    }
+    @media(max-width:859px){
       .idols-accordion{
         flex-direction:column;
         height:auto;overflow:visible;
@@ -753,7 +757,7 @@
       .icard:hover::before,.icard.is-open::before{transform:translateX(-180%) skewX(-18deg)}
       .icard-glow{width:120%;height:110%}
     }
-    @media(min-width:600px) and (max-width:860px){
+    @media(min-width:600px) and (max-width:859px){
       .idols-accordion{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,3vw,22px)}
     }
 
@@ -782,6 +786,7 @@
     }
     .estadio-visual img{
       width:100%;height:100%;object-fit:cover;
+      will-change:transform;transform:scale(1.1);
     }
     .estadio-content{
       display:flex;flex-direction:column;justify-content:center;
@@ -917,14 +922,23 @@
     }
 
     @media(max-width:560px){
-      .hero{grid-template-columns:1fr}
+      .hero{grid-template-columns:1fr;height:auto;min-height:100svh;overflow:visible}
       .hero-stripes,.js .hero-stripes{
         position:absolute;top:76px;left:0;right:0;width:100%;height:7px;
         background:linear-gradient(90deg,var(--red) 0 33.333%,var(--white) 33.333% 66.666%,var(--black) 66.666% 100%);
         animation:none;transform:none;
       }
-      .hero-inner{padding-top:calc(76px + 2.25rem);padding-bottom:6rem}
+      .hero-inner{padding-top:calc(76px + 2.25rem);padding-bottom:7rem}
       .hero-facts{gap:.7rem 1.2rem}
+    }
+
+    @media(max-width:400px){
+      .hero-title{font-size:clamp(2.5rem,15.5vw,4rem)}
+      .hero-inner{padding-inline:clamp(1rem,5vw,1.25rem)}
+      .ticker-track span{font-size:.88rem}
+      .tcard-feature .tcard-photo-wrap{aspect-ratio:4/3}
+      .icard{min-height:360px}
+      .foot-grid{gap:2.4rem}
     }
 
     @media(prefers-reduced-motion:reduce){
@@ -1130,7 +1144,7 @@
             <div class="tl-body">
               <h3>O tri em Tóquio</h3>
               <p>Tricampeão da América e campeão mundial ao vencer o Liverpool por 1 a 0, com atuação histórica de Rogério Ceni e gol de Mineiro.</p>
-              <figure class="tl-photo"><img src="img/historia/tri-toquio-2005.png" alt="São Paulo tricampeão mundial em Tóquio, 2005" width="800" height="450" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')"></figure>
+              <figure class="tl-photo"><img src="img/historia/tri-toquio-2005.webp" alt="São Paulo tricampeão mundial em Tóquio, 2005" width="800" height="450" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')"></figure>
             </div>
           </li>
           <li class="tl-item reveal">
@@ -1326,7 +1340,7 @@
 
         <div class="tcard-feature reveal" id="feature-mundial">
           <figure class="tcard-photo-wrap">
-            <img class="tcard-photo" src="img/trofeus/mundial.png" alt="As três taças do Mundial de Clubes do São Paulo FC" width="960" height="600" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+            <img class="tcard-photo" src="img/trofeus/mundial.webp" alt="As três taças do Mundial de Clubes do São Paulo FC" width="960" height="600" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
             <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
           </figure>
           <div class="tcard-feature-body">
@@ -1341,7 +1355,7 @@
         <ul class="titles-grid">
           <li class="tcard reveal" style="--d:.05s">
             <figure class="tcard-photo-wrap">
-              <img class="tcard-photo" src="img/trofeus/libertadores.png" alt="Taça da Copa Libertadores do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <img class="tcard-photo" src="img/trofeus/libertadores.webp" alt="Taça da Copa Libertadores do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
               <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
             </figure>
             <p class="tcard-count">3×</p>
@@ -1350,7 +1364,7 @@
           </li>
           <li class="tcard reveal" style="--d:.1s">
             <figure class="tcard-photo-wrap">
-              <img class="tcard-photo" src="img/trofeus/brasileirao.png" alt="Taça do Campeonato Brasileiro do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <img class="tcard-photo" src="img/trofeus/brasileirao.webp" alt="Taça do Campeonato Brasileiro do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
               <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
             </figure>
             <p class="tcard-count">6×</p>
@@ -1359,7 +1373,7 @@
           </li>
           <li class="tcard reveal" style="--d:.15s">
             <figure class="tcard-photo-wrap">
-              <img class="tcard-photo" src="img/trofeus/copa-do-brasil.png" alt="Taça da Copa do Brasil do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <img class="tcard-photo" src="img/trofeus/copa-do-brasil.webp" alt="Taça da Copa do Brasil do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
               <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
             </figure>
             <p class="tcard-count">3×</p>
@@ -1368,7 +1382,7 @@
           </li>
           <li class="tcard reveal" style="--d:.2s">
             <figure class="tcard-photo-wrap">
-              <img class="tcard-photo" src="img/trofeus/supercopa-brasil.png" alt="Taça da Supercopa do Brasil do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <img class="tcard-photo" src="img/trofeus/supercopa-brasil.webp" alt="Taça da Supercopa do Brasil do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
               <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
             </figure>
             <p class="tcard-count">1×</p>
@@ -1377,7 +1391,7 @@
           </li>
           <li class="tcard reveal" style="--d:.25s">
             <figure class="tcard-photo-wrap">
-              <img class="tcard-photo" src="img/trofeus/recopa-sul-americana.png" alt="Taça da Recopa Sul-Americana do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <img class="tcard-photo" src="img/trofeus/recopa-sul-americana.webp" alt="Taça da Recopa Sul-Americana do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
               <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
             </figure>
             <p class="tcard-count">2×</p>
@@ -1386,7 +1400,7 @@
           </li>
           <li class="tcard reveal" style="--d:.3s">
             <figure class="tcard-photo-wrap">
-              <img class="tcard-photo" src="img/trofeus/sul-americana.png" alt="Taça da Copa Sul-Americana do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <img class="tcard-photo" src="img/trofeus/sul-americana.webp" alt="Taça da Copa Sul-Americana do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
               <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
             </figure>
             <p class="tcard-count">1×</p>
@@ -1395,7 +1409,7 @@
           </li>
           <li class="tcard reveal" style="--d:.35s">
             <figure class="tcard-photo-wrap">
-              <img class="tcard-photo" src="img/trofeus/supercopa-libertadores.png" alt="Taça da Supercopa Libertadores do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <img class="tcard-photo" src="img/trofeus/supercopa-libertadores.webp" alt="Taça da Supercopa Libertadores do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
               <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
             </figure>
             <p class="tcard-count">1×</p>
@@ -1404,7 +1418,7 @@
           </li>
           <li class="tcard reveal" style="--d:.4s">
             <figure class="tcard-photo-wrap">
-              <img class="tcard-photo" src="img/trofeus/paulista.png" alt="Taça do Campeonato Paulista do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <img class="tcard-photo" src="img/trofeus/paulista.webp" alt="Taça do Campeonato Paulista do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
               <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
             </figure>
             <p class="tcard-count">22×</p>
@@ -1427,7 +1441,7 @@
         <div class="cult-grid">
           <div class="cult-card reveal">
             <figure class="cult-card-photo">
-              <img src="img/torcida/mascote-santo-paulo.png" alt="Santo Paulo, mascote do São Paulo FC" width="600" height="450" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <img src="img/torcida/mascote-santo-paulo.webp" alt="Santo Paulo, mascote do São Paulo FC" width="600" height="450" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
             </figure>
             <div class="cult-card-body">
               <h3 class="cult-title">Santo Paulo, o vovô tricolor</h3>
@@ -1493,7 +1507,7 @@
       </div>
 
       <div class="idols-accordion" role="list">
-        <article class="icard reveal" role="listitem">
+        <article class="icard reveal" role="listitem" tabindex="0" aria-label="Rogério Ceni">
           <div class="icard-glow" aria-hidden="true"></div>
           <img class="icard-img" src="img/idolos/rogerio-ceni.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
           <span class="icard-name">Rogério Ceni</span>
@@ -1504,7 +1518,7 @@
             <div class="icard-trule" aria-hidden="true"></div>
           </div>
         </article>
-        <article class="icard reveal" role="listitem">
+        <article class="icard reveal" role="listitem" tabindex="0" aria-label="Raí">
           <div class="icard-glow" aria-hidden="true"></div>
           <img class="icard-img" src="img/idolos/rai.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
           <span class="icard-name">Raí</span>
@@ -1515,7 +1529,7 @@
             <div class="icard-trule" aria-hidden="true"></div>
           </div>
         </article>
-        <article class="icard reveal" role="listitem">
+        <article class="icard reveal" role="listitem" tabindex="0" aria-label="Telê Santana">
           <div class="icard-glow" aria-hidden="true"></div>
           <img class="icard-img" src="img/idolos/tele-santana.jpg" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
           <span class="icard-name">Telê</span>
@@ -1526,7 +1540,7 @@
             <div class="icard-trule" aria-hidden="true"></div>
           </div>
         </article>
-        <article class="icard reveal" role="listitem">
+        <article class="icard reveal" role="listitem" tabindex="0" aria-label="Muricy Ramalho">
           <div class="icard-glow" aria-hidden="true"></div>
           <img class="icard-img" src="img/idolos/muricy-ramalho.jpg" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
           <span class="icard-name">Muricy</span>
@@ -1537,9 +1551,9 @@
             <div class="icard-trule" aria-hidden="true"></div>
           </div>
         </article>
-        <article class="icard reveal" role="listitem">
+        <article class="icard reveal" role="listitem" tabindex="0" aria-label="Leônidas da Silva">
           <div class="icard-glow" aria-hidden="true"></div>
-          <img class="icard-img" src="img/idolos/leonidas-da-silva.png" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          <img class="icard-img" src="img/idolos/leonidas-da-silva.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
           <span class="icard-name">Leônidas</span>
           <div class="icard-meta">
             <h3>Leônidas da Silva</h3>
@@ -1548,7 +1562,7 @@
             <div class="icard-trule" aria-hidden="true"></div>
           </div>
         </article>
-        <article class="icard reveal" role="listitem">
+        <article class="icard reveal" role="listitem" tabindex="0" aria-label="Kaká">
           <div class="icard-glow" aria-hidden="true"></div>
           <img class="icard-img icard-photo--right" src="img/idolos/kaka.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
           <span class="icard-name">Kaká</span>
@@ -1559,7 +1573,7 @@
             <div class="icard-trule" aria-hidden="true"></div>
           </div>
         </article>
-        <article class="icard reveal" role="listitem">
+        <article class="icard reveal" role="listitem" tabindex="0" aria-label="Cafu">
           <div class="icard-glow" aria-hidden="true"></div>
           <img class="icard-img" src="img/idolos/cafu.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
           <span class="icard-name">Cafu</span>
@@ -1570,7 +1584,7 @@
             <div class="icard-trule" aria-hidden="true"></div>
           </div>
         </article>
-        <article class="icard reveal" role="listitem">
+        <article class="icard reveal" role="listitem" tabindex="0" aria-label="Mineiro">
           <div class="icard-glow" aria-hidden="true"></div>
           <img class="icard-img icard-photo--shift" src="img/idolos/mineiro.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
           <span class="icard-name">Mineiro</span>
@@ -1711,7 +1725,7 @@
       var progress = document.getElementById('scrollProgress');
       var toTop = document.getElementById('toTop');
 
-      var stadiumImg = document.querySelector('.stadium-bg img');
+      var stadiumImg = document.querySelector('.estadio-visual img');
       var parallaxOn = stadiumImg && stadiumImg.isConnected && !reduce;
       function parallax() {
         if (!parallaxOn) return;
@@ -1834,17 +1848,23 @@
       });
 
       var idolCards = document.querySelectorAll('.icard');
+      function closeIdols() { idolCards.forEach(function(c) { c.classList.remove('is-open'); }); }
+      function toggleIdol(card) {
+        var wasOpen = card.classList.contains('is-open');
+        closeIdols();
+        if (!wasOpen) card.classList.add('is-open');
+      }
       idolCards.forEach(function(card) {
-        card.addEventListener('click', function() {
-          var wasOpen = card.classList.contains('is-open');
-          idolCards.forEach(function(c) { c.classList.remove('is-open'); });
-          if (!wasOpen) card.classList.add('is-open');
+        card.addEventListener('click', function() { toggleIdol(card); });
+        card.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleIdol(card);
+          }
         });
       });
       document.addEventListener('click', function(e) {
-        if (!e.target.closest('.icard')) {
-          idolCards.forEach(function(c) { c.classList.remove('is-open'); });
-        }
+        if (!e.target.closest('.icard')) closeIdols();
       });
     })();
   </script>
