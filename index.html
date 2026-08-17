@@ -674,18 +674,20 @@
       .jcard{transition:none;opacity:1;transform:none}
       .jcard:hover{transform:none}
       .jcard::before{transition:none}
+      .jersey-art{transition:none}
+      .jcard:hover .jersey-art{transform:none}
       .spec-row{transition:none;opacity:1;transform:none}
     }
 
     .camisas-grid{
-      display:grid;grid-template-columns:1fr;gap:clamp(.9rem,2vw,1.2rem);
+      display:grid;grid-template-columns:1fr;gap:clamp(1rem,2.5vw,1.5rem);
       max-width:60rem;margin-inline:auto;list-style:none;padding:0;
     }
-    @media(min-width:960px){.camisas-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:600px){.camisas-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:980px){.camisas-grid{grid-template-columns:repeat(3,1fr)}}
 
     .jcard{
-      position:relative;display:flex;flex-direction:column;gap:.9rem;
-      padding:clamp(1.1rem,2.5vw,1.5rem);
+      position:relative;display:flex;flex-direction:column;
       border-radius:var(--radius);
       border:1px solid rgba(255,255,255,.06);
       background:rgba(255,255,255,.025);
@@ -699,53 +701,60 @@
       border-color:rgba(212,0,27,.3);
       background:rgba(255,255,255,.04);
       box-shadow:0 20px 50px rgba(0,0,0,.35);
-      transform:translateY(-3px);
-    }
-    @media(min-width:640px){
-      .jcard{flex-direction:row;align-items:stretch;gap:clamp(1.1rem,2.5vw,1.6rem)}
+      transform:translateY(-4px);
     }
 
-    .jcard-year-wrap{
-      display:flex;flex-direction:column;justify-content:center;
-      min-width:5.5rem;flex-shrink:0;
+    .jcard-display{
+      position:relative;display:flex;align-items:center;justify-content:center;
+      padding:clamp(1.2rem,3vw,1.8rem) clamp(1rem,2.5vw,1.4rem) clamp(.9rem,2vw,1.1rem);
+      background:
+        radial-gradient(120% 90% at 50% 0%,rgba(212,0,27,.08),transparent 62%),
+        linear-gradient(180deg,rgba(255,255,255,.03),transparent);
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+    .jersey-art{
+      width:clamp(96px,20vw,120px);height:auto;
+      filter:drop-shadow(0 12px 24px rgba(0,0,0,.45));
+      transition:transform .5s cubic-bezier(.22,1,.36,1),filter .4s var(--ease);
+    }
+    .jcard:hover .jersey-art{
+      transform:translateY(-4px) scale(1.04);
+      filter:drop-shadow(0 16px 32px rgba(0,0,0,.55));
+    }
+
+    .jcard-body{
+      position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;
+      gap:.3rem;padding:clamp(1rem,2.5vw,1.3rem) clamp(1rem,2.5vw,1.4rem) clamp(1.2rem,3vw,1.5rem);
+    }
+    .jcard-accent{
+      width:46px;height:4px;border-radius:2px;margin-bottom:.15rem;
+      background:linear-gradient(90deg,var(--red) 0 33%,#fff 33% 66%,var(--black) 66% 100%);
     }
     .jcard-year{
       font-family:var(--font);font-weight:900;
-      font-size:clamp(2rem,4vw,2.6rem);line-height:1;letter-spacing:-.02em;
+      font-size:clamp(1.1rem,2.5vw,1.3rem);line-height:1;letter-spacing:.02em;
       color:#fff;margin:0;
     }
     .jcard-tag{
-      font-family:var(--mono);font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;
-      color:var(--red-soft);margin:.45rem 0 0;
+      font-family:var(--mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--red-soft);margin:0;
     }
-
-    .jcard-band{
-      position:relative;height:4px;border-radius:2px;flex-shrink:0;
-      background:linear-gradient(90deg,var(--red) 0 33%,#fff 33% 66%,var(--black) 66% 100%);
-    }
-    @media(min-width:640px){
-      .jcard-band{
-        width:5px;height:auto;align-self:stretch;border-radius:3px;
-        background:linear-gradient(180deg,var(--red) 0 33%,#fff 33% 66%,var(--black) 66% 100%);
-      }
-    }
-
-    .jcard-body{display:flex;flex-direction:column;gap:.35rem;min-width:0;justify-content:center}
     .jcard-name{
-      font-weight:800;text-transform:uppercase;font-size:clamp(.85rem,2vw,1rem);
-      letter-spacing:.02em;color:rgba(255,255,255,.92);margin:0;line-height:1.3;
+      font-weight:800;text-transform:uppercase;font-size:clamp(.85rem,2vw,.95rem);
+      letter-spacing:.02em;color:rgba(255,255,255,.92);margin:.2rem 0 0;line-height:1.3;
     }
     .jcard-line{
-      color:rgba(255,255,255,.55);font-size:clamp(.8rem,1.6vw,.86rem);line-height:1.6;
-      max-width:38ch;margin:0;
+      color:rgba(255,255,255,.55);font-size:clamp(.78rem,1.6vw,.84rem);line-height:1.6;
+      max-width:34ch;margin:.15rem 0 0;
     }
 
-    .jcard::after{
-      content:"";position:absolute;right:-2.5rem;top:-3.5rem;
-      width:9rem;height:9rem;border-radius:50%;
-      background:radial-gradient(circle,rgba(212,0,27,.07),transparent 70%);
-      pointer-events:none;z-index:1;
+    .jcard::before{
+      content:"";position:absolute;top:0;left:-75%;width:50%;height:100%;
+      background:linear-gradient(115deg,transparent,rgba(255,255,255,.03),transparent);
+      transform:skewX(-18deg);transition:left .7s cubic-bezier(.22,1,.36,1);
+      pointer-events:none;z-index:5;
     }
+    .jcard:hover::before{left:125%}
 
     .jcard::before{
       content:"";position:absolute;top:0;left:-75%;width:50%;height:100%;
@@ -1875,69 +1884,129 @@
 
         <ul class="camisas-grid">
           <li class="jcard">
-            <div class="jcard-year-wrap">
-              <p class="jcard-year">1930</p>
-              <p class="jcard-tag">Uniforme nº 1</p>
+            <div class="jcard-display">
+              <svg class="jersey-art" viewBox="0 0 120 120" aria-hidden="true">
+                <defs><clipPath id="jclip-1930"><use href="#jersey"/></clipPath></defs>
+                <rect x="0" y="0" width="120" height="120" fill="#fff" clip-path="url(#jclip-1930)"/>
+                <rect x="0" y="40" width="120" height="16" fill="var(--red)" clip-path="url(#jclip-1930)"/>
+                <rect x="0" y="56" width="120" height="16" fill="var(--black)" clip-path="url(#jclip-1930)"/>
+                <use href="#jersey" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+              </svg>
             </div>
-            <span class="jcard-band" aria-hidden="true"></span>
             <div class="jcard-body">
-              <p class="jcard-name">O manto da fundação</p>
-              <p class="jcard-line">Do cinturão vermelho do Paulistano e da faixa preta da AA Palmeiras nasce a combinação das três cores.</p>
+              <span class="jcard-accent" aria-hidden="true"></span>
+              <p class="jcard-year">1930 · Uniforme nº 1</p>
+              <p class="jcard-tag">O manto da fundação</p>
+              <p class="jcard-name">Três cores, um clube</p>
+              <p class="jcard-line">Em janeiro de 1930, o clube nasce com as cores de seus antecessores: o vermelho do Paulistano e o preto da AA Palmeiras, sobre o branco comum.</p>
             </div>
           </li>
           <li class="jcard">
-            <div class="jcard-year-wrap">
-              <p class="jcard-year">1932</p>
-              <p class="jcard-tag">Uniforme nº 2</p>
+            <div class="jcard-display">
+              <svg class="jersey-art" viewBox="0 0 120 120" aria-hidden="true">
+                <defs>
+                  <clipPath id="jclip-1932"><use href="#jersey"/></clipPath>
+                  <pattern id="jp-1932" width="36" height="36" patternUnits="userSpaceOnUse">
+                    <rect width="12" height="36" fill="var(--red)"/>
+                    <rect x="12" width="12" height="36" fill="#fff"/>
+                    <rect x="24" width="12" height="36" fill="var(--black)"/>
+                  </pattern>
+                </defs>
+                <rect x="0" y="0" width="120" height="120" fill="url(#jp-1932)" clip-path="url(#jclip-1932)"/>
+                <use href="#jersey" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+              </svg>
             </div>
-            <span class="jcard-band" aria-hidden="true"></span>
             <div class="jcard-body">
-              <p class="jcard-name">A camisa listrada</p>
-              <p class="jcard-line">Listras verticais vermelho, branco e preto desde o 4 a 0 sobre o Santos, em maio de 1932.</p>
+              <span class="jcard-accent" aria-hidden="true"></span>
+              <p class="jcard-year">1932 · Uniforme nº 2</p>
+              <p class="jcard-tag">A camisa listrada</p>
+              <p class="jcard-name">4 a 0 que virou tradição</p>
+              <p class="jcard-line">Em maio de 1932, o São Paulo goleia o Santos por 4 a 0 vestindo as listras verticais tricolores pela primeira vez.</p>
             </div>
           </li>
           <li class="jcard">
-            <div class="jcard-year-wrap">
-              <p class="jcard-year">1943</p>
+            <div class="jcard-display">
+              <svg class="jersey-art" viewBox="0 0 120 120" aria-hidden="true">
+                <defs>
+                  <clipPath id="jclip-1943"><use href="#jersey"/></clipPath>
+                  <pattern id="jp-1943" width="15" height="15" patternUnits="userSpaceOnUse">
+                    <rect width="5" height="15" fill="var(--red)"/>
+                    <rect x="5" width="5" height="15" fill="#fff"/>
+                    <rect x="10" width="5" height="15" fill="var(--black)"/>
+                  </pattern>
+                </defs>
+                <rect x="0" y="0" width="120" height="120" fill="url(#jp-1943)" clip-path="url(#jclip-1943)"/>
+                <use href="#jersey" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="jcard-body">
+              <span class="jcard-accent" aria-hidden="true"></span>
+              <p class="jcard-year">1943 · O manto do Diamante Negro</p>
               <p class="jcard-tag">Era de Leônidas</p>
-            </div>
-            <span class="jcard-band" aria-hidden="true"></span>
-            <div class="jcard-body">
-              <p class="jcard-name">O manto do Diamante Negro</p>
-              <p class="jcard-line">As listras finas do Tricolor na era de Leônidas da Silva, que encantou o Brasil nos anos 1940.</p>
+              <p class="jcard-name">O inventor da bicicleta</p>
+              <p class="jcard-line">Com as listras finas e Leônidas da Silva em campo, o Tricolor domina o futebol paulista e encanta o Brasil nos anos 1940.</p>
             </div>
           </li>
           <li class="jcard">
-            <div class="jcard-year-wrap">
-              <p class="jcard-year">1992</p>
+            <div class="jcard-display">
+              <svg class="jersey-art" viewBox="0 0 120 120" aria-hidden="true">
+                <defs><clipPath id="jclip-1992"><use href="#jersey"/></clipPath></defs>
+                <rect x="0" y="0" width="120" height="120" fill="#fff" clip-path="url(#jclip-1992)"/>
+                <rect x="0" y="40" width="120" height="6" fill="var(--black)" clip-path="url(#jclip-1992)"/>
+                <rect x="0" y="46" width="120" height="6" fill="var(--red)" clip-path="url(#jclip-1992)"/>
+                <rect x="0" y="52" width="120" height="6" fill="var(--black)" clip-path="url(#jclip-1992)"/>
+                <use href="#jersey" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="jcard-body">
+              <span class="jcard-accent" aria-hidden="true"></span>
+              <p class="jcard-year">1992 · O branco do bi mundial</p>
               <p class="jcard-tag">Era de Telê</p>
-            </div>
-            <span class="jcard-band" aria-hidden="true"></span>
-            <div class="jcard-body">
-              <p class="jcard-name">O branco do bi mundial</p>
-              <p class="jcard-line">O branco da maior geração tricolor, com os detalhes do bicampeonato mundial em 92 e 93.</p>
+              <p class="jcard-name">O time dos sonhos</p>
+              <p class="jcard-line">Com Telê Santana no comando, o São Paulo conquista a América e o mundo em 1992 e 1993, com a maior geração da história.</p>
             </div>
           </li>
           <li class="jcard">
-            <div class="jcard-year-wrap">
-              <p class="jcard-year">2005</p>
-              <p class="jcard-tag">Camisa de Tóquio</p>
+            <div class="jcard-display">
+              <svg class="jersey-art" viewBox="0 0 120 120" aria-hidden="true">
+                <defs>
+                  <clipPath id="jclip-2005"><use href="#jersey"/></clipPath>
+                  <pattern id="jp-2005" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                    <rect width="8" height="24" fill="var(--red)"/>
+                    <rect x="8" width="8" height="24" fill="#fff"/>
+                    <rect x="16" width="8" height="24" fill="var(--black)"/>
+                  </pattern>
+                </defs>
+                <rect x="0" y="0" width="120" height="120" fill="#fff" clip-path="url(#jclip-2005)"/>
+                <rect x="0" y="38" width="120" height="34" fill="url(#jp-2005)" clip-path="url(#jclip-2005)"/>
+                <use href="#jersey" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+              </svg>
             </div>
-            <span class="jcard-band" aria-hidden="true"></span>
             <div class="jcard-body">
-              <p class="jcard-name">O tri sobre o Liverpool</p>
-              <p class="jcard-line">O branco do tricampeonato mundial, imortalizado com Rogério Ceni no Japão, sobre o Liverpool.</p>
+              <span class="jcard-accent" aria-hidden="true"></span>
+              <p class="jcard-year">2005 · A camisa de Tóquio</p>
+              <p class="jcard-tag">O tri mundial</p>
+              <p class="jcard-name">1 a 0 sobre o Liverpool</p>
+              <p class="jcard-line">Em Tóquio, o Tricolor vence o Liverpool por 1 a 0 e se torna tricampeão mundial, com Rogério Ceni erguendo a taça.</p>
             </div>
           </li>
           <li class="jcard">
-            <div class="jcard-year-wrap">
-              <p class="jcard-year">HOJE</p>
-              <p class="jcard-tag">O manto tricolor</p>
+            <div class="jcard-display">
+              <svg class="jersey-art" viewBox="0 0 120 120" aria-hidden="true">
+                <defs><clipPath id="jclip-hoje"><use href="#jersey"/></clipPath></defs>
+                <rect x="0" y="0" width="120" height="120" fill="#fff" clip-path="url(#jclip-hoje)"/>
+                <rect x="0" y="30" width="120" height="8" fill="var(--black)" clip-path="url(#jclip-hoje)"/>
+                <rect x="0" y="86" width="120" height="8" fill="var(--black)" clip-path="url(#jclip-hoje)"/>
+                <rect x="0" y="94" width="120" height="8" fill="var(--red)" clip-path="url(#jclip-hoje)"/>
+                <use href="#jersey" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+              </svg>
             </div>
-            <span class="jcard-band" aria-hidden="true"></span>
             <div class="jcard-body">
-              <p class="jcard-name">Sob as cinco estrelas</p>
-              <p class="jcard-line">O branco que a nova geração veste — 96 anos de história e contando.</p>
+              <span class="jcard-accent" aria-hidden="true"></span>
+              <p class="jcard-year">HOJE · O manto tricolor</p>
+              <p class="jcard-tag">Sob as cinco estrelas</p>
+              <p class="jcard-name">96 anos e contando</p>
+              <p class="jcard-line">A mesma camisa branca atravessa gerações: de 1930 até hoje, o branco tricolor é o orgulho de quem veste o clube.</p>
             </div>
           </li>
         </ul>
