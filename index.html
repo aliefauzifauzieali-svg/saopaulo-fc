@@ -671,37 +671,40 @@
       .compare-badge{transition:none}
       .compare-card:hover .compare-badge{transform:none}
       .compare-emblem{transition:none}
-      .jcard{opacity:1!important;transform:none!important}
-      .jcard:hover{background:transparent;border-color:rgba(255,255,255,.05)}
+      .jcard{opacity:1!important;transform:none!important;--fill:1!important}
+      .jcard:hover{background:transparent;border-color:rgba(255,255,255,.04)}
       .jcard::before{transform:none!important}
       .jcard-num,.jcard-dot,.jcard-year,.jcard-tag,.jcard-name,.jcard-line,.jcard-fact{
         opacity:1!important;transform:none!important;
       }
-      .tl-dot{opacity:1!important}
+      .tl-line{height:100%!important}
+      .tl-dot{opacity:1!important;transform:translateY(100%)!important}
       .spec-row{transition:none;opacity:1;transform:none}
     }
 
     .camisas-intro{
-      max-width:48rem;margin:0 auto clamp(2rem,5vw,3.5rem);text-align:center;
+      max-width:42rem;margin:0 auto clamp(2.5rem,6vw,4rem);text-align:center;
     }
     .camisas-intro p{
-      color:rgba(255,255,255,.65);font-size:clamp(.92rem,2vw,1.04rem);line-height:1.7;
+      color:rgba(255,255,255,.55);font-size:clamp(.88rem,1.8vw,1rem);line-height:1.8;
+      letter-spacing:.01em;
     }
 
     /* ── timeline ─────────────────────────────────────────── */
     .camisas-timeline{
-      position:relative;max-width:54rem;margin:0 auto;
+      position:relative;max-width:50rem;margin:0 auto;
       display:flex;flex-direction:column;gap:0;padding:0;
       list-style:none;
     }
     .tl-line{
-      position:absolute;left:1.5rem;top:0;width:1px;background:rgba(255,255,255,.1);
-      height:0;will-change:height;
+      position:absolute;left:1.5rem;top:0;width:2px;height:0;
+      background:linear-gradient(180deg,var(--red) 0%,rgba(212,0,27,.4) 80%,transparent 100%);
+      will-change:height;
     }
     .tl-dot{
-      position:absolute;left:calc(1.5rem - 4px);top:0;width:9px;height:9px;
+      position:absolute;left:calc(1.5rem - 5px);top:0;width:11px;height:11px;
       border-radius:50%;background:var(--red);
-      box-shadow:0 0 16px rgba(212,0,27,.7),0 0 32px rgba(212,0,27,.25);
+      box-shadow:0 0 20px rgba(212,0,27,.8),0 0 40px rgba(212,0,27,.3);
       opacity:0;will-change:transform,opacity;pointer-events:none;z-index:3;
     }
 
@@ -709,69 +712,85 @@
     .jcard{
       position:relative;display:grid;
       grid-template-columns:3rem 1fr;gap:0 clamp(1rem,3vw,2rem);
-      padding:clamp(1.2rem,3vw,1.8rem) 0;
-      border-bottom:1px solid rgba(255,255,255,.05);
-      opacity:0;transform:translateX(-20px);
+      padding:clamp(1.6rem,4vw,2.2rem) 0;
+      border-bottom:1px solid rgba(255,255,255,.04);
+      opacity:0;transform:translateX(-24px) scale(.98);
     }
-    .jcard:last-child{border-bottom:none;cursor:pointer}
+    .jcard:last-child{border-bottom:none}
     .jcard::before{
       content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
       background:var(--red);border-radius:0 2px 2px 0;
-      transform:scaleY(0);transform-origin:top;
-      transition:transform .35s cubic-bezier(.4,0,.2,1);
+      transform:scaleY(var(--fill, 0));transform-origin:top;
     }
-    .jcard.in::before{transform:scaleY(1)}
+    .jcard:last-child::before{background:var(--gold)}
+    .jcard:hover{
+      background:rgba(255,255,255,.025);
+      border-color:rgba(255,255,255,.06);
+    }
     .jcard:hover::before{background:var(--gold)}
-    .jcard:hover{background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.08)}
 
     /* ── marker ───────────────────────────────────────────── */
     .jcard-marker{
-      display:flex;flex-direction:column;align-items:center;gap:.3rem;
-      padding-top:.15rem;
+      display:flex;flex-direction:column;align-items:center;gap:.4rem;
+      padding-top:.2rem;
     }
     .jcard-num{
-      font-family:var(--mono);font-size:.55rem;letter-spacing:.15em;
+      font-family:var(--mono);font-size:.5rem;letter-spacing:.18em;
       color:var(--red-soft);font-weight:600;
-      opacity:0;transform:scale(.5);
+      opacity:0;transform:scale(.4);
     }
     .jcard-dot{
-      width:10px;height:10px;border-radius:50%;flex-shrink:0;
+      width:11px;height:11px;border-radius:50%;flex-shrink:0;
       border:2px solid var(--red);background:var(--black-2);
       transform:scale(0);
     }
+    .jcard:last-child .jcard-dot{border-color:var(--gold);background:var(--gold)}
+    .jcard:hover .jcard-dot{
+      background:var(--red);border-color:var(--red);
+      box-shadow:0 0 12px rgba(212,0,27,.5);
+    }
+    .jcard:last-child:hover .jcard-dot{
+      background:var(--gold);border-color:var(--gold);
+      box-shadow:0 0 12px rgba(232,181,45,.5);
+    }
 
     /* ── content ──────────────────────────────────────────── */
-    .jcard-content{display:flex;flex-direction:column;gap:.35rem}
-    .jcard-header{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem .8rem;margin-bottom:.1rem}
+    .jcard-content{display:flex;flex-direction:column;gap:.4rem}
+    .jcard-header{
+      display:flex;flex-wrap:wrap;align-items:baseline;
+      gap:.6rem .9rem;margin-bottom:.15rem;
+    }
     .jcard-year{
       font-family:var(--font);font-weight:900;
-      font-size:clamp(1.4rem,3vw,1.8rem);line-height:1;letter-spacing:-.01em;
-      color:rgba(255,255,255,.85);
-      opacity:0;transform:translateY(8px);
+      font-size:clamp(1.6rem,3.5vw,2.2rem);line-height:1;letter-spacing:-.02em;
+      color:rgba(255,255,255,.9);
+      opacity:0;transform:translateY(10px);
     }
     .jcard:hover .jcard-year{color:#fff}
     .jcard-tag{
-      font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;
+      font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;
       color:var(--red-soft);opacity:0;
     }
     .jcard-name{
-      font-weight:800;text-transform:uppercase;font-size:clamp(.88rem,2vw,1rem);
-      letter-spacing:.02em;color:rgba(255,255,255,.92);margin:0;line-height:1.3;
-      opacity:0;transform:translateY(6px);
+      font-weight:800;text-transform:uppercase;
+      font-size:clamp(.85rem,1.8vw,1.05rem);
+      letter-spacing:.03em;color:rgba(255,255,255,.88);margin:0;line-height:1.35;
+      opacity:0;transform:translateY(8px);
     }
     .jcard:hover .jcard-name{color:#fff}
     .jcard-line{
-      color:rgba(255,255,255,.55);font-size:clamp(.82rem,1.7vw,.9rem);line-height:1.7;
-      margin:0;opacity:0;
+      color:rgba(255,255,255,.48);font-size:clamp(.8rem,1.6vw,.9rem);line-height:1.75;
+      margin:0;opacity:0;max-width:52ch;
     }
-    .jcard-line strong{color:rgba(255,255,255,.8);font-weight:600}
+    .jcard-line strong{color:rgba(255,255,255,.78);font-weight:600}
     .jcard-fact{
-      display:inline-flex;align-items:center;gap:.4rem;
-      font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;
-      color:rgba(255,255,255,.35);margin:.2rem 0 0;opacity:0;transform:translateY(4px);
+      display:inline-flex;align-items:center;gap:.5rem;
+      font-family:var(--mono);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;
+      color:rgba(255,255,255,.3);margin:.3rem 0 0;
+      opacity:0;transform:translateY(4px);
     }
     .jcard-fact::before{
-      content:"";width:16px;height:1px;background:rgba(255,255,255,.15);flex-shrink:0;
+      content:"";width:20px;height:1px;background:rgba(255,255,255,.12);flex-shrink:0;
     }
 
 .section-dark .sec-title{color:#fff}
@@ -2727,56 +2746,126 @@
       var tlDot = document.querySelector('.tl-dot');
 
       if (tl && jcards.length && !reduce && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        /* ── main timeline pinned scroll ──────────────────── */
+        /* ── main timeline: line draws + dot follows ──────── */
         var mainTl = gsap.timeline({
           scrollTrigger: {
             trigger: tl,
-            start: 'top 80%',
-            end: 'bottom 20%',
-            scrub: 0.8,
+            start: 'top 85%',
+            end: 'bottom 15%',
+            scrub: 1,
           }
         });
 
-        /* line draws */
         mainTl.fromTo(tlLine,
           { height: '0%' },
           { height: '100%', ease: 'none', duration: 1 },
           0
         );
 
-        /* dot moves */
         mainTl.fromTo(tlDot,
           { y: 0, opacity: 0 },
-          { y: function() { return tl.offsetHeight; }, opacity: 1, ease: 'none', duration: 1 },
+          {
+            y: function() { return tl.offsetHeight - 11; },
+            opacity: 1,
+            ease: 'none',
+            duration: 1
+          },
           0
         );
 
         /* ── per-card reveals ─────────────────────────────── */
-        jcards.forEach(function (card, i) {
+        jcards.forEach(function (card) {
           var cardTl = gsap.timeline({
             scrollTrigger: {
               trigger: card,
-              start: 'top 75%',
-              end: 'top 30%',
-              scrub: 0.5,
+              start: 'top 80%',
+              end: 'top 35%',
+              scrub: 0.6,
             }
           });
 
-          cardTl.to(card, { opacity: 1, x: 0, duration: 1, ease: 'power2.out' }, 0);
-          cardTl.to(card.querySelector('.jcard-num'), { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(2)' }, 0.1);
-          cardTl.to(card.querySelector('.jcard-dot'), { scale: 1, duration: 0.5, ease: 'back.out(3)' }, 0.05);
-          cardTl.to(card.querySelector('.jcard-year'), { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.15);
-          cardTl.to(card.querySelector('.jcard-tag'), { opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.2);
-          cardTl.to(card.querySelector('.jcard-name'), { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.2);
-          cardTl.to(card.querySelector('.jcard-line'), { opacity: 1, duration: 0.7, ease: 'power2.out' }, 0.25);
-          cardTl.to(card.querySelector('.jcard-fact'), { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.35);
+          /* card container: fade in + slide from left + slight scale */
+          cardTl.to(card, {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 1,
+            ease: 'power3.out'
+          }, 0);
+
+          /* red accent line fills from top */
+          cardTl.to(card, {
+            '--fill': 1,
+            duration: 0.6,
+            ease: 'power2.out'
+          }, 0.05);
+
+          /* dot pops in with spring */
+          cardTl.to(card.querySelector('.jcard-dot'), {
+            scale: 1,
+            duration: 0.5,
+            ease: 'back.out(3)'
+          }, 0.08);
+
+          /* num pops in */
+          cardTl.to(card.querySelector('.jcard-num'), {
+            opacity: 1,
+            scale: 1,
+            duration: 0.5,
+            ease: 'back.out(2)'
+          }, 0.12);
+
+          /* year slides up */
+          cardTl.to(card.querySelector('.jcard-year'), {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power3.out'
+          }, 0.15);
+
+          /* tag fades in */
+          cardTl.to(card.querySelector('.jcard-tag'), {
+            opacity: 1,
+            duration: 0.4,
+            ease: 'power2.out'
+          }, 0.2);
+
+          /* name slides up */
+          cardTl.to(card.querySelector('.jcard-name'), {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power3.out'
+          }, 0.22);
+
+          /* description fades in */
+          cardTl.to(card.querySelector('.jcard-line'), {
+            opacity: 1,
+            duration: 0.7,
+            ease: 'power2.out'
+          }, 0.28);
+
+          /* fact slides up last */
+          cardTl.to(card.querySelector('.jcard-fact'), {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: 'power3.out'
+          }, 0.35);
         });
 
       } else if (tl && jcards.length) {
-        /* ── reduced motion fallback: just show everything ── */
-        jcards.forEach(function (c) { c.style.opacity = '1'; c.style.transform = 'none'; });
+        /* ── reduced motion fallback ────────────────────── */
+        jcards.forEach(function (c) {
+          c.style.opacity = '1';
+          c.style.transform = 'none';
+          c.style.setProperty('--fill', '1');
+        });
         if (tlLine) tlLine.style.height = '100%';
-        if (tlDot) { tlDot.style.opacity = '1'; tlDot.style.transform = 'translateY(' + tl.offsetHeight + 'px)'; }
+        if (tlDot) {
+          tlDot.style.opacity = '1';
+          tlDot.style.transform = 'translateY(' + (tl.offsetHeight - 11) + 'px)';
+        }
       }
 
       var specRows = document.querySelectorAll('.spec-row');
