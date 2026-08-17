@@ -687,7 +687,6 @@
       .jcard:hover .jcard-year{color:rgba(255,255,255,.85)}
       .jcard:hover .jcard-name{color:rgba(255,255,255,.92)}
       .tl-dot{opacity:1!important}
-      .camisas-progress-glow{display:none}
       .spec-row{transition:none;opacity:1;transform:none}
     }
 
@@ -701,21 +700,6 @@
     /* ── cinematic overlays ───────────────────────────────── */
     #camisas{position:relative;overflow:hidden}
     #camisas .wrap{position:relative;z-index:2}
-
-    /* ── progress bar ─────────────────────────────────────── */
-    .camisas-progress{
-      position:sticky;top:0;left:0;right:0;height:3px;z-index:10;
-      background:rgba(255,255,255,.04);
-    }
-    .camisas-progress-fill{
-      height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--gold));
-      border-radius:0 2px 2px 0;will-change:width;
-    }
-    .camisas-progress-glow{
-      position:absolute;top:-3px;left:0;width:50px;height:9px;border-radius:50%;
-      background:radial-gradient(ellipse,rgba(232,181,45,.8),transparent 70%);
-      opacity:0;will-change:transform,opacity;pointer-events:none;
-    }
 
     /* ── timeline ─────────────────────────────────────────── */
     .camisas-timeline{
@@ -1955,10 +1939,6 @@
     </section>
 
     <section class="section section-dark" id="camisas">
-      <div class="camisas-progress" aria-hidden="true">
-        <div class="camisas-progress-fill"></div>
-        <div class="camisas-progress-glow"></div>
-      </div>
       <div class="wrap">
         <header class="sec-head reveal">
           <span class="trule" aria-hidden="true"></span>
@@ -2787,8 +2767,6 @@
       var tl = document.querySelector('.camisas-timeline');
       var tlLine = document.querySelector('.tl-line');
       var tlDot = document.querySelector('.tl-dot');
-      var progressFill = document.querySelector('.camisas-progress-fill');
-      var progressGlow = document.querySelector('.camisas-progress-glow');
 
       /* card entrance (one-way, via observer) */
       if (jcards.length && 'IntersectionObserver' in window) {
@@ -2828,13 +2806,6 @@
           if (tlDot) {
             tlDot.style.transform = 'translateY(' + (pct * rect.height) + 'px)';
             tlDot.style.opacity = pct > 0.01 ? 1 : 0;
-          }
-
-          /* progress bar */
-          if (progressFill) progressFill.style.width = (pct * 100) + '%';
-          if (progressGlow) {
-            progressGlow.style.transform = 'translateX(' + (pct * rect.width - 25) + 'px)';
-            progressGlow.style.opacity = pct > 0.02 ? Math.min(pct * 2, 0.9) : 0;
           }
         }
         window.addEventListener('scroll', onScroll, { passive: true });
