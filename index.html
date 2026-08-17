@@ -671,21 +671,12 @@
       .compare-badge{transition:none}
       .compare-card:hover .compare-badge{transform:none}
       .compare-emblem{transition:none}
-      .jcard{transition:none;opacity:1;transform:none}
+      .jcard{opacity:1!important;transform:none!important}
       .jcard:hover{background:transparent;border-color:rgba(255,255,255,.05)}
-      .jcard::before{transition:none;transform:none}
-      .jcard.in::before{transform:none}
-      .jcard:hover .jcard-dot{transform:none;box-shadow:none}
-      .jcard-dot{transition:none;transform:none}
-      .jcard.in .jcard-dot{animation:none}
-      .jcard-num{transition:none;opacity:1;transform:none}
-      .jcard-year{transition:none;opacity:1;transform:none}
-      .jcard-tag{transition:none;opacity:1}
-      .jcard-name{transition:none;opacity:1;transform:none}
-      .jcard-line{transition:none;opacity:1}
-      .jcard-fact{transition:none;opacity:1;transform:none}
-      .jcard:hover .jcard-year{color:rgba(255,255,255,.85)}
-      .jcard:hover .jcard-name{color:rgba(255,255,255,.92)}
+      .jcard::before{transform:none!important}
+      .jcard-num,.jcard-dot,.jcard-year,.jcard-tag,.jcard-name,.jcard-line,.jcard-fact{
+        opacity:1!important;transform:none!important;
+      }
       .tl-dot{opacity:1!important}
       .spec-row{transition:none;opacity:1;transform:none}
     }
@@ -696,10 +687,6 @@
     .camisas-intro p{
       color:rgba(255,255,255,.65);font-size:clamp(.92rem,2vw,1.04rem);line-height:1.7;
     }
-
-    /* ── cinematic overlays ───────────────────────────────── */
-    #camisas{position:relative;overflow:hidden}
-    #camisas .wrap{position:relative;z-index:2}
 
     /* ── timeline ─────────────────────────────────────────── */
     .camisas-timeline{
@@ -725,12 +712,8 @@
       padding:clamp(1.2rem,3vw,1.8rem) 0;
       border-bottom:1px solid rgba(255,255,255,.05);
       opacity:0;transform:translateX(-20px);
-      transition:opacity .7s cubic-bezier(.2,.7,.2,1),
-                 transform .7s cubic-bezier(.2,.7,.2,1),
-                 background .25s ease,border-color .25s ease;
     }
     .jcard:last-child{border-bottom:none;cursor:pointer}
-    .jcard.in{opacity:1;transform:none}
     .jcard::before{
       content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
       background:var(--red);border-radius:0 2px 2px 0;
@@ -750,39 +733,12 @@
       font-family:var(--mono);font-size:.55rem;letter-spacing:.15em;
       color:var(--red-soft);font-weight:600;
       opacity:0;transform:scale(.5);
-      transition:opacity .5s ease .3s,transform .5s ease .3s,color .2s ease;
     }
-    .jcard.in .jcard-num{opacity:1;transform:scale(1)}
     .jcard-dot{
       width:10px;height:10px;border-radius:50%;flex-shrink:0;
       border:2px solid var(--red);background:var(--black-2);
       transform:scale(0);
-      transition:transform .4s cubic-bezier(.34,1.56,.64,1) .15s,
-                 background .25s ease,box-shadow .25s ease,border-color .25s ease;
     }
-    .jcard.in .jcard-dot{transform:scale(1)}
-    @keyframes dotBurst{
-      0%{box-shadow:0 0 0 0 rgba(212,0,27,.6)}
-      70%{box-shadow:0 0 0 12px rgba(212,0,27,0)}
-      100%{box-shadow:0 0 0 0 rgba(212,0,27,0)}
-    }
-    .jcard.in .jcard-dot{animation:dotBurst .8s ease-out .2s both}
-    .jcard:hover .jcard-dot{
-      transform:scale(1.4);background:var(--red);
-      box-shadow:0 0 14px rgba(212,0,27,.55);
-    }
-    .jcard:last-child .jcard-dot{border-color:var(--gold);background:var(--gold)}
-    .jcard:last-child.in .jcard-dot{animation-name:dotBurstGold}
-    @keyframes dotBurstGold{
-      0%{box-shadow:0 0 0 0 rgba(232,181,45,.6)}
-      70%{box-shadow:0 0 0 12px rgba(232,181,45,0)}
-      100%{box-shadow:0 0 0 0 rgba(232,181,45,0)}
-    }
-    .jcard:last-child:hover .jcard-dot{
-      background:var(--gold);border-color:var(--gold);
-      box-shadow:0 0 14px rgba(232,181,45,.55);
-    }
-    .jcard:last-child:hover::before{background:var(--gold)}
 
     /* ── content ──────────────────────────────────────────── */
     .jcard-content{display:flex;flex-direction:column;gap:.35rem}
@@ -792,39 +748,28 @@
       font-size:clamp(1.4rem,3vw,1.8rem);line-height:1;letter-spacing:-.01em;
       color:rgba(255,255,255,.85);
       opacity:0;transform:translateY(8px);
-      transition:opacity .5s ease .25s,transform .5s ease .25s,color .25s ease;
     }
-    .jcard.in .jcard-year{opacity:1;transform:none}
     .jcard:hover .jcard-year{color:#fff}
     .jcard-tag{
       font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;
       color:var(--red-soft);opacity:0;
-      transition:opacity .5s ease .35s;
     }
-    .jcard.in .jcard-tag{opacity:1}
     .jcard-name{
       font-weight:800;text-transform:uppercase;font-size:clamp(.88rem,2vw,1rem);
       letter-spacing:.02em;color:rgba(255,255,255,.92);margin:0;line-height:1.3;
       opacity:0;transform:translateY(6px);
-      transition:opacity .5s ease .3s,transform .5s ease .3s,color .25s ease;
     }
-    .jcard.in .jcard-name{opacity:1;transform:none}
     .jcard:hover .jcard-name{color:#fff}
     .jcard-line{
       color:rgba(255,255,255,.55);font-size:clamp(.82rem,1.7vw,.9rem);line-height:1.7;
       margin:0;opacity:0;
-      transition:opacity .6s ease .4s;
     }
-    .jcard.in .jcard-line{opacity:1}
     .jcard-line strong{color:rgba(255,255,255,.8);font-weight:600}
     .jcard-fact{
       display:inline-flex;align-items:center;gap:.4rem;
       font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;
-      color:rgba(255,255,255,.35);margin:.2rem 0 0;
-      opacity:0;transform:translateY(4px);
-      transition:opacity .5s ease .5s,transform .5s ease .5s;
+      color:rgba(255,255,255,.35);margin:.2rem 0 0;opacity:0;transform:translateY(4px);
     }
-    .jcard.in .jcard-fact{opacity:1;transform:none}
     .jcard-fact::before{
       content:"";width:16px;height:1px;background:rgba(255,255,255,.15);flex-shrink:0;
     }
@@ -2496,9 +2441,22 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
   <script>
     (function () {
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ── Lenis smooth scroll ────────────────────────────── */
+      var lenis = null;
+      if (!reduce && typeof Lenis !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+        lenis = new Lenis({ duration: 1.2, easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); } });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+        gsap.ticker.lagSmoothing(0);
+      }
       var header = document.querySelector('.site-head');
       var toggle = document.getElementById('navToggle');
       var nav = document.getElementById('siteNav');
@@ -2768,49 +2726,57 @@
       var tlLine = document.querySelector('.tl-line');
       var tlDot = document.querySelector('.tl-dot');
 
-      /* card entrance (one-way, via observer) */
-      if (jcards.length && 'IntersectionObserver' in window) {
-        var jcardObs = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              var idx = Array.prototype.indexOf.call(jcards, entry.target);
-              entry.target.style.transitionDelay = (idx * .12) + 's';
-              entry.target.classList.add('in');
-              jcardObs.unobserve(entry.target);
+      if (tl && jcards.length && !reduce && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        /* ── main timeline pinned scroll ──────────────────── */
+        var mainTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: tl,
+            start: 'top 80%',
+            end: 'bottom 20%',
+            scrub: 0.8,
+          }
+        });
+
+        /* line draws */
+        mainTl.fromTo(tlLine,
+          { height: '0%' },
+          { height: '100%', ease: 'none', duration: 1 },
+          0
+        );
+
+        /* dot moves */
+        mainTl.fromTo(tlDot,
+          { y: 0, opacity: 0 },
+          { y: function() { return tl.offsetHeight; }, opacity: 1, ease: 'none', duration: 1 },
+          0
+        );
+
+        /* ── per-card reveals ─────────────────────────────── */
+        jcards.forEach(function (card, i) {
+          var cardTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 75%',
+              end: 'top 30%',
+              scrub: 0.5,
             }
           });
-        }, { threshold: 0.15 });
-        jcards.forEach(function (c) { jcardObs.observe(c); });
-      }
 
-      /* cinematic scroll — rAF, direct DOM style */
-      if (tl && jcards.length) {
-        var ticking = false;
-        function onScroll() {
-          if (!ticking) {
-            requestAnimationFrame(updateTimeline);
-            ticking = true;
-          }
-        }
-        function updateTimeline() {
-          ticking = false;
-          var rect = tl.getBoundingClientRect();
-          var viewH = window.innerHeight;
-          var scrolled = Math.max(0, -rect.top + viewH * 0.45);
-          var pct = Math.max(0, Math.min(scrolled / rect.height, 1));
+          cardTl.to(card, { opacity: 1, x: 0, duration: 1, ease: 'power2.out' }, 0);
+          cardTl.to(card.querySelector('.jcard-num'), { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(2)' }, 0.1);
+          cardTl.to(card.querySelector('.jcard-dot'), { scale: 1, duration: 0.5, ease: 'back.out(3)' }, 0.05);
+          cardTl.to(card.querySelector('.jcard-year'), { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.15);
+          cardTl.to(card.querySelector('.jcard-tag'), { opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.2);
+          cardTl.to(card.querySelector('.jcard-name'), { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.2);
+          cardTl.to(card.querySelector('.jcard-line'), { opacity: 1, duration: 0.7, ease: 'power2.out' }, 0.25);
+          cardTl.to(card.querySelector('.jcard-fact'), { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.35);
+        });
 
-          /* timeline line */
-          if (tlLine) tlLine.style.height = (pct * rect.height) + 'px';
-
-          /* timeline dot */
-          if (tlDot) {
-            tlDot.style.transform = 'translateY(' + (pct * rect.height) + 'px)';
-            tlDot.style.opacity = pct > 0.01 ? 1 : 0;
-          }
-        }
-        window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('resize', onScroll, { passive: true });
-        updateTimeline();
+      } else if (tl && jcards.length) {
+        /* ── reduced motion fallback: just show everything ── */
+        jcards.forEach(function (c) { c.style.opacity = '1'; c.style.transform = 'none'; });
+        if (tlLine) tlLine.style.height = '100%';
+        if (tlDot) { tlDot.style.opacity = '1'; tlDot.style.transform = 'translateY(' + tl.offsetHeight + 'px)'; }
       }
 
       var specRows = document.querySelectorAll('.spec-row');
