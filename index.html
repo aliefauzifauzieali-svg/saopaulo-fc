@@ -20,7 +20,7 @@
   <meta property="og:title" content="São Paulo FC — Tricolor Paulista · História, Títulos e Ídolos">
   <meta property="og:description" content="Escudo coração de cinco pontas, camisas históricas, hino, os 3 Mundiais e os ídolos que eternizaram o Tricolor. Uma página feita por torcedores.">
   <meta property="og:url" content="https://saopaulo-fc.netlify.app/">
-  <meta property="og:image" content="https://saopaulo-fc.netlify.app/og.png">
+  <meta property="og:image" content="https://saopaulo-fc.netlify.app/img/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:type" content="image/png">
@@ -29,7 +29,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="São Paulo FC — Tricolor Paulista">
   <meta name="twitter:description" content="História, escudo, camisas, títulos e ídolos do Tricolor: 3x Mundial, 3x Libertadores, 6x Brasileiro.">
-  <meta name="twitter:image" content="https://saopaulo-fc.netlify.app/og.png">
+  <meta name="twitter:image" content="https://saopaulo-fc.netlify.app/img/og.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,8 +46,8 @@
     "sport": "Association Football",
     "foundingDate": "1930-01-25",
     "slogan": "O Mais Querido",
-    "logo": "https://saopaulo-fc.netlify.app/og.png",
-    "image": "https://saopaulo-fc.netlify.app/og.png",
+    "logo": "https://saopaulo-fc.netlify.app/img/og.png",
+    "image": "https://saopaulo-fc.netlify.app/img/og.png",
     "location": {
       "@type": "Place",
       "name": "São Paulo, Brasil",
@@ -140,6 +140,31 @@
 
     .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.25rem,4vw,2rem)}
 
+    .film-intro{
+      position:fixed;inset:0;z-index:999;display:grid;place-items:center;
+      background:var(--black-2);
+      pointer-events:none;
+      animation:introOut 1.1s var(--ease) 1.15s forwards;
+    }
+    .film-intro-mark{
+      width:clamp(70px,11vw,104px);height:auto;opacity:0;
+      animation:introMark .8s cubic-bezier(.16,1,.3,1) .1s forwards;
+    }
+    .film-intro::after{
+      content:"";position:absolute;left:50%;top:50%;margin-left:calc(clamp(120px,16vw,140px) / -2);margin-top:clamp(70px,9vw,100px);
+      width:clamp(120px,16vw,140px);height:4px;
+      background:linear-gradient(90deg,var(--red) 0 33.333%,var(--white) 33.333% 66.666%,var(--black) 66.666% 100%);
+      transform:scaleX(0);animation:introBar .7s var(--ease) .45s forwards;
+    }
+    @keyframes introMark{from{opacity:0;transform:scale(.72)}to{opacity:1;transform:scale(1)}}
+    @keyframes introBar{to{transform:scaleX(1)}}
+    @keyframes introOut{to{opacity:0;visibility:hidden}}
+
+    .film-grain{
+      position:fixed;inset:0;z-index:80;pointer-events:none;opacity:.45;
+      background-image:var(--noise);background-size:260px;
+    }
+
     .site-head{opacity:0;animation:fadeIn .8s var(--ease) .1s forwards}
     @keyframes fadeIn{to{opacity:1}}
 
@@ -186,9 +211,9 @@
       font-family:var(--font);font-weight:700;font-size:.95rem;letter-spacing:.02em;
       text-transform:uppercase;text-decoration:none;
       padding:.95rem 1.7rem;border-radius:999px;border:2px solid transparent;
-      cursor:pointer;transition:transform .2s var(--ease),background .2s var(--ease),color .2s var(--ease),box-shadow .2s var(--ease);
+      cursor:pointer;transition:transform .2s var(--ease),background .2s var(--ease),color .2s var(--ease),box-shadow .2s var(--ease),letter-spacing .25s var(--ease);
     }
-    .btn:hover{transform:translateY(-2px)}
+    .btn:hover{transform:translateY(-2px);letter-spacing:.06em}
     .btn:active{transform:translateY(0)}
     .btn::after{
       content:"";position:absolute;top:0;bottom:0;left:-70%;width:45%;pointer-events:none;
@@ -201,6 +226,8 @@
     .btn-solid:hover{background:var(--red-deep);box-shadow:0 12px 30px rgba(212,0,27,.35)}
     .btn-ghost{border-color:var(--ink);color:var(--ink);background:transparent}
     .btn-ghost:hover{background:var(--ink);color:#fff}
+    .btn-line{border-color:rgba(255,255,255,.55);color:#fff;background:transparent}
+    .btn-line:hover{background:#fff;color:var(--red-deep);box-shadow:0 12px 30px rgba(0,0,0,.25)}
     .btn-white{background:#fff;color:var(--red-deep)}
     .btn-white:hover{box-shadow:0 12px 30px rgba(0,0,0,.25)}
 
@@ -209,9 +236,21 @@
       background:rgba(6,6,8,.85);
       -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
       border-bottom:1px solid rgba(255,255,255,.06);
-      color:#fff;transition:box-shadow .3s var(--ease);
+      color:#fff;transition:box-shadow .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease),transform .35s var(--ease);
     }
-    .site-head.is-scrolled{box-shadow:0 8px 30px rgba(0,0,0,.25)}
+    .site-head.is-scrolled{
+      background:rgba(6,6,8,.92);
+      border-bottom-color:rgba(255,255,255,.14);
+      box-shadow:0 8px 30px rgba(0,0,0,.25);
+    }
+    .site-head.is-hide{transform:translateY(-100%)}
+    @media(min-width:1025px){
+      .site-head.is-compact .head-inner{height:60px}
+      .site-head.is-compact .brand-mark{width:28px;height:33px}
+      .site-head.is-compact .brand-word{font-size:1.1rem}
+      .site-head.is-compact .site-nav a{padding:.25rem 0}
+      .site-head.is-compact .site-nav .nav-cta{padding:.5rem 1.1rem}
+    }
     .head-inner{
       max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.25rem,4vw,2rem);
       display:flex;align-items:center;justify-content:space-between;gap:1rem;height:76px;
@@ -261,19 +300,41 @@
     .hero::before{
       content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
       background:
-        radial-gradient(90% 70% at 88% 104%,rgba(212,0,27,.12),transparent 62%),
+        radial-gradient(90% 70% at 88% 104%,rgba(212,0,27,.14),transparent 62%),
         linear-gradient(90deg,transparent 0 33.35%,rgba(212,0,27,.05) 33.35% 33.5%,transparent 33.5% 66.65%,rgba(11,11,13,.05) 66.65% 66.8%,transparent 66.8%);
     }
+    .hero::after{
+      content:"";position:absolute;top:-30%;bottom:-30%;left:-20%;width:34%;z-index:0;pointer-events:none;
+      background:linear-gradient(105deg,transparent,rgba(255,255,255,.30),transparent);
+      transform:translateX(-180%) skewX(-18deg);
+      animation:heroBeam 12s var(--ease) 2s infinite;
+    }
+    @keyframes heroBeam{
+      0%{transform:translateX(-180%) skewX(-18deg)}
+      55%{transform:translateX(460%) skewX(-18deg)}
+      100%{transform:translateX(460%) skewX(-18deg)}
+    }
     .hero-inner{position:relative;z-index:1}
-    .hero-watermark{
-      position:absolute;z-index:1;right:clamp(1rem,6vw,4rem);bottom:clamp(3rem,9vh,5rem);
-      font-family:var(--mono);font-weight:900;font-size:clamp(4.5rem,17vw,11.5rem);line-height:1;
-      letter-spacing:-.03em;color:rgba(11,11,13,.06);user-select:none;pointer-events:none;
+    .hero-seal{
+      position:absolute;z-index:1;right:clamp(1rem,6vw,4rem);top:calc(76px + clamp(2.5rem,9vh,4.5rem));
+      width:clamp(96px,12vw,132px);aspect-ratio:1;border-radius:50%;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.1rem;
+      transform:rotate(-8deg);opacity:0;user-select:none;pointer-events:none;
+      animation:sealIn .9s var(--ease) .5s forwards;
     }
-    @supports((-webkit-text-stroke:1px #000) or (text-stroke:1px #000)){
-      .hero-watermark{color:transparent;-webkit-text-stroke:1.5px rgba(11,11,13,.10)}
+    .hero-seal::before{
+      content:"";position:absolute;inset:0;border-radius:50%;
+      border:1.5px dashed rgba(11,11,13,.28);
     }
-    @media(max-width:900px){.hero-watermark{display:none}}
+    .hero-seal::after{
+      content:"";position:absolute;inset:7px;border-radius:50%;
+      border:1px solid rgba(212,0,27,.4);
+    }
+    .hero-seal-txt{font-family:var(--mono);font-size:.52rem;letter-spacing:.28em;color:var(--muted);text-indent:.28em}
+    .hero-seal-year{font-weight:900;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1;color:var(--red);letter-spacing:-.02em}
+    .hero-seal-sub{font-family:var(--mono);font-size:.48rem;letter-spacing:.3em;color:var(--ink);text-indent:.3em}
+    @keyframes sealIn{from{opacity:0;transform:rotate(-2deg) scale(.8)}to{opacity:.9;transform:rotate(-8deg) scale(1)}}
+    @media(max-width:900px){.hero-seal{display:none}}
     .hero-stripes{
       width:clamp(46px,14vw,220px);height:100%;position:relative;
       background:linear-gradient(90deg,
@@ -282,6 +343,12 @@
     }
     .js .hero-stripes{animation:growStripes 1.1s var(--ease) both}
     @keyframes growStripes{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+    .hero-stripes::after{
+      content:"";position:absolute;top:0;left:0;right:0;height:42%;pointer-events:none;
+      background:linear-gradient(180deg,rgba(255,255,255,.16),transparent);
+      animation:stripesShine 8s var(--ease) infinite;
+    }
+    @keyframes stripesShine{0%,100%{opacity:.25}50%{opacity:.65}}
 
     .hero-inner{
       min-width:0;display:flex;flex-direction:column;justify-content:center;
@@ -299,9 +366,9 @@
       overflow-wrap:anywhere;
     }
     .hero-title .ch{display:inline-block;vertical-align:bottom}
-    .js .hero-title .ch{opacity:0;animation:heroCh .65s var(--ease) calc(.45s + var(--i)*.055s) both}
+    .js .hero-title .ch{opacity:0;animation:heroCh .7s cubic-bezier(.16,1,.3,1) calc(.4s + var(--i)*.055s) both}
     @keyframes heroCh{
-      from{opacity:0;transform:translateY(.5em) rotate(9deg)}
+      from{opacity:0;transform:translateY(.42em) rotate(5deg) scale(.97)}
       to{opacity:1;transform:none}
     }
     @supports((-webkit-background-clip:text) or (background-clip:text)){
@@ -319,7 +386,7 @@
     .hero-tag{
       margin-top:1.6rem;max-width:36rem;
       font-size:clamp(1.05rem,2.1vw,1.35rem);line-height:1.55;color:var(--muted);
-      font-weight:600;
+      font-weight:600;text-wrap:pretty;
     }
     .hero-tag strong{color:var(--ink);font-weight:700}
     .hero-actions{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2.1rem}
@@ -349,15 +416,15 @@
 
     .ticker{overflow:hidden;background:var(--black);color:#fff;border-top:1px solid rgba(255,255,255,.08)}
     .ticker-track{
-      display:flex;align-items:center;width:max-content;
+      display:flex;align-items:center;width:max-content;list-style:none;
       padding-block:1.05rem;animation:tick 38s linear infinite;
     }
-    .ticker-track span{
+    .ticker-track li{
       display:flex;align-items:center;gap:3rem;margin-right:3rem;white-space:nowrap;
       font-weight:800;text-transform:uppercase;
       font-size:clamp(1rem,2.2vw,1.6rem);letter-spacing:.03em;
     }
-    .ticker-track span::after{
+    .ticker-track li::after{
       content:"";width:10px;height:10px;flex:none;background:var(--red);transform:rotate(45deg);
     }
     @keyframes tick{to{transform:translateX(-50%)}}
@@ -374,6 +441,7 @@
     .section-red{background:var(--black-2);color:#fff;position:relative;overflow:hidden}
     .section-red .sec-head{max-width:100%}
     .section-dark + .section-dark{border-top:1px solid rgba(255,255,255,.09)}
+    .section-dark + .section-red{border-top:1px solid rgba(255,255,255,.09)}
     .section-dark .wrap{position:relative;z-index:1}
     .section-dark::after,.hino::after,.cta::after{
       content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
@@ -387,11 +455,13 @@
     }
     .sec-title{
       font-size:clamp(2rem,4.8vw,3.5rem);font-weight:900;text-transform:uppercase;
-      line-height:1.02;letter-spacing:-.01em;
+      line-height:1.02;letter-spacing:-.01em;text-wrap:balance;
     }
-    .sec-lead{margin-top:1.1rem;color:var(--muted);font-size:1.06rem;max-width:46ch}
+    .sec-lead{margin-top:1.1rem;color:var(--muted);font-size:1.06rem;max-width:46ch;text-wrap:pretty}
     .section-dark .sec-lead,.section-red .sec-lead{color:rgba(255,255,255,.75)}
     .section-dark .kicker,.section-red .kicker{color:rgba(255,255,255,.75)}
+
+    .timeline-wrap{display:grid;grid-template-columns:minmax(0,940px);justify-content:center;align-items:start}
 
     .timeline{list-style:none;position:relative;max-width:780px}
     .timeline::before{
@@ -405,8 +475,16 @@
       content:"";position:absolute;left:0;top:6px;width:19px;height:19px;
       background:var(--red);border:3px solid var(--black);transform:rotate(45deg);
     }
+    .tl-item::after{
+      content:attr(data-year);position:absolute;top:-.55rem;z-index:0;
+      font-weight:900;font-size:clamp(4rem,14vw,8rem);line-height:1;letter-spacing:-.02em;
+      color:transparent;-webkit-text-stroke:1px rgba(212,0,27,.16);
+      pointer-events:none;user-select:none;
+    }
+    @media(max-width:899px){.tl-item::after{display:none}}
     .tl-year{font-size:clamp(1.7rem,4.4vw,2.7rem);font-weight:900;line-height:1;color:var(--red);letter-spacing:-.01em;transition:color .3s var(--ease),transform .3s var(--ease)}
     .tl-item:hover .tl-year{color:var(--red-deep);transform:translateX(3px)}
+    .tl-body{position:relative;z-index:1}
     .tl-body h3{font-size:1.08rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin:.55rem 0 .45rem;color:var(--ink)}
     .tl-body p{color:var(--muted);max-width:56ch;font-size:1rem}
     .tl-photo{
@@ -419,12 +497,40 @@
     .tl-item:hover .tl-photo{border-color:rgba(212,0,27,.3);box-shadow:0 18px 38px rgba(22,22,26,.12)}
     .tl-photo.is-missing{display:none}
 
-    .hino{background:var(--red);color:#fff;padding-block:clamp(4.5rem,10vw,7rem);position:relative;overflow:hidden}
-    .hino::before{
-      content:"";position:absolute;top:-3rem;right:-2rem;width:min(38vw,420px);height:min(38vw,420px);
-      background:rgba(255,255,255,.07);transform:rotate(45deg);
+    @media(min-width:900px){
+      .timeline{max-width:none}
+      .timeline::before{left:50%;transform:translateX(-50%)}
+      .tl-item{width:50%;padding:0 3.5rem 3.4rem 0}
+      .tl-item:nth-child(odd){text-align:right}
+      .tl-item:nth-child(odd) .tl-body p{margin-left:auto}
+      .tl-item:nth-child(odd) .tl-photo{margin-left:auto}
+      .tl-item:nth-child(odd)::after{right:-1.5rem}
+      .tl-item:nth-child(even){margin-left:50%;padding:0 0 3.4rem 3.5rem}
+      .tl-item:nth-child(even)::after{left:-1.5rem}
+      .tl-item::before{left:auto;right:-10px;top:10px}
+      .tl-item:nth-child(even)::before{right:auto;left:-10px}
+      .js #historia .tl-item:nth-child(even).reveal{transform:translateX(40px)}
     }
-    .hino-inner{max-width:60rem;position:relative}
+
+    .hino{
+      background:var(--red);
+      color:#fff;padding-block:clamp(4.5rem,10vw,7rem);position:relative;overflow:hidden;
+    }
+    .hino::before{
+      content:"";position:absolute;top:-4%;left:-4%;right:-4%;bottom:-4%;z-index:0;
+      background:
+        radial-gradient(120% 100% at 50% 16%,rgba(0,0,0,0) 42%,rgba(70,0,9,.55) 100%),
+        linear-gradient(180deg,rgba(196,0,25,.64) 0%,rgba(128,0,17,.92) 100%),
+        url('img/morumbis.webp') center 30%/cover no-repeat;
+      animation:hinoZoom 32s ease-in-out infinite alternate;
+    }
+    @keyframes hinoZoom{from{transform:scale(1)}to{transform:scale(1.12)}}
+    .hino-inner{max-width:60rem;position:relative;z-index:1}
+    .hino-inner::before{
+      content:"";position:absolute;top:-3rem;right:-2rem;width:min(38vw,420px);height:min(38vw,420px);
+      background:rgba(255,255,255,.07);transform:rotate(45deg);pointer-events:none;
+    }
+    .hino-audio{margin-top:2.4rem}
     .hino-verse{
       font-family:var(--serif);font-style:italic;font-weight:600;
       font-size:clamp(1.6rem,4.2vw,2.8rem);line-height:1.22;
@@ -436,69 +542,182 @@
     }
     .hino-credit{margin-top:2rem;color:rgba(255,255,255,.7);font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase}
 
-    .escudo-stage{display:grid;grid-template-columns:1fr;gap:clamp(1.75rem,4vw,3rem);align-items:center}
-    @media(min-width:900px){.escudo-stage{grid-template-columns:minmax(0,330px) minmax(0,1fr);gap:clamp(2.5rem,5vw,4rem)}}
-    .emblem{width:auto;height:auto;margin-inline:auto}
-
-    .escudo-plate{
-      position:relative;text-align:center;width:100%;max-width:330px;margin-inline:auto;
-      background:var(--paper);
-      border:1px solid var(--line);border-radius:var(--radius);
-      padding:clamp(1.9rem,4vw,2.6rem) 1.25rem clamp(1.5rem,3vw,1.9rem);
+    /* ── escudo cinema ── */
+    .escudo-cinema{
+      position:relative;background:var(--black-2);color:#fff;
+      padding-top:clamp(4rem,10vw,8rem);padding-bottom:clamp(4rem,10vw,8rem);
       overflow:hidden;
     }
-    .plate-badge{
-      position:relative;display:block;width:clamp(140px,21vw,180px);margin-inline:auto;
-      aspect-ratio:304/403;
+    .cinema-noise{position:absolute;inset:0;z-index:1;pointer-events:none;background-image:var(--noise);background-size:260px;opacity:.3}
+    .cinema-vignette{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 80% 70% at 50% 40%,transparent 30%,rgba(6,6,8,.6) 100%)}
+    .cinema-spot{
+      position:absolute;top:8%;left:50%;width:min(500px,80vw);height:min(500px,80vw);
+      transform:translateX(-50%);z-index:0;pointer-events:none;border-radius:50%;
+      background:radial-gradient(circle,rgba(212,0,27,.07) 0%,transparent 65%);
+      filter:blur(50px);animation:cinemaPulse 6s ease-in-out infinite alternate;
     }
-    .plate-badge .emblem{position:relative;z-index:1;width:100%;height:auto;margin:0;filter:drop-shadow(0 14px 28px rgba(22,22,26,.18))}
-    .plate-frame{
-      position:absolute;z-index:0;inset:-14px -18px;
-      border:1px dashed var(--line);border-radius:6px;pointer-events:none;
+    @keyframes cinemaPulse{0%{opacity:.6;transform:translateX(-50%) scale(1)}100%{opacity:1;transform:translateX(-50%) scale(1.1)}}
+
+    .escudo-head{max-width:44rem}
+    .escudo-head .sec-lead{color:rgba(255,255,255,.7)}
+    .escudo-head .kicker{color:rgba(255,255,255,.7)}
+
+    /* ── comparison grid ── */
+    .escudo-compare{
+      display:flex;flex-direction:column;align-items:center;gap:0;
+      max-width:44rem;
+      margin-bottom:clamp(2rem,5vw,3.5rem);
     }
-    .escudo-plate figcaption{
-      position:relative;margin-top:1.6rem;
-      font-family:var(--mono);font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);
+    @media(min-width:700px){
+      .escudo-compare{flex-direction:row;justify-content:center;align-items:flex-start;gap:clamp(1rem,2vw,1.5rem)}
     }
-    .escudo-plate figcaption::before{content:"";display:block;width:2.2rem;height:3px;background:var(--red);margin:0 auto .7rem}
 
-    .escudo-copy{display:flex;flex-direction:column;gap:1.8rem;min-width:0}
-    .escudo-story{color:var(--ink);font-size:1.06rem;line-height:1.7;max-width:44rem}
-    .escudo-story strong{font-weight:700}
-
-    .escudo-spec{margin:0;border-top:1px solid var(--line)}
-    .spec-row{border-bottom:1px solid var(--line);padding:1.05rem 0}
-    .spec-row:last-child{border-bottom:0;padding-bottom:.15rem}
-    .spec-row dt{font-family:var(--mono);font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:.38rem}
-    .spec-row dd{margin:0;color:var(--muted);font-size:.97rem;line-height:1.65;max-width:42rem}
-
-    .escudo-origin{
-      display:flex;align-items:center;gap:1rem;
-      background:var(--paper);border:1px solid var(--line);border-radius:12px;
-      padding:.9rem 1.1rem;
+    .compare-card{
+      position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;
+      justify-content:center;gap:1rem;
+      padding:clamp(1.8rem,4vw,2.8rem) clamp(1.5rem,3vw,2.5rem);
+      border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);
+      background:rgba(255,255,255,.02);
+      flex:1 1 0;min-width:0;overflow:hidden;
+      opacity:0;transform:translateY(20px);
+      transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1),border-color .4s var(--ease),background .4s var(--ease),box-shadow .4s var(--ease);
     }
-    .escudo-origin .emblem{width:50px;height:auto;flex:none;margin:0}
-    .escudo-origin p{margin:0;color:var(--muted);font-size:.92rem;line-height:1.55}
+    .compare-card.in{opacity:1;transform:none}
+    .compare-card.in:hover{
+      border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04);
+      box-shadow:0 16px 48px rgba(0,0,0,.3);
+    }
 
-    .camisas-grid{display:grid;grid-template-columns:1fr;gap:1.15rem}
-    @media(min-width:560px){.camisas-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(min-width:980px){.camisas-grid{grid-template-columns:repeat(4,1fr)}}
+    .compare-card--current{
+      border-color:rgba(212,0,27,.12);background:rgba(212,0,27,.025);
+    }
+    .compare-card--current.in:hover{
+      border-color:rgba(212,0,27,.28);background:rgba(212,0,27,.05);
+      box-shadow:0 16px 48px rgba(0,0,0,.3),0 0 0 1px rgba(212,0,27,.08);
+    }
+
+    .compare-watermark{
+      font-family:var(--font);font-weight:900;
+      font-size:clamp(1.2rem,3vw,1.6rem);
+      line-height:1;letter-spacing:.06em;
+      color:rgba(255,255,255,.5);text-align:center;
+      margin-bottom:.2rem;
+    }
+    .compare-watermark--current{color:var(--red-soft)}
+
+    .compare-badge{
+      position:relative;
+      width:clamp(130px,22vw,170px);aspect-ratio:1;
+      margin:0 auto;
+      flex-shrink:0;
+      transition:transform .5s cubic-bezier(.2,.7,.2,1);
+    }
+    .compare-card:hover .compare-badge{
+      transform:translateY(-3px) scale(1.02);
+    }
+
+    .compare-emblem{
+      position:relative;
+      width:100%;height:100%;object-fit:contain;
+      filter:drop-shadow(0 4px 16px rgba(0,0,0,.5));
+      transition:filter .4s var(--ease);
+    }
+    .compare-card:hover .compare-emblem{
+      filter:drop-shadow(0 6px 24px rgba(0,0,0,.6));
+    }
+
+    .compare-info{display:flex;flex-direction:column;align-items:center;gap:.25rem;text-align:center}
+    .compare-label{
+      font-family:var(--font);font-size:clamp(.78rem,1.8vw,.88rem);font-weight:600;
+      color:rgba(255,255,255,.8);
+    }
+    .compare-sub{
+      font-family:var(--mono);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;
+      color:rgba(255,255,255,.3);
+    }
+
+    .compare-stars{
+      display:flex;gap:.4rem;align-items:center;justify-content:center;
+      padding-top:.6rem;border-top:1px solid rgba(255,255,255,.06);margin-top:.1rem;
+    }
+    .compare-stars .stars i{width:.48rem;height:.48rem}
+    .compare-stars .stars--gold i{background:var(--gold)}
+    .compare-stars .stars--red i{background:var(--red)}
+
+    /* footer: copy + spec */
+    .escudo-cinema-footer{max-width:100%}
+    .escudo-copy{display:flex;flex-direction:column;gap:1.4rem;min-width:0}
+    .escudo-story{color:rgba(255,255,255,.85);font-size:clamp(.94rem,2.2vw,1.06rem);line-height:1.7;max-width:44rem}
+    .escudo-story strong{color:#fff;font-weight:700}
+
+    .escudo-spec{margin:0;border-top:1px solid rgba(255,255,255,.08)}
+    .spec-row{
+      border-bottom:1px solid rgba(255,255,255,.06);padding:.95rem 0;
+      opacity:0;transform:translateY(10px);
+      transition:opacity .5s var(--ease),transform .5s var(--ease);
+    }
+    .spec-row.revealed{opacity:1;transform:none}
+    .spec-row:last-child{border-bottom:0;padding-bottom:.1rem}
+    .spec-row dt{
+      display:flex;align-items:center;gap:.4rem;
+      font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red-soft);margin-bottom:.35rem;
+    }
+    .spec-row dd{margin:0;color:rgba(255,255,255,.5);font-size:clamp(.88rem,2vw,.97rem);line-height:1.6;max-width:42rem}
+
+    /* ── reduced motion ── */
+    @media(prefers-reduced-motion:reduce){
+      .cinema-spot{animation:none;opacity:.8}
+      .compare-card{transition:none;opacity:1;transform:none}
+      .compare-badge{transition:none}
+      .compare-card:hover .compare-badge{transform:none}
+      .compare-emblem{transition:none}
+      .spec-row{transition:none;opacity:1;transform:none}
+    }
+
+    .camisas-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,2.5rem);
+      perspective:1200px;
+    }
+    @media(max-width:979px){.camisas-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:559px){.camisas-grid{grid-template-columns:1fr}}
     .jcard{
       position:relative;overflow:hidden;
-      border:1px solid var(--line);border-radius:var(--radius);background:var(--white);
-      padding:2.4rem 1.2rem 1.5rem;display:flex;flex-direction:column;align-items:center;gap:.8rem;text-align:center;
-      transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s var(--ease);
+      border-radius:16px;
+      background:#fff;
+      border:1px solid rgba(255,255,255,.08);
+      padding:0;display:flex;flex-direction:column;
+      transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s cubic-bezier(.22,1,.36,1),border-color .5s;
     }
-    .jcard:hover{transform:translateY(-6px);border-color:rgba(212,0,27,.35);box-shadow:0 22px 44px rgba(22,22,26,.14),0 0 60px rgba(212,0,27,.08)}
-    .jcard-photo-wrap{position:relative;width:clamp(150px,38vw,180px);height:clamp(150px,38vw,180px);flex:none;border-radius:14px;overflow:hidden;background:var(--white);box-shadow:0 10px 24px rgba(22,22,26,.1)}
-    .jcard-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
-    .jcard:hover .jcard-photo{transform:scale(1.06)}
-    .jcard-fallback{position:absolute;inset:0;width:100%;height:100%;display:none}
-    .jcard-photo.is-missing{display:none}
-    .jcard-photo.is-missing + .jcard-fallback{display:block}
-    .jcard-year{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
-    .jcard-name{font-weight:800;text-transform:uppercase;font-size:1.02rem;letter-spacing:.02em}
-    .jcard-line{color:var(--muted);font-size:.9rem;line-height:1.5;max-width:26ch}
+    .jcard:hover{
+      transform:translateY(-8px);
+      border-color:rgba(212,0,27,.45);
+      box-shadow:0 30px 60px rgba(0,0,0,.5),0 0 80px rgba(212,0,27,.15);
+    }
+    .jcard-photo-wrap{
+      position:relative;width:100%;aspect-ratio:1;
+      overflow:hidden;background:#fff;
+      display:flex;align-items:center;justify-content:center;
+      padding:1rem;
+    }
+    .jcard-photo{
+      position:relative;width:100%;height:100%;
+      object-fit:contain;
+      transition:transform .7s cubic-bezier(.22,1,.36,1);
+    }
+    .jcard:hover .jcard-photo{transform:scale(1.05)}
+    .jcard-body{position:relative;padding:1.2rem 1.4rem 1.5rem;display:flex;flex-direction:column;gap:.35rem}
+    .jcard-year{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin:0}
+    .jcard-name{font-weight:800;text-transform:uppercase;font-size:1rem;letter-spacing:.02em;color:#0B0B0D;margin:0}
+    .jcard-line{color:rgba(0,0,0,.55);font-size:.88rem;line-height:1.55;max-width:28ch;margin:0}
+    .jcard::before{
+      content:"";position:absolute;top:0;left:-75%;width:50%;height:100%;
+      background:linear-gradient(115deg,transparent,rgba(0,0,0,.04),transparent);
+      transform:skewX(-18deg);transition:left .7s cubic-bezier(.22,1,.36,1);
+      pointer-events:none;z-index:3;
+    }
+    .jcard:hover::before{left:125%}
+    .js .camisas-grid .jcard:nth-child(odd).reveal.in:hover{transform:translateY(-8px) rotateY(-4deg) rotateX(2deg)}
+    .js .camisas-grid .jcard:nth-child(even).reveal.in:hover{transform:translateY(-8px) rotateY(4deg) rotateX(2deg)}
 
     .section-dark .sec-title{color:#fff}
 
@@ -507,7 +726,9 @@
       content:"";position:absolute;top:-200px;left:50%;transform:translateX(-50%);
       width:min(92vw,920px);height:440px;pointer-events:none;
       background:radial-gradient(closest-side,rgba(232,181,45,.16),transparent 70%);
+      animation:glowPulse 7s ease-in-out infinite;
     }
+    @keyframes glowPulse{0%,100%{opacity:.6}50%{opacity:1}}
     #titulos::after{
       content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
       background:
@@ -526,12 +747,16 @@
       transition:transform .45s var(--ease),box-shadow .45s var(--ease);
     }
     .tcard-feature:hover{transform:translateY(-4px);box-shadow:0 30px 60px rgba(0,0,0,.5)}
+    .js .tcard-feature.reveal.in:hover{transform:translateY(-4px)}
+    .tcard-feature:hover{border-color:rgba(232,181,45,.65)}
     @media(min-width:820px){
       .tcard-feature{grid-template-columns:minmax(0,5fr) minmax(0,4fr);align-items:center}
     }
     .tcard-feature .tcard-photo-wrap{
       position:relative;width:100%;aspect-ratio:16/10;border-radius:14px;overflow:hidden;background:transparent;
+      transition:transform .5s var(--ease);
     }
+    .tcard-feature:hover .tcard-photo-wrap{transform:scale(1.03)}
     .tcard-feature .tcard-photo{object-fit:contain}
     .tcard-feature-body{position:relative;display:flex;flex-direction:column;gap:.65rem;padding:.4rem .2rem}
     .tcard-feature .tcard-count{
@@ -561,6 +786,19 @@
     .titles-grid{display:grid;grid-template-columns:1fr;gap:1.15rem}
     @media(min-width:640px){.titles-grid{grid-template-columns:repeat(2,1fr)}}
     @media(min-width:1080px){.titles-grid{grid-template-columns:repeat(4,1fr)}}
+
+    .title-filters{display:flex;flex-wrap:wrap;gap:.55rem;margin:0 0 clamp(1.8rem,4vw,2.6rem)}
+    .title-filter{
+      border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.03);color:rgba(255,255,255,.75);
+      font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+      padding:.55rem 1.15rem;border-radius:999px;cursor:pointer;
+      transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease);
+    }
+    .title-filter:hover{border-color:var(--gold-soft);color:#fff}
+    .title-filter.is-active{background:var(--gold);border-color:var(--gold);color:var(--black)}
+    .titles-grid .tcard.is-hidden,.tcard-feature.is-hidden{display:none}
+    @keyframes cardEnter{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
+    .tcard.is-enter,.tcard-feature.is-enter{animation:cardEnter .45s var(--ease)}
     .tcard{
       position:relative;overflow:hidden;
       display:flex;flex-direction:column;gap:.5rem;
@@ -570,70 +808,249 @@
       transition:transform .45s var(--ease),border-color .45s var(--ease),box-shadow .45s var(--ease);
     }
     .tcard:hover{
-      transform:translateY(-6px);border-color:rgba(255,255,255,.22);
-      box-shadow:0 24px 48px rgba(0,0,0,.45),0 0 60px rgba(212,0,27,.12);
+      transform:translateY(-6px);border-color:rgba(232,181,45,.4);
+      box-shadow:0 24px 48px rgba(0,0,0,.45),0 0 60px rgba(232,181,45,.14);
     }
+    .tcard::after{
+      content:"";position:absolute;inset:0;border-radius:var(--radius);pointer-events:none;
+      border:1px solid transparent;transition:border-color .45s var(--ease);
+    }
+    .tcard:hover::after{border-color:rgba(232,181,45,.55)}
     .tcard-count{font-size:clamp(2.1rem,4.5vw,2.8rem);font-weight:900;line-height:1;letter-spacing:-.02em;color:var(--gold-soft)}
     .tcard-name{font-weight:800;text-transform:uppercase;font-size:.98rem;letter-spacing:.02em;color:#fff}
     .tcard-years{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:rgba(255,255,255,.55);line-height:1.7}
     .tcard-photo-wrap{
       position:relative;width:100%;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:transparent;
+      transition:transform .5s var(--ease);
     }
-    .tcard-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:transform .6s var(--ease)}
-    .tcard:hover .tcard-photo{transform:scale(1.06)}
+    .tcard:hover .tcard-photo-wrap{transform:scale(1.03)}
+    .tcard-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
     .tcard-photo.is-missing{display:none}
     .tcard-photo.is-missing + .tcard-fallback{display:block}
     .tcard-fallback{position:absolute;inset:0;width:100%;height:100%;display:none;padding:20px}
 
-    .cult-grid{display:grid;grid-template-columns:1fr;gap:2.6rem}
-    @media(min-width:820px){.cult-grid{grid-template-columns:1fr 1fr;gap:4rem}}
-    .cult-card{
-      border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);
-      background:rgba(255,255,255,.03);overflow:hidden;
-      transition:transform .45s var(--ease),border-color .45s var(--ease),box-shadow .45s var(--ease);
-    }
-    .cult-card:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.25);box-shadow:0 24px 48px rgba(0,0,0,.4)}
-    .cult-card-photo{
-      position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:rgba(255,255,255,.05);
-    }
-    .cult-card-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
-    .cult-card:hover .cult-card-photo img{transform:scale(1.05)}
-    .cult-card-photo.is-missing{display:none}
-    .cult-card-body{padding:1.4rem 1.5rem 1.6rem}
-    .cult-title{font-weight:800;font-size:1.35rem;text-transform:uppercase;letter-spacing:.02em;margin-bottom:.7rem}
-    .cult-text{color:rgba(255,255,255,.72);max-width:46ch}
-    .grito{
-      margin-top:1.8rem;border:1px solid rgba(255,255,255,.16);border-radius:var(--radius);
-      padding:1.4rem 1.5rem;background:rgba(255,255,255,.03);
-      font-family:var(--mono);font-size:.85rem;line-height:1.9;letter-spacing:.06em;
-    }
-    .grito-label{font-size:.64rem;letter-spacing:.2em;color:var(--red-soft);margin-bottom:.6rem}
-    .grito strong{color:#fff;font-weight:700}
-    .cotia-chips{list-style:none;display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1.4rem;max-width:46ch}
-    .cotia-chips li{
-      border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:.42rem .95rem;
-      font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.9);
-    }
-    .cult-note{margin-top:1.8rem;font-size:.68rem;letter-spacing:.14em;color:var(--red-soft)}
+    /* ── Faith — section visual identity ── */
+    #torcida{overflow:hidden}
+    #torcida .wrap{max-width:960px}
 
-    .classicos{margin-top:3.4rem;padding-top:3rem;border-top:1px solid rgba(255,255,255,.14)}
-    .classicos-grid{list-style:none;display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1.6rem}
-    @media(min-width:720px){.classicos-grid{grid-template-columns:repeat(3,1fr)}}
-    .classicos-card{
-      border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);
-      background:rgba(255,255,255,.03);padding:1.35rem 1.45rem;
-      transition:transform .45s var(--ease),border-color .45s var(--ease),background .45s var(--ease),box-shadow .45s var(--ease);
+    /* ── Split layout (mascote / cotia) ── */
+    .faith-split{
+      display:grid;grid-template-columns:1fr;gap:clamp(2rem,4vw,3.5rem);
+      align-items:center;
+      padding:clamp(.5rem,1.5vw,1rem) 0;
     }
-    .classicos-card:hover{transform:translateY(-5px);border-color:var(--red-soft);background:rgba(255,255,255,.06);box-shadow:0 20px 40px rgba(0,0,0,.35)}
-    .classicos-name{display:flex;align-items:center;gap:.45rem;font-weight:800;font-size:1.12rem;text-transform:uppercase;letter-spacing:.02em;color:#fff}
-    .classicos-name .star{color:var(--gold);font-size:.9em}
-    .classicos-vs{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red-soft);margin-top:.4rem}
-    .classicos-line{color:rgba(255,255,255,.7);font-size:.93rem;line-height:1.55;margin-top:.65rem}
+    @media(min-width:820px){
+      .faith-split{grid-template-columns:1fr 1fr;gap:clamp(2.5rem,5vw,5rem)}
+      .faith-split--reverse{direction:rtl}
+      .faith-split--reverse > *{direction:ltr}
+    }
+
+    .faith-split-photo{
+      position:relative;border-radius:16px;overflow:hidden;
+      aspect-ratio:4/3;
+    }
+    .faith-split-photo img{
+      display:block;width:100%;height:100%;object-fit:cover;
+      filter:brightness(.9) saturate(1.05);
+      transition:transform 1s cubic-bezier(.22,1,.36,1),filter .5s ease;
+    }
+    .faith-split:hover .faith-split-photo img{transform:scale(1.04);filter:brightness(1) saturate(1.1)}
+    .faith-split-photo::after{
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.35) 100%);
+    }
+
+    .faith-split-body{display:flex;flex-direction:column;gap:.6rem}
+    .faith-split-body .kicker-inline{
+      font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+      color:var(--red);font-weight:600;
+    }
+    .faith-split-body h3{
+      font-weight:800;font-size:clamp(1.3rem,2.8vw,1.75rem);text-transform:uppercase;
+      letter-spacing:.02em;color:#fff;line-height:1.15;
+    }
+    .faith-split-body p{color:rgba(255,255,255,.55);font-size:.93rem;line-height:1.7;max-width:38ch}
+
+    /* ── Grito — cinematic chant block ── */
+    .faith-grito{
+      position:relative;
+      margin:clamp(2.5rem,5vw,4rem) 0;
+      padding:clamp(3.5rem,7vw,5.5rem) clamp(2rem,5vw,3.5rem);
+      text-align:center;
+      border-radius:20px;
+      background:var(--ink);
+      overflow:hidden;
+    }
+    .faith-grito::before{
+      content:"";position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse at 30% 50%,rgba(212,0,27,.12) 0%,transparent 60%),
+        radial-gradient(ellipse at 70% 50%,rgba(212,0,27,.08) 0%,transparent 60%);
+      opacity:0;
+      transition:opacity .8s var(--ease);
+    }
+    .faith-grito.in::before{opacity:1}
+
+    .grito-kicker{
+      display:block;font-family:var(--mono);font-size:.55rem;letter-spacing:.28em;
+      text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:2.2rem;
+      position:relative;z-index:1;
+    }
+
+    .grito-lines{
+      position:relative;z-index:1;
+      font-family:var(--mono);font-size:clamp(.85rem,1.4vw,1.05rem);
+      line-height:2.6;letter-spacing:.08em;
+    }
+    .grito-lines p{
+      margin:0;color:rgba(255,255,255,.5);
+      opacity:0;transform:translateY(14px);
+      transition:opacity .6s var(--ease),transform .6s var(--ease),color .5s var(--ease),text-shadow .5s var(--ease);
+    }
+    .faith-grito.in .grito-lines p{opacity:1;transform:none}
+    .faith-grito.in .grito-lines p:nth-child(1){transition-delay:.2s;color:rgba(255,255,255,.7)}
+    .faith-grito.in .grito-lines p:nth-child(2){transition-delay:.4s;color:rgba(255,255,255,.7)}
+    .faith-grito.in .grito-lines p:nth-child(3){transition-delay:.6s;color:rgba(255,255,255,.6)}
+    .faith-grito.in .grito-lines p:nth-child(4){transition-delay:.8s;color:rgba(255,255,255,.6)}
+
+    .grito-climax{
+      margin-top:1.2rem!important;
+      font-size:clamp(1.2rem,2.8vw,1.7rem);
+      font-weight:900;letter-spacing:.04em;
+      color:var(--red);
+      text-shadow:0 0 40px rgba(212,0,27,.35),0 0 80px rgba(212,0,27,.15);
+    }
+    .faith-grito.in .grito-climax{
+      transition-delay:1s;
+      animation:climaxGlow 3.5s ease-in-out 1.5s infinite;
+    }
+    @keyframes climaxGlow{
+      0%,100%{text-shadow:0 0 40px rgba(212,0,27,.35),0 0 80px rgba(212,0,27,.15)}
+      50%{text-shadow:0 0 60px rgba(212,0,27,.5),0 0 120px rgba(212,0,27,.25),0 0 180px rgba(212,0,27,.08)}
+    }
+
+    .faith-grito .btn{
+      margin-top:2.4rem;position:relative;z-index:1;
+    }
+
+    /* ── Cotia — youth academy ── */
+    .faith-chips{
+      list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;
+    }
+    .faith-chips li{
+      border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:.45rem 1rem;
+      font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;
+      text-transform:uppercase;color:rgba(255,255,255,.7);
+      background:rgba(255,255,255,.02);
+      opacity:0;transform:translateY(6px);
+      transition:opacity .5s var(--ease),transform .5s var(--ease),
+                 background .25s,border-color .25s,color .25s,box-shadow .25s;
+    }
+    .faith-split--reverse.in .faith-chips li{opacity:1;transform:none}
+    .faith-split--reverse.in .faith-chips li:nth-child(1){transition-delay:.08s}
+    .faith-split--reverse.in .faith-chips li:nth-child(2){transition-delay:.14s}
+    .faith-split--reverse.in .faith-chips li:nth-child(3){transition-delay:.2s}
+    .faith-split--reverse.in .faith-chips li:nth-child(4){transition-delay:.26s}
+    .faith-split--reverse.in .faith-chips li:nth-child(5){transition-delay:.32s}
+    .faith-split--reverse.in .faith-chips li:nth-child(6){transition-delay:.38s}
+    .faith-split--reverse.in .faith-chips li:nth-child(7){transition-delay:.44s}
+    .faith-chips li:hover{
+      background:rgba(212,0,27,.1);border-color:rgba(212,0,27,.45);color:#fff;
+      box-shadow:0 0 16px rgba(212,0,27,.12);
+    }
+
+    .faith-stat{
+      margin-top:1.6rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.06);
+      display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap;
+    }
+    .faith-stat-label{
+      font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;
+      text-transform:uppercase;color:rgba(255,255,255,.35);
+    }
+    .faith-stat strong{
+      color:var(--gold-soft);font-variant-numeric:tabular-nums;
+      font-size:2.2em;font-weight:800;letter-spacing:.01em;line-height:1;
+      text-shadow:0 0 20px rgba(232,181,45,.12);
+    }
+    .faith-stat-suffix{
+      font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;
+      text-transform:uppercase;color:rgba(255,255,255,.3);
+    }
+
+    /* ── Clássicos ── */
+    .faith-classicos{
+      margin-top:clamp(3rem,6vw,4.5rem);
+      padding-top:clamp(2rem,4vw,3rem);
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+    .faith-classicos-title{
+      font-weight:800;font-size:1.15rem;text-transform:uppercase;
+      letter-spacing:.08em;color:rgba(255,255,255,.9);margin-bottom:2rem;text-align:center;
+    }
+    .faith-classicos-grid{
+      display:grid;grid-template-columns:1fr;gap:1rem;
+    }
+    @media(min-width:720px){.faith-classicos-grid{grid-template-columns:repeat(3,1fr);gap:1.2rem}}
+
+    .faith-classico{
+      position:relative;padding:1.6rem 1.4rem 1.4rem;
+      border-radius:12px;
+      background:rgba(255,255,255,.02);
+      border:1px solid rgba(255,255,255,.05);
+      overflow:hidden;
+      transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s var(--ease),border-color .35s;
+    }
+    .faith-classico::before{
+      content:"";position:absolute;top:0;left:0;right:0;height:3px;
+      background:var(--red);
+      transform:scaleX(0);transform-origin:left;
+      transition:transform .5s cubic-bezier(.22,1,.36,1);
+    }
+    .faith-classico:hover::before{transform:scaleX(1)}
+    .faith-classico:hover{
+      transform:translateY(-5px);
+      box-shadow:0 20px 40px rgba(0,0,0,.3),0 0 0 1px rgba(212,0,27,.1);
+      border-color:rgba(255,255,255,.08);
+    }
+
+    .faith-classico-star{
+      color:var(--gold);font-size:.75em;margin-right:.3rem;
+      display:inline-block;
+    }
+    .faith-classico h4{
+      display:inline;font-weight:800;font-size:1.1rem;text-transform:uppercase;
+      letter-spacing:.02em;color:#fff;
+    }
+    .faith-classico-vs{
+      font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--red-soft);margin-top:.45rem;
+    }
+    .faith-classico-text{
+      color:rgba(255,255,255,.45);font-size:.87rem;line-height:1.6;margin-top:.6rem;
+    }
+    .faith-classico-badge{
+      display:inline-block;margin-top:.9rem;
+      border:1px solid rgba(232,181,45,.2);color:var(--gold-soft);
+      font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;
+      text-transform:uppercase;border-radius:999px;padding:.3rem .8rem;
+      background:rgba(232,181,45,.03);
+    }
 
     #idolos .sec-head{text-align:center;max-width:100%;margin-inline:auto;margin-bottom:clamp(2rem,4vw,3rem)}
     #idolos .sec-lead{margin-inline:auto}
     #idolos .sec-head .kicker{justify-content:center}
     #idolos .sec-head .trule{margin-inline:auto}
+
+    .idols-nav{display:flex;justify-content:center;gap:.7rem;margin:-.8rem 0 0;padding-bottom:1.4rem}
+    .idols-nav-btn{
+      width:2.7rem;height:2.7rem;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.04);color:rgba(255,255,255,.8);cursor:pointer;
+      transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease),transform .25s var(--ease);
+    }
+    .idols-nav-btn svg{width:1.05rem;height:1.05rem}
+    .idols-nav-btn:hover{background:var(--red);border-color:var(--red);color:#fff;transform:translateY(-2px)}
+    .idols-nav-btn:active{transform:translateY(0)}
 
     .idols-accordion{
       position:relative;
@@ -755,11 +1172,17 @@
       .idols-accordion{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,3vw,22px)}
     }
 
-    #estadio{background:#000;padding-block:0;overflow:hidden}
+    #estadio{background:var(--black-2);padding-block:0;overflow:hidden}
+    #estadio::before{
+      content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+      width:min(80vw,700px);height:300px;pointer-events:none;
+      background:radial-gradient(closest-side,rgba(212,0,27,.10),transparent 70%);
+      animation:glowPulse 8s ease-in-out infinite;
+    }
     .estadio-hero{
       position:relative;z-index:3;width:100%;aspect-ratio:16/11;min-height:min(82svh,640px);
       display:flex;align-items:center;justify-content:center;
-      overflow:hidden;background:#000;
+      overflow:hidden;background:var(--black-2);
       padding:clamp(5rem,11vh,7.5rem) clamp(1.25rem,4vw,3rem);
     }
     @media(min-width:900px){
@@ -776,8 +1199,13 @@
     .estadio-hero::after{
       content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
       background:
-        linear-gradient(180deg,rgba(0,0,0,.55) 0%,transparent 38%,transparent 72%,rgba(0,0,0,.85) 100%),
-        radial-gradient(130% 110% at 50% 46%,transparent 55%,rgba(0,0,0,.6) 100%);
+        linear-gradient(180deg,rgba(6,6,8,.45) 0%,rgba(6,6,8,.18) 28%,transparent 52%),
+        linear-gradient(0deg,rgba(6,6,8,.92) 0%,rgba(6,6,8,.18) 34%,transparent 62%),
+        radial-gradient(120% 105% at 50% 34%,transparent 58%,rgba(6,6,8,.5) 100%);
+    }
+    .estadio-stripes{
+      position:absolute;left:0;right:0;bottom:0;height:6px;z-index:4;pointer-events:none;
+      background:linear-gradient(90deg,var(--red) 0 33.333%,var(--white) 33.333% 66.666%,var(--black) 66.666% 100%);
     }
     .estadio-hero-inner{
       position:relative;z-index:3;max-width:66rem;
@@ -822,11 +1250,15 @@
     .estadio-glass{
       position:relative;z-index:1;
       list-style:none;display:grid;grid-template-columns:repeat(2,1fr);
-      border-radius:calc(var(--radius) + 6px);overflow:hidden;
-      background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02) 50%,rgba(255,255,255,.015));
-      -webkit-backdrop-filter:blur(20px) saturate(140%);backdrop-filter:blur(20px) saturate(140%);
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow:0 26px 60px -22px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.1);
+      border-radius:var(--radius);overflow:hidden;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.1);
+      transition:transform .45s var(--ease),border-color .45s var(--ease),box-shadow .45s var(--ease);
+    }
+    .estadio-glass:hover{
+      transform:translateY(-4px);
+      border-color:rgba(255,255,255,.22);
+      box-shadow:0 24px 48px rgba(0,0,0,.45),0 0 60px rgba(212,0,27,.12);
     }
     @media(min-width:700px){.estadio-glass{grid-template-columns:repeat(3,1fr)}}
     @media(min-width:1024px){.estadio-glass{grid-template-columns:repeat(6,1fr)}}
@@ -854,17 +1286,16 @@
     .estadio-glass li:hover .estadio-fact-num{color:var(--red-soft);text-shadow:0 0 24px rgba(255,90,107,.4)}
     .estadio-fact-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.55)}
 
-    .js #estadio .estadio-band{opacity:0;transform:translateY(46px);transition:opacity .9s var(--ease) var(--d,0s),transform .9s var(--ease) var(--d,0s)}
-    .js #estadio .estadio-band.reveal.in{opacity:1;transform:none}
-
-    .estadio-scene{
-      position:absolute;left:0;right:0;bottom:0;height:56%;z-index:0;pointer-events:none;
-      background:url('img/morumbis-upside-rot.webp') center/cover no-repeat;
-      background-position:center 40%;
-      filter:brightness(.78);
-      -webkit-mask-image:linear-gradient(180deg,transparent,#000 14%);
-      mask-image:linear-gradient(180deg,transparent,#000 14%);
+    .js #estadio .estadio-band,
+    .js #estadio .estadio-about,
+    .js #estadio .estadio-side{
+      opacity:1;
+      transform:translateY(30px);
+      transition:transform .9s var(--ease) var(--d,0s);
     }
+    .js #estadio .estadio-band.in,
+    .js #estadio .estadio-about.in,
+    .js #estadio .estadio-side.in{transform:none}
 
     .estadio-info{
       display:grid;grid-template-columns:1fr;gap:1.5rem;
@@ -873,12 +1304,16 @@
     }
     @media(min-width:900px){.estadio-info{grid-template-columns:1.5fr 1fr;gap:clamp(2rem,5vw,4rem)}}
     .estadio-about{
-      border-radius:calc(var(--radius) + 4px);
-      background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02) 50%,rgba(255,255,255,.015));
-      -webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.1);
       padding:1.6rem 1.6rem 1.4rem;position:relative;overflow:hidden;
+      transition:transform .45s var(--ease),border-color .45s var(--ease),box-shadow .45s var(--ease);
+    }
+    .estadio-about:hover{
+      transform:translateY(-4px);
+      border-color:rgba(255,255,255,.22);
+      box-shadow:0 24px 48px rgba(0,0,0,.45),0 0 60px rgba(212,0,27,.12);
     }
     .estadio-about-label{
       font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
@@ -890,13 +1325,30 @@
     .estadio-points{list-style:none;display:flex;flex-direction:column;gap:.65rem}
     .estadio-points li{display:flex;align-items:baseline;gap:.7rem;color:rgba(255,255,255,.82);font-size:.96rem;line-height:1.5}
     .estadio-points li::before{content:"";width:7px;height:7px;background:var(--red);transform:rotate(45deg);flex:none;translate:0 -1px}
+    .estadio-chips{list-style:none;display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.6rem}
+    .estadio-chips li{
+      display:flex;align-items:center;gap:.55rem;
+      border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03);border-radius:999px;
+      padding:.45rem .95rem .45rem .45rem;color:rgba(255,255,255,.8);font-size:.8rem;line-height:1.3;
+      transition:border-color .3s var(--ease),background .3s var(--ease);
+    }
+    .estadio-chips li:hover{border-color:rgba(232,181,45,.45);background:rgba(255,255,255,.06)}
+    .estadio-chip-year{
+      flex:none;border-radius:999px;background:var(--gold);color:var(--black);
+      font-family:var(--mono);font-weight:700;font-size:.66rem;letter-spacing:.06em;
+      padding:.28rem .6rem;
+    }
     .estadio-side{
-      border-radius:calc(var(--radius) + 4px);
-      background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02) 50%,rgba(255,255,255,.015));
-      -webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.1);
       padding:1.6rem 1.6rem 1.4rem;position:relative;overflow:hidden;
+      transition:transform .45s var(--ease),border-color .45s var(--ease),box-shadow .45s var(--ease);
+    }
+    .estadio-side:hover{
+      transform:translateY(-4px);
+      border-color:rgba(255,255,255,.22);
+      box-shadow:0 24px 48px rgba(0,0,0,.45),0 0 60px rgba(212,0,27,.12);
     }
     .estadio-side-title{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.1rem}
     .estadio-side dl{display:grid;gap:.8rem;margin-bottom:1.3rem}
@@ -913,37 +1365,28 @@
 
     .section-red .wrap{position:relative;z-index:2}
 
-    .stats-band{padding-block:clamp(3.5rem,8vw,6rem)}
-    .stats-grid{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:2.5rem 1.5rem}
-    @media(min-width:820px){.stats-grid{grid-template-columns:repeat(4,1fr);gap:2rem}}
-    .stat{display:flex;flex-direction:column;gap:.4rem}
-    .stat-num{font-size:clamp(3.4rem,8vw,5.6rem);font-weight:900;line-height:1;letter-spacing:-.02em;color:var(--ink)}
-    .stat-num small{font-size:.45em;color:var(--red)}
-    @supports((-webkit-background-clip:text) or (background-clip:text)){
-      .stat-num > span{
-        background:linear-gradient(180deg,var(--ink) 40%,var(--red-deep) 180%);
-        -webkit-background-clip:text;background-clip:text;
-        -webkit-text-fill-color:transparent;color:transparent;
-      }
-    }
-    .stat-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-
     .cta{
-      background:
-        linear-gradient(rgba(11,11,13,.72),rgba(11,11,13,.72)),
-        url('img/morumbis.webp') center/cover no-repeat;
+      background:linear-gradient(rgba(11,11,13,.72),rgba(11,11,13,.72));
       color:#fff;padding-block:clamp(5rem,11vw,9rem);text-align:center;position:relative;overflow:hidden;
     }
-    .cta::before{content:none}
+    .cta::before{
+      content:"";position:absolute;inset:-6%;
+      background:url('img/morumbis.webp') center/cover no-repeat;
+      animation:ctaZoom 34s ease-in-out infinite alternate;
+    }
+    @keyframes ctaZoom{from{transform:scale(1)}to{transform:scale(1.12)}}
     .cta .wrap{position:relative;z-index:1}
     .cta .sec-head{margin-inline:auto;margin-bottom:0;max-width:44rem}
-    .cta .sec-title{font-size:clamp(2.4rem,7vw,5rem)}
+    .cta .sec-title{font-size:clamp(2.4rem,7vw,5rem);color:#fff}
+    .cta .kicker{color:rgba(255,255,255,.85)}
     .cta p.sec-lead{margin-inline:auto;color:rgba(255,255,255,.78)}
     .cta .trule{margin-inline:auto;background:repeating-linear-gradient(90deg,#fff 0 18px,var(--red) 18px 36px,#fff 36px 54px)}
-    .cta .btn{margin-top:2.2rem}
+    .cta-actions{margin-top:2.2rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
 
-    .site-foot{background:var(--black-2);color:rgba(255,255,255,.65);padding-block:3rem 2.2rem;font-size:.92rem}
-    .site-foot::before{content:"";display:block;height:5px;margin-bottom:3rem;background:repeating-linear-gradient(90deg,var(--red) 0 42px,var(--white) 42px 84px,var(--black) 84px 126px)}
+    .site-foot{
+      background:var(--black-2);color:rgba(255,255,255,.65);padding-block:3rem 2.2rem;font-size:.92rem;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
     .foot-grid{display:grid;grid-template-columns:1fr;gap:2.2rem}
     @media(min-width:820px){.foot-grid{grid-template-columns:1.4fr 1fr 1fr}}
     .foot-brand{display:flex;align-items:center;gap:.8rem;margin-bottom:.9rem;color:var(--red)}
@@ -952,8 +1395,13 @@
     .foot-blurb{max-width:34ch;line-height:1.6}
     .foot-col h3{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#fff;margin-bottom:1rem}
     .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
-    .foot-col a{text-decoration:none;color:rgba(255,255,255,.65);transition:color .2s}
-    .foot-col a:hover{color:var(--red-soft)}
+    .foot-col a{text-decoration:none;color:rgba(255,255,255,.65);transition:color .2s;position:relative}
+    .foot-col a::after{
+      content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;
+      background:var(--red);transition:width .25s var(--ease);
+    }
+    .foot-col a:hover{color:#fff}
+    .foot-col a:hover::after{width:100%}
     .foot-bottom{
       margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.12);
       display:flex;flex-wrap:wrap;gap:.6rem 2rem;justify-content:space-between;
@@ -961,30 +1409,41 @@
     }
     .foot-stars{display:flex;justify-content:center;margin-top:2.2rem}
     .foot-stars .stars i{width:.5rem;height:.5rem;background:var(--gold-soft);opacity:.7}
+    .foot-social{list-style:none;display:flex;justify-content:center;gap:.7rem;margin-top:2.2rem}
+    .foot-social a{
+      display:flex;align-items:center;justify-content:center;
+      width:2.6rem;height:2.6rem;border-radius:50%;
+      border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.03);color:rgba(255,255,255,.75);
+      transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease),transform .25s var(--ease);
+    }
+    .foot-social a:hover{background:var(--red);border-color:var(--red);color:#fff;transform:translateY(-3px)}
+    .foot-social svg{width:1.05rem;height:1.05rem}
 
-    .js .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease) var(--d,0s),transform .9s var(--ease) var(--d,0s)}
+    .js .reveal{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease) var(--d,0s),transform 1s var(--ease) var(--d,0s)}
     .js .reveal.in{opacity:1;transform:none}
+    .js .sec-head.reveal{opacity:0;transform:translateY(28px);filter:blur(10px);transition:opacity 1s var(--ease) var(--d,0s),transform 1s var(--ease) var(--d,0s),filter 1s var(--ease) var(--d,0s)}
+    .js .sec-head.reveal.in{opacity:1;transform:none;filter:blur(0)}
     .js #historia .tl-item.reveal{transform:translateX(-40px);transition:opacity .9s var(--ease) var(--d,0s),transform .9s var(--ease) var(--d,0s)}
     .js #historia .tl-item.reveal.in{transform:none}
     .js .tcard.reveal,.js .tcard-feature.reveal{transform:scale(.96) translateY(16px)}
     .js .tcard.reveal.in,.js .tcard-feature.reveal.in{transform:none}
     .js .icard.reveal{opacity:0;transform:translateY(24px)}
     .js .icard.reveal.in{opacity:1;transform:none;transition:opacity .6s var(--ease) var(--d,0s),transform .6s var(--ease) var(--d,0s),flex-grow .7s cubic-bezier(.22,1,.36,1),flex-shrink .7s cubic-bezier(.22,1,.36,1),border-color .5s,box-shadow .6s}
-    .js .jcard.reveal.in:hover,.js .tcard.reveal.in:hover{transform:translateY(-6px);transition-delay:0s}
+    .js .jcard.reveal.in:hover,.js .tcard.reveal.in:hover{transform:translateY(-8px);transition-delay:0s}
 
     img[loading="lazy"]{opacity:0;transition:opacity .5s var(--ease)}
     img[loading="lazy"].loaded, img[loading="lazy"]:not([src=""]){opacity:1}
     .tl-photo img[loading="lazy"],
     .jcard-photo[loading="lazy"],
     .tcard-photo[loading="lazy"],
-    .cult-card-photo img[loading="lazy"]{
+    .faith-split-photo img[loading="lazy"]{
       transition:opacity .5s var(--ease),transform .6s var(--ease);
     }
 
     #scrollProgress{
       position:fixed;top:0;left:0;right:0;height:5px;z-index:70;
       transform:scaleX(0);transform-origin:0 50%;pointer-events:none;
-      background:var(--red);
+      background:linear-gradient(90deg,var(--red) 0 60%,var(--gold) 100%);
     }
 
     .to-top{
@@ -1029,7 +1488,7 @@
     @media(max-width:400px){
       .hero-title{font-size:clamp(2.5rem,15.5vw,4rem)}
       .hero-inner{padding-inline:clamp(1rem,5vw,1.25rem)}
-      .ticker-track span{font-size:.88rem}
+      .ticker-track li{font-size:.88rem}
       .tcard-feature .tcard-photo-wrap{aspect-ratio:4/3}
       .icard{min-height:360px}
       .foot-grid{gap:2.4rem}
@@ -1038,13 +1497,26 @@
     @media(prefers-reduced-motion:reduce){
       html{scroll-behavior:auto}
       *,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important}
+      .film-intro{display:none}
+      .film-grain{display:none}
       .site-head{animation:none;opacity:1}
       .ticker-track{animation:none}
       .js .hero-stripes{animation:none}
+      .hero::after,.hero-stripes::after,#titulos::before,#estadio::before,.cta::before,.hino::before{animation:none !important}
+      .cta::before,.hino::before{transform:none}
       .js .hero-fx,.js .reveal{opacity:1;transform:none}
+      .js .sec-head.reveal{opacity:1;transform:none;filter:none}
       .js .hero-title .ch{animation:none;opacity:1;transform:none}
       .js #historia .tl-item.reveal,.js .tcard.reveal,.js .tcard-feature.reveal{transform:none}
       .js .icard.reveal{opacity:1;transform:none;transition:none}
+      .js .camisas-grid .jcard:nth-child(odd).reveal.in:hover,.js .camisas-grid .jcard:nth-child(even).reveal.in:hover{transform:translateY(-8px)}
+      .js .faith-split.reveal.in:hover{transform:none}
+      .js .faith-classico:hover{transform:none;box-shadow:none}
+      .faith-classico::before{transform:scaleX(1)}
+      .faith-grito.in::before{opacity:1}
+      .faith-grito.in .grito-lines p{opacity:1;transform:none;transition:none}
+      .faith-grito.in .grito-climax{animation:none}
+      .faith-split--reverse.in .faith-chips li{opacity:1;transform:none;transition:none}
       .js #estadio .estadio-band{opacity:1;transform:none;transition:none}
       .js .estadio-rule{transform:scaleX(1)}
       img[loading="lazy"]{opacity:1;transition:none}
@@ -1052,6 +1524,11 @@
   </style>
 </head>
 <body>
+
+  <div class="film-intro" aria-hidden="true">
+    <img class="film-intro-mark" src="img/spfc-logo.svg" alt="" width="90" height="120" decoding="async">
+  </div>
+  <div class="film-grain" aria-hidden="true"></div>
 
   <div id="scrollProgress" aria-hidden="true"></div>
 
@@ -1074,7 +1551,7 @@
     <div class="head-inner">
       <a class="brand" href="#top" aria-label="São Paulo FC — voltar ao início">
         <span class="brand-mark">
-          <img class="brand-logo" src="img/spfc-logo.png" alt="Escudo oficial do São Paulo Futebol Clube" width="30" height="40" decoding="async" onerror="this.classList.add('is-missing')">
+          <img class="brand-logo" src="img/spfc-logo.svg" alt="Escudo oficial do São Paulo Futebol Clube" width="30" height="40" decoding="async" onerror="this.classList.add('is-missing')">
           <svg class="brand-logo-fallback" viewBox="0 0 120 120" aria-hidden="true">
             <path d="M8 2h104v32L60 114 8 34Z" fill="#fff" stroke="#0B0B0D" stroke-width="3" stroke-linejoin="round"/>
             <path d="M10 5h100v26H10z" fill="#0B0B0D"/>
@@ -1109,7 +1586,11 @@
 
     <section class="hero" id="inicio" aria-label="Apresentação do São Paulo FC">
       <div class="hero-stripes" aria-hidden="true"></div>
-      <span class="hero-watermark" aria-hidden="true">1930</span>
+      <span class="hero-seal" aria-hidden="true">
+        <span class="hero-seal-txt">Est.</span>
+        <span class="hero-seal-year">1930</span>
+        <span class="hero-seal-sub">SPFC</span>
+      </span>
       <div class="hero-inner">
         <p class="hero-eyebrow hero-fx fx-1">São Paulo Futebol Clube · São Paulo · Brasil · Desde 1930</p>
         <p class="hero-stars hero-fx fx-2" aria-hidden="true">
@@ -1136,32 +1617,33 @@
     </section>
 
     <div class="ticker" aria-hidden="true">
-      <div class="ticker-track">
-        <span>TRICAMPEÃO MUNDIAL · 1992 · 1993 · 2005</span>
-        <span>TRICAMPEÃO DA AMÉRICA · 1992 · 1993 · 2005</span>
-        <span>HEXACAMPEÃO BRASILEIRO · 1977 · 1986 · 1991 · 2006 · 2007 · 2008</span>
-        <span>TRICOLOR DE AÇO · DESDE 1970</span>
-        <span>COPA DO BRASIL 2023 · SUPERCOPA 2024</span>
-        <span>O MAIS QUERIDO DO BRASIL</span>
-        <span>TRICAMPEÃO MUNDIAL · 1992 · 1993 · 2005</span>
-        <span>TRICAMPEÃO DA AMÉRICA · 1992 · 1993 · 2005</span>
-        <span>HEXACAMPEÃO BRASILEIRO · 1977 · 1986 · 1991 · 2006 · 2007 · 2008</span>
-        <span>TRICOLOR DE AÇO · DESDE 1970</span>
-        <span>COPA DO BRASIL 2023 · SUPERCOPA 2024</span>
-        <span>O MAIS QUERIDO DO BRASIL</span>
-      </div>
+      <ul class="ticker-track">
+        <li>TRICAMPEÃO MUNDIAL · 1992 · 1993 · 2005</li>
+        <li>TRICAMPEÃO DA AMÉRICA · 1992 · 1993 · 2005</li>
+        <li>HEXACAMPEÃO BRASILEIRO · 1977 · 1986 · 1991 · 2006 · 2007 · 2008</li>
+        <li>TRICOLOR DE AÇO · DESDE 1970</li>
+        <li>COPA DO BRASIL 2023 · SUPERCOPA 2024</li>
+        <li>O MAIS QUERIDO DO BRASIL</li>
+        <li>TRICAMPEÃO MUNDIAL · 1992 · 1993 · 2005</li>
+        <li>TRICAMPEÃO DA AMÉRICA · 1992 · 1993 · 2005</li>
+        <li>HEXACAMPEÃO BRASILEIRO · 1977 · 1986 · 1991 · 2006 · 2007 · 2008</li>
+        <li>TRICOLOR DE AÇO · DESDE 1970</li>
+        <li>COPA DO BRASIL 2023 · SUPERCOPA 2024</li>
+        <li>O MAIS QUERIDO DO BRASIL</li>
+      </ul>
     </div>
 
     <section class="section section-light" id="historia">
       <div class="wrap">
         <header class="sec-head reveal">
           <span class="trule" aria-hidden="true"></span>
-          <p class="kicker">Desde 1930</p>
+          <p class="kicker">01 · Desde 1930</p>
           <h2 class="sec-title">Uma história em vermelho, preto e branco</h2>
           <p class="sec-lead">De um clube fundado por sócios apaixonados a uma das maiores forças do futebol mundial — com as cores que nenhum torcedor esquece.</p>
         </header>
 
-        <ol class="timeline">
+        <div class="timeline-wrap">
+          <ol class="timeline">
           <li class="tl-item reveal">
             <p class="tl-year">1930</p>
             <div class="tl-body">
@@ -1272,6 +1754,7 @@
             </div>
           </li>
         </ol>
+        </div>
       </div>
     </section>
 
@@ -1282,59 +1765,75 @@
           <p class="hino-coro">Ó Tricolor, clube bem amado: as tuas glórias vêm do passado.</p>
         </blockquote>
         <p class="hino-credit">Hino oficial · Tenente José Porphyrio da Paz · composto em 1936 · oficializado em 1942</p>
+        <a class="btn btn-white hino-audio" href="https://www.youtube.com/results?search_query=hino+sao+paulo+fc" target="_blank" rel="noopener">Ouvir o hino</a>
       </div>
     </section>
 
-    <section class="section" id="escudo">
+    <section class="section escudo-cinema" id="escudo">
+      <div class="cinema-noise" aria-hidden="true"></div>
+      <div class="cinema-vignette" aria-hidden="true"></div>
+      <div class="cinema-spot" aria-hidden="true"></div>
+
       <div class="wrap">
-        <header class="sec-head reveal">
+        <header class="sec-head escudo-head reveal">
           <span class="trule" aria-hidden="true"></span>
-          <p class="kicker">O símbolo</p>
+          <p class="kicker">02 · O símbolo</p>
           <h2 class="sec-title">O coração de cinco pontas</h2>
           <p class="sec-lead">Desenhado dias após a fundação do clube, em 1930, e mantido até hoje — a forma que estampa o peito tricolor.</p>
         </header>
 
-        <div class="escudo-stage">
-          <figure class="escudo-plate reveal">
-            <span class="plate-badge">
-              <span class="plate-frame" aria-hidden="true"></span>
-              <img class="emblem" src="img/spfc-logo.png" alt="Escudo oficial do São Paulo FC com as cinco estrelas" width="304" height="403" decoding="async">
-            </span>
-            <figcaption>Escudo atual · coração de cinco pontas</figcaption>
-          </figure>
+        <div class="escudo-compare" id="escudoCompare">
+          <div class="compare-card" style="--i:0">
+            <span class="compare-watermark" aria-hidden="true">1930</span>
+            <div class="compare-badge">
+              <img class="compare-emblem" src="img/Logo/Escudo_do_SPFC_1930-1935.png" alt="Escudo do São Paulo FC de 1930 a 1935, com a sigla pontuada S.P.F.C." width="298" height="300" decoding="async">
+            </div>
+            <div class="compare-info">
+              <span class="compare-label">S.P.F.C. pontuado</span>
+              <span class="compare-sub">1930 – 1935</span>
+            </div>
+          </div>
 
+          <div class="compare-card compare-card--current" style="--i:1">
+            <span class="compare-watermark compare-watermark--current" aria-hidden="true">HOJE</span>
+            <div class="compare-badge compare-badge--current">
+              <img class="compare-emblem" src="img/Logo/spfc-logo.png" alt="Escudo atual do São Paulo FC — coração de cinco pontas com as cinco estrelas" width="304" height="403" decoding="async">
+            </div>
+            <div class="compare-info">
+              <span class="compare-label">Coração de cinco pontas</span>
+              <span class="compare-sub">1935 – presente</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="escudo-cinema-footer">
           <div class="escudo-copy">
             <p class="escudo-story reveal">O emblema são-paulino nasceu dias após a fundação, em 1930, desenhado pelo estilista alemão Walter Ostrich, o "Oliver", com a colaboração de Firmiano de Morais Pinto Filho. Apresentado pela primeira vez em 9 de março de 1930, na vitória por 3 a 0 sobre o Ypiranga, <strong>sua forma única — um coração de cinco pontas — foi eleita a mais bonita do mundo pela imprensa britânica.</strong></p>
 
             <dl class="escudo-spec reveal">
-              <div class="spec-row">
+              <div class="spec-row" style="--d:.06s">
                 <dt>O formato</dt>
                 <dd>Um triângulo isósceles com o lado maior para cima, encimado por um retângulo preto com as letras SPFC em branco. No interior, a faixa branca central ladeada pelo triângulo vermelho e pelo preto.</dd>
               </div>
-              <div class="spec-row">
+              <div class="spec-row" style="--d:.12s">
                 <dt>As cores</dt>
                 <dd>Vermelho dos sócios do Paulistano, preto dos associados da AA das Palmeiras e o branco comum a ambos — as mesmas cores da bandeira paulista.</dd>
               </div>
-              <div class="spec-row">
+              <div class="spec-row" style="--d:.18s">
                 <dt>As estrelas</dt>
                 <dd>Duas douradas, em homenagem aos recordes mundiais do triplo salto de Adhemar Ferreira da Silva (1952 e 1955), e três vermelhas, pelos títulos mundiais de 1992, 1993 e 2005. Sobrepostas ao escudo, como insígnia — não parte do desenho.</dd>
               </div>
             </dl>
-
-            <div class="escudo-origin reveal">
-              <img class="emblem" src="img/escudo-1930.png" alt="Escudo do São Paulo FC de 1930 a 1935, com a sigla pontuada S.P.F.C." width="298" height="300" loading="lazy" decoding="async">
-              <p>Original de 1930 — o mesmo coração de cinco pontas que o Tricolor veste até hoje, agora sob a insígnia das estrelas.</p>
-            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section section-light" id="camisas">
+    <section class="section section-dark" id="camisas">
       <div class="wrap">
         <header class="sec-head reveal">
           <span class="trule" aria-hidden="true"></span>
-          <p class="kicker">Os mantos</p>
+          <p class="kicker">03 · Os mantos</p>
           <h2 class="sec-title">Camisas que entraram para a história</h2>
           <p class="sec-lead">Do manto da fundação à camisa de Tóquio: cada tecido branco carrega uma história tricolor.</p>
         </header>
@@ -1342,83 +1841,69 @@
         <ul class="camisas-grid">
           <li class="jcard reveal">
             <figure class="jcard-photo-wrap">
-              <img class="jcard-photo" src="img/Camisas/1930.png" alt="Camisa de 1930 do São Paulo FC, branca com faixas vermelha e preta no peito" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-              <svg class="jcard-fallback" viewBox="0 0 120 120" aria-hidden="true">
-                <defs>
-                  <clipPath id="clip1930"><use href="#jersey"/></clipPath>
-                </defs>
-                <use href="#jersey" fill="#fff" stroke="#0B0B0D" stroke-width="2"/>
-                <g clip-path="url(#clip1930)">
-                  <rect x="0" y="38" width="120" height="14" fill="#D4001B"/>
-                  <rect x="0" y="52" width="120" height="14" fill="#0B0B0D"/>
-                </g>
-                <path d="M52 21 Q60 27 68 21 L65 17 Q60 22 55 17 Z" fill="#D4001B"/>
-              </svg>
+              <img class="jcard-photo" src="img/Camisas/camisa 1930.png" alt="Camisa de 1930 do São Paulo FC, branca com faixas vermelha e preta no peito" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+
             </figure>
-            <p class="jcard-year">1930 · Uniforme nº 1</p>
-            <p class="jcard-name">O manto da fundação</p>
-            <p class="jcard-line">Do cinturão vermelho do Paulistano e da faixa preta da AA Palmeiras nasce a combinação das três cores.</p>
+            <div class="jcard-body">
+              <span class="jcard-year">1930 · Uniforme nº 1</span>
+              <p class="jcard-name">O manto da fundação</p>
+              <p class="jcard-line">Do cinturão vermelho do Paulistano e da faixa preta da AA Palmeiras nasce a combinação das três cores.</p>
+            </div>
           </li>
           <li class="jcard reveal" style="--d:.06s">
             <figure class="jcard-photo-wrap">
-              <img class="jcard-photo" src="img/Camisas/1932.png" alt="Camisa listrada de 1932 do São Paulo FC, com listras verticais vermelho, branco e preto" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-              <svg class="jcard-fallback" viewBox="0 0 120 120" aria-hidden="true">
-                <defs>
-                  <clipPath id="clip1932"><use href="#jersey"/></clipPath>
-                  <pattern id="list1932" width="14" height="14" patternUnits="userSpaceOnUse">
-                    <rect width="14" height="14" fill="#fff"/>
-                    <rect width="4.7" height="14" fill="#D4001B"/>
-                    <rect x="9.3" width="4.7" height="14" fill="#0B0B0D"/>
-                  </pattern>
-                </defs>
-                <g clip-path="url(#clip1932)">
-                  <rect x="0" y="0" width="120" height="120" fill="url(#list1932)"/>
-                </g>
-                <use href="#jersey" fill="none" stroke="#0B0B0D" stroke-width="2"/>
-                <path d="M52 21 Q60 27 68 21 L65 17 Q60 22 55 17 Z" fill="#D4001B"/>
-              </svg>
+              <img class="jcard-photo" src="img/Camisas/camisa 1932.png" alt="Camisa listrada de 1932 do São Paulo FC, com listras verticais vermelho, branco e preto" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+
             </figure>
-            <p class="jcard-year">1932 · Uniforme nº 2</p>
-            <p class="jcard-name">A camisa listrada</p>
-            <p class="jcard-line">Listras verticais vermelho, branco e preto desde o 4 a 0 sobre o Santos, em maio de 1932.</p>
+            <div class="jcard-body">
+              <span class="jcard-year">1932 · Uniforme nº 2</span>
+              <p class="jcard-name">A camisa listrada</p>
+              <p class="jcard-line">Listras verticais vermelho, branco e preto desde o 4 a 0 sobre o Santos, em maio de 1932.</p>
+            </div>
+          </li>
+          <li class="jcard reveal" style="--d:.09s">
+            <figure class="jcard-photo-wrap">
+              <img class="jcard-photo" src="img/Camisas/camisa 1943.gif" alt="Camisa de 1943 do São Paulo FC, com listras finas tricolores da era de Leônidas" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+
+            </figure>
+            <div class="jcard-body">
+              <span class="jcard-year">1943</span>
+              <p class="jcard-name">O manto de Leônidas</p>
+              <p class="jcard-line">As listras finas do Tricolor na era do Diamante Negro, que encantou o Brasil nos anos 1940.</p>
+            </div>
           </li>
           <li class="jcard reveal" style="--d:.12s">
             <figure class="jcard-photo-wrap">
-              <img class="jcard-photo" src="img/Camisas/2005.png" alt="Camisa de 2005 do São Paulo FC, branca com faixa tricolor no peito" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-              <svg class="jcard-fallback" viewBox="0 0 120 120" aria-hidden="true">
-                <defs>
-                  <clipPath id="clip2005"><use href="#jersey"/></clipPath>
-                </defs>
-                <use href="#jersey" fill="#fff" stroke="#0B0B0D" stroke-width="2"/>
-                <g clip-path="url(#clip2005)">
-                  <rect x="0" y="42" width="120" height="12" fill="#D4001B"/>
-                  <rect x="0" y="54" width="120" height="12" fill="#0B0B0D"/>
-                </g>
-                <path d="M52 21 Q60 27 68 21 L65 17 Q60 22 55 17 Z" fill="#0B0B0D"/>
-              </svg>
+              <img class="jcard-photo" src="img/Camisas/camisa 1992.gif" alt="Camisa de 1992 do São Paulo FC, branca com detalhes pretos e vermelhos da era Telê" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+
             </figure>
-            <p class="jcard-year">2005</p>
-            <p class="jcard-name">A camisa de Tóquio</p>
-            <p class="jcard-line">O branco do tricampeonato mundial, imortalizado com Rogério Ceni no Japão, sobre o Liverpool.</p>
+            <div class="jcard-body">
+              <span class="jcard-year">1992</span>
+              <p class="jcard-name">A era de Telê</p>
+              <p class="jcard-line">O branco da maior geração tricolor, com os detalhes do bi mundial em 92 e 93.</p>
+            </div>
+          </li>
+          <li class="jcard reveal" style="--d:.15s">
+            <figure class="jcard-photo-wrap">
+              <img class="jcard-photo" src="img/Camisas/camisa 2005.png" alt="Camisa de 2005 do São Paulo FC, branca com faixa tricolor no peito" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+
+            </figure>
+            <div class="jcard-body">
+              <span class="jcard-year">2005</span>
+              <p class="jcard-name">A camisa de Tóquio</p>
+              <p class="jcard-line">O branco do tricampeonato mundial, imortalizado com Rogério Ceni no Japão, sobre o Liverpool.</p>
+            </div>
           </li>
           <li class="jcard reveal" style="--d:.18s">
             <figure class="jcard-photo-wrap">
-              <img class="jcard-photo" src="img/Camisas/hoje.png" alt="Camisa atual do São Paulo FC, branca com mangas pretas" width="800" height="800" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-              <svg class="jcard-fallback" viewBox="0 0 120 120" aria-hidden="true">
-                <defs>
-                  <clipPath id="clipHoje"><use href="#jersey"/></clipPath>
-                </defs>
-                <use href="#jersey" fill="#fff" stroke="#0B0B0D" stroke-width="2"/>
-                <g clip-path="url(#clipHoje)">
-                  <path d="M-5 0 L44 0 L44 70 L-5 70 Z" fill="#0B0B0D"/>
-                  <path d="M76 0 L125 0 L125 70 L76 70 Z" fill="#0B0B0D"/>
-                </g>
-                <path d="M52 21 Q60 27 68 21 L65 17 Q60 22 55 17 Z" fill="#D4001B"/>
-              </svg>
+              <img class="jcard-photo" src="img/Camisas/hoje.png" alt="Camisa atual do São Paulo FC, branca com mangas pretas" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+
             </figure>
-            <p class="jcard-year">Hoje</p>
-            <p class="jcard-name">O manto tricolor</p>
-            <p class="jcard-line">O branco que a nova geração veste sob as cinco estrelas — 96 anos e contando.</p>
+            <div class="jcard-body">
+              <span class="jcard-year">Hoje</span>
+              <p class="jcard-name">O manto tricolor</p>
+              <p class="jcard-line">O branco que a nova geração veste sob as cinco estrelas — 96 anos e contando.</p>
+            </div>
           </li>
         </ul>
       </div>
@@ -1429,12 +1914,19 @@
         <header class="sec-head reveal">
           <span class="trule" aria-hidden="true"></span>
           <span class="stars-divider" aria-hidden="true"><span class="stars"><i></i><i></i><i></i><i></i><i></i></span></span>
-          <p class="kicker">A galeria</p>
+          <p class="kicker">04 · A galeria</p>
           <h2 class="sec-title">Todos os títulos</h2>
           <p class="sec-lead">São 12 títulos internacionais oficiais — o maior número entre os clubes brasileiros — e 20 taças nacionais e internacionais de grande porte.</p>
         </header>
 
-        <div class="tcard-feature reveal" id="feature-mundial">
+        <div class="title-filters" role="group" aria-label="Filtrar títulos por categoria">
+          <button class="title-filter is-active" type="button" data-filter="all" aria-pressed="true">Todos</button>
+          <button class="title-filter" type="button" data-filter="int" aria-pressed="false">Internacional</button>
+          <button class="title-filter" type="button" data-filter="nac" aria-pressed="false">Nacional</button>
+          <button class="title-filter" type="button" data-filter="est" aria-pressed="false">Estadual</button>
+        </div>
+
+        <div class="tcard-feature reveal" id="feature-mundial" data-cat="int">
           <figure class="tcard-photo-wrap">
             <img class="tcard-photo" src="img/trofeus/mundial.webp" alt="As três taças do Mundial de Clubes do São Paulo FC" width="960" height="600" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
             <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
@@ -1449,7 +1941,7 @@
         </div>
 
         <ul class="titles-grid">
-          <li class="tcard reveal" style="--d:.05s">
+          <li class="tcard reveal" data-cat="int" style="--d:.05s">
             <figure class="tcard-photo-wrap">
               <img class="tcard-photo" src="img/trofeus/libertadores.webp" alt="Taça da Copa Libertadores do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
               <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
@@ -1458,7 +1950,7 @@
             <p class="tcard-name">Copa Libertadores</p>
             <p class="tcard-years">1992 · 1993 · 2005</p>
           </li>
-          <li class="tcard reveal" style="--d:.1s">
+          <li class="tcard reveal" data-cat="nac" style="--d:.1s">
             <figure class="tcard-photo-wrap">
               <img class="tcard-photo" src="img/trofeus/brasileirao.webp" alt="Taça do Campeonato Brasileiro do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
               <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
@@ -1467,7 +1959,7 @@
             <p class="tcard-name">Campeonato Brasileiro</p>
             <p class="tcard-years">1977 · 1986 · 1991 · 2006 · 2007 · 2008</p>
           </li>
-          <li class="tcard reveal" style="--d:.15s">
+          <li class="tcard reveal" data-cat="nac" style="--d:.15s">
             <figure class="tcard-photo-wrap">
               <img class="tcard-photo" src="img/trofeus/copa-do-brasil.webp" alt="Taça da Copa do Brasil do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
               <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
@@ -1476,7 +1968,7 @@
             <p class="tcard-name">Copa do Brasil</p>
             <p class="tcard-years">1998 · 2002 · 2023</p>
           </li>
-          <li class="tcard reveal" style="--d:.2s">
+          <li class="tcard reveal" data-cat="nac" style="--d:.2s">
             <figure class="tcard-photo-wrap">
               <img class="tcard-photo" src="img/trofeus/supercopa-brasil.webp" alt="Taça da Supercopa do Brasil do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
               <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
@@ -1485,7 +1977,7 @@
             <p class="tcard-name">Supercopa do Brasil</p>
             <p class="tcard-years">2024</p>
           </li>
-          <li class="tcard reveal" style="--d:.25s">
+          <li class="tcard reveal" data-cat="int" style="--d:.25s">
             <figure class="tcard-photo-wrap">
               <img class="tcard-photo" src="img/trofeus/recopa-sul-americana.webp" alt="Taça da Recopa Sul-Americana do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
               <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
@@ -1494,7 +1986,7 @@
             <p class="tcard-name">Recopa Sul-Americana</p>
             <p class="tcard-years">1993 · 1994</p>
           </li>
-          <li class="tcard reveal" style="--d:.3s">
+          <li class="tcard reveal" data-cat="int" style="--d:.3s">
             <figure class="tcard-photo-wrap">
               <img class="tcard-photo" src="img/trofeus/sul-americana.webp" alt="Taça da Copa Sul-Americana do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
               <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
@@ -1503,7 +1995,7 @@
             <p class="tcard-name">Copa Sul-Americana</p>
             <p class="tcard-years">2012</p>
           </li>
-          <li class="tcard reveal" style="--d:.35s">
+          <li class="tcard reveal" data-cat="int" style="--d:.35s">
             <figure class="tcard-photo-wrap">
               <img class="tcard-photo" src="img/trofeus/supercopa-libertadores.webp" alt="Taça da Supercopa Libertadores do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
               <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
@@ -1512,7 +2004,7 @@
             <p class="tcard-name">Supercopa Libertadores</p>
             <p class="tcard-years">1993</p>
           </li>
-          <li class="tcard reveal" style="--d:.4s">
+          <li class="tcard reveal" data-cat="est" style="--d:.4s">
             <figure class="tcard-photo-wrap">
               <img class="tcard-photo" src="img/trofeus/paulista.webp" alt="Taça do Campeonato Paulista do São Paulo FC" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
               <svg class="tcard-fallback" viewBox="0 0 120 120" aria-hidden="true"><use href="#trophy" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/></svg>
@@ -1529,65 +2021,81 @@
       <div class="wrap">
         <header class="sec-head reveal">
           <span class="trule" aria-hidden="true"></span>
-          <p class="kicker">Time da fé</p>
+          <p class="kicker">05 · Time da fé</p>
           <h2 class="sec-title">A torcida e a base</h2>
           <p class="sec-lead">O velhinho de barbas brancas, o grito que faz o estádio tremer e o celeiro de craques que alimenta o Tricolor.</p>
         </header>
 
-        <div class="cult-grid">
-          <div class="cult-card reveal">
-            <figure class="cult-card-photo">
-              <img src="img/torcida/mascote-santo-paulo.webp" alt="Santo Paulo, mascote do São Paulo FC" width="600" height="450" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            </figure>
-            <div class="cult-card-body">
-              <h3 class="cult-title">Santo Paulo, o vovô tricolor</h3>
-              <p class="cult-text">O mascote eternizou-se nos cartuns do jornal A Gazeta, nos anos 1940. Chamado de "Santo Paulo" para não se confundir com o nome do clube, o simpático velhinho de barbas brancas representa o "time da fé" — o apóstolo Paulo, o padroeiro da cidade, dá nome ao clube desde a fundação em 25 de janeiro.</p>
-              <div class="grito" aria-label="Grito de torcida do São Paulo FC">
-                <p class="grito-label">O grito que ecoa no MorumBIS</p>
-                <p>Arakan–Balan–Bakan<br>Arakan–Balan–Bakan<br>Tumerê–Tumerá · Macambê, bê-cam-bê-cá<br>Rico-réco, Rico-rá<br><strong>Rá-rá-rá! São Paulo! São Paulo! São Paulo!</strong></p>
-              </div>
-            </div>
+        <div class="faith-split reveal" style="--d:.04s">
+          <figure class="faith-split-photo">
+            <img src="img/torcida/mascote-santo-paulo.webp" alt="Santo Paulo, mascote do São Paulo FC" width="600" height="450" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </figure>
+          <div class="faith-split-body">
+            <span class="kicker-inline">O Mascote</span>
+            <h3>Santo Paulo, o vovô tricolor</h3>
+            <p>O mascote eternizou-se nos cartuns do jornal A Gazeta, nos anos 1940. Chamado de "Santo Paulo" para não se confundir com o nome do clube, o simpático velhinho de barbas brancas representa o "time da fé" — o apóstolo Paulo, o padroeiro da cidade, dá nome ao clube desde a fundação em 25 de janeiro.</p>
           </div>
-          <div class="cult-card reveal" style="--d:.08s">
-            <figure class="cult-card-photo">
-              <img src="img/torcida/cotia-base.webp" alt="Centro de treinamento da base do São Paulo FC" width="600" height="450" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            </figure>
-            <div class="cult-card-body">
-              <h3 class="cult-title">Made in Cotia</h3>
-              <p class="cult-text">O centro de treinamento da base é uma das fábricas de talento mais respeitadas do Brasil. De lá saíram craques que conquistaram o mundo — e que continuam enchendo o estádio de esperança.</p>
-              <ul class="cotia-chips">
-                <li>Kaká</li>
-                <li>Lucas Moura</li>
-                <li>Casemiro</li>
-                <li>Hernanes</li>
-                <li>Éder Militão</li>
-                <li>Antony</li>
-                <li>David Neres</li>
-              </ul>
-              <p class="cult-note mono">Recorde de público do MorumBIS: 146.082 torcedores em 1977</p>
+        </div>
+
+        <div class="faith-grito reveal" style="--d:.06s">
+          <span class="grito-kicker">O grito que ecoa no MorumBIS</span>
+          <div class="grito-lines">
+            <p>Arakan–Balan–Bakan</p>
+            <p>Arakan–Balan–Bakan</p>
+            <p>Tumerê–Tumerá · Macambê, bê-cam-bê-cá</p>
+            <p>Rico-réco, Rico-rá</p>
+            <p class="grito-climax">Rá-rá-rá! São Paulo! São Paulo! São Paulo!</p>
+          </div>
+          <a class="btn btn-white" href="https://www.youtube.com/results?search_query=grito+sao+paulo+fc+torcida" target="_blank" rel="noopener">Ouça o grito</a>
+        </div>
+
+        <div class="faith-split faith-split--reverse reveal" style="--d:.08s">
+          <figure class="faith-split-photo">
+            <img src="img/torcida/cotia-base.webp" alt="Centro de treinamento da base do São Paulo FC em Cotia" width="600" height="450" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+          </figure>
+          <div class="faith-split-body">
+            <span class="kicker-inline">Made in Cotia</span>
+            <h3>A fábrica de craques</h3>
+            <p>O centro de treinamento da base é uma das fábricas de talento mais respeitadas do Brasil. De lá saíram craques que conquistaram o mundo — e que continuam enchendo o estádio de esperança.</p>
+            <ul class="faith-chips">
+              <li>Kaká</li>
+              <li>Lucas Moura</li>
+              <li>Casemiro</li>
+              <li>Hernanes</li>
+              <li>Éder Militão</li>
+              <li>Antony</li>
+              <li>David Neres</li>
+            </ul>
+            <div class="faith-stat">
+              <span class="faith-stat-label">Recorde de público</span>
+              <strong><span data-count="146082">146.082</span></strong>
+              <span class="faith-stat-suffix">torcedores · 1977</span>
             </div>
           </div>
         </div>
 
-        <div class="classicos reveal">
-          <h3 class="cult-title">Os grandes clássicos</h3>
-          <ul class="classicos-grid">
-            <li class="classicos-card">
-              <p class="classicos-name"><span class="star" aria-hidden="true">★</span>San–São</p>
-              <p class="classicos-vs">São Paulo × Santos</p>
-              <p class="classicos-line">O clássico mais antigo do Brasil ainda em atividade, disputado desde 1930.</p>
-            </li>
-            <li class="classicos-card">
-              <p class="classicos-name"><span class="star" aria-hidden="true">★</span>Choque-Rei</p>
-              <p class="classicos-vs">São Paulo × Palmeiras</p>
-              <p class="classicos-line">Batizado pelo jornalista Tomaz Mazzoni nos anos 1940, é um dos maiores duelos do país.</p>
-            </li>
-            <li class="classicos-card">
-              <p class="classicos-name"><span class="star" aria-hidden="true">★</span>Majestoso</p>
-              <p class="classicos-vs">São Paulo × Corinthians</p>
-              <p class="classicos-line">O duelo mais repetido do futebol paulista, com mais de 340 jogos em mais de 90 anos.</p>
-            </li>
-          </ul>
+        <div class="faith-classicos reveal" style="--d:.12s">
+          <h3 class="faith-classicos-title">Os grandes clássicos</h3>
+          <div class="faith-classicos-grid" role="list">
+            <div class="faith-classico" role="listitem">
+              <h4><span class="faith-classico-star" aria-hidden="true">★</span>San–São</h4>
+              <p class="faith-classico-vs">São Paulo × Santos</p>
+              <p class="faith-classico-text">O clássico mais antigo do Brasil ainda em atividade, disputado desde 1930.</p>
+              <span class="faith-classico-badge">est. 1930</span>
+            </div>
+            <div class="faith-classico" role="listitem">
+              <h4><span class="faith-classico-star" aria-hidden="true">★</span>Choque-Rei</h4>
+              <p class="faith-classico-vs">São Paulo × Palmeiras</p>
+              <p class="faith-classico-text">Batizado pelo jornalista Tomaz Mazzoni nos anos 1940, é um dos maiores duelos do país.</p>
+              <span class="faith-classico-badge">anos 1940</span>
+            </div>
+            <div class="faith-classico" role="listitem">
+              <h4><span class="faith-classico-star" aria-hidden="true">★</span>Majestoso</h4>
+              <p class="faith-classico-vs">São Paulo × Corinthians</p>
+              <p class="faith-classico-text">O duelo mais repetido do futebol paulista, com mais de 340 jogos em mais de 90 anos.</p>
+              <span class="faith-classico-badge">340+ jogos</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1596,14 +2104,23 @@
       <div class="wrap">
         <header class="sec-head reveal">
           <span class="trule" aria-hidden="true"></span>
-          <p class="kicker">As lendas do Morumbi</p>
+          <p class="kicker">06 · As lendas do Morumbi</p>
           <h2 class="sec-title">Ídolos que vestem a história</h2>
           <p class="sec-lead">Goleiros artilheiros, mestres táticos e craques que fizeram o mundo aplaudir o Tricolor.</p>
         </header>
       </div>
 
+      <div class="idols-nav" aria-label="Navegar entre os ídolos">
+        <button class="idols-nav-btn" type="button" data-dir="-1" aria-label="Ídolo anterior">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="idols-nav-btn" type="button" data-dir="1" aria-label="Próximo ídolo">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5 L16 12 L9 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
       <div class="idols-accordion" role="list">
-        <article class="icard reveal" role="listitem" tabindex="0" aria-label="Rogério Ceni">
+        <article class="icard is-open reveal" role="listitem" tabindex="0" aria-label="Rogério Ceni">
           <div class="icard-glow" aria-hidden="true"></div>
           <img class="icard-img" src="img/idolos/rogerio-ceni.webp" alt="" width="400" height="560" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
           <span class="icard-name">Rogério Ceni</span>
@@ -1697,6 +2214,7 @@
     <section class="section section-red" id="estadio">
       <div class="estadio-hero reveal">
         <img src="img/morumbis.webp" alt="Estádio MorumBIS — visão panorâmica da arquibancada e campo" width="1200" height="675" loading="lazy" decoding="async" onerror="this.parentElement.remove()">
+        <span class="estadio-stripes" aria-hidden="true"></span>
         <div class="estadio-hero-inner">
           <p class="estadio-label">A casa · Estádio Cícero Pompeu de Toledo</p>
           <h2 class="estadio-title">MorumBIS</h2>
@@ -1708,7 +2226,6 @@
         </div>
         <span class="estadio-scroll-hint" aria-hidden="true"></span>
       </div>
-      <div class="estadio-scene" aria-hidden="true"></div>
       <div class="wrap">
         <div class="estadio-band reveal">
           <ul class="estadio-glass">
@@ -1725,20 +2242,23 @@
           <div class="estadio-about reveal">
             <p class="estadio-about-label">O templo</p>
             <h3>Uma casa para a história</h3>
-            <p>Inaugurado em 1960, o MorumBIS é a sede do São Paulo FC e o maior estádio particular do Brasil — palco dos três Mundiais tricolores e de algumas das noites mais memoráveis do futebol mundial.</p>
+            <p>O MorumBIS é a sede do São Paulo FC e o palco das maiores noites da história tricolor — um templo erguido com recursos do próprio clube e levado pelo coro de uma torcida que nunca cala.</p>
             <ul class="estadio-points">
-              <li>Maior estádio particular do Brasil</li>
-              <li>Palco do tri Mundial de Clubes — 92, 93 e 2005</li>
-              <li>Mais de seis décadas como casa do Tricolor</li>
+              <li>Palco dos três Mundiais de Clubes — 92, 93 e 2005</li>
+              <li>Públicos de mais de 100 mil nas finais mundiais de 92 e 93</li>
+              <li>Projeto e construção financiados pelo próprio clube</li>
+            </ul>
+            <ul class="estadio-chips">
+              <li><span class="estadio-chip-year">1960</span> Inauguração do Cícero Pompeu de Toledo</li>
+              <li><span class="estadio-chip-year">1970</span> Conclusão do anel superior</li>
+              <li><span class="estadio-chip-year">2020</span> Naming rights e a chegada do MorumBIS</li>
             </ul>
           </div>
           <aside class="estadio-side reveal" style="--d:.12s">
             <p class="estadio-side-title">Identidade</p>
             <dl>
               <div><dt>Nome oficial</dt><dd>Cícero Pompeu de Toledo</dd></div>
-              <div><dt>Inauguração</dt><dd>02/10/1960</dd></div>
               <div><dt>Proprietário</dt><dd>São Paulo FC</dd></div>
-              <div><dt>Capacidade</dt><dd>66.795</dd></div>
             </dl>
             <a class="estadio-map" href="https://maps.google.com/?q=Est%C3%A1dio+C%C3%ADcero+Pompeu+de+Toledo" target="_blank" rel="noopener">Ver no mapa</a>
           </aside>
@@ -1746,42 +2266,18 @@
       </div>
     </section>
 
-    <section class="section" id="numeros" aria-label="Números do São Paulo FC">
-      <div class="wrap">
-        <ul class="stats-grid">
-          <li class="stat reveal">
-            <span class="trule" aria-hidden="true"></span>
-            <p class="stat-num"><span data-count="3">3</span><small>×</small></p>
-            <p class="stat-label">Mundiais</p>
-          </li>
-          <li class="stat reveal" style="--d:.06s">
-            <span class="trule" aria-hidden="true"></span>
-            <p class="stat-num"><span data-count="3">3</span><small>×</small></p>
-            <p class="stat-label">Libertadores</p>
-          </li>
-          <li class="stat reveal" style="--d:.12s">
-            <span class="trule" aria-hidden="true"></span>
-            <p class="stat-num"><span data-count="6">6</span><small>×</small></p>
-            <p class="stat-label">Brasileiros</p>
-          </li>
-          <li class="stat reveal" style="--d:.18s">
-            <span class="trule" aria-hidden="true"></span>
-            <p class="stat-num"><span data-count="22">22</span><small>×</small></p>
-            <p class="stat-label">Paulistas</p>
-          </li>
-        </ul>
-      </div>
-    </section>
-
     <section class="cta" id="camisa">
       <div class="wrap">
         <header class="sec-head reveal">
           <span class="trule" aria-hidden="true"></span>
-          <p class="kicker">O manto</p>
+          <p class="kicker">07 · O manto</p>
           <h2 class="sec-title">Vista o tricolor</h2>
           <p class="sec-lead">Uma história de 96 anos espera por você. Acompanhe o dia a dia, os bastidores e os próximos jogos no site oficial do clube.</p>
         </header>
-        <a class="btn btn-solid reveal" href="https://www.saopaulofc.net/" target="_blank" rel="noopener">Acesse o site oficial</a>
+        <div class="cta-actions">
+          <a class="btn btn-solid reveal" href="https://www.saopaulofc.net/" target="_blank" rel="noopener">Acesse o site oficial</a>
+          <a class="btn btn-line reveal" style="--d:.08s" href="https://www.youtube.com/@saopaulofc" target="_blank" rel="noopener">Assista no canal oficial</a>
+        </div>
       </div>
     </section>
 
@@ -1795,7 +2291,7 @@
         <div>
           <p class="foot-brand">
             <span class="brand-mark">
-              <img class="brand-logo" src="img/spfc-logo.png" alt="Escudo oficial do São Paulo Futebol Clube" width="27" height="36" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
+              <img class="brand-logo" src="img/spfc-logo.svg" alt="Escudo oficial do São Paulo Futebol Clube" width="27" height="36" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
               <svg class="brand-logo-fallback" viewBox="0 0 120 120" aria-hidden="true">
                 <path d="M8 2h104v32L60 114 8 34Z" fill="#fff" stroke="#0B0B0D" stroke-width="3" stroke-linejoin="round"/>
                 <path d="M10 5h100v26H10z" fill="#0B0B0D"/>
@@ -1828,6 +2324,29 @@
           </ul>
         </div>
       </div>
+      <ul class="foot-social" aria-label="Redes sociais oficiais do São Paulo FC">
+        <li>
+          <a href="https://x.com/SaoPauloFC" target="_blank" rel="noopener" aria-label="X (Twitter) oficial">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" fill="currentColor"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/saopaulofc" target="_blank" rel="noopener" aria-label="Instagram oficial">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.2" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.2" cy="6.8" r="1.25" fill="currentColor"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/@saopaulofc" target="_blank" rel="noopener" aria-label="YouTube oficial">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 12s0-3.85-.5-5.7a3 3 0 0 0-2.1-2.1C19 3.7 12 3.7 12 3.7s-7 0-8.9.5a3 3 0 0 0-2.1 2.1C.5 8.15.5 12 .5 12s0 3.85.5 5.7a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.5-1.85.5-5.7.5-5.7z" fill="currentColor"/><path d="M9.7 8.6v6.8L15.4 12z" fill="#fff"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.facebook.com/saopaulofc" target="_blank" rel="noopener" aria-label="Facebook oficial">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.3-.04-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4v2.4H7.6V13h2.7v8z" fill="currentColor"/></svg>
+          </a>
+        </li>
+      </ul>
+
       <div class="foot-stars" aria-hidden="true">
         <span class="stars"><i></i><i></i><i></i><i></i><i></i></span>
       </div>
@@ -1884,9 +2403,26 @@
         countNums.forEach(function (n) { countObs.observe(n); });
       }
 
+      var lastY = window.scrollY || document.documentElement.scrollTop;
+      var hideHeader = false;
       function onScroll() {
         var y = window.scrollY || document.documentElement.scrollTop;
-        if (header) header.classList.toggle('is-scrolled', y > 8);
+        if (header) {
+          header.classList.toggle('is-scrolled', y > 8);
+          if (!nav || !nav.classList.contains('is-open')) {
+            if (y > 260 && y > lastY + 12 && !hideHeader) {
+              hideHeader = true;
+              header.classList.add('is-hide');
+            } else if ((y < lastY - 12 || y <= 260) && hideHeader) {
+              hideHeader = false;
+              header.classList.remove('is-hide');
+            }
+            if (window.innerWidth >= 1025) {
+              header.classList.toggle('is-compact', y > 140);
+            }
+          }
+        }
+        lastY = y;
         if (toTop) toTop.classList.toggle('is-visible', y > 640);
         if (progress) {
           var h = document.documentElement.scrollHeight - window.innerHeight;
@@ -1904,18 +2440,44 @@
       }
 
       if (toggle && nav) {
+        var lastFocus = null;
         function setMenu(open) {
           nav.classList.toggle('is-open', open);
           toggle.classList.toggle('is-active', open);
           document.body.classList.toggle('menu-open', open);
           toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
           toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+          if (open) {
+            lastFocus = document.activeElement;
+            var first = nav.querySelector('a');
+            if (first) first.focus();
+          } else if (lastFocus && typeof lastFocus.focus === 'function') {
+            lastFocus.focus();
+          }
         }
         toggle.addEventListener('click', function () {
           setMenu(!nav.classList.contains('is-open'));
         });
+        document.addEventListener('click', function (e) {
+          if (nav.classList.contains('is-open') && !nav.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
+        });
         document.addEventListener('keydown', function (e) {
           if (e.key === 'Escape' && nav.classList.contains('is-open')) setMenu(false);
+        });
+        nav.addEventListener('keydown', function (e) {
+          if (e.key === 'Tab' && nav.classList.contains('is-open')) {
+            var focusables = nav.querySelectorAll('a[href],button');
+            if (!focusables.length) return;
+            var first = focusables[0];
+            var last = focusables[focusables.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
         });
         nav.querySelectorAll('a').forEach(function (a) {
           a.addEventListener('click', function () { setMenu(false); });
@@ -1957,34 +2519,11 @@
         spyTargets.forEach(function (t) { spy.observe(t); });
       }
 
-      var counters = document.querySelectorAll('[data-count]');
-      function runCount(el) {
-        var target = parseInt(el.getAttribute('data-count'), 10);
-        el.textContent = target;
-        if (reduce) return;
-        var start = null;
-        var dur = 1200;
-        function frame(ts) {
-          if (start === null) start = ts;
-          var p = Math.min(1, (ts - start) / dur);
-          el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
-          if (p < 1) requestAnimationFrame(frame);
-        }
-        requestAnimationFrame(frame);
-      }
-      if (!reduce && 'IntersectionObserver' in window) {
-        var cio = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              runCount(entry.target);
-              cio.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.4 });
-        counters.forEach(function (c) { cio.observe(c); });
-      } else {
-        counters.forEach(runCount);
-      }
+      var tlItems = document.querySelectorAll('#historia .tl-item');
+      tlItems.forEach(function (item) {
+        var yEl = item.querySelector('.tl-year');
+        if (yEl) item.setAttribute('data-year', yEl.textContent.trim());
+      });
 
       var yearEl = document.getElementById('year');
       if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -1993,6 +2532,112 @@
         if(img.complete){img.classList.add('loaded')}
         else{img.addEventListener('load',function(){img.classList.add('loaded')},{once:true})}
       });
+
+      var titleFilters = document.querySelectorAll('.title-filter');
+      var titleCards = Array.prototype.slice.call(document.querySelectorAll('#feature-mundial, .titles-grid .tcard'));
+      if (titleFilters.length && titleCards.length) {
+        function applyFilter(f) {
+          var before = {};
+          titleCards.forEach(function (c) {
+            if (!c.classList.contains('is-hidden')) before[c] = c.getBoundingClientRect();
+          });
+          titleCards.forEach(function (c) {
+            c.classList.toggle('is-hidden', !(f === 'all' || c.getAttribute('data-cat') === f));
+          });
+          titleCards.forEach(function (c) {
+            var b = before[c];
+            if (c.classList.contains('is-hidden')) return;
+            if (!b) {
+              c.classList.remove('is-enter');
+              void c.offsetWidth;
+              c.classList.add('is-enter');
+              c.addEventListener('animationend', function () { c.classList.remove('is-enter'); }, { once: true });
+              return;
+            }
+            var a = c.getBoundingClientRect();
+            var dx = b.left - a.left;
+            var dy = b.top - a.top;
+            if (dx || dy) {
+              c.style.transition = 'none';
+              c.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
+              void c.offsetWidth;
+              c.style.transition = 'transform .5s var(--ease)';
+              c.style.transform = '';
+              c.addEventListener('transitionend', function (e) {
+                if (e.propertyName === 'transform') c.style.transition = '';
+              }, { once: true });
+            }
+          });
+        }
+        titleFilters.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var f = btn.getAttribute('data-filter');
+            titleFilters.forEach(function (b) {
+              var on = b === btn;
+              b.classList.toggle('is-active', on);
+              b.setAttribute('aria-pressed', on ? 'true' : 'false');
+            });
+            applyFilter(f);
+          });
+        });
+      }
+
+      var counters = document.querySelectorAll('[data-count]');
+      if (counters.length && 'IntersectionObserver' in window) {
+        var countObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (!en.isIntersecting) return;
+            var el = en.target;
+            countObserver.unobserve(el);
+            var target = parseInt(el.getAttribute('data-count'), 10);
+            var suffix = el.getAttribute('data-suffix') || '';
+            var start = null;
+            function tick(ts) {
+              if (start === null) start = ts;
+              var p = Math.min((ts - start) / 1600, 1);
+              var eased = 1 - Math.pow(1 - p, 3);
+              el.textContent = Math.round(target * eased).toLocaleString('pt-BR') + suffix;
+              if (p < 1) requestAnimationFrame(tick);
+            }
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+              el.textContent = target.toLocaleString('pt-BR') + suffix;
+            } else {
+              requestAnimationFrame(tick);
+            }
+          });
+        }, { threshold: 0.6 });
+        counters.forEach(function (el) { countObserver.observe(el); });
+      }
+
+      var compareCards = document.querySelectorAll('.compare-card');
+      if (compareCards.length && 'IntersectionObserver' in window) {
+        var cardObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var i = parseInt(getComputedStyle(entry.target).getPropertyValue('--i')) || 0;
+              entry.target.style.transitionDelay = (i * .15) + 's';
+              entry.target.classList.add('in');
+              cardObs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.2 });
+        compareCards.forEach(function (c) { cardObs.observe(c); });
+      }
+
+      var specRows = document.querySelectorAll('.spec-row');
+      if (specRows.length && 'IntersectionObserver' in window) {
+        var specObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var delay = getComputedStyle(entry.target).getPropertyValue('--d') || '0s';
+              entry.target.style.transitionDelay = delay;
+              entry.target.classList.add('revealed');
+              specObs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.3 });
+        specRows.forEach(function (row) { specObs.observe(row); });
+      }
 
       var idolCards = document.querySelectorAll('.icard');
       function closeIdols() { idolCards.forEach(function(c) { c.classList.remove('is-open'); }); }
@@ -2011,7 +2656,25 @@
         });
       });
       document.addEventListener('click', function(e) {
-        if (!e.target.closest('.icard')) closeIdols();
+        if (!e.target.closest('.icard') && !e.target.closest('.idols-nav')) closeIdols();
+      });
+      var idolList = Array.prototype.slice.call(idolCards);
+      function currentIdolIndex() {
+        for (var i = 0; i < idolList.length; i++) {
+          if (idolList[i].classList.contains('is-open')) return i;
+        }
+        return -1;
+      }
+      document.querySelectorAll('.idols-nav-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var n = idolList.length;
+          var cur = currentIdolIndex();
+          var next = cur === -1 ? 0 : (cur + parseInt(btn.getAttribute('data-dir'), 10) + n) % n;
+          closeIdols();
+          idolList[next].classList.add('is-open');
+          var smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          idolList[next].scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'nearest', inline: 'nearest' });
+        });
       });
     })();
   </script>
