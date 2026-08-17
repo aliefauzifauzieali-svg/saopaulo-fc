@@ -730,10 +730,8 @@
       content:"";position:absolute;top:0;left:0;bottom:0;width:0%;
       background:linear-gradient(90deg,var(--red),var(--gold));
       border-radius:0 2px 2px 0;
-      transition:width .15s linear;
-    }
-    #camisas .camisas-progress[data-fill]::after{
       width:var(--progress,0%);
+      transition:none;
     }
 
     /* ── jcard ────────────────────────────────────────────── */
@@ -2801,7 +2799,6 @@
                 tl.style.setProperty('--tl-progress', pct);
               }
               if (progressBar) {
-                progressBar.setAttribute('data-fill', '');
                 progressBar.style.setProperty('--progress', Math.round(seen / jcards.length * 100) + '%');
               }
               jcardObs.unobserve(entry.target);
@@ -2822,7 +2819,6 @@
           var pct = Math.min(scrolled / rect.height, 1);
           tl.style.setProperty('--tl-progress', pct);
           if (progressBar) {
-            progressBar.setAttribute('data-fill', '');
             progressBar.style.setProperty('--progress', Math.round(pct * 100) + '%');
           }
         }
