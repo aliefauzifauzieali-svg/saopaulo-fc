@@ -152,9 +152,9 @@ a{color:inherit;position:relative}
 .nav-toggle.is-active span:nth-child(1){transform:translateY(8px) rotate(45deg)}
 .nav-toggle.is-active span:nth-child(2){opacity:0}
 .nav-toggle.is-active span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
-@media(max-width:1024px){.nav-toggle{display:block}.site-nav{position:fixed;top:76px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;max-height:calc(100svh - 76px);overflow-y:auto;-webkit-overflow-scrolling:touch;background:rgba(11,11,13,.98);padding:1rem clamp(1.25rem,4vw,2rem) 1.5rem;transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .25s var(--ease),transform .25s var(--ease)}.site-nav.is-open{transform:none;opacity:1;pointer-events:auto}.site-nav a{padding:.95rem 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:.8rem}.site-nav .nav-cta{border-bottom:0;border-radius:999px;text-align:center;margin-top:.6rem;padding:.95rem}}
+@media(max-width:1024px){.nav-toggle{display:block}.site-nav{position:fixed;top:76px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;max-height:calc(100vh - 76px);max-height:calc(100svh - 76px);overflow-y:auto;-webkit-overflow-scrolling:touch;background:rgba(11,11,13,.98);padding:1rem clamp(1.25rem,4vw,2rem) 1.5rem;transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .25s var(--ease),transform .25s var(--ease)}.site-nav.is-open{transform:none;opacity:1;pointer-events:auto}.site-nav a{padding:.95rem 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:.8rem}.site-nav .nav-cta{border-bottom:0;border-radius:999px;text-align:center;margin-top:.6rem;padding:.95rem}}
 @media(min-width:1025px){.site-head.is-compact .head-inner{height:60px}.site-head.is-compact .brand-mark{width:28px;height:33px}.site-head.is-compact .brand-word{font-size:1.1rem}.site-head.is-compact .site-nav a{padding:.25rem 0}.site-head.is-compact .site-nav .nav-cta{padding:.5rem 1.1rem}}
-.hero{min-height:100svh;display:grid;grid-template-columns:auto minmax(0,1fr);background:var(--black);color:#fff;position:relative;overflow:hidden}
+.hero{min-height:100vh;min-height:100svh;display:grid;grid-template-columns:auto minmax(0,1fr);background:var(--black);color:#fff;position:relative;overflow:hidden}
 .hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(80% 60% at 85% 100%,rgba(212,0,27,.15),transparent 55%)}
 .hero-stripes{width:clamp(46px,14vw,220px);height:100%;position:relative;background:linear-gradient(90deg,var(--red) 0 33.333%,var(--white) 33.333% 66.666%,var(--black) 66.666% 100%);transform-origin:top}
 .hero-stripes::after{content:"";position:absolute;top:0;left:0;right:0;height:42%;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.12),transparent)}
@@ -414,7 +414,7 @@ a{color:inherit;position:relative}
 @media(max-width:859px){.idols-accordion{flex-direction:column;height:auto;overflow:visible;gap:clamp(14px,3.5vw,22px);padding:2rem clamp(1.25rem,4.5vw,2.25rem) 3rem}.icard{flex:0 0 auto;width:100%;aspect-ratio:3/4;height:auto;min-height:400px}.icard:hover,.icard.is-open{flex:0 0 auto}.icard-name{display:none}.icard-meta{transform:none}.icard-meta > *{opacity:1;transform:none;transition:none}.icard-meta .icard-line{font-size:clamp(.85rem,3vw,.95rem);max-width:40ch}.icard-img{filter:brightness(.66) saturate(.82)}.icard:hover .icard-img,.icard.is-open .icard-img{transform:none;filter:brightness(.66) saturate(.82)}.icard:hover::before,.icard.is-open::before{transform:translateX(-180%) skewX(-18deg)}.icard-glow{width:120%;height:110%}}
 @media(min-width:600px) and (max-width:859px){.idols-accordion{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,3vw,22px)}}
 #estadio{background:var(--black-2);padding-block:0;overflow:hidden}
-.estadio-hero{position:relative;z-index:3;width:100%;aspect-ratio:16/11;min-height:min(82svh,640px);display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--black-2);padding:clamp(5rem,11vh,7.5rem) clamp(1.25rem,4vw,3rem)}
+.estadio-hero{position:relative;z-index:3;width:100%;aspect-ratio:16/11;min-height:min(82vh,640px);min-height:min(82svh,640px);display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--black-2);padding:clamp(5rem,11vh,7.5rem) clamp(1.25rem,4vw,3rem)}
 @media(min-width:900px){.estadio-hero{aspect-ratio:21/9;min-height:0;max-height:90vh;padding:clamp(3.5rem,9vh,7rem) clamp(1.25rem,4vw,3rem)}}
 .estadio-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform;transform:scale(1.08)}
 .estadio-hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(6,6,8,.4) 0%,rgba(6,6,8,.15) 28%,transparent 52%),linear-gradient(0deg,rgba(6,6,8,.88) 0%,rgba(6,6,8,.15) 34%,transparent 62%),radial-gradient(120% 105% at 50% 34%,transparent 58%,rgba(6,6,8,.45) 100%)}
@@ -515,7 +515,7 @@ a{color:inherit;position:relative}
 .js .tcard.reveal.in:hover{transform:translateY(-5px);transition-delay:0s}
 img[loading="lazy"]{opacity:0;transition:opacity .5s var(--ease)}
 img[loading="lazy"].loaded,img[loading="lazy"]:not([src=""]){opacity:1}
-@media(max-width:560px){.hero{grid-template-columns:1fr;height:auto;min-height:100svh;overflow:visible}.hero-stripes{position:absolute;top:76px;left:0;right:0;width:100%;height:7px;background:linear-gradient(90deg,var(--red) 0 33.333%,var(--white) 33.333% 66.666%,var(--black) 66.666% 100%);transform:none}.hero-inner{padding-top:calc(76px + 2.25rem);padding-bottom:7rem}.hero-facts{gap:.7rem 1.2rem}}
+@media(max-width:560px){.hero{grid-template-columns:1fr;height:auto;min-height:100vh;min-height:100svh;overflow:visible}.hero-stripes{position:absolute;top:76px;left:0;right:0;width:100%;height:7px;background:linear-gradient(90deg,var(--red) 0 33.333%,var(--white) 33.333% 66.666%,var(--black) 66.666% 100%);transform:none}.hero-inner{padding-top:calc(76px + 2.25rem);padding-bottom:7rem}.hero-facts{gap:.7rem 1.2rem}}
 @media(max-width:400px){.hero-title{font-size:clamp(2.5rem,15.5vw,4rem)}.hero-inner{padding-inline:clamp(1rem,5vw,1.25rem)}.ticker-track li{font-size:.88rem}.tcard-feature .tcard-photo-wrap{aspect-ratio:4/3}.icard{min-height:360px}.foot-grid{gap:2.4rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}.site-head{animation:none}.hero-title .ch{animation:none;opacity:1;transform:none}.hero-seal{animation:none;opacity:.9}.hero-scroll span{animation:none}.ticker-track{animation:none}.js .reveal{opacity:1;transform:none}.js .sec-head.reveal{opacity:1;transform:none;filter:none}.js #historia .tl-item.reveal{transform:none}.js .tcard.reveal,.js .tcard-feature.reveal{transform:none}.js .icard.reveal{opacity:1;transform:none;transition:none}.compare-card{transition:none;opacity:1;transform:none}.spec-row{transition:none;opacity:1;transform:none}.faith-grito.in::before{opacity:1}.faith-grito.in .grito-lines p{opacity:1;transform:none;transition:none}.faith-grito.in .grito-climax{text-shadow:none}.faith-classico::before{transform:scaleX(1)}.estadio-glass{transition:none}.estadio-about,.estadio-side{transition:none}.js .estadio-rule{transform:scaleX(1)}img[loading="lazy"]{opacity:1;transition:none}}
 
@@ -773,7 +773,7 @@ img[loading="lazy"].loaded,img[loading="lazy"]:not([src=""]){opacity:1}
         </header>
 
         <div class="escudo-compare" id="escudoCompare">
-          <div class="compare-card" style="--i:0">
+          <div class="compare-card reveal" style="--i:0">
             <span class="compare-watermark" aria-hidden="true">1930</span>
             <div class="compare-badge">
               <img class="compare-emblem" src="img/Logo/Escudo_do_SPFC_1930-1935.png" alt="Escudo do São Paulo FC de 1930 a 1935, com a sigla pontuada S.P.F.C." width="298" height="300" decoding="async">
@@ -784,7 +784,7 @@ img[loading="lazy"].loaded,img[loading="lazy"]:not([src=""]){opacity:1}
             </div>
           </div>
 
-          <div class="compare-card compare-card--current" style="--i:1">
+          <div class="compare-card compare-card--current reveal" style="--i:1">
             <span class="compare-watermark compare-watermark--current" aria-hidden="true">HOJE</span>
             <div class="compare-badge compare-badge--current">
               <img class="compare-emblem" src="img/Logo/spfc-logo.png" alt="Escudo atual do São Paulo FC — coração de cinco pontas com as cinco estrelas" width="304" height="403" decoding="async">
