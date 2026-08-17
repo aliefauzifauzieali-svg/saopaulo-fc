@@ -687,8 +687,11 @@
       .jcard:hover .jcard-year{color:rgba(255,255,255,.85)}
       .jcard:hover .jcard-name{color:rgba(255,255,255,.92)}
       .camisas-timeline::before{transition:none}
-      .camisas-timeline::after{transition:none}
-      .camisas-progress::after{transition:none}
+      .camisas-timeline::after{transition:none;opacity:1}
+      .camisas-progress::before{transition:none}
+      .camisas-progress::after{transition:none;opacity:0}
+      #camisas::before{opacity:0}
+      #camisas::after{opacity:0}
       .spec-row{transition:none;opacity:1;transform:none}
     }
 
@@ -709,29 +712,56 @@
       content:"";position:absolute;left:1.5rem;top:0;bottom:0;width:1px;
       background:rgba(255,255,255,.1);
       transform-origin:top;transform:scaleY(var(--tl-progress,0));
-      transition:transform .1s linear;
     }
     .camisas-timeline::after{
-      content:"";position:absolute;left:calc(1.5rem - 3px);top:0;width:7px;height:7px;
+      content:"";position:absolute;left:calc(1.5rem - 4px);top:0;width:9px;height:9px;
       border-radius:50%;background:var(--red);
-      box-shadow:0 0 18px rgba(212,0,27,.7);
-      transform:translateY(calc(var(--tl-progress,0) * (var(--tl-height,1000px))));
-      opacity:calc(var(--tl-progress,0));
-      transition:transform .1s linear,opacity .15s ease;
+      box-shadow:0 0 20px rgba(212,0,27,.8),0 0 40px rgba(212,0,27,.3);
+      transform:translateY(calc(var(--tl-progress,0) * var(--tl-px,0px)));
+      opacity:var(--tl-opacity,0);
       pointer-events:none;z-index:3;
     }
 
-    /* ── progress bar (top of section) ────────────────────── */
+    /* ── progress bar (cinematic) ─────────────────────────── */
+    #camisas{
+      position:relative;overflow:hidden;
+    }
     #camisas .camisas-progress{
       position:absolute;top:0;left:0;right:0;height:3px;z-index:10;
-      background:rgba(255,255,255,.06);
+      background:rgba(255,255,255,.04);
+      overflow:hidden;
+    }
+    #camisas .camisas-progress::before{
+      content:"";position:absolute;top:0;left:0;right:0;bottom:0;
+      background:linear-gradient(90deg,
+        transparent 0%,
+        var(--red) 15%,
+        var(--red) 70%,
+        var(--gold) 100%
+      );
+      transform:scaleX(var(--progress,0));transform-origin:left;
+      will-change:transform;
     }
     #camisas .camisas-progress::after{
-      content:"";position:absolute;top:0;left:0;bottom:0;width:0%;
-      background:linear-gradient(90deg,var(--red),var(--gold));
-      border-radius:0 2px 2px 0;
-      width:var(--progress,0%);
-      transition:none;
+      content:"";position:absolute;top:-2px;width:40px;height:7px;
+      border-radius:50%;
+      background:radial-gradient(ellipse,rgba(232,181,45,.9),transparent 70%);
+      left:calc(var(--progress,0) * 100% - 20px);
+      opacity:var(--progress,0);
+      will-change:left,opacity;
+      pointer-events:none;
+    }
+
+    /* ── cinematic overlay ────────────────────────────────── */
+    #camisas::before{
+      content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+      background:radial-gradient(ellipse at center,transparent 40%,rgba(6,6,8,.6) 100%);
+    }
+    #camisas::after{
+      content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+      opacity:.03;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size:128px 128px;
     }
 
     /* ── jcard ────────────────────────────────────────────── */
@@ -2794,13 +2824,6 @@
               entry.target.style.transitionDelay = (idx * .12) + 's';
               entry.target.classList.add('in');
               seen = Math.max(seen, idx + 1);
-              if (tl) {
-                var pct = Math.min(seen / jcards.length, 1);
-                tl.style.setProperty('--tl-progress', pct);
-              }
-              if (progressBar) {
-                progressBar.style.setProperty('--progress', Math.round(seen / jcards.length * 100) + '%');
-              }
               jcardObs.unobserve(entry.target);
             }
           });
@@ -2808,22 +2831,32 @@
         jcards.forEach(function (c) { jcardObs.observe(c); });
       }
 
-      /* scroll-based timeline progress */
+      /* cinematic scroll-driven progress */
       if (tl && jcards.length) {
-        var tlHeight = tl.offsetHeight;
-        tl.style.setProperty('--tl-height', tlHeight + 'px');
-        function updateProgress() {
-          var rect = tl.getBoundingClientRect();
-          var viewH = window.innerHeight;
-          var scrolled = Math.max(0, -rect.top + viewH * 0.5);
-          var pct = Math.min(scrolled / rect.height, 1);
-          tl.style.setProperty('--tl-progress', pct);
-          if (progressBar) {
-            progressBar.style.setProperty('--progress', Math.round(pct * 100) + '%');
+        var ticking = false;
+        function onScroll() {
+          if (!ticking) {
+            requestAnimationFrame(updateTimeline);
+            ticking = true;
           }
         }
-        window.addEventListener('scroll', updateProgress, { passive: true });
-        updateProgress();
+        function updateTimeline() {
+          ticking = false;
+          var rect = tl.getBoundingClientRect();
+          var viewH = window.innerHeight;
+          var scrolled = Math.max(0, -rect.top + viewH * 0.45);
+          var pct = Math.max(0, Math.min(scrolled / rect.height, 1));
+          var px = scrolled;
+          tl.style.setProperty('--tl-progress', pct);
+          tl.style.setProperty('--tl-px', px + 'px');
+          tl.style.setProperty('--tl-opacity', pct > 0.01 ? 1 : 0);
+          if (progressBar) {
+            progressBar.style.setProperty('--progress', pct);
+          }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+        updateTimeline();
       }
 
       var specRows = document.querySelectorAll('.spec-row');
