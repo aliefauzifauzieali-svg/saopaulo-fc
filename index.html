@@ -672,68 +672,78 @@
       .compare-card:hover .compare-badge{transform:none}
       .compare-emblem{transition:none}
       .jcard{transition:none;opacity:1;transform:none}
-      .jcard:hover{transform:none}
-      .jcard::before{transition:none}
       .spec-row{transition:none;opacity:1;transform:none}
     }
 
-    .camisas-grid{
-      display:grid;grid-template-columns:1fr;gap:clamp(1rem,2.5vw,1.5rem);
-      max-width:60rem;margin-inline:auto;list-style:none;padding:0;
+    .camisas-intro{
+      max-width:48rem;margin:0 auto clamp(2rem,5vw,3.5rem);text-align:center;
     }
-    @media(min-width:600px){.camisas-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(min-width:980px){.camisas-grid{grid-template-columns:repeat(3,1fr)}}
+    .camisas-intro p{
+      color:rgba(255,255,255,.65);font-size:clamp(.92rem,2vw,1.04rem);line-height:1.7;
+    }
+
+    .camisas-timeline{
+      position:relative;max-width:54rem;margin:0 auto;
+      display:flex;flex-direction:column;gap:0;padding:0;
+      list-style:none;
+    }
+    .camisas-timeline::before{
+      content:"";position:absolute;left:1.5rem;top:0;bottom:0;width:1px;
+      background:linear-gradient(180deg,transparent,rgba(255,255,255,.1) 8%,rgba(255,255,255,.1) 92%,transparent);
+    }
 
     .jcard{
-      position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;
-      padding:clamp(1.6rem,4vw,2.2rem) clamp(1.2rem,2.5vw,1.6rem) clamp(1.4rem,3.5vw,1.8rem);
-      border-radius:var(--radius);
-      border:1px solid rgba(255,255,255,.06);
-      background:rgba(255,255,255,.025);
-      overflow:hidden;
-      opacity:0;transform:translateY(20px);
-      transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1),
-                 border-color .4s var(--ease),background .4s var(--ease),box-shadow .4s var(--ease);
+      position:relative;display:grid;
+      grid-template-columns:3rem 1fr;gap:0 clamp(1rem,3vw,2rem);
+      padding:clamp(1.2rem,3vw,1.8rem) 0;
+      border-bottom:1px solid rgba(255,255,255,.05);
+      opacity:0;transform:translateY(16px);
+      transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1);
     }
+    .jcard:last-child{border-bottom:none}
     .jcard.in{opacity:1;transform:none}
-    .jcard.in:hover{
-      border-color:rgba(212,0,27,.3);
-      background:rgba(255,255,255,.04);
-      box-shadow:0 20px 50px rgba(0,0,0,.35);
-      transform:translateY(-4px);
-    }
-    .jcard::after{
-      content:"";position:absolute;top:0;left:0;right:0;height:4px;
-      background:linear-gradient(90deg,var(--red) 0 33%,#fff 33% 66%,var(--black) 66% 100%);
-    }
-    .jcard::before{
-      content:"";position:absolute;top:0;left:-75%;width:50%;height:100%;
-      background:linear-gradient(115deg,transparent,rgba(255,255,255,.03),transparent);
-      transform:skewX(-18deg);transition:left .7s cubic-bezier(.22,1,.36,1);
-      pointer-events:none;z-index:5;
-    }
-    .jcard:hover::before{left:125%}
 
+    .jcard-marker{
+      display:flex;flex-direction:column;align-items:center;gap:.3rem;
+      padding-top:.15rem;
+    }
+    .jcard-num{
+      font-family:var(--mono);font-size:.55rem;letter-spacing:.15em;
+      color:var(--red-soft);font-weight:600;
+    }
+    .jcard-dot{
+      width:10px;height:10px;border-radius:50%;flex-shrink:0;
+      border:2px solid var(--red);background:var(--black-2);
+    }
+    .jcard:last-child .jcard-dot{border-color:var(--gold);background:var(--gold)}
+
+    .jcard-content{display:flex;flex-direction:column;gap:.35rem}
+    .jcard-header{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem .8rem;margin-bottom:.1rem}
     .jcard-year{
       font-family:var(--font);font-weight:900;
-      font-size:clamp(2rem,5vw,2.8rem);line-height:1;letter-spacing:-.02em;
-      color:#fff;margin:0;
+      font-size:clamp(1.4rem,3vw,1.8rem);line-height:1;letter-spacing:-.01em;
+      color:#fff;
     }
     .jcard-tag{
-      font-family:var(--mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;
-      color:var(--red-soft);margin:.5rem 0 0;
-    }
-    .jcard-accent{
-      width:46px;height:4px;border-radius:2px;margin:1rem 0 .8rem;
-      background:linear-gradient(90deg,var(--red) 0 33%,#fff 33% 66%,var(--black) 66% 100%);
+      font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;
+      color:var(--red-soft);
     }
     .jcard-name{
       font-weight:800;text-transform:uppercase;font-size:clamp(.88rem,2vw,1rem);
       letter-spacing:.02em;color:rgba(255,255,255,.92);margin:0;line-height:1.3;
     }
     .jcard-line{
-      color:rgba(255,255,255,.55);font-size:clamp(.78rem,1.6vw,.84rem);line-height:1.6;
-      max-width:32ch;margin:.35rem 0 0;
+      color:rgba(255,255,255,.55);font-size:clamp(.82rem,1.7vw,.9rem);line-height:1.7;
+      margin:0;
+    }
+    .jcard-line strong{color:rgba(255,255,255,.8);font-weight:600}
+    .jcard-fact{
+      display:inline-flex;align-items:center;gap:.4rem;
+      font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;
+      color:rgba(255,255,255,.35);margin:.2rem 0 0;
+    }
+    .jcard-fact::before{
+      content:"";width:16px;height:1px;background:rgba(255,255,255,.15);flex-shrink:0;
     }
 
     .jcard::before{
@@ -1533,7 +1543,7 @@
       .js .hero-title .ch{animation:none;opacity:1;transform:none}
       .js #historia .tl-item.reveal,.js .tcard.reveal,.js .tcard-feature.reveal{transform:none}
       .js .icard.reveal{opacity:1;transform:none;transition:none}
-      .js .camisas-grid .jcard{transform:none}
+      .js .camisas-timeline .jcard{transform:none}
       .js .faith-split.reveal.in:hover{transform:none}
       .js .faith-classico:hover{transform:none;box-shadow:none}
       .faith-classico::before{transform:scaleX(1)}
@@ -1862,50 +1872,102 @@
           <p class="sec-lead">Do manto da fundação à camisa de Tóquio: cada tecido branco carrega uma história tricolor.</p>
         </header>
 
-        <ul class="camisas-grid">
+        <div class="camisas-intro reveal">
+          <p>São Paulo FC é um dos poucos clubes do mundo cuja identidade visual está tão ligada a suas camisas. Desde 1930, cada geração de jogadores vestiu o branco com as três cores — e cada camisa conta uma história de conquista, identidade e orgulho.</p>
+        </div>
+
+        <ol class="camisas-timeline">
           <li class="jcard">
-            <p class="jcard-year">1930</p>
-            <p class="jcard-tag">Uniforme nº 1</p>
-            <span class="jcard-accent" aria-hidden="true"></span>
-            <p class="jcard-name">Três cores, um clube</p>
-            <p class="jcard-line">Em janeiro de 1930, o clube nasce com as cores de seus antecessores: o vermelho do Paulistano e o preto da AA Palmeiras, sobre o branco comum.</p>
+            <div class="jcard-marker">
+              <span class="jcard-num">01</span>
+              <span class="jcard-dot" aria-hidden="true"></span>
+            </div>
+            <div class="jcard-content">
+              <div class="jcard-header">
+                <p class="jcard-year">1930</p>
+                <span class="jcard-tag">Uniforme nº 1</span>
+              </div>
+              <p class="jcard-name">O manto da fundação</p>
+              <p class="jcard-line">Em 25 de janeiro de 1930, o clube nasce da fusão do Club Athletico Paulistano com a Associação Atlética das Palmeiras. A primeira camisa une as cores de ambos: <strong>o vermelho do Paulistano, o preto da AA Palmeiras e o branco que era comum aos dois clubes</strong>. Nas primeiras partidas, o manto já ostentava as três cores que se tornariam sinônimo do tricolor paulista.</p>
+              <span class="jcard-fact">9 de mar de 1930 · 3 a 0 sobre o Ypiranga · primeira vitória</span>
+            </div>
           </li>
           <li class="jcard">
-            <p class="jcard-year">1932</p>
-            <p class="jcard-tag">Uniforme nº 2</p>
-            <span class="jcard-accent" aria-hidden="true"></span>
-            <p class="jcard-name">4 a 0 que virou tradição</p>
-            <p class="jcard-line">Em maio de 1932, o São Paulo goleia o Santos por 4 a 0 vestindo as listras verticais tricolores pela primeira vez.</p>
+            <div class="jcard-marker">
+              <span class="jcard-num">02</span>
+              <span class="jcard-dot" aria-hidden="true"></span>
+            </div>
+            <div class="jcard-content">
+              <div class="jcard-header">
+                <p class="jcard-year">1932</p>
+                <span class="jcard-tag">Uniforme nº 2</span>
+              </div>
+              <p class="jcard-name">A camisa listrada</p>
+              <p class="jcard-line">Inspirado nos grandes clubes europeus, o São Paulo adota as <strong>listras verticais vermelho, branco e preto</strong> em 1932. A estreia é memorável: o Tricolor goleia o Santos por 4 a 0, e a camisa ganha status de ícone. A partir daquele dia, as listras tricolores passam a representar a identidade visual do clube em campo e nas arquibancadas.</p>
+              <span class="jcard-fact">maio de 1932 · 4 a 0 sobre o Santos · estreia das listras</span>
+            </div>
           </li>
           <li class="jcard">
-            <p class="jcard-year">1943</p>
-            <p class="jcard-tag">Era de Leônidas</p>
-            <span class="jcard-accent" aria-hidden="true"></span>
-            <p class="jcard-name">O inventor da bicicleta</p>
-            <p class="jcard-line">Com as listras finas e Leônidas da Silva em campo, o Tricolor domina o futebol paulista e encanta o Brasil nos anos 1940.</p>
+            <div class="jcard-marker">
+              <span class="jcard-num">03</span>
+              <span class="jcard-dot" aria-hidden="true"></span>
+            </div>
+            <div class="jcard-content">
+              <div class="jcard-header">
+                <p class="jcard-year">1943</p>
+                <span class="jcard-tag">Era de Leônidas</span>
+              </div>
+              <p class="jcard-name">O inventor da bicicleta</p>
+              <p class="jcard-line">A camisa de listras finas tricolores veste o maior jogador da história do clube: <strong>Leônidas da Silva, o Diamante Negro</strong>, inventor da bicicleta e primeiro grande ídolo do futebol brasileiro. Nos anos 1940, o São Paulo domina o futebol paulista com Leônidas em campo, e a camisa tricolor se eterniza como símbolo da era dourada do futebol nacional.</p>
+              <span class="jcard-fact">anos 1940 · 8 títulos paulistas · Leônidas, artilheiro</span>
+            </div>
           </li>
           <li class="jcard">
-            <p class="jcard-year">1992</p>
-            <p class="jcard-tag">Era de Telê</p>
-            <span class="jcard-accent" aria-hidden="true"></span>
-            <p class="jcard-name">O time dos sonhos</p>
-            <p class="jcard-line">Com Telê Santana no comando, o São Paulo conquista a América e o mundo em 1992 e 1993, com a maior geração da história.</p>
+            <div class="jcard-marker">
+              <span class="jcard-num">04</span>
+              <span class="jcard-dot" aria-hidden="true"></span>
+            </div>
+            <div class="jcard-content">
+              <div class="jcard-header">
+                <p class="jcard-year">1992</p>
+                <span class="jcard-tag">Era de Telê</span>
+              </div>
+              <p class="jcard-name">O time dos sonhos</p>
+              <p class="jcard-line">Com Telê Santana no comando, o São Paulo entra para a história do futebol mundial. A camisa branca de 1992 — minimalista, com detalhes pretos e vermelhos — é vestida por <strong>Raí, Cafu, Müller, Palhinha, Zetti e Gilmar</strong> na maior campanha da história do clube. O Tricolor conquista a Libertadores, o Mundial e o Brasileiro no mesmo ano.</p>
+              <span class="jcard-fact">1992 e 1993 · bicampeão mundial · Intercontinental 2 a 1 sobre o Barcelona</span>
+            </div>
           </li>
           <li class="jcard">
-            <p class="jcard-year">2005</p>
-            <p class="jcard-tag">A camisa de Tóquio</p>
-            <span class="jcard-accent" aria-hidden="true"></span>
-            <p class="jcard-name">1 a 0 sobre o Liverpool</p>
-            <p class="jcard-line">Em Tóquio, o Tricolor vence o Liverpool por 1 a 0 e se torna tricampeão mundial, com Rogério Ceni erguendo a taça.</p>
+            <div class="jcard-marker">
+              <span class="jcard-num">05</span>
+              <span class="jcard-dot" aria-hidden="true"></span>
+            </div>
+            <div class="jcard-content">
+              <div class="jcard-header">
+                <p class="jcard-year">2005</p>
+                <span class="jcard-tag">A camisa de Tóquio</span>
+              </div>
+              <p class="jcard-name">O tri sobre o Liverpool</p>
+              <p class="jcard-line">Em 18 de dezembro de 2005, no Estádio Nacional de Tóquio, o São Paulo vence o Liverpool por 1 a 0 e se torna <strong>tricampeão mundial</strong> — o único clube brasileiro a conquistar a taça três vezes. O goleiro <strong>Rogério Ceni</strong>, capitão e artilheiro, levanta a taça com a camisa branca de faixa tricolor, eternizando o momento mais glorioso do clube no cenário internacional.</p>
+              <span class="jcard-fact">18 de dez de 2005 · 1 a 0 sobre o Liverpool · Rogério Ceni, capitão</span>
+            </div>
           </li>
           <li class="jcard">
-            <p class="jcard-year">HOJE</p>
-            <p class="jcard-tag">O manto tricolor</p>
-            <span class="jcard-accent" aria-hidden="true"></span>
-            <p class="jcard-name">96 anos e contando</p>
-            <p class="jcard-line">A mesma camisa branca atravessa gerações: de 1930 até hoje, o branco tricolor é o orgulho de quem veste o clube.</p>
+            <div class="jcard-marker">
+              <span class="jcard-num">06</span>
+              <span class="jcard-dot" aria-hidden="true"></span>
+            </div>
+            <div class="jcard-content">
+              <div class="jcard-header">
+                <p class="jcard-year">HOJE</p>
+                <span class="jcard-tag">O manto tricolor</span>
+              </div>
+              <p class="jcard-name">96 anos e contando</p>
+              <p class="jcard-line">A camisa branca com as três cores continua vestindo uma nova geração de jogadores e torcedores. De 1930 até hoje, <strong>mais de 96 anos de história</strong> se acumulam no tecido tricolor — cada jogo, cada título, cada grito de gol é parte de uma tradição que atravessa décadas e continua escrevendo o futuro do clube mais querido do Brasil.</p>
+              <span class="jcard-fact">1930–presente · 96 anos · o mais querido do Brasil</span>
+            </div>
           </li>
-        </ul>
+        </ol>
       </div>
     </section>
 
