@@ -671,53 +671,90 @@
       .compare-badge{transition:none}
       .compare-card:hover .compare-badge{transform:none}
       .compare-emblem{transition:none}
+      .jcard{transition:none;opacity:1;transform:none}
+      .jcard:hover{transform:none}
+      .jcard:hover .jcard-photo{transform:none}
+      .jcard::before{transition:none}
       .spec-row{transition:none;opacity:1;transform:none}
     }
 
     .camisas-grid{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,2.5rem);
-      perspective:1200px;
+      display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.2rem,2.5vw,2rem);
     }
     @media(max-width:979px){.camisas-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:559px){.camisas-grid{grid-template-columns:1fr}}
+
     .jcard{
       position:relative;overflow:hidden;
-      border-radius:16px;
-      background:#fff;
-      border:1px solid rgba(255,255,255,.08);
-      padding:0;display:flex;flex-direction:column;
-      transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s cubic-bezier(.22,1,.36,1),border-color .5s;
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+      display:flex;flex-direction:column;
+      opacity:0;transform:translateY(24px);
+      transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1),
+                 border-color .4s var(--ease),background .4s var(--ease),box-shadow .4s var(--ease);
     }
-    .jcard:hover{
-      transform:translateY(-8px);
-      border-color:rgba(212,0,27,.45);
-      box-shadow:0 30px 60px rgba(0,0,0,.5),0 0 80px rgba(212,0,27,.15);
+    .jcard.in{opacity:1;transform:none}
+    .jcard.in:hover{
+      border-color:rgba(212,0,27,.3);
+      background:rgba(255,255,255,.05);
+      box-shadow:0 24px 64px rgba(0,0,0,.4),0 0 0 1px rgba(212,0,27,.08);
+      transform:translateY(-4px);
     }
+
     .jcard-photo-wrap{
-      position:relative;width:100%;aspect-ratio:1;
-      overflow:hidden;background:#fff;
+      position:relative;width:100%;aspect-ratio:4/5;
+      overflow:hidden;
+      background:rgba(255,255,255,.02);
       display:flex;align-items:center;justify-content:center;
-      padding:1rem;
+      padding:clamp(1rem,3vw,2rem);
     }
+    .jcard-photo-wrap::after{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(180deg,transparent 60%,rgba(6,6,8,.95) 100%);
+      pointer-events:none;z-index:1;
+    }
+
+    .jcard-year-bg{
+      position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+      font-family:var(--font);font-weight:900;
+      font-size:clamp(4rem,10vw,7rem);line-height:1;letter-spacing:-.04em;
+      color:rgba(255,255,255,.03);pointer-events:none;user-select:none;z-index:0;
+    }
+
     .jcard-photo{
       position:relative;width:100%;height:100%;
-      object-fit:contain;
-      transition:transform .7s cubic-bezier(.22,1,.36,1);
+      object-fit:contain;z-index:1;
+      filter:drop-shadow(0 8px 24px rgba(0,0,0,.4));
+      transition:transform .6s cubic-bezier(.22,1,.36,1),filter .4s var(--ease);
     }
-    .jcard:hover .jcard-photo{transform:scale(1.05)}
-    .jcard-body{position:relative;padding:1.2rem 1.4rem 1.5rem;display:flex;flex-direction:column;gap:.35rem}
-    .jcard-year{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin:0}
-    .jcard-name{font-weight:800;text-transform:uppercase;font-size:1rem;letter-spacing:.02em;color:#0B0B0D;margin:0}
-    .jcard-line{color:rgba(0,0,0,.55);font-size:.88rem;line-height:1.55;max-width:28ch;margin:0}
+    .jcard:hover .jcard-photo{transform:scale(1.04);filter:drop-shadow(0 12px 32px rgba(0,0,0,.5))}
+
+    .jcard-body{
+      position:relative;padding:clamp(1rem,2.5vw,1.4rem) clamp(1rem,2.5vw,1.4rem) clamp(1.2rem,3vw,1.6rem);
+      display:flex;flex-direction:column;gap:.35rem;
+      border-top:1px solid rgba(255,255,255,.05);
+    }
+    .jcard-year{
+      font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--red-soft);margin:0;
+    }
+    .jcard-name{
+      font-weight:800;text-transform:uppercase;font-size:clamp(.88rem,2vw,1.05rem);
+      letter-spacing:.02em;color:rgba(255,255,255,.92);margin:0;line-height:1.25;
+    }
+    .jcard-line{
+      color:rgba(255,255,255,.5);font-size:clamp(.78rem,1.6vw,.88rem);line-height:1.6;
+      max-width:30ch;margin:0;
+    }
+
     .jcard::before{
       content:"";position:absolute;top:0;left:-75%;width:50%;height:100%;
-      background:linear-gradient(115deg,transparent,rgba(0,0,0,.04),transparent);
+      background:linear-gradient(115deg,transparent,rgba(255,255,255,.03),transparent);
       transform:skewX(-18deg);transition:left .7s cubic-bezier(.22,1,.36,1);
-      pointer-events:none;z-index:3;
+      pointer-events:none;z-index:5;
     }
     .jcard:hover::before{left:125%}
-    .js .camisas-grid .jcard:nth-child(odd).reveal.in:hover{transform:translateY(-8px) rotateY(-4deg) rotateX(2deg)}
-    .js .camisas-grid .jcard:nth-child(even).reveal.in:hover{transform:translateY(-8px) rotateY(4deg) rotateX(2deg)}
 
     .section-dark .sec-title{color:#fff}
 
@@ -1509,7 +1546,7 @@
       .js .hero-title .ch{animation:none;opacity:1;transform:none}
       .js #historia .tl-item.reveal,.js .tcard.reveal,.js .tcard-feature.reveal{transform:none}
       .js .icard.reveal{opacity:1;transform:none;transition:none}
-      .js .camisas-grid .jcard:nth-child(odd).reveal.in:hover,.js .camisas-grid .jcard:nth-child(even).reveal.in:hover{transform:translateY(-8px)}
+      .js .camisas-grid .jcard{transform:none}
       .js .faith-split.reveal.in:hover{transform:none}
       .js .faith-classico:hover{transform:none;box-shadow:none}
       .faith-classico::before{transform:scaleX(1)}
@@ -1839,10 +1876,10 @@
         </header>
 
         <ul class="camisas-grid">
-          <li class="jcard reveal">
+          <li class="jcard">
             <figure class="jcard-photo-wrap">
+              <span class="jcard-year-bg" aria-hidden="true">1930</span>
               <img class="jcard-photo" src="img/Camisas/camisa 1930.png" alt="Camisa de 1930 do São Paulo FC, branca com faixas vermelha e preta no peito" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-
             </figure>
             <div class="jcard-body">
               <span class="jcard-year">1930 · Uniforme nº 1</span>
@@ -1850,10 +1887,10 @@
               <p class="jcard-line">Do cinturão vermelho do Paulistano e da faixa preta da AA Palmeiras nasce a combinação das três cores.</p>
             </div>
           </li>
-          <li class="jcard reveal" style="--d:.06s">
+          <li class="jcard">
             <figure class="jcard-photo-wrap">
+              <span class="jcard-year-bg" aria-hidden="true">1932</span>
               <img class="jcard-photo" src="img/Camisas/camisa 1932.png" alt="Camisa listrada de 1932 do São Paulo FC, com listras verticais vermelho, branco e preto" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-
             </figure>
             <div class="jcard-body">
               <span class="jcard-year">1932 · Uniforme nº 2</span>
@@ -1861,10 +1898,10 @@
               <p class="jcard-line">Listras verticais vermelho, branco e preto desde o 4 a 0 sobre o Santos, em maio de 1932.</p>
             </div>
           </li>
-          <li class="jcard reveal" style="--d:.09s">
+          <li class="jcard">
             <figure class="jcard-photo-wrap">
+              <span class="jcard-year-bg" aria-hidden="true">1943</span>
               <img class="jcard-photo" src="img/Camisas/camisa 1943.gif" alt="Camisa de 1943 do São Paulo FC, com listras finas tricolores da era de Leônidas" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-
             </figure>
             <div class="jcard-body">
               <span class="jcard-year">1943</span>
@@ -1872,10 +1909,10 @@
               <p class="jcard-line">As listras finas do Tricolor na era do Diamante Negro, que encantou o Brasil nos anos 1940.</p>
             </div>
           </li>
-          <li class="jcard reveal" style="--d:.12s">
+          <li class="jcard">
             <figure class="jcard-photo-wrap">
+              <span class="jcard-year-bg" aria-hidden="true">1992</span>
               <img class="jcard-photo" src="img/Camisas/camisa 1992.gif" alt="Camisa de 1992 do São Paulo FC, branca com detalhes pretos e vermelhos da era Telê" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-
             </figure>
             <div class="jcard-body">
               <span class="jcard-year">1992</span>
@@ -1883,10 +1920,10 @@
               <p class="jcard-line">O branco da maior geração tricolor, com os detalhes do bi mundial em 92 e 93.</p>
             </div>
           </li>
-          <li class="jcard reveal" style="--d:.15s">
+          <li class="jcard">
             <figure class="jcard-photo-wrap">
+              <span class="jcard-year-bg" aria-hidden="true">2005</span>
               <img class="jcard-photo" src="img/Camisas/camisa 2005.png" alt="Camisa de 2005 do São Paulo FC, branca com faixa tricolor no peito" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-
             </figure>
             <div class="jcard-body">
               <span class="jcard-year">2005</span>
@@ -1894,10 +1931,10 @@
               <p class="jcard-line">O branco do tricampeonato mundial, imortalizado com Rogério Ceni no Japão, sobre o Liverpool.</p>
             </div>
           </li>
-          <li class="jcard reveal" style="--d:.18s">
+          <li class="jcard">
             <figure class="jcard-photo-wrap">
+              <span class="jcard-year-bg" aria-hidden="true">HOJE</span>
               <img class="jcard-photo" src="img/Camisas/hoje.png" alt="Camisa atual do São Paulo FC, branca com mangas pretas" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-
             </figure>
             <div class="jcard-body">
               <span class="jcard-year">Hoje</span>
@@ -2622,6 +2659,21 @@
           });
         }, { threshold: 0.2 });
         compareCards.forEach(function (c) { cardObs.observe(c); });
+      }
+
+      var jcards = document.querySelectorAll('.jcard');
+      if (jcards.length && 'IntersectionObserver' in window) {
+        var jcardObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var idx = Array.prototype.indexOf.call(jcards, entry.target);
+              entry.target.style.transitionDelay = (idx * .1) + 's';
+              entry.target.classList.add('in');
+              jcardObs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        jcards.forEach(function (c) { jcardObs.observe(c); });
       }
 
       var specRows = document.querySelectorAll('.spec-row');
