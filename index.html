@@ -673,85 +673,78 @@
       .compare-emblem{transition:none}
       .jcard{transition:none;opacity:1;transform:none}
       .jcard:hover{transform:none}
-      .jcard:hover .jcard-stripe{transform:none;box-shadow:none}
       .jcard::before{transition:none}
       .spec-row{transition:none;opacity:1;transform:none}
     }
 
     .camisas-grid{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.2rem,2.5vw,2rem);
+      display:grid;grid-template-columns:1fr;gap:clamp(.9rem,2vw,1.2rem);
+      max-width:60rem;margin-inline:auto;list-style:none;padding:0;
     }
-    @media(max-width:979px){.camisas-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:559px){.camisas-grid{grid-template-columns:1fr}}
+    @media(min-width:960px){.camisas-grid{grid-template-columns:repeat(2,1fr)}}
 
     .jcard{
-      position:relative;overflow:hidden;
+      position:relative;display:flex;flex-direction:column;gap:.9rem;
+      padding:clamp(1.1rem,2.5vw,1.5rem);
       border-radius:var(--radius);
-      background:rgba(255,255,255,.03);
       border:1px solid rgba(255,255,255,.06);
-      display:flex;flex-direction:column;
-      opacity:0;transform:translateY(24px);
+      background:rgba(255,255,255,.025);
+      overflow:hidden;
+      opacity:0;transform:translateY(20px);
       transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1),
                  border-color .4s var(--ease),background .4s var(--ease),box-shadow .4s var(--ease);
     }
     .jcard.in{opacity:1;transform:none}
     .jcard.in:hover{
       border-color:rgba(212,0,27,.3);
-      background:rgba(255,255,255,.05);
-      box-shadow:0 24px 64px rgba(0,0,0,.4),0 0 0 1px rgba(212,0,27,.08);
-      transform:translateY(-4px);
+      background:rgba(255,255,255,.04);
+      box-shadow:0 20px 50px rgba(0,0,0,.35);
+      transform:translateY(-3px);
+    }
+    @media(min-width:640px){
+      .jcard{flex-direction:row;align-items:stretch;gap:clamp(1.1rem,2.5vw,1.6rem)}
     }
 
-    .jcard-hero{
-      position:relative;
-      display:flex;align-items:center;gap:clamp(.9rem,2vw,1.2rem);
-      padding:clamp(1.3rem,3vw,1.8rem) clamp(1rem,2.5vw,1.4rem);
-      border-bottom:1px solid rgba(255,255,255,.05);
-      background:
-        linear-gradient(135deg,rgba(212,0,27,.05),transparent 55%),
-        rgba(255,255,255,.02);
-      overflow:hidden;
+    .jcard-year-wrap{
+      display:flex;flex-direction:column;justify-content:center;
+      min-width:5.5rem;flex-shrink:0;
     }
-    .jcard-stripe{
-      width:5px;align-self:stretch;border-radius:3px;flex-shrink:0;
-      background:linear-gradient(180deg,var(--red) 0 33%,#fff 33% 66%,var(--black) 66% 100%);
-      transition:transform .4s var(--ease),box-shadow .4s var(--ease);
-    }
-    .jcard:hover .jcard-stripe{
-      transform:scaleY(1.04);
-      box-shadow:0 0 20px rgba(212,0,27,.35);
-    }
-
-    .jcard-hero-txt{display:flex;flex-direction:column;gap:.2rem;min-width:0}
-    .jcard-hero-year{
+    .jcard-year{
       font-family:var(--font);font-weight:900;
-      font-size:clamp(2rem,4.5vw,2.8rem);line-height:1;letter-spacing:-.03em;
+      font-size:clamp(2rem,4vw,2.6rem);line-height:1;letter-spacing:-.02em;
       color:#fff;margin:0;
     }
-    .jcard-hero-year small{font-size:.5em;font-weight:700;letter-spacing:.08em;color:rgba(255,255,255,.4)}
-    .jcard-hero-tag{
-      font-family:var(--mono);font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;
-      color:var(--red-soft);margin:0;
+    .jcard-tag{
+      font-family:var(--mono);font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--red-soft);margin:.45rem 0 0;
     }
 
-    .jcard-hero::after{
-      content:"";position:absolute;right:-1.5rem;top:-2.5rem;
-      width:8rem;height:8rem;border-radius:50%;
-      background:radial-gradient(circle,rgba(212,0,27,.08),transparent 70%);
-      pointer-events:none;
+    .jcard-band{
+      position:relative;height:4px;border-radius:2px;flex-shrink:0;
+      background:linear-gradient(90deg,var(--red) 0 33%,#fff 33% 66%,var(--black) 66% 100%);
+    }
+    @media(min-width:640px){
+      .jcard-band{
+        width:5px;height:auto;align-self:stretch;border-radius:3px;
+        background:linear-gradient(180deg,var(--red) 0 33%,#fff 33% 66%,var(--black) 66% 100%);
+      }
     }
 
-    .jcard-body{
-      position:relative;padding:clamp(1rem,2.5vw,1.4rem) clamp(1rem,2.5vw,1.4rem) clamp(1.2rem,3vw,1.6rem);
-      display:flex;flex-direction:column;gap:.35rem;
-    }
+    .jcard-body{display:flex;flex-direction:column;gap:.35rem;min-width:0;justify-content:center}
     .jcard-name{
-      font-weight:800;text-transform:uppercase;font-size:clamp(.88rem,2vw,1.05rem);
-      letter-spacing:.02em;color:rgba(255,255,255,.92);margin:0;line-height:1.25;
+      font-weight:800;text-transform:uppercase;font-size:clamp(.85rem,2vw,1rem);
+      letter-spacing:.02em;color:rgba(255,255,255,.92);margin:0;line-height:1.3;
     }
     .jcard-line{
-      color:rgba(255,255,255,.5);font-size:clamp(.78rem,1.6vw,.88rem);line-height:1.6;
-      max-width:30ch;margin:0;
+      color:rgba(255,255,255,.55);font-size:clamp(.8rem,1.6vw,.86rem);line-height:1.6;
+      max-width:38ch;margin:0;
+    }
+
+    .jcard::after{
+      content:"";position:absolute;right:-2.5rem;top:-3.5rem;
+      width:9rem;height:9rem;border-radius:50%;
+      background:radial-gradient(circle,rgba(212,0,27,.07),transparent 70%);
+      pointer-events:none;z-index:1;
     }
 
     .jcard::before{
@@ -1882,74 +1875,68 @@
 
         <ul class="camisas-grid">
           <li class="jcard">
-            <div class="jcard-hero">
-              <span class="jcard-stripe" aria-hidden="true"></span>
-              <div class="jcard-hero-txt">
-                <p class="jcard-hero-year">1930<small>· uniforme nº 1</small></p>
-                <p class="jcard-hero-tag">O manto da fundação</p>
-              </div>
+            <div class="jcard-year-wrap">
+              <p class="jcard-year">1930</p>
+              <p class="jcard-tag">Uniforme nº 1</p>
             </div>
+            <span class="jcard-band" aria-hidden="true"></span>
             <div class="jcard-body">
+              <p class="jcard-name">O manto da fundação</p>
               <p class="jcard-line">Do cinturão vermelho do Paulistano e da faixa preta da AA Palmeiras nasce a combinação das três cores.</p>
             </div>
           </li>
           <li class="jcard">
-            <div class="jcard-hero">
-              <span class="jcard-stripe" aria-hidden="true"></span>
-              <div class="jcard-hero-txt">
-                <p class="jcard-hero-year">1932<small>· uniforme nº 2</small></p>
-                <p class="jcard-hero-tag">A camisa listrada</p>
-              </div>
+            <div class="jcard-year-wrap">
+              <p class="jcard-year">1932</p>
+              <p class="jcard-tag">Uniforme nº 2</p>
             </div>
+            <span class="jcard-band" aria-hidden="true"></span>
             <div class="jcard-body">
+              <p class="jcard-name">A camisa listrada</p>
               <p class="jcard-line">Listras verticais vermelho, branco e preto desde o 4 a 0 sobre o Santos, em maio de 1932.</p>
             </div>
           </li>
           <li class="jcard">
-            <div class="jcard-hero">
-              <span class="jcard-stripe" aria-hidden="true"></span>
-              <div class="jcard-hero-txt">
-                <p class="jcard-hero-year">1943<small>· era de Leônidas</small></p>
-                <p class="jcard-hero-tag">O manto do Diamante Negro</p>
-              </div>
+            <div class="jcard-year-wrap">
+              <p class="jcard-year">1943</p>
+              <p class="jcard-tag">Era de Leônidas</p>
             </div>
+            <span class="jcard-band" aria-hidden="true"></span>
             <div class="jcard-body">
+              <p class="jcard-name">O manto do Diamante Negro</p>
               <p class="jcard-line">As listras finas do Tricolor na era de Leônidas da Silva, que encantou o Brasil nos anos 1940.</p>
             </div>
           </li>
           <li class="jcard">
-            <div class="jcard-hero">
-              <span class="jcard-stripe" aria-hidden="true"></span>
-              <div class="jcard-hero-txt">
-                <p class="jcard-hero-year">1992<small>· era de Telê</small></p>
-                <p class="jcard-hero-tag">O branco do bi mundial</p>
-              </div>
+            <div class="jcard-year-wrap">
+              <p class="jcard-year">1992</p>
+              <p class="jcard-tag">Era de Telê</p>
             </div>
+            <span class="jcard-band" aria-hidden="true"></span>
             <div class="jcard-body">
+              <p class="jcard-name">O branco do bi mundial</p>
               <p class="jcard-line">O branco da maior geração tricolor, com os detalhes do bicampeonato mundial em 92 e 93.</p>
             </div>
           </li>
           <li class="jcard">
-            <div class="jcard-hero">
-              <span class="jcard-stripe" aria-hidden="true"></span>
-              <div class="jcard-hero-txt">
-                <p class="jcard-hero-year">2005<small>· camisa de Tóquio</small></p>
-                <p class="jcard-hero-tag">O tri sobre o Liverpool</p>
-              </div>
+            <div class="jcard-year-wrap">
+              <p class="jcard-year">2005</p>
+              <p class="jcard-tag">Camisa de Tóquio</p>
             </div>
+            <span class="jcard-band" aria-hidden="true"></span>
             <div class="jcard-body">
+              <p class="jcard-name">O tri sobre o Liverpool</p>
               <p class="jcard-line">O branco do tricampeonato mundial, imortalizado com Rogério Ceni no Japão, sobre o Liverpool.</p>
             </div>
           </li>
           <li class="jcard">
-            <div class="jcard-hero">
-              <span class="jcard-stripe" aria-hidden="true"></span>
-              <div class="jcard-hero-txt">
-                <p class="jcard-hero-year">HOJE<small>· o manto tricolor</small></p>
-                <p class="jcard-hero-tag">Sob as cinco estrelas</p>
-              </div>
+            <div class="jcard-year-wrap">
+              <p class="jcard-year">HOJE</p>
+              <p class="jcard-tag">O manto tricolor</p>
             </div>
+            <span class="jcard-band" aria-hidden="true"></span>
             <div class="jcard-body">
+              <p class="jcard-name">Sob as cinco estrelas</p>
               <p class="jcard-line">O branco que a nova geração veste — 96 anos de história e contando.</p>
             </div>
           </li>
