@@ -673,7 +673,7 @@
       .compare-emblem{transition:none}
       .jcard{transition:none;opacity:1;transform:none}
       .jcard:hover{transform:none}
-      .jcard:hover .jcard-photo{transform:none}
+      .jcard:hover .jcard-stripe{transform:none;box-shadow:none}
       .jcard::before{transition:none}
       .spec-row{transition:none;opacity:1;transform:none}
     }
@@ -702,42 +702,48 @@
       transform:translateY(-4px);
     }
 
-    .jcard-photo-wrap{
-      position:relative;width:100%;aspect-ratio:4/5;
+    .jcard-hero{
+      position:relative;
+      display:flex;align-items:center;gap:clamp(.9rem,2vw,1.2rem);
+      padding:clamp(1.3rem,3vw,1.8rem) clamp(1rem,2.5vw,1.4rem);
+      border-bottom:1px solid rgba(255,255,255,.05);
+      background:
+        linear-gradient(135deg,rgba(212,0,27,.05),transparent 55%),
+        rgba(255,255,255,.02);
       overflow:hidden;
-      background:rgba(255,255,255,.02);
-      display:flex;align-items:center;justify-content:center;
-      padding:clamp(1rem,3vw,2rem);
     }
-    .jcard-photo-wrap::after{
-      content:"";position:absolute;inset:0;
-      background:linear-gradient(180deg,transparent 60%,rgba(6,6,8,.95) 100%);
-      pointer-events:none;z-index:1;
+    .jcard-stripe{
+      width:5px;align-self:stretch;border-radius:3px;flex-shrink:0;
+      background:linear-gradient(180deg,var(--red) 0 33%,#fff 33% 66%,var(--black) 66% 100%);
+      transition:transform .4s var(--ease),box-shadow .4s var(--ease);
+    }
+    .jcard:hover .jcard-stripe{
+      transform:scaleY(1.04);
+      box-shadow:0 0 20px rgba(212,0,27,.35);
     }
 
-    .jcard-year-bg{
-      position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    .jcard-hero-txt{display:flex;flex-direction:column;gap:.2rem;min-width:0}
+    .jcard-hero-year{
       font-family:var(--font);font-weight:900;
-      font-size:clamp(4rem,10vw,7rem);line-height:1;letter-spacing:-.04em;
-      color:rgba(255,255,255,.03);pointer-events:none;user-select:none;z-index:0;
+      font-size:clamp(2rem,4.5vw,2.8rem);line-height:1;letter-spacing:-.03em;
+      color:#fff;margin:0;
+    }
+    .jcard-hero-year small{font-size:.5em;font-weight:700;letter-spacing:.08em;color:rgba(255,255,255,.4)}
+    .jcard-hero-tag{
+      font-family:var(--mono);font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;
+      color:var(--red-soft);margin:0;
     }
 
-    .jcard-photo{
-      position:relative;width:100%;height:100%;
-      object-fit:contain;z-index:1;
-      filter:drop-shadow(0 8px 24px rgba(0,0,0,.4));
-      transition:transform .6s cubic-bezier(.22,1,.36,1),filter .4s var(--ease);
+    .jcard-hero::after{
+      content:"";position:absolute;right:-1.5rem;top:-2.5rem;
+      width:8rem;height:8rem;border-radius:50%;
+      background:radial-gradient(circle,rgba(212,0,27,.08),transparent 70%);
+      pointer-events:none;
     }
-    .jcard:hover .jcard-photo{transform:scale(1.04);filter:drop-shadow(0 12px 32px rgba(0,0,0,.5))}
 
     .jcard-body{
       position:relative;padding:clamp(1rem,2.5vw,1.4rem) clamp(1rem,2.5vw,1.4rem) clamp(1.2rem,3vw,1.6rem);
       display:flex;flex-direction:column;gap:.35rem;
-      border-top:1px solid rgba(255,255,255,.05);
-    }
-    .jcard-year{
-      font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
-      color:var(--red-soft);margin:0;
     }
     .jcard-name{
       font-weight:800;text-transform:uppercase;font-size:clamp(.88rem,2vw,1.05rem);
@@ -1466,12 +1472,11 @@
     .js .tcard.reveal.in,.js .tcard-feature.reveal.in{transform:none}
     .js .icard.reveal{opacity:0;transform:translateY(24px)}
     .js .icard.reveal.in{opacity:1;transform:none;transition:opacity .6s var(--ease) var(--d,0s),transform .6s var(--ease) var(--d,0s),flex-grow .7s cubic-bezier(.22,1,.36,1),flex-shrink .7s cubic-bezier(.22,1,.36,1),border-color .5s,box-shadow .6s}
-    .js .jcard.reveal.in:hover,.js .tcard.reveal.in:hover{transform:translateY(-8px);transition-delay:0s}
+    .js .tcard.reveal.in:hover{transform:translateY(-8px);transition-delay:0s}
 
     img[loading="lazy"]{opacity:0;transition:opacity .5s var(--ease)}
     img[loading="lazy"].loaded, img[loading="lazy"]:not([src=""]){opacity:1}
     .tl-photo img[loading="lazy"],
-    .jcard-photo[loading="lazy"],
     .tcard-photo[loading="lazy"],
     .faith-split-photo img[loading="lazy"]{
       transition:opacity .5s var(--ease),transform .6s var(--ease);
@@ -1877,69 +1882,75 @@
 
         <ul class="camisas-grid">
           <li class="jcard">
-            <figure class="jcard-photo-wrap">
-              <span class="jcard-year-bg" aria-hidden="true">1930</span>
-              <img class="jcard-photo" src="img/Camisas/camisa 1930.png" alt="Camisa de 1930 do São Paulo FC, branca com faixas vermelha e preta no peito" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            </figure>
+            <div class="jcard-hero">
+              <span class="jcard-stripe" aria-hidden="true"></span>
+              <div class="jcard-hero-txt">
+                <p class="jcard-hero-year">1930<small>· uniforme nº 1</small></p>
+                <p class="jcard-hero-tag">O manto da fundação</p>
+              </div>
+            </div>
             <div class="jcard-body">
-              <span class="jcard-year">1930 · Uniforme nº 1</span>
-              <p class="jcard-name">O manto da fundação</p>
               <p class="jcard-line">Do cinturão vermelho do Paulistano e da faixa preta da AA Palmeiras nasce a combinação das três cores.</p>
             </div>
           </li>
           <li class="jcard">
-            <figure class="jcard-photo-wrap">
-              <span class="jcard-year-bg" aria-hidden="true">1932</span>
-              <img class="jcard-photo" src="img/Camisas/camisa 1932.png" alt="Camisa listrada de 1932 do São Paulo FC, com listras verticais vermelho, branco e preto" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            </figure>
+            <div class="jcard-hero">
+              <span class="jcard-stripe" aria-hidden="true"></span>
+              <div class="jcard-hero-txt">
+                <p class="jcard-hero-year">1932<small>· uniforme nº 2</small></p>
+                <p class="jcard-hero-tag">A camisa listrada</p>
+              </div>
+            </div>
             <div class="jcard-body">
-              <span class="jcard-year">1932 · Uniforme nº 2</span>
-              <p class="jcard-name">A camisa listrada</p>
               <p class="jcard-line">Listras verticais vermelho, branco e preto desde o 4 a 0 sobre o Santos, em maio de 1932.</p>
             </div>
           </li>
           <li class="jcard">
-            <figure class="jcard-photo-wrap">
-              <span class="jcard-year-bg" aria-hidden="true">1943</span>
-              <img class="jcard-photo" src="img/Camisas/camisa 1943.gif" alt="Camisa de 1943 do São Paulo FC, com listras finas tricolores da era de Leônidas" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            </figure>
+            <div class="jcard-hero">
+              <span class="jcard-stripe" aria-hidden="true"></span>
+              <div class="jcard-hero-txt">
+                <p class="jcard-hero-year">1943<small>· era de Leônidas</small></p>
+                <p class="jcard-hero-tag">O manto do Diamante Negro</p>
+              </div>
+            </div>
             <div class="jcard-body">
-              <span class="jcard-year">1943</span>
-              <p class="jcard-name">O manto de Leônidas</p>
-              <p class="jcard-line">As listras finas do Tricolor na era do Diamante Negro, que encantou o Brasil nos anos 1940.</p>
+              <p class="jcard-line">As listras finas do Tricolor na era de Leônidas da Silva, que encantou o Brasil nos anos 1940.</p>
             </div>
           </li>
           <li class="jcard">
-            <figure class="jcard-photo-wrap">
-              <span class="jcard-year-bg" aria-hidden="true">1992</span>
-              <img class="jcard-photo" src="img/Camisas/camisa 1992.gif" alt="Camisa de 1992 do São Paulo FC, branca com detalhes pretos e vermelhos da era Telê" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            </figure>
+            <div class="jcard-hero">
+              <span class="jcard-stripe" aria-hidden="true"></span>
+              <div class="jcard-hero-txt">
+                <p class="jcard-hero-year">1992<small>· era de Telê</small></p>
+                <p class="jcard-hero-tag">O branco do bi mundial</p>
+              </div>
+            </div>
             <div class="jcard-body">
-              <span class="jcard-year">1992</span>
-              <p class="jcard-name">A era de Telê</p>
-              <p class="jcard-line">O branco da maior geração tricolor, com os detalhes do bi mundial em 92 e 93.</p>
+              <p class="jcard-line">O branco da maior geração tricolor, com os detalhes do bicampeonato mundial em 92 e 93.</p>
             </div>
           </li>
           <li class="jcard">
-            <figure class="jcard-photo-wrap">
-              <span class="jcard-year-bg" aria-hidden="true">2005</span>
-              <img class="jcard-photo" src="img/Camisas/camisa 2005.png" alt="Camisa de 2005 do São Paulo FC, branca com faixa tricolor no peito" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            </figure>
+            <div class="jcard-hero">
+              <span class="jcard-stripe" aria-hidden="true"></span>
+              <div class="jcard-hero-txt">
+                <p class="jcard-hero-year">2005<small>· camisa de Tóquio</small></p>
+                <p class="jcard-hero-tag">O tri sobre o Liverpool</p>
+              </div>
+            </div>
             <div class="jcard-body">
-              <span class="jcard-year">2005</span>
-              <p class="jcard-name">A camisa de Tóquio</p>
               <p class="jcard-line">O branco do tricampeonato mundial, imortalizado com Rogério Ceni no Japão, sobre o Liverpool.</p>
             </div>
           </li>
           <li class="jcard">
-            <figure class="jcard-photo-wrap">
-              <span class="jcard-year-bg" aria-hidden="true">HOJE</span>
-              <img class="jcard-photo" src="img/Camisas/hoje.png" alt="Camisa atual do São Paulo FC, branca com mangas pretas" width="200" height="195" loading="lazy" decoding="async" onerror="this.classList.add('is-missing')">
-            </figure>
+            <div class="jcard-hero">
+              <span class="jcard-stripe" aria-hidden="true"></span>
+              <div class="jcard-hero-txt">
+                <p class="jcard-hero-year">HOJE<small>· o manto tricolor</small></p>
+                <p class="jcard-hero-tag">Sob as cinco estrelas</p>
+              </div>
+            </div>
             <div class="jcard-body">
-              <span class="jcard-year">Hoje</span>
-              <p class="jcard-name">O manto tricolor</p>
-              <p class="jcard-line">O branco que a nova geração veste sob as cinco estrelas — 96 anos e contando.</p>
+              <p class="jcard-line">O branco que a nova geração veste — 96 anos de história e contando.</p>
             </div>
           </li>
         </ul>
